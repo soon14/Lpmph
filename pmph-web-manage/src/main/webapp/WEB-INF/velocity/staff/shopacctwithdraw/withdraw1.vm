@@ -1,0 +1,64 @@
+#parse("/module/mod-grid.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.date.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/shopacctwithdraw/withdraw1.js?version=$!{JS_VERSION}" ></script>
+
+<div class="well well-searchForm">
+	<form id="searchForm" class="form-horizontal required-validate" style="margin-bottom: 0px;">
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="control-group">
+				<label class="control-label">店铺名称：</label>
+				<div class="controls">
+					##<input type="text" name="shopName" class="input-medium" value="" placeholder="输入店铺名称">
+					<select name="shopId" style="width:160px">
+						#shopStatuslist('','1')
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+            <div class="control-group">
+                <label class="control-label">
+                	<span class="requiredTag" style="color:red;">* </span>
+                	申请开始日期：
+                </label>
+                <div class="controls">
+                    <input type="text" style="cursor: pointer" class="input-medium required Wdate" id="begDate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" name="begDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+                </div>
+            </div>
+        </div>
+        <div class="span4">
+            <div class="control-group">
+                <label class="control-label">
+                	<span class="requiredTag" style="color:red;">* </span>
+                	申请截止日期：
+                </label>
+                <div class="controls">
+                    <input type="text" style="cursor: pointer" class="input-medium required Wdate" id="endDate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begDate\')}'})" name="endDate"  value="$!date.format('yyyy-MM-dd',$!{endDate})">
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+	</div>
+	</form>
+</div>
+<div class="row-fluid" style="margin-bottom: 10px;">
+	<div class="pull-right">
+		<a class="btn btn-info" id="btnFormSearch" href="#"><i class="icon-search icon-white"></i> 查询</a>
+		<a class="btn" id="btnFormReset" href="#"><i class="icon-refresh"></i> 重置</a>
+	</div>
+</div>
+
+<ul class="nav nav-tabs" id="myTab">
+	<li class="active"><a href="#">待处理</a></li>
+</ul>
+ 
+<div class="tab-content">
+  <div class="tab-pane active" id="pendTab" data-toggle="tab">
+		<div class="row-fluid">
+			<table id="dataGridTable"></table>
+		</div>
+  </div>
+</div>
+<form action="" accept-charset="" id="withdraw-check" method="" onsubmit=""> </form>

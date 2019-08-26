@@ -1,0 +1,47 @@
+#set($layout="/common/upload/layout.vm")
+#parse("/module/mod-form.vm")
+
+<script type="text/javascript" src="$!{BUSIJS_PATH}/common/login/main-login.js?version=$!{JS_VERSION}" ></script>
+
+<!--header-->
+<div id="header" class="clearfix">
+    <!--logo-->
+    <div class="wrap960 logoBg">
+        <div class="logo">
+            <h1><a href="index.html">人民卫生出版社有限公司</a></h1>
+        </div>
+    </div>
+</div>
+
+<!--beign-->
+<div id="content" class="wrap100 clearfix">
+    <div class="wrap960 login clearfix">
+        <div class="login-ad clearfix">
+            <img src="$IMAGE_PATH/login_ad.jpg" />
+        </div>
+        <div class="login-box">
+            <h2>登录</h2>
+            <form id="loginform">
+                <div class=""> <input type="text" class="inputBox" name="j_username" placeholder="用户名/邮箱/手机号码"></div>
+                <div class=""> <input type="password" class="inputBox" name="j_password"  placeholder="密码"></div>
+                <div class=" clearfix mt20">
+                    <label><input type="checkbox" class="checkbox" checked>7天内自动登录</label>
+                    <span class="fr"><a href="#"> 忘记登录密码？</a></span></div>
+			</form>
+                <div class="mt5">
+                    <button class="login-btn"id="loginsubmit">登&nbsp;&nbsp;录</button>
+                </div>
+                <div class="fr mt5"><a href="#">免费注册</a></div>
+			
+            
+        </div>
+    </div>
+</div>
+<input type="hidden" name="Referer" id="Referer" value="$!{Referer}"/>
+<!--footer-->
+<div id="footer" class="text-center footer">
+    <div class=""><a href="#">关于我们</a> <a href="#">联系我们</a> <a href="#">招贤纳士</a> <a href="#">网站声明</a></div>
+    <p>北京市朝阳区潘家园南里19号世界医药图书大厦B座</p>
+
+    <p>Copyright&copy 2014-2014 人民卫生出版社主办 京ICP备：05067302号-2京公网安备110402440015号</p>
+</div>

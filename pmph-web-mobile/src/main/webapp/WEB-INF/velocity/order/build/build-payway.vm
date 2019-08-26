@@ -1,0 +1,15 @@
+<!-- 支付方式 -->
+<div class="bdr-btn odr-pay " style="border-bottom:2px solid #e7e6e6;">
+    <div class="paytit">支付方式</div>
+    <ul class="am-avg-sm-3 paylist">
+		#set($var_list_ordPayType = ${paramTools.getParamDTOList("ORD_PAY_TYPE")})
+        #foreach($item in $var_list_ordPayType)
+			<li>
+				## 研发BUG #14981   暂时屏蔽“线下支付”方式
+				<div class="js_payType paybox #if($velocityCount==1)active#end" #if($velocityCount!=1)style="display:none;"#end spcode="$!{item.spCode}">
+					#escapeHtml($!{item.spValue})
+				</div>
+			</li>
+		#end
+    </ul>
+</div>

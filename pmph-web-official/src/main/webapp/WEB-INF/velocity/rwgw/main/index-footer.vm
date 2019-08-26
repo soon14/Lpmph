@@ -1,0 +1,20 @@
+<!--底部 begin-->
+<div id="footer">
+    <div class="w">
+        <p class="tt">友情链接</p>
+		<div class="ecp-component friendship-link"
+					data-status="1" data-site-id="3" data-module="ecp-component/friendship-link">
+       </div>
+
+        <p class="spit"></p>
+
+        <div class="copyright" style="display:table;margin: 0 auto;">
+			#siteObj('3')
+			##<p>$!{siteObj.siteAddress}</p>
+			<p><img class="bhh" width="20px" height="20px" src="/images/ghs.png" alt style="float:left"/><a href="http://
+www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502031111" target="_blank">京公网安备 11010502031111号 </a>$!{siteObj.caseNo} #if($!{siteObj.copyrightCompany} && $!{siteObj.copyrightCompany} != '')©$!{siteObj.copyrightCompany}#end</p>
+			<p>基建工程监督电话：59787010 基建工程监督信箱：jjjd@pmph.com</p>
+        </div>
+    </div>
+</div>
+<!--底部 end-->

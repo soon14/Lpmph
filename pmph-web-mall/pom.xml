@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>ecp-pmph</artifactId>
+		<groupId>com.ai.ecp.pmph</groupId>
+		<version>1.30-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+	</parent>
+	<groupId>com.ai.ecp.pmph</groupId>
+	<artifactId>pmph-web-mall</artifactId>
+	<version>1.30-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>pmph-web-mall</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-web-mall-jar</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+        <dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-web-im-connect-jar</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ai.ecp.pmph</groupId>
+			<artifactId>pmph-services-client</artifactId>
+			<version>1.30-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.ai.ecp.pmph</groupId>
+    		<artifactId>pmph-aip-services-client</artifactId>
+    		<version>1.30-SNAPSHOT</version>
+		</dependency>
+
+
+
+	</dependencies>
+  
+	<build>
+		<finalName>pmph-web-mall</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+		<groupId>org.apache.tomcat.maven</groupId>
+		<artifactId>tomcat7-maven-plugin</artifactId>
+		<version>2.2</version>
+		<configuration>
+			<url>http://localhost:8080/manager/text</url>
+			<server>TomcatServer</server>
+			<path>/pmph</path>
+			<username>admin</username>
+        	<password>password</password>
+			<update>true</update>
+		</configuration>
+	</plugin>
+		</plugins>
+	</build>
+</project>

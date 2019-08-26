@@ -1,0 +1,21 @@
+#parse("/rwgw-en/sys/sys_param.vm")
+<!--搜索 begin-->
+<input type="hidden" id="mallsiteurl" name="mallsiteurl" value="#siteInfoURL('1')" />
+<div id="search">
+    <div class="w">
+        <a href="#siteInfoURL('5')" class="logo">
+            <img src="$IMAGE_PATH/rwgw-logo-en.png" alt=""/>
+        </a>
+        <div class="search-right" id="rwgwsearch">
+            <div class="ser-wrap" #if(!${ishome} || ${ishome} == '') style = "margin-top:20px;" #end>
+                <input type="text" class="itxt" id="searchkeyword" placeholder="enter words"/>
+                <input type="button" id = "rwgwdosearch" class="ibtn" value="search"/>
+            </div>
+            #if(${ishome} && ${ishome} != '')
+            <span class="hz-icon"></span>
+            #end
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="$BUSIJS_PATH/main/rwgw-search.js"></script>
+<!--搜索 end-->

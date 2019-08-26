@@ -1,0 +1,39 @@
+#parse("/rwgw/sys/sys_param.vm")
+<div class="gwIndex-book">
+    <div class="w"><!-- 图书楼层 begin -->
+        <div class="box clearfix" style="padding-bottom:0;">
+            <div style="min-height:60px;" class="box-left box-book ecp-component main-floor-shader"
+					data-status="1" data-gds-size="10" data-tab-size="5"
+					data-place-id="1203" data-place-width="150" data-place-height="150"
+					data-module="ecp-component/main-floor-shader">
+				<div class="box-head">
+					<i class="box-ticon ticon-book"></i>
+				</div>
+				<div class="box-body">
+					<div class="tab">
+					    <div class="floor-tabs">
+						</div>
+						<div class="tabc gds-info">
+						</div>
+			
+					</div>
+				</div>
+			</div>
+            <div style="min-height:600px;"  class="box-right box-sale ecp-component main-sidebar-ranking"
+					data-status="1" data-gds-size="10" data-tab-size="4"
+					data-place-id="1204" data-place-width="80" data-place-height="80"
+					data-module="ecp-component/main-sidebar-ranking">
+				<div class="box-head">
+					<i class="box-ticon ticon-rank"></i>
+				</div>
+				<div class="box-body">
+				    <div class="floor-tabs">
+					</div>
+					<div class="order-list gds-info">
+					</div>
+				</div>
+			</div>
+        </div>
+        <!-- 图书楼层 end -->
+    </div>
+</div>

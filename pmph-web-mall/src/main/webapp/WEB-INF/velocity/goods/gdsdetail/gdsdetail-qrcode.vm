@@ -1,0 +1,7 @@
+<script type="text/javascript" src="$BUSIJS_PATH/goods/gdsdetail/gdsdetail-qrcode.js?version=$!{JS_VERSION}"></script>
+<script type="text/javascript" src="$BUSIJS_PATH/goods/gdsdetail/qrcode.min.js?version=$!{JS_VERSION}"></script>
+<input type="hidden" value="$!{gdsId}" id="gdsId"/>
+<input type="hidden" value="$!{skuId}" id="skuId"/>
+<input type="hidden" value="$!{URL}"   id="qrCodeURL"/>
+<div id="qrcode" style=""></div>
+<div id="qrcodeMsg">微信扫码购买</div> 

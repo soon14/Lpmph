@@ -1,0 +1,241 @@
+#parse("sys/sys_param.vm")
+<title>退货申请-#siteName('')</title>
+<!--content-->
+<div id="content" class="pay">
+    <div class="wrap1200">
+        <form class="pay-form form-horizontal required-validate" id="applySubForm" action=""  method="post" >
+        <input type="hidden" id="checkedAll" name="checkedAll" value="$!{checkedAll}">
+		<div class="ret-container">
+            <div class="ret-box">
+                <div class="head">
+                    <h3>订单信息</h3>
+                </div>
+                <div class="body">
+                    <table class="ret-detail">
+                        <thead>
+                        <tr>
+                            <td style="width:100px">书号</td>
+                            <td style="width:100px">商品图片</td>
+                            <td style="width:350px">商品名称</td>
+                            <td style="width:150px">价格</td>
+                            <td style="width:100px">申请数量</td>
+                            <td style="width:100px">退款金额</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+						#foreach($!backOrderSub in $!backApplyOrdSubResps)
+						#set($backIndex = $velocityCount - 1)
+    					<tr class="bg-fff"> 
+                            <td><div class="border-right">$!{backOrderSub.zsCode} </div></td>
+                            <td><div class="border-right"><a href="$!{CONTEXT_PATH}$!backOrderSub.gdsUrl" target="_blank"><img src="#genImageUrl($!backOrderSub.getPicId(),'200x200!')" width="48"></img></a></div></td>
+                            <td><div class="border-right"><a href="$!{CONTEXT_PATH}$!backOrderSub.gdsUrl" target="_blank">$!backOrderSub.gdsName</a></div></td>
+                            <td><div class="border-right">#money($!backOrderSub.discountPrice)</div></td>
+                            <td><div class="border-right">x $!backOrderSub.num</div></td>
+                            #if($velocityCount == 1)
+							<td rowspan="$!backApplyOrdSubResps.size()"><div class="border-right"><span style="color:red;font-weight:bold;">#money($ordReturnRefundResp.backMoney)</span></div></td> 
+							#end 
+                            <input type="hidden" name="rBackOrdSubReqs[$!{backIndex}].num" id="num" value="$!backOrderSub.num">
+							<input type="hidden" name="rBackOrdSubReqs[$!{backIndex}].orderId" id="orderId" value="$!{orderId}">
+    						<input type="hidden" name="rBackOrdSubReqs[$!{backIndex}].orderSubId" id="orderSubId" value="$!{backOrderSub.orderSubId}">
+    						<input type="hidden" name="rBackOrdSubReqs[$!{backIndex}].orderAmount" id="orderAmount" value="$!{backOrderSub.orderAmount}">
+                        </tr>
+    					#end 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ret-box">
+                <div class="head">
+                    <h3>订单优惠信息</h3>
+                </div>
+                <div class="body">
+                   <table class="ret-pref">
+                         #if($!{ordReturnRefundResp.rBackDiscountResps} || $!{ordReturnRefundResp.rBackCouponResps}) 
+    						 #set($itemCount = 0)
+    						 #if($!{ordReturnRefundResp.rBackDiscountResps}&&$!{ordReturnRefundResp.rBackDiscountResps.size()}>0)
+            					 #set($disCount = 0)
+    							 #set($discountType = 0)
+    							 #foreach($!backDiscountItem in $!ordReturnRefundResp.rBackDiscountResps)
+    								#if($!backDiscountItem.discountType == '02')
+    									 #if($!backDiscountItem.procType == '0')
+    										#set($itemCount = 1)
+    										#set($disCount = 1)
+    									 #end
+    									  #if($!backDiscountItem.procType == '1')
+    										#set($itemCount = 1)
+    										#set($disCount = 1)
+    									 #end
+    								#end 
+    								#if($!backDiscountItem.discountType == '03')
+    									  #if($!backDiscountItem.procType == '0')
+    										 #set($discountType = 1)
+    									  #end
+    								#end 
+    							 #end
+    							 #if($!disCount == 1)
+    								<tr class="first-tr">
+                                         <th>积分</th> 
+                                         <td>
+                							#foreach($!backDiscountItem in $!ordReturnRefundResp.rBackDiscountResps)
+                								#if($!backDiscountItem.discountType == '02')
+                									 #if($!backDiscountItem.procType == '0')
+                										<p>下单使用将返还$!{backDiscountItem.amount}积分</p>
+                									 #end
+                									  #if($!backDiscountItem.procType == '1')
+                										<p>下单赠送将扣减$!{backDiscountItem.amount}积分</p>
+                									 #end
+                								#end 
+                							#end			
+                							#set($jsScore = $!{ordReturnRefundResp.curScore}-$!{ordReturnRefundResp.reduCulateScore})
+                							<span  style="color:red;font-weight:bold;">当前剩余积分$!{ordReturnRefundResp.curScore}
+                							#if($!{jsScore}<0)
+                								，积分不足以扣减，退货之后，积分为0
+                							#else
+                								，退货之后，积分为$!{jsScore}
+                							#end
+                							</span>
+                                         </td>
+                                     </tr>
+    							 #end
+    							 
+        					 #end
+        					 #if($!{ordReturnRefundResp.rBackCouponResps}&&$!{ordReturnRefundResp.rBackCouponResps.size()}>0)
+        						<tr #if($!itemCount == 0) class="first-tr" #end>
+    							   #set($itemCount = 1)
+                                   <th>优惠券</th>
+                                   <td>
+        							   #foreach($!backCouponItem in $!ordReturnRefundResp.rBackCouponResps)
+            								<p>优惠券名称：$!{backCouponItem.couponTypeName}&nbsp;&nbsp;&nbsp;赠送扣减数量：$!{backCouponItem.couponCnt}</p> 
+        							   #end
+                                   </td>
+                               </tr>  
+        					 #end
+        					 #if($!{ordReturnRefundResp.rBackDiscountResps}&&$!{ordReturnRefundResp.rBackDiscountResps.size()}>0)
+    							#if($!discountType == 1)
+    								 #set($zjCount = 0)
+            						 #foreach($!backDiscountItem in $!ordReturnRefundResp.rBackDiscountResps)
+        								  #if($!backDiscountItem.discountType == '03')
+        									  #if($!backDiscountItem.procType == '0')
+        										#set($itemCount = 1)
+    											#set($zjCount = 1)
+        									  #end
+        								  #end 
+    								 #end
+    								 #if($!zjCount == 1)
+    									<tr #if($!itemCount == 0) class="first-tr" #end>
+                                           <th>资金账户</th>
+                                           <td style="padding-bottom: 25px">
+                							  #foreach($!backDiscountItem in $!ordReturnRefundResp.rBackDiscountResps)
+                								  #if($!backDiscountItem.discountType == '03')
+                									  #if($!backDiscountItem.procType == '0')
+                										 <p>#translate("STAFF_ACCT_TYPE",$!{backDiscountItem.acctType}):下单使用返还#money($!backDiscountItem.amount)元</p>
+                									  #end
+                								  #end 
+                							  #end
+                                           </td>
+                                       </tr>
+    								 #end
+    								 
+    						   #end
+    						 #end
+    						 #if($!itemCount == 0)
+        						 <tr class="first-tr">
+            						<th>无优惠信息</th>
+        							<td style="padding-bottom: 25px">
+                                    </td>
+            					</tr>
+    						 #end
+    					 #else
+    					    <tr class="first-tr">
+        						<th>无优惠信息</th>
+    							<td style="padding-bottom: 25px">
+                                </td>
+        					</tr>
+    					 #end
+                       </table>
+                </div>
+            </div> 
+            <div class="ret-box">
+                <div class="head">
+                    <h3>退货须知</h3>
+                </div>
+                <div class="body">
+                    <div class="know">
+                        <p>1、数字产品不允许退货</p>
+                        <p>2、已使用的优惠券不退</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ret-box">
+                <div class="head">
+                    <h3>退货原因</h3>
+                </div>
+                <div class="body">
+                        <input type="hidden" name="orderId" id="orderId" value="$!{orderId}">
+						<input type="hidden" name="backTypeName" id="backTypeName" value="">	
+						<div class="control-group">
+                            <label class="control-label" >退货原因：</label>
+                            <div class="controls">
+                                <select style="width:160px"  id="" name="backType">
+            						#listParam('ORD_BACK_GDS_TYPE')
+            					</select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >问题描述：</label>
+                            <div class="controls">
+                                <textarea rows="3" id="backDesc" name="backDesc" maxlength="100" class="c-area required htmlcheck"></textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >图片信息：</label>
+                            <div class="controls">
+								<input type="hidden" id="pic1" name="backPicList[0]"/>
+        						<input type="hidden" id="pic2" name="backPicList[1]"/>
+        						<input type="hidden" id="pic3" name="backPicList[2]"/>
+        						<input type="hidden" id="pic4" name="backPicList[3]"/> 
+        						<input type="hidden" id="pic5" name="backPicList[4]"/>
+                                <a href="javascript:;" class="a-upload">
+                                    <input type="file" class="com_input" name="pictrue" id="pictrue">选择上传图片
+                                </a>
+                                <p>为了帮助我们更好的解决问题，请您上传图片</p>
+                                <p>最多可以上传5张图片，每张图片的大小不能超过5M，支持jpg,png,jpeg,gif</p>
+								 <ul class="express">
+                                    <li id="li1" style="display:none;">
+                                        <img id="image1" src="" alt="" />
+        								<i id="closeimage1" style="display:none;">x</i>
+                                    </li>
+                                    <li id="li2" style="display:none;">
+                                        <img id="image2" src="" alt="" />
+        								<i id="closeimage2" style="display:none;">x</i>
+                                    </li>
+                                    <li id="li3" style="display:none;">
+                                        <img id="image3" src="" alt="" />
+        								<i id="closeimage3" style="display:none;">x</i>
+                                    </li>
+        							<li id="li4" style="display:none;">
+                                        <img id="image4" src="" alt="" />
+        								<i id="closeimage4" style="display:none;">x</i>
+                                    </li>
+        							<li id="li5" style="display:none;">
+                                        <img id="image5" src="" alt="" />
+        								<i id="closeimage5" style="display:none;">x</i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+								<button type="button" class="btn btn-success" id="btn_apply_sub"><i class="icon-ok"></i> 提交</button>
+								<button type="button" class="btn btn-primary" id="btnReturn"><i class="icon-ban-circle"></i> 关闭</button>
+                            </div>
+                        </div>
+                   
+                </div>
+            </div>
+
+        </div>
+        </form>
+			
+    </div>
+</div>

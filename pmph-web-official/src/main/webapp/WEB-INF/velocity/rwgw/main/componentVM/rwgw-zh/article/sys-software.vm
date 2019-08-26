@@ -1,0 +1,37 @@
+<!-- 文章列表 首页人卫公告 -->
+#parse("/rwgw/sys/sys_param.vm")
+
+#if(!${siteId} || ${siteId} == '')
+	#set(${siteId} = '3')
+#end
+
+#if(${siteId} == '5')##官网英文版
+	#set($errorMsg = "Sorry, No Data Found.")
+#else
+	#set($errorMsg = "亲，暂无数据！")
+#end
+<div class="box-head">
+    <span class="tit">$!{channel.channelName}</span>
+    #if($channel && $channel.id && '' != $!{channel.id})
+    <a class="r-opt" href="#getGwChannelUrl($channel $!{siteId})">
+        more
+        <i class="micon micon-more"></i>
+    </a>
+    #end
+</div>
+<div class="box-body">
+	#if(${articles.size()} > 0)##有文章
+    <ul class="notice-list">
+    	#foreach($article in $articles)
+        <li>
+            <p>
+                <a href="#siteInfoURL($!{siteId})/about?articleId=$!{article.id}" title="$!{article.articleTitle}">$!{article.articleTitle}</a>
+
+            </p>
+        </li>
+        #end
+    </ul>
+    #else
+    <div class ='pro-empty'>#if($!{errorMessage})$!{errorMessage}#else $!{errorMsg} #end</div>
+    #end
+</div>

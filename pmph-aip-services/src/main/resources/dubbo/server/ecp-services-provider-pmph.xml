@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+	http://www.springframework.org/schema/beans/spring-beans.xsd  
+	http://code.alibabatech.com/schema/dubbo  
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <bean id="aipLMNetValueAddedRSV" class="com.ai.ecp.pmph.aip.dubbo.impl.AipLMNetValueAddedRSVImpl"></bean>
+    <dubbo:service interface="com.ai.ecp.pmph.aip.dubbo.interfaces.IAipLMNetValueAddedRSV" ref="aipLMNetValueAddedRSV" provider="${default.dubbo.provider.id}"/>
+
+    <bean id="aipZYAuthRSV" class="com.ai.ecp.pmph.aip.dubbo.impl.AipZYAuthRSVImpl"></bean>
+    <dubbo:service interface="com.ai.ecp.pmph.aip.dubbo.interfaces.IAipZYAuthRSV" ref="aipZYAuthRSV" provider="${default.dubbo.provider.id}"/>
+
+	<bean id="aipEEduNoticeRSV" class="com.ai.ecp.pmph.aip.dubbo.impl.AipEEduNoticeRSVImpl"></bean>
+    <dubbo:service interface="com.ai.ecp.pmph.aip.dubbo.interfaces.IAipEEduNoticeRSV" ref="aipEEduNoticeRSV" provider="${default.dubbo.provider.id}"/>
+    
+    <bean id="aipExternalAuthRSV" class="com.ai.ecp.pmph.aip.dubbo.impl.AipExternalAuthRSVImpl"></bean>
+    <dubbo:service interface="com.ai.ecp.pmph.aip.dubbo.interfaces.IAipExternalAuthRSV" ref="aipExternalAuthRSV" provider="${default.dubbo.provider.id}"/>
+</beans>  

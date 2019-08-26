@@ -1,0 +1,106 @@
+.order-return{
+    border: 1px solid #dcdcdc;
+    border-left: 10px;
+    border-top: 10px;
+}
+.ret-box .head {
+    background-color: #f5f5f5;
+    padding-left: 35px;
+}
+.ret-box .body {
+    padding: 30px 35px;
+}
+.ret-detail {
+    text-align: center;
+    width: 100%;
+    table-layout: fixed;
+}
+.ret-detail td {
+    border: 1px solid #dddddd;
+    width: 25%;
+    table-layout: fixed;
+    padding: 15px 0;
+}
+.ret-detail thead tr {
+    font-weight: bold;
+}
+.ret-detail img {
+    margin-right: 10px;
+    width: 40px;
+}
+.ret-pref {
+    text-align: center;
+    width: 100%;
+    table-layout: fixed;
+}
+.thclass{
+	text-align: center !important;
+}
+.ret-pref td {
+    padding-bottom: 15px;
+    text-align: left;
+}
+.ret-pref th {
+    width: 100px;
+    padding-right: 15px;
+    font-weight: normal;
+    vertical-align: baseline;
+    font-size: 14px;
+    text-align: center;
+}
+.ret-pref p {
+    /*line-height: 25px;*/
+}
+.ret-pref .first-tr th,
+.ret-pref .first-tr td {
+    /*padding-top: 25px;*/
+}
+.ret-pref .last-tr th,
+.ret-pref .last-tr td {
+    padding-bottom: 25px;
+}
+.con-pad{
+    padding-top: 6px;
+}
+.c-area{
+    width: 300px;
+    padding: 10px;
+}
+
+.border-right{
+	text-align: center;
+}
+ 
+.ret-pzn {
+  overflow: hidden;
+  text-align: center;
+  border-bottom: 1px solid #ff6a00;
+}
+.ret-pzn li {
+  float: left;
+  padding: 0 20px;
+  height: 35px;
+  line-height: 35px;
+  cursor: pointer;
+  list-style:none;
+}
+.ret-pzn li.active,
+.ret-pzn li:hover {
+  color: #fff;
+  background-color: #ff6a00;
+}
+.ret-pzn li:hover {
+  background-color: #FFA14B;
+}
+.ret-pzc .item {
+  padding: 20px;
+  border: 1px solid #dddddd; 
+  display: none;
+  margin-top: 20px;
+}
+.ret-pzc .imgs {
+  font-size: 0;
+}
+.ret-pzc .imgs img {
+  margin: 10px;
+}

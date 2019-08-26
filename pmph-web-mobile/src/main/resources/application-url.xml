@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+	<url>
+		<homePage>/homepage</homePage>
+		<loginPage>/login</loginPage>
+		<logoutPage>/login</logoutPage>
+		<notLogin>http://132.37.5.191:14300/woego</notLogin>
+		<notPermit>/permission/noPermission</notPermit>
+		<sessionExpired>http://132.37.5.191:14300/woego</sessionExpired>
+		<contextPage>http://www.woego.cn/woego</contextPage>
+		<mallPage>http://localhost:8080/woego-web-mall</mallPage>
+		<managePage>http://localhost:8080/woego-web-manage</managePage>
+		<ssoUrl>http://books123456789.ipmph.com/newsso</ssoUrl>
+		<serviceId>newshopapptest</serviceId>
+		<ssoAdmin>admin</ssoAdmin>
+		<ssoPassword>admin</ssoPassword>
+		<ssoClientId>4c8a231d017f44f6b60c755e4fc9e00b</ssoClientId><!-- 应用客户端ID  -->
+		<ssoClientSecret>e4fb967d5b184e9bafb6da05aed98b08</ssoClientSecret><!-- 客户端密钥  -->
+		<ssoRedirectUri>http://localhost:8080/pmph-web-mobile/sso/thirdpartycallback</ssoRedirectUri><!-- 应用的回调URL  -->
+	</url>
+	<!-- 行为分析相关参数 -->
+	<xwrankmallcode>100</xwrankmallcode><!-- 行为分析排行榜远程服务请求商城编码 -->
+	<xwrankurl>/service/getGoodsRank</xwrankurl><!-- 行为分析排行榜远程服务请求相对地址 -->
+	<xwrecommendurl>/service/recommendGoods</xwrecommendurl><!-- 行为分析猜你喜欢远程服务请求相对地址 -->
+	<site>
+		<key>1</key>
+	</site>
+</application>

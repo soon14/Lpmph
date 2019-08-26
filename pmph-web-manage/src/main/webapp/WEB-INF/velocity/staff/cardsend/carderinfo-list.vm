@@ -1,0 +1,47 @@
+#parse("/module/mod-form.vm")
+#parse("/module/mod-grid.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/cardsend/carderinfo-list.js?version=$!{JS_VERSION}" ></script>
+
+<div id="p_main">
+    <div class="well well-searchForm">
+        <form id="carderinfosearchForm" class="form-horizontal" style="margin-bottom: 0px;">
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label">发卡人姓名：</label>
+                        <div class="controls">
+                            <input type="text" name="disName" class="input-medium" value="" placeholder="输入发卡人姓名">
+                        </div>
+                    </div>
+                </div>
+                <div class="span6">
+                    <div class="control-group">
+                        <label class="control-label">发卡人电话：</label>
+                        <div class="controls">
+                            <input type="text" name="disMobile" class="input-medium" value="" placeholder="输入发卡人电话">
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </form>
+    </div>
+    <div class="row-fluid" style="margin-bottom: 10px;">
+        <div class="span6">
+            <a class="btn" id="p_btn_code_add" href="javascript:void();"><i class="icon-plus"></i> 新增</a>
+            <a class="btn" id="p_btn_code_edit" href="javascript:void();"><i class="icon-edit"></i> 编辑</a>
+            <a class="btn" id="p_btn_code_active" href="javascript:void();"><i class="icon-ok-sign"></i> 生效</a>
+            <a class="btn btn-danger" id="p_btn_code_valid" href="javascript:void();"><i class="icon-remove-sign"></i> 失效</a>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-info" id="p_btnFormSearch" href="javascript:void();"><i class="icon-search icon-white"></i> 查询</a>
+            <a class="btn" id="p_btnFormReset" href="javascript:void();"><i class="icon-refresh"></i> 重置</a>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <table id="carderinfodataGridTable"></table>
+    </div>
+    <form id="p_editFrom" action="${CONTEXT_PATH}/carderinfo/edit" method="post">
+        <input type="hidden" name="id" id="p_recordId" value="" />
+    </form>
+</div>

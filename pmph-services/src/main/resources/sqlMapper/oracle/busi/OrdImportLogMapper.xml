@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.ecp.pmph.dao.mapper.busi.OrdImportLogMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.ecp.pmph.dao.model.OrdImportLog" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="IMPORT_TYPE" property="importType" jdbcType="VARCHAR" />
+    <result column="IMPORT_TIME" property="importTime" jdbcType="TIMESTAMP" />
+    <result column="OLD_ORDER_ID" property="oldOrderId" jdbcType="VARCHAR" />
+    <result column="NEW_ORDER_ID" property="newOrderId" jdbcType="VARCHAR" />
+    <result column="EXCEPTION_MSG" property="exceptionMsg" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_STAFF" property="createStaff" jdbcType="INTEGER" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_STAFF" property="updateStaff" jdbcType="INTEGER" />
+    <result column="NEW_STAFF_ID" property="newStaffId" jdbcType="INTEGER" />
+    <result column="OLD_STAFF_ID" property="oldStaffId" jdbcType="VARCHAR" />
+    <result column="FILE_ID" property="fileId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, IMPORT_TYPE, IMPORT_TIME, OLD_ORDER_ID, NEW_ORDER_ID, EXCEPTION_MSG, STATUS, 
+    CREATE_TIME, CREATE_STAFF, UPDATE_TIME, UPDATE_STAFF, NEW_STAFF_ID, OLD_STAFF_ID, 
+    FILE_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ecp.pmph.dao.model.OrdImportLogCriteria" >
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       select * from (select t_1.*,rownum as row_num from (
+    </if>
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_ord_import_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       <![CDATA[ ) t_1 where rownum<=#{limitClauseCount,jdbcType=INTEGER} + #{limitClauseStart,jdbcType=INTEGER}) t_2 where t_2.row_num>#{limitClauseStart,jdbcType=INTEGER}]]>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ord_import_log
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_ord_import_log
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.ecp.pmph.dao.model.OrdImportLogCriteria" >
+    delete from t_ord_import_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.ecp.pmph.dao.model.OrdImportLog" >
+    insert into t_ord_import_log (ID, IMPORT_TYPE, IMPORT_TIME, 
+      OLD_ORDER_ID, NEW_ORDER_ID, EXCEPTION_MSG, 
+      STATUS, CREATE_TIME, CREATE_STAFF, 
+      UPDATE_TIME, UPDATE_STAFF, NEW_STAFF_ID, 
+      OLD_STAFF_ID, FILE_ID)
+    values (#{id,jdbcType=VARCHAR}, #{importType,jdbcType=VARCHAR}, #{importTime,jdbcType=TIMESTAMP}, 
+      #{oldOrderId,jdbcType=VARCHAR}, #{newOrderId,jdbcType=VARCHAR}, #{exceptionMsg,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createStaff,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateStaff,jdbcType=INTEGER}, #{newStaffId,jdbcType=INTEGER}, 
+      #{oldStaffId,jdbcType=VARCHAR}, #{fileId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.ecp.pmph.dao.model.OrdImportLog" >
+    insert into t_ord_import_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="importType != null" >
+        IMPORT_TYPE,
+      </if>
+      <if test="importTime != null" >
+        IMPORT_TIME,
+      </if>
+      <if test="oldOrderId != null" >
+        OLD_ORDER_ID,
+      </if>
+      <if test="newOrderId != null" >
+        NEW_ORDER_ID,
+      </if>
+      <if test="exceptionMsg != null" >
+        EXCEPTION_MSG,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createStaff != null" >
+        CREATE_STAFF,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="updateStaff != null" >
+        UPDATE_STAFF,
+      </if>
+      <if test="newStaffId != null" >
+        NEW_STAFF_ID,
+      </if>
+      <if test="oldStaffId != null" >
+        OLD_STAFF_ID,
+      </if>
+      <if test="fileId != null" >
+        FILE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="importType != null" >
+        #{importType,jdbcType=VARCHAR},
+      </if>
+      <if test="importTime != null" >
+        #{importTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldOrderId != null" >
+        #{oldOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="newOrderId != null" >
+        #{newOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionMsg != null" >
+        #{exceptionMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null" >
+        #{createStaff,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null" >
+        #{updateStaff,jdbcType=INTEGER},
+      </if>
+      <if test="newStaffId != null" >
+        #{newStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="oldStaffId != null" >
+        #{oldStaffId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.ecp.pmph.dao.model.OrdImportLogCriteria" resultType="java.lang.Long" >
+    select count(*) from t_ord_import_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_ord_import_log
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.importType != null" >
+        IMPORT_TYPE = #{record.importType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.importTime != null" >
+        IMPORT_TIME = #{record.importTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.oldOrderId != null" >
+        OLD_ORDER_ID = #{record.oldOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newOrderId != null" >
+        NEW_ORDER_ID = #{record.newOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionMsg != null" >
+        EXCEPTION_MSG = #{record.exceptionMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createStaff != null" >
+        CREATE_STAFF = #{record.createStaff,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateStaff != null" >
+        UPDATE_STAFF = #{record.updateStaff,jdbcType=INTEGER},
+      </if>
+      <if test="record.newStaffId != null" >
+        NEW_STAFF_ID = #{record.newStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="record.oldStaffId != null" >
+        OLD_STAFF_ID = #{record.oldStaffId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileId != null" >
+        FILE_ID = #{record.fileId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_ord_import_log
+    set ID = #{record.id,jdbcType=VARCHAR},
+      IMPORT_TYPE = #{record.importType,jdbcType=VARCHAR},
+      IMPORT_TIME = #{record.importTime,jdbcType=TIMESTAMP},
+      OLD_ORDER_ID = #{record.oldOrderId,jdbcType=VARCHAR},
+      NEW_ORDER_ID = #{record.newOrderId,jdbcType=VARCHAR},
+      EXCEPTION_MSG = #{record.exceptionMsg,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_STAFF = #{record.createStaff,jdbcType=INTEGER},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      UPDATE_STAFF = #{record.updateStaff,jdbcType=INTEGER},
+      NEW_STAFF_ID = #{record.newStaffId,jdbcType=INTEGER},
+      OLD_STAFF_ID = #{record.oldStaffId,jdbcType=VARCHAR},
+      FILE_ID = #{record.fileId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.ecp.pmph.dao.model.OrdImportLog" >
+    update t_ord_import_log
+    <set >
+      <if test="importType != null" >
+        IMPORT_TYPE = #{importType,jdbcType=VARCHAR},
+      </if>
+      <if test="importTime != null" >
+        IMPORT_TIME = #{importTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oldOrderId != null" >
+        OLD_ORDER_ID = #{oldOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="newOrderId != null" >
+        NEW_ORDER_ID = #{newOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionMsg != null" >
+        EXCEPTION_MSG = #{exceptionMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null" >
+        CREATE_STAFF = #{createStaff,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null" >
+        UPDATE_STAFF = #{updateStaff,jdbcType=INTEGER},
+      </if>
+      <if test="newStaffId != null" >
+        NEW_STAFF_ID = #{newStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="oldStaffId != null" >
+        OLD_STAFF_ID = #{oldStaffId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileId != null" >
+        FILE_ID = #{fileId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.ecp.pmph.dao.model.OrdImportLog" >
+    update t_ord_import_log
+    set IMPORT_TYPE = #{importType,jdbcType=VARCHAR},
+      IMPORT_TIME = #{importTime,jdbcType=TIMESTAMP},
+      OLD_ORDER_ID = #{oldOrderId,jdbcType=VARCHAR},
+      NEW_ORDER_ID = #{newOrderId,jdbcType=VARCHAR},
+      EXCEPTION_MSG = #{exceptionMsg,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_STAFF = #{createStaff,jdbcType=INTEGER},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_STAFF = #{updateStaff,jdbcType=INTEGER},
+      NEW_STAFF_ID = #{newStaffId,jdbcType=INTEGER},
+      OLD_STAFF_ID = #{oldStaffId,jdbcType=VARCHAR},
+      FILE_ID = #{fileId,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

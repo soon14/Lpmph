@@ -1,0 +1,75 @@
+##parse("/sys/sys_head.vm")
+#parse("/module/mod-form.vm")
+
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" type="text/css" href="$!{CSS_PATH}/customer/amazeui.css" />
+<link rel="stylesheet" type="text/css" href="$!{CSS_PATH}/customer/mall.css" />
+<link rel="stylesheet" type="text/css" href="$!{CSS_PATH}/customer/public.css" />
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/flexible/flexible.js"></script>
+<script type="text/javascript" src="$BUSIJS_PATH/customer/strophe.js"></script>
+<script type="text/javascript" src="$BUSIJS_PATH/customer/html.util.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/b.dialog.js"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/customer/customer-tool.js"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/customer/customer-service.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/upload/lrz.all.bundle.js"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/customer/imgUpload.js"></script>
+<input type="hidden" id="boshService" value="$!{boshService}"/>
+<input type="hidden" id="uName" value="$!{uName}"/>
+<input type="hidden" id="csaCode" value="$!{csaCode}"/>
+<input type="hidden" id="shopId" value="$!{shopIdForLogout}"/>
+<input type="hidden" id="staffCode" value="$!{staffCode}"/>
+<input type="hidden" id="sessionId" value="$!{sessionId}"/>
+<input type="hidden" id="issueType" value="$!{issueType}"/>
+<input type="hidden" id="ordId" value="$!{ordId}"/>
+<input type="hidden" id="gdsId" value="$!{gdsId}"/>
+<input type="hidden" id="shopIdForLogout" value="$!{shopIdForLogout}"/>
+<input type="hidden" id="csaCodeForLogout" value="$!{csaCodeForLogout}"/>
+<input type="hidden" id="uNameForLogout" value="$!{uNameForLogout}"/>
+<input type="hidden" id="waitCount" value="$!{waitCount}" />
+<input type="hidden" id="custPic" value="$!{custPic}"/>
+<input type="hidden" id="servPic" value="#genImageUrl($!{servPic})"/>
+<input type="hidden" id="custLevel" value="$!{custLevel}" />
+<input type="hidden" id="serName" value="$!{serName}"/>
+<input type="hidden" id="sessionTime" value="$!{sessionTime}"/>
+<input type="hidden" id="gdsDetailUrl" value="#siteInfo(1)/gdsdetail/"/>
+<input type="hidden" id="ordDetailUrl" value="#siteInfo(1)/ord/detail/"/>
+<!--qatest common t_Base_Param_Simple -->
+<input type="hidden" id="imProjectUrl" value="#translate('IM_PROJECT_URL','IM_PROJECT_URL')" />
+<style type="text/css">
+	.public-arrowleft1 {
+    width: 12px;
+    height: 12px;
+    border-left: 2px solid #333;
+    border-bottom: 2px solid #333;
+    display: block;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin-top: 18px;
+}
+.scroll{
+   padding-bottom:30px;
+}
+.notice{
+      text-align: center;
+    position: absolute;
+    z-index: 6;
+    background: #f0eded;
+    padding: 5px 0;
+    width: 100%;
+}
+.odr-btn .btn {
+background-color: #e0dcdc;
+}
+.odr-btn .btn-qd {
+    background-color: #fff54d;
+}
+</style>
+
+
+<!--里面有聊天块 , 订单页面 , ....-->
+<div class="w">
+
+</div>
+
+
+#parse("/customer/template.vm")

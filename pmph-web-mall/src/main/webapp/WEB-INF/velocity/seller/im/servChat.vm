@@ -1,0 +1,7 @@
+#parse("/sys/sys_param.vm")
+<div>
+<input type="hidden" id="username" value="${staffCode}">
+<input type="hidden" id="servChatUrl" value="${servChatUrl}">
+</div>
+<script type="text/javascript" src="$BUSIJS_PATH/seller/im/chat.js"></script>
+#parse("/im/template.vm")

@@ -1,0 +1,20 @@
+	#parse("/sys/sys_param.vm")
+	<meta http-equiv="keywords" content="ASIA,ECP,供应链电商"/>
+    <meta http-equiv="description" content="ASIA,ECP,供应链电商"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<!--<meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible" />-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+	
+	<meta id="global" contextpath="$!{CONTEXT_PATH}" version="$!{JS_VERSION}"></meta>
+	#parse("/sys/sys_open_js_header.vm")
+    <script language="javascript">
+	    $.metadata.setType("attr", "validate");
+	    GLOBAL = {
+	        WEBROOT:$("#global").attr("contextpath"),
+		    VERSION:$("#global").attr("version")
+	    };
+    </script>
+	

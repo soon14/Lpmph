@@ -1,0 +1,57 @@
+<!--首页新版新闻资讯 -->
+#parse("/rwgw/sys/sys_param.vm")
+
+#if(!${siteId} || ${siteId} == '')
+	#set(${siteId} = '3')
+#end
+
+#if(${siteId} == '5')
+	#set($errorMsg = "Sorry, No Data Found.")
+#else
+	#set($errorMsg = "亲，暂无数据！")
+#end
+
+<div class="box-head box-nopad">
+    <span class="tit">$!{channel.channelName}</span>
+    #if($channel && $channel.id && '' != $!{channel.id})
+    <a class="r-opt" href="#getGwChannelUrl($channel $!{siteId})">
+        more
+        <i class="micon micon-more"></i>
+    </a>
+    #end
+</div>
+<div class="box-body news-info">
+	#if(${articles.size()} > 0)##有文章
+    #foreach($article in $articles)
+	    #if(${velocityCount} > 1)
+	    	#break;
+	    #end
+	    <div class="news-info-act clearfix">
+	        <a href="#siteInfoURL($!{siteId})/about?articleId=$!{article.id}" class="img">
+	        	<img class="img" src="$!{article.thumbnailUrl}" alt="$!{article.articleTitle}"/>
+	        </a>
+	        <h3 class="tit"><a href="#siteInfoURL($!{siteId})/about?articleId=$!{article.id}" title="$!{article.articleTitle}">$!{article.articleTitle}</a></h3>
+	        <p class="con"><a href="#siteInfoURL($!{siteId})/about?articleId=$!{article.id}" title="$!{article.articleRemark}">$!{article.articleRemark}</a></p>
+	    </div>
+    #end
+    #if(${articles.size()} > 1)
+    <div class="news-list news-dian">
+    	#foreach($article in $articles)
+	    #if(${velocityCount} > 1)
+        <div class="item">
+            <i class="micon micon-nl"></i>
+            <p>
+				<a href="#siteInfoURL($!{siteId})/about?articleId=$!{article.id}" title="$!{article.articleTitle}">$!{article.articleTitle}</a>
+			</p>
+	        <span class="ntime">
+	          $!date.format('yyyy-MM-dd',$!{article.pubTime})
+	        </span>
+        </div>
+        #end
+        #end
+    </div>
+    #end
+    #else
+    <div class ='pro-empty'>#if($!{errorMessage})$!{errorMessage}#else $!{errorMsg} #end</div>
+    #end
+</div>

@@ -1,0 +1,15 @@
+<style type="text/css">
+div.error {
+    width: 260px;
+    border: 2px solid red;
+    background-color: yellow;
+    text-align: center;
+}
+</style>
+<h1>错误页面</h1>
+<hr>
+<div class="error">
+ 出错了:<br>
+${requestScope['exception'].message}
+</div>
+<hr>

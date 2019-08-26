@@ -1,0 +1,48 @@
+<!--店铺信息 显示 可以根据后台数据显示相应 -->
+ <div class="shop-info-wrap">
+    <div class="shop-info-logo" style="border-bottom:0px;border-top:0px;">
+    	<div style="border-top:1px dashed #dddddd;margin-top:-10px;width:250px;margin-left:auto;margin-right:auto;"></div>
+    	<div style="height:20px;"></div>
+        ##<img src="http://10.8.0.213:19423/imageServer/image/564f34b00cf2b738819e9c35_100x100!.jpg" alt="">
+        <img id="shopLogo" style="border:1px solid #dddddd;padding:1px;" src="" alt="">
+    </div>
+    <div id="gdsDetailShopFullName" class="shop-info-fullName" style="border-bottom:0px;border-top:0px;text-align:center;padding:10px 5px;">
+        	
+    </div>
+    <div style="border-bottom:1px dashed #dddddd;width:250px;margin-left:auto;margin-right:auto;"></div>
+    <div class="shop-info-dataMsg" style="border-bottom:0px;border-top:0px;">
+    <!-- 如果数字位数超过十位的话 最好判断修改一下-->
+        <div class="dataMsg_num">
+            <p id="gdsDetailCollectCount"></p>
+            <p>关注人数</p>
+        </div>
+        <div class="dataMsg_num">
+            <p id="gdsDetailGdsNum"></p>
+            <p>全部商品</p>
+        </div>
+        <div class="dataMsg_num">
+            <p id="gdsDetailEvalRate"></p>
+            <p>好评率</p>
+        </div>
+    </div>
+    <div style="border-top:1.5px dashed #dddddd;width:250px;margin-left:auto;margin-right:auto;"></div>
+    <div class="shop-info-tabMsg" style="border-top:0px;border-bottom:0px;">
+        <!--<a href="javascript:void(0);"><span class="tabMsg-call"></span>联系卖家</a>-->
+        <a href="javascript:void(0);" class="imUrl" target="_blank">
+          #custInfo()
+          	<span class="imInfo" style="display:none">
+				$!{cust.staffCode}#$!{gdsDetailInfo.shopId}#2#$!{gdsDetailInfo.id}
+			</span>
+        	<i class="micon micon-imkf"></i>联系卖家
+        </a>
+        <br>
+        <a href="$!{CONTEXT_PATH}/shopIndex/$!{shopId}" style="margin-bottom:0px;">
+        	<span class="tabMsg-come">&nbsp;</span>进店逛逛
+        </a>
+        <!--<a href="javascript:void(0);"><i class="micon micon-mkf"></i>进店逛逛</a>-->
+        <!-- 默认显示未关注 已关注 图片 yesfocus.png -->
+        <a href="javascript:void(0);" id="addShopCollect" style="margin-bottom:0px;"><span class="tabMsg-focus">&nbsp;</span>关注店铺</a>
+        <!--<a href="javascript:void(0);"><i class="micon micon-coll"></i>关注店铺</a>-->
+    </div>
+    <div style="border-bottom:1.5px dashed #dddddd;width:250px;margin-left:auto;margin-right:auto;"></div>
+</div>

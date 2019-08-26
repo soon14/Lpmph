@@ -1,0 +1,4 @@
+#parse("/sys/sys_param.vm")
+<!-- 表单需要引用的脚本、样式库 -->
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/extend/css/bootstrap_page.css" type="text/css">
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/extend/js/b.page.js"></script>

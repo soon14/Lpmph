@@ -1,0 +1,92 @@
+<div id="build_canvas_invoice" class="am-offcanvas slidePage">
+  <div class="am-offcanvas-bar am-offcanvas-bar-flip">
+	<div class="am-offcanvas-content">
+		<!-- 发票信息 -->
+        <header class="am-header am-header-fixed">
+            <div class="am-header-title">
+					发票信息
+            </div>
+            <div id="canvas_invoice" class="am-header-left am-header-nav top-left">
+                <a class="">
+                    <i class="public-arrowleft"></i>
+                </a>
+            </div>
+        </header>
+        <div class="ui-content-fixBottom" id="build_invoice_box">
+            <div class="odr-box odr-pad ivo-t">
+                <p class="ft-df">发票类型</p>
+                <ul class="ivo-p">
+                    #set($list = ${paramTools.getParamDTOList("ORD_INVOICE_TYPE")})
+                    #foreach($attr in $list)
+                        <li #if($attr.spCode=="0")class = "js_build_invoice_sub active"#else class="faile"#end>
+                            #escapeHtml($!{attr.spValue})
+                        </li>
+                    #end
+                    ##<li class="js_build_invoice_sub" invoice="">电子发票</li>
+                    ##<li class="js_build_invoice_sub" invoice="">增值税发票</li>
+                </ul>
+                
+            </div>
+            
+            <div class="odr-box odr-pad">
+	            <div class="bdr-btn">
+		            <div class="ivo-flex ivo-cc">
+		                <ul class="ivo-p">
+		                    <li class="active" id="company">单位</li>
+		                    <li id="person">个人</li>
+		                </ul>
+		            </div>
+					<span style="color:#ff0000">1000元以内（含1000元）随书快递，1000元以上会单独发快递，注意查收！</span>
+		        </div>
+                
+                <div class="bdr-btn">
+                    <div class="ivo-flex ivo-cc">
+                        <label class="ivo-tit">发票抬头</label>
+                        <div class="ivo-con">
+							<input id="build_inv_title" type="text" placeholder="请输入单位名称" maxlength="50"/>
+						</div>
+        
+                    </div>
+                </div>
+                <div class="bdr-btn" id="taxpayer">
+                    <div class="ivo-flex ivo-cc">
+                        <label class="ivo-tit">纳税人识别号</label>
+                        <div class="ivo-con">
+							<input id="taxpayer_no" type="text" placeholder="请输入正确的纳税人识别号" maxlength="50"/>
+						</div>
+        
+                    </div>
+                </div>
+                <div class="bdr-btn">
+                    <div class="ivo-flex ivo-cc">
+                        <label class="ivo-tit">附加明细</label>
+                        <ul class="ivo-p" id="build_inv_detail">
+                            <li value="1" class="js_build_inv_detail">是</li>
+                            <li value="0" class="js_build_inv_detail active">否</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bdr-btn">
+                    <div class="ivo-flex">
+                        <label class="ivo-tit">发票内容</label>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="ivo-cc">
+						<ul class="ivo-p" id="build_inv_content">
+							#set($var_listInvoice = ${paramTools.getParamDTOList("ORD_INVOICE_CONTENT")})
+							#foreach($item in $var_listInvoice)
+                            <li invoice="$!{item.spValue}" class="js_build_inv_content #if($velocityCount == 1)active#end" >#escapeHtml($!{item.spValue})</li>
+							#end
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="reg-b-50" >
+                <a class="wbtn wbtn-radius" id="build_invoice_save">确定</a>
+            </div>
+        </div>
+			
+    </div>
+  </div>
+</div>

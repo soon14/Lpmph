@@ -1,0 +1,3 @@
+#parse("/sys/sys_param.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/iscroll/iscroll.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/scrollLoading/jquery.scrollLoading.js"></script>

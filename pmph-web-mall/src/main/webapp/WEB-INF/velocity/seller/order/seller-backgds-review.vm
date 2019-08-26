@@ -1,0 +1,196 @@
+#parse("sys/sys_param.vm")
+<link href="$CSS_PATH/seller-reset.css" type="text/css" rel="stylesheet">
+<link href="$CSS_PATH/seller.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/seller-backgds-review.js?version=$!{JS_VERSION}"></script>
+
+<div class="seller-mainR">
+    <div class="main">
+        <div class="seller-box">
+            <div class="head">
+                <h3>订单信息</h3>
+            </div>
+            <div class="body">
+				#if($!rBackApplyResp.siteId == 2)
+    				#set($ordurl = "/ord/point/detail/")
+    			#else
+    				#set($ordurl = "/ord/detail/")
+    			#end
+                <p style="margin-bottom: 10px">
+                    订单编号：<a href="#siteInfo('1')$ordurl${rBackApplyResp.orderId}">$!rBackApplyResp.orderId</a>
+                </p>
+                <table class="seller-table">
+                    <thead>
+                    <tr>
+                        <th>书号</th>
+                        <th style="width: 350px">商品名称</th>
+                        <th>购买数量</th>
+                        <th>购买价格</th>
+                        <th>退款金额</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+						#foreach($!rBackGdsResp in $!rBackGdsResps)
+                        <td>$!rBackGdsResp.zsCode</td>
+                        <td><a href="#siteInfo($!rBackApplyResp.siteId)$!{rBackGdsResp.gdsUrl}">$!{rBackGdsResp.gdsName}</a></td>
+                        <td>$!rBackGdsResp.num</td>
+                        #if($!{rBackApplyResp.siteId} =="2")
+    						<td><div class="border-right">#money($!rBackGdsResp.discountMoney)+$!{rBackGdsResp.score}积分</div></td>
+    						#if($!velocityCount == 1)
+    							<td rowspan="$!rBackGdsResps.size()" >
+										#set($score = $!{rBackApplyInfoResp.rBackApplyScoreResp.sumUsedCulateScore})
+										#if(!$!score)
+											#set($score = 0)
+										#end
+										#money($!rBackApplyInfoResp.backMoney)+$!{score}积分
+								</td>
+    						#end
+						#else
+							<td>#money($!rBackGdsResp.discountMoney)</td>
+    						#if($!velocityCount == 1)
+    							<td rowspan="$!rBackGdsResps.size()" >#money($!rBackApplyInfoResp.backMoney)</td>
+    						#end
+						#end
+						#end
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="seller-box">
+            <div class="head">
+                <h3>凭证信息</h3>
+            </div>
+            <div class="body">
+               ## <p>申请凭证</p>
+                <div class="ret-pzimg">
+					#set($vfsId = "")
+					#foreach($!picitem in $!rBackPicResps)
+						#if($!picitem.picType == '0')
+							#if($!picitem.getVfsId()) 
+								<span>
+									<img src="#genImageUrl($!picitem.getVfsId(),'')" width="100" style="cursor: pointer" onClick="imgModal(this);" data-toggle="modal" data-target=".bs-img-modal-lg"></img>
+                                </span>
+							#end
+						#end 
+					#end 
+                </div>
+            </div>
+       </div>
+
+        <div class="seller-box">
+            <div class="head">
+                <h3>优惠信息</h3>
+            </div>
+            <div class="body">
+                <table class="ret-pref">
+                    <tbody>
+                    #if($null.isNull($!{rBackApplyInfoResp.rBackApplyScoreResp}) || $null.isNull($!{rBackApplyInfoResp.rBackApplyAccResp})
+					 || $null.isNull($!{rBackApplyInfoResp.rBackApplyCoupResp}))
+    					 <tr>
+    						<p>无优惠信息</p>
+    					 </tr>
+    				#else
+    					#if($!{rBackApplyInfoResp.rBackApplyScoreResp})
+        					<tr id="scoreShare">
+                                <th>积分：</th>
+                                <td>
+    								#if($!{rBackApplyInfoResp.rBackApplyScoreResp.staffScore})
+    									#set($scoreNum = $!{rBackApplyInfoResp.rBackApplyScoreResp.staffScore})
+    								#else
+    									#set($scoreNum = 0)
+    								#end
+                                    <p>下单赠送扣减$!{rBackApplyInfoResp.rBackApplyScoreResp.sumReduCulateScore}积分,
+    									下单使用返还$!{rBackApplyInfoResp.rBackApplyScoreResp.sumUsedCulateScore}积分
+    								</p>
+                                </td>
+        					</tr>
+    					#end
+    					#if($!{rBackApplyInfoResp.rBackApplyCoupResp})
+    						<tr id="counp">
+                                <th>优惠券：</th>
+                                <td>
+    								#foreach($!{backApllyCoup} in $!{rBackApplyInfoResp.rBackApplyCoupResp.backApllyCoupList})
+    									#if($!{backApllyCoup.coupBackNum})
+    										#set($talNum = $!{backApllyCoup.coupBackNum})
+    									#else
+    										#set($talNum = 0)
+    									#end
+    									#if(${talNum} > $!{backApllyCoup.coupPresentNum})
+    										#set($backNum = $!{backApllyCoup.coupPresentNum})
+    									#else
+    										#set($backNum = ${talNum})
+    									#end
+    										
+                                    <p>$!{backApllyCoup.coupName} 下单赠送 $!{backApllyCoup.coupPresentNum}张，用户该类型优惠券剩余${talNum}张，应扣减${backNum}张</p>
+    								#end
+                                </td>
+        					</tr>
+    					#end
+    					#if($!{rBackApplyInfoResp.rBackApplyAccResp})
+    						<tr>
+                                <th>资金账户：</th>
+                                <td>
+    								#foreach($!{sumUsedCulateAcct} in $!{rBackApplyInfoResp.rBackApplyAccResp.sumUsedCulateAccList})
+                                    <p>$!{sumUsedCulateAcct.acctTypeName}： 下单使用#money($!{sumUsedCulateAcct.useMoney})元（整个订单使用的），退款(货)返还#money($!{sumUsedCulateAcct.backMoney})元</p>
+    								#end
+                                </td>
+    						</tr>
+    					#end
+    				#end
+                    </tbody>
+                </table>
+                <div class="ret-exam">
+                    <form class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label">退款原因：</label>
+                            <div class="controls">
+                                <p class="controls-txt"> $!{rBackApplyResp.backTypeName}</p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">问题描述：</label>
+                            <div class="controls">
+                                <p class="controls-txt"> $!{rBackApplyResp.backDesc}</p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputWarning">退款方式：</label>
+							#if($!{rBackApplyResp.payType} == "0") 
+                				<label class="radio inline">
+                				<input type="radio" name="payway" id="offline" value="0" checked="checked">
+                					线下退款
+                				</label>
+                			#else
+                				<label class="radio inline">
+                				<input type="radio" name="payway" id="offline" value="0">
+                					线下退款
+                    			</label>
+                    			<label class="radio inline">
+                    			<input type="radio" name="payway" id="online" value="1" checked="checked">
+                    				线上退款
+                    			</label>
+                			#end
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="checkDesc">审核意见：</label>
+                            <div class="controls">
+                                <textarea rows="3" class="input-xxlarge" name="checkDesc" id="checkDesc" maxlength="100"></textarea>
+                            </div>
+                        </div>
+						
+						<input type = "hidden" id="orderId" value="$!{rBackApplyResp.orderId}"/>
+                    	<input type = "hidden" id="backId" value="$!{rBackApplyResp.backId}"/>
+                    	<input type = "hidden" id="applyType" value="$!{rBackApplyResp.applyType}"/>
+                    	<input type = "hidden" id="shareInfo" value='$!{shareInfo}'/>
+                        <div class="btn-wrap">
+                            <span class="sbtn sbtn-blue" id="btn_pass">通过</span>
+                            <span class="sbtn" id="btn_unallow">不通过</span>
+                            <span class="sbtn" id="btn_return">返回</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

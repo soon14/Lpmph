@@ -1,0 +1,186 @@
+@charset "utf-8";
+/*  开学季皮肤样式 */
+a:hover {
+  color: #24a671;
+}
+.navBg .sidebar {
+  background-color: #24a671;
+}
+.side-hover:hover {
+  border: 1px solid #24a671;
+}
+.sidebar .item01 {
+  border: 1px solid #24a671;
+}
+.sidebar-box {
+  border: 1px solid #24a671;
+  border-top: 0;
+}
+.recom-box .recom-con .recom-btn {
+  background-color: #24a671;
+}
+.grade-star {
+  background-image: url(../images/schoolOpen/rank-x.png);
+}
+.grade-star a.active {
+  background-image: url(../images/schoolOpen/rank-x.png);
+  background-position: 0 1px;
+}
+.box-tit-more {
+  color: #24a671;
+}
+.slide-pagination li a {
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+}
+.slide-pagination li a.current {
+  background: #24a671;
+}
+.new-box .new-c-tit li a:hover,
+.new-box .new-c-tit li a.active {
+  color: #666;
+  font-weight: bold;
+}
+.k-icon {
+  background-color: #24a671;
+}
+.new-box .new-c-tit li a {
+  border-bottom: 1px solid #24a671;
+}
+.new-box .new-c-tit li a:hover .l-icon,
+.new-box .new-c-tit li a.active .l-icon {
+  background: url(../images/schoolOpen/d-topl.png) no-repeat;
+}
+.new-box .new-c-list .list-icon-orang {
+  background-color: #24a671;
+}
+.new-box .new-tit-list a:hover,
+.new-box .new-tit-list a.active {
+  border-bottom-color: #24a671;
+  background-image: url(../images/schoolOpen/d-top.png);
+  color: #24a671;
+}
+.zj-recommend .new-tit .active {
+  color: #24a671;
+}
+.dicon {
+  background-image: url(../images/schoolOpen/dicon.png);
+  width: 30px;
+  height: 30px;
+}
+.dicon-tit7 {
+  margin-top: 10px;
+  background-position: 0 -150px;
+}
+.new-box .box-con-right .border-top a {
+  color: #24a671;
+}
+.new-box .new-con-bg-none .tit {
+  color: #24a671;
+}
+#site-search .autocomplete-input {
+  border: 2px solid #24a671;
+  background-image: url(../images/schoolOpen/search-b.png);
+  background-position: 10px 10px;
+}
+.autocomplete-button {
+  background-color: #24a671;
+}
+#header .search .searchConten a {
+  background-color: #929191;
+}
+.navBg .book {
+  background-image: url(../images/schoolOpen/menu-ad.png);
+}
+.navBg .book-at {
+  width: 68px;
+}
+.navBg .book-kd {
+  width: 78px;
+  background-position: -69px 0;
+}
+.navBg .book-new {
+  width: 92px;
+  background-position: -151px 0;
+}
+.navBg {
+  background-image: url(../images/schoolOpen/navBg.png);
+}
+.navBg .nav-bar {
+  margin-left: 20px;
+}
+.navBg .nav-bar a:hover,
+.navBg .nav-bar a.active {
+  background-color: #24a671;
+}
+.navBg .nav-bar a {
+  line-height: 32px;
+  height: 40px;
+}
+.navBg .nav-bar li {
+  background-image: url(../images/schoolOpen/navBg.png);
+}
+#webBody {
+  position: relative;
+  overflow: hidden;
+}
+#webBody:before {
+  content: "";
+  background: url(../images/schoolOpen/schoolbg.jpg) top center no-repeat;
+  height: 640px;
+  display: block;
+  position: absolute;
+  width: 1672px;
+  left: 50%;
+  top: 0;
+  z-index: 1;
+  margin-left: -836px;
+}
+.onebg {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+}
+.school-logo {
+  position: absolute;
+  right: -14px;
+  margin-right: -60px;
+  margin-left: 30px;
+  margin-top: -28px;
+  display: block;
+}
+.rw-book {
+  position: relative;
+}
+.rw-book .new-tit .fresh {
+  cursor: pointer;
+  position: absolute;
+  font-size: 12px;
+  margin-right: 0;
+  right: 0;
+  top: 5px;
+  color: #24a671;
+}
+.rw-book .new-tit .fresh i {
+  display: inline-block;
+  width: 25px;
+  height: 15px;
+  vertical-align: middle;
+  background: url("../images/schoolOpen/hp.png");
+}
+body {
+  min-width: 1200px;
+}
+.seniorBtn {
+  background: #fff;
+  position: relative;
+  z-index: 1;
+}
+@media screen and (max-width: 1201px) {
+  .school-logo {
+    right: 60px;
+    z-index: 0;
+  }
+}
+/*# sourceMappingURL=school-open.css.map */

@@ -1,0 +1,66 @@
+
+<div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+  	<li role="presentation" 
+	  	#if(${tab} == '1')
+	    	class="active"
+	    #end
+  	><a href="#income" aria-controls="income" role="tab" data-toggle="tab">订单收入</a></li>
+    <li role="presentation"
+    	#if(${tab} == '2')
+	    	class="active"
+	    #end
+	><a href="#expend" aria-controls="expend" role="tab" data-toggle="tab">退货退款支出</a></li>
+    <li role="presentation"
+    	#if(${tab} == '3')
+	    	class="active"
+	    #end
+	><a href="#adjust" aria-controls="adjust" role="tab" data-toggle="tab">调账</a></li>
+  	<li role="presentation"
+    	#if(${tab} == '4')
+	    	class="active"
+	    #end
+	><a href="#withdraw" aria-controls="withdraw" role="tab" data-toggle="tab">提现</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+  	<div role="tabpanel" id="income"
+  		#if(${tab} == '1')
+	    	class="tab-pane active"
+	    #else
+	    	class="tab-pane"
+	    #end
+	>
+		#parse("/staff/shopacctdetail/shopacct-income.vm")
+	</div>
+    <div role="tabpanel" id="expend" 
+		#if(${tab} == '2')
+	    	class="tab-pane active"
+	    #else
+	    	class="tab-pane"
+	    #end
+	>
+		#parse("/staff/shopacctdetail/shopacct-expend.vm")
+	</div>
+    <div role="tabpanel" id="adjust" 
+		#if(${tab} == '3')
+	    	class="tab-pane active"
+	    #else
+	    	class="tab-pane"
+	    #end
+	>
+		#parse("/staff/shopacctdetail/shopacct-adjust.vm")
+	</div>
+	<div role="tabpanel" id="withdraw" 
+		#if(${tab} == '4')
+	    	class="tab-pane active"
+	    #else
+	    	class="tab-pane"
+	    #end
+	>
+		#parse("/staff/shopacctdetail/shopacct-withdraw.vm")
+	</div>
+  </div>
+</div>

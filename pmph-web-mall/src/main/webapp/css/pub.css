@@ -1,0 +1,328 @@
+@charset "utf-8";
+/*被用户激活(在鼠标点击与释放之间发生的事件)*/
+.add-table td  a:active{
+	text-decoration: underline;
+} 
+/*其鼠标悬停*/
+.add-table td  a:hover{
+	text-decoration: underline;
+}     
+/*导入列表样式*/
+a.sign-order-xls,
+a.sign-import-success{
+	color:#0099FF ;
+	
+}
+#signOrder-delete{
+	color:#0033FF;
+}
+.add-table td a.sign-import-fail{
+	color:#FF6633;
+}
+.signOrder-main{
+	border: 1px solid #ddd;
+    margin: 15px 0;
+}
+.signOrder-list{
+	border-bottom: 1px solid #ddd;
+	
+}
+.signOrder-list .signOrder-list-head{
+	background-color:#F2F2F2;
+	color:#FF6633;
+	padding:10px;
+	box-sizing: border-box;
+}
+.signOrder-list-detail{
+	overflow: hidden;
+}
+.signOrder-list-detail .signOrder-address,.signOrder-list-detail .signOrder-phoneNum{
+	margin-right: 15px;
+	color:#333;
+}
+.signOrder-list-detail .signOrder-warningMsg{
+	float: right;
+    color: #ff0000;
+}
+.signOrder-txt{
+	border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    padding: 5px;
+}
+
+.signOrder-txt:last-child{
+	border:none;
+}
+.txtStyle{
+	vertical-align: middle;
+    text-align: center;
+}
+.signOrder-money-total{
+	padding: 8px 20px;
+    box-sizing: border-box;
+    text-align: right;
+    background-color: #f5f5f5;
+    font-size: 16px;
+    border: 1px solid #ddd;
+}
+.signOrder-money-detail{
+	margin:15px 0;
+}
+.signOrder-money-detail div{
+	width:95%;
+	margin:5px auto;
+	font-size: 14px;
+	text-align: right;
+}
+.signOrder-money-detail .money-detail-number{
+	margin: 0 5px;
+}
+.signOrder-money-detail .money-detail-number,.money-detail-rmb{
+	color:#FF0000;
+}
+.money-detail-rmb{
+	
+	font-weight: bold;
+	display: inline-block;
+    width: 150px;
+}
+.signOrder-button{
+	text-align: center;
+    height: 80px;
+    line-height: 80px;
+}
+#signOrderSub{
+	background-color: #FF6633;
+    border: 1px solid #ff6633;
+    color: #ffffff;
+    font-size: 15px;
+    width: 130px;
+    height: 35px;
+    border-radius: 5px;
+    outline: none;
+}
+.btn-file-wrap{
+	position: relative;
+    display: inline-block;
+    border-radius: 4px;
+    padding: 4px 20px;
+    overflow: hidden;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    margin-top: -10px;
+    background-color: #ff6633;
+    color: #ffffff;
+    font-size: 14px;
+    vertical-align:middle;
+}
+
+
+.btn-file-wrap:hover,.btn-file-wrap:active,.btn-file-wrap:visited,.btn-file-wrap:link{
+	color: #ffffff;
+}
+.input-wrap{
+	display: inline-block;
+    position: relative;
+}
+.input-wrap input.uoloadFile{
+	position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+
+
+/* all-list style*/
+
+.sign-order-txt{
+	padding: 8px;
+    background-color: #ff990029;
+    border: 1px solid #ff9900;
+    margin-bottom: 10px;
+}
+.sign-order-txt .money-detail-rmb{
+	display: inline;
+    width: auto;
+}
+.sign-order-txt span.money-right{
+    float: right;
+}
+.btnSearch{
+	display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.75);
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #f5f5f5;
+    background-image: -moz-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#e6e6e6));
+    background-image: -webkit-linear-gradient(top,#fff,#e6e6e6);
+    background-image: -o-linear-gradient(top,#fff,#e6e6e6);
+    background-image: linear-gradient(to bottom,#fff,#e6e6e6);
+    background-repeat: repeat-x;
+    border: 1px solid #ccc;
+    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+    border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 2px rgba(0,0,0,0.05);
+}
+.exportfFile{
+    background-color: #ff9900;
+    border: 1px solid #ff9900;
+    outline: none;
+    color: #ffffff;
+    background-image:none;
+}
+.textDetail{
+	display: inline-block;
+    width: 95%;
+    vertical-align: top;
+}
+.sign-list-detail{
+	border: 1px solid #ddd;
+	margin-bottom: 20px;
+}
+.sign-detail-head{
+	padding: 6px 10px;
+    box-sizing:  border-box;
+    background-color: #F6FDF6;
+    border: 1px solid #f6fdf6;
+    color: #999999;
+}
+.dealtime{
+	margin:0 15px;
+}
+.sign-money a{
+	color:#ff0000;
+	font-weight: bold;
+}
+.dealtime button.rewrite{
+	padding: 0px 6px;
+    background-color: #ff9900;
+    border: 1px solid #ff9900;
+    outline: none;
+    color: #ffffff;
+    vertical-align: top;
+    border-radius: 3px;
+}
+.fapiaoMsg{
+	font-size: 13px;
+}
+.fapiaoMsg .c-gray-fa{
+	color: #000;
+}
+/*提交成功页面*/
+.success-wrap{
+	border:1px solid #dddddd;
+	overflow: hidden;
+	background-color: #F6FDF6;
+	padding: 20px;
+    box-sizing: border-box;
+}
+.success-img,.success-msg{
+	float:left;
+}
+
+.success-icon{
+	display: inline-block;
+    width: 80px;
+    height: 80px;
+    background: url(../images/mstate.png) no-repeat;
+    background-position: 0 0;
+}
+.fail-icon{
+	display: inline-block;
+    width: 80px;
+    height: 80px;
+    background: url(../images/mstate.png) no-repeat;
+    background-position: -104px 0;
+}
+.success-img{
+	width: 20%;
+    text-align: right;
+}
+.success-msg{
+	width: 80%;
+	padding: 5px 10px;
+    box-sizing: border-box;
+}
+.success-msg-head{
+	color: #008000;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+}
+.success-msg-head p{
+	margin-bottom:40px;
+	padding-left: 10px;
+    box-sizing: border-box;
+}
+.success-msg-body{
+	padding: 20px 0;
+    box-sizing: border-box;
+    font-size: 13px;
+}
+.success-msg-body p{
+	color: #ff0000;
+    font-weight: bold;
+    font-size: 13px;
+}
+.success-msg-body .msg-txt-tab{
+	margin: 5px 0;
+}
+.success-msg-body  .msg-txt-detail{
+	margin: 5px 0;
+}
+.msg-txt-detail .msg-txt-detail-type,.msg-txt-detail .msg-txt-detail-money{
+	font-size:16px;
+	font-weight: bold;
+}
+.msg-txt-detail .msg-txt-detail-type{
+	color:#008000;
+}
+.msg-txt-detail .msg-txt-detail-money{
+	color:#FF0000;
+}
+.msg-txt-tab a{
+	color: #0066FF;
+}
+.msg-txt-tab a:hover{
+	text-decoration: underline;
+}
+.success-back{
+	text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.success-back button{
+	color: #ffffff;
+    background-color: #FF6633;
+    border: 1px solid #ff6633;
+    outline: none;
+    width: 100px;
+    height: 30px;
+    font-size: 13px;
+    border-radius: 3px;
+}
+
+
+
+
+
+

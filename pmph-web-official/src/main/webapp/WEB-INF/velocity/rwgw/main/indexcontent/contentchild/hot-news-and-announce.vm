@@ -1,0 +1,25 @@
+#parse("/rwgw/sys/sys_param.vm")
+<div class="w">
+    <div class="box clearfix">
+    	##热点新闻
+        <div style="min-height:450px;" class="box-left ecp-component article-list-shader" data-status="1" data-homepage-is-show="1" data-place-size="6" data-place-id="1205" data-place-width="1200" data-place-height="800" data-return-url = "/rwgw/main/componentVM/rwgw-zh/article/hot-news" data-module="ecp-component/article-list-shader">
+
+            <div class='loading-small'></div>
+
+        </div>
+        ##人卫公告
+        <div class="box-right ecp-component article-list-shader" data-status="1" data-homepage-is-show="1" data-place-size="19" data-place-id="1206" data-return-url = "/rwgw/main/componentVM/rwgw-zh/article/rw-announcement" data-module="ecp-component/article-list-shader">
+            <div class='loading-small'></div>
+        </div>
+		##媒体报道
+        <div class="box-left ecp-component article-list-shader" data-status="1" data-homepage-is-show="1" data-place-size="4" data-place-id="1217" data-place-width="1200" data-place-height="800" data-return-url = "/rwgw/main/componentVM/rwgw-zh/article/media-report" data-module="ecp-component/article-list-shader">
+
+            <div class='loading-small'></div>
+
+        </div>
+    </div>
+    ##广告
+    <div class="box ecp-component leaflet-vm-shader" data-status="1" data-place-size="3" data-place-id="1208" data-place-width="392" data-place-height="160" data-return-url = "/rwgw/main/componentVM/rwgw-zh/leaflet/hot-news-down-img" data-module="ecp-component/leaflet/leaflet-vm-shader">
+        
+    </div>
+</div>

@@ -1,0 +1,32 @@
+#parse("sys/sys_param.vm")
+<title>自主征订-提交成功</title>
+ 
+<link rel="stylesheet" href="$!{CSS_PATH}/pub.css" />
+<script type="text/javascript" src="$!{BUSIJS_PATH}/pub/build.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/pub/create-success.js?version=$!{JS_VERSION}" ></script>
+
+
+<div id="main">
+	
+	<input id="rOrdZDResponseRedisKey" type="hidden" value="$!{rOrdZDResponseRedisKey}">
+	<input id="ordMainMapsFailedRedisKey" type="hidden" value="$!{ordMainMapsFailedRedisKey}">
+	<div class="success-wrap">
+	
+	    <div class="success-img">
+	    	
+	    </div>
+	    
+	    <div class="success-msg">
+	   		<div class="success-msg-head">
+	   			
+	   		</div>
+	   		<div class="success-msg-body">
+	   		
+	   		
+	    	</div>
+	    	
+	    	<div class="success-back">
+		    	<button id="signSuccessBack">返回</button>
+		    </div>
+	</div>
+</div>

@@ -1,0 +1,51 @@
+<!-- 首页人卫科技 新闻资讯右边模块-->
+#parse("/rwgw/sys/sys_param.vm")
+#if($floorAdRespList && 0 < ${floorAdRespList.size()})
+<div class="banner-swipe" style="height:auto;">
+    <div id='rw-tec-swipe-$!{floorRespDTO.id}' class='swipe'>
+        <div class='swipe-wrap'>
+			#foreach($floorAd in ${floorAdRespList})
+			<div class="item" style="height:auto;">
+			    <div class="wrapImg"><a href="$!{floorAd.linkUrl}"><img src="$!{floorAd.vfsUrl}" alt="$!{floorAd.advertiseTitle}"></a></div>
+			    <div class="wrapTit">$!{floorAd.advertiseTitle}</div>
+			</div>
+			#end
+		</div>
+	</div>
+</div>
+#else
+    <div class ='pro-empty'>#if($!{errorMessage})$!{errorMessage}#else 亲，暂无数据 #end</div>
+#end
+##处理页签
+#if($floorTabList && 0 < ${floorTabList.size()})
+<ul class="rw-tec-tabnav" style="display:none;">
+	#foreach($tab in $floorTabList)
+    <li>
+    	<a href="#if($!{tab.linkUrl} && '' != $!{tab.linkUrl})$!{tab.linkUrl}#else javascript:void(0);#end">$!{tab.tabName}</a>
+    </li>
+    #end
+</ul>
+#end
+
+<script type="text/javascript">
+	$(function(){
+		//处理轮播
+		var swipe = document.getElementById('rw-tec-swipe-$!{floorRespDTO.id}');
+	    if (swipe) {
+    		window["eTecSwipe-$!{floorRespDTO.id}"] = Swipe(swipe, {
+	            // startSlide: 4,
+	            auto: 3000,
+	            callback: function (pos) {
+	            }
+	        });
+	    }
+	    
+	    //处理页签
+	    var tabObj = $(".rw-tec-tabnav");
+	    tabObj.each(function(){
+	    	var tab = $(this);
+	    	$("ul.tabnav",tab.closest(".box")).append($("li",tab));
+	    	tab.remove();
+	    });
+	});
+</script>

@@ -1,0 +1,16 @@
+#parse("/sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/rwzw/list.js"></script>
+                    <ul class="newList list-borer">
+						#foreach($attr in ${respVO.getResult()})
+							 <li>
+                            <div class="newlist-date">$!date.format('yyyy-MM-dd',$!{attr.pubTime})</div>
+                            <div class=" newlist-con"><a href="#siteInfoURL('4')/about?staticId=$!{attr.staticId}&articleId=$!{attr.id}&placeId=$!{placeId}"><i class="qk-icon qk-icon-new"></i>
+                                $!{attr.articleTitle}</a></div>
+
+                        </li>
+							#end
+                    </ul>
+                  
+
+	  <div class="pagination pagination-centered " id="pageControlbar" data-total-page="${respVO.pageCount}" data-total-row="${respVO.count}" data-page-size="${respVO.pageSize}" data-page-number="${respVO.pageNo}" data-status="begin">
+                    </div>

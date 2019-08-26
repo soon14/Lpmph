@@ -1,0 +1,35 @@
+
+#parse("/module/mod-form.vm")
+#parse("/sys/sys_param.vm")
+<div class="sign-order-txt">
+	我的账户余额：<span class="money-detail-rmb">#moneyNum($!{sPubOrder.getBalance()})</span>元 
+	#if($!{sPubOrder.getAmount()}>0)
+		<span class="money-detail-rmb money-right">
+			提醒：您有$!{sPubOrder.getAmount()}笔订单待支付，您至少需要支付#moneyNum($!{sPubOrder.getPayMoney()})元，请联系客服进行付款操作！
+		</span>
+	#end
+</div>
+<div class="row-fluid clearfix date-box">
+    <form class="form-horizontal">
+        <div class="span5">
+            <div class="control-group">
+                <label class="control-label">开始日期：</label>
+
+                <input type="text" class="input-small Wdate" id="begdate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'enddate\')}'})" name="begDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+            </div>
+        </div>
+        <div class="span5">
+            <div class="control-group">
+                <label class="control-label">结束日期：</label>
+
+                <input type="text" class="input-small Wdate" id="enddate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begdate\')}'})" name="endDate"  value="$!date.format('yyyy-MM-dd',$!{endDate})">
+            </div>
+        </div>
+        <div class="span2">
+            ##<input type="button" class="btnSearch" value="查询" />
+            <button class="btn">查询</button>
+            <input type="hidden" class="btnSearch exportfFile" value="导出" />
+        </div>
+
+    </form>
+</div>

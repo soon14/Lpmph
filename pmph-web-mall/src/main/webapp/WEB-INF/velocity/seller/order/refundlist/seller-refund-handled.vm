@@ -1,0 +1,95 @@
+#parse("sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/seller-refund-handled.js?version=$!{JS_VERSION}"></script>
+    <div style="overflow-x: auto;">
+       <table class="seller-table table-striped">
+         <thead>
+           <tr>
+               <td>退款申请编号</td>
+               <td>商户订单号</td>
+               <td>订单编号</td>
+               <td>支付方式</td>
+               <td>支付通道</td>
+               <td>支付时间</td>
+               <td>申请日期</td>
+               <td>申请单状态</td>
+               <td>交易金额</td>
+               <td>退款金额</td>
+               <td>退款时间</td>
+               <td>退款方式</td>
+               <td>补偿性退款</td>
+               <td>操作</td>
+           </tr>
+         </thead>
+        <tbody>
+    		#if($null.isNull($resp) || $resp.count == 0)
+				<tr class="odd">
+                    <td class="kong" colspan="14">很遗憾，暂无数据</td>
+                </tr>
+    		#else
+				#foreach($!ordItem in $!resp.getResult())
+        		   <tr>
+					   <input type="hidden" name="siteId" value="$!{ordItem.rBackApplyResp.siteId}">
+					   <input type="hidden" name="payType" value="$!{ordItem.rBackApplyResp.payType}">
+					   <input type="hidden" name="applyType" value="$!{ordItem.rBackApplyResp.applyType}"/>
+                       <td><a href="javascript:void(0);" class="backId">$!{ordItem.rBackApplyResp.backId}</a></td>
+                       <td>$!{ordItem.rBackApplyResp.payTranNo}</td>
+					   <td><a href="javascript:void(0);" class="orderId">$!{ordItem.rBackApplyResp.orderId}</a></td>
+					   <td>#translate('ORD_PAY_TYPE',$!{ordItem.payType})</td>
+               		   <td>#translate('ORD_PAY_WAY',$!{ordItem.payWay})</td>
+               		   <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{ordItem.rBackApplyResp.payTime})</td>
+					   
+					   <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{ordItem.rBackApplyResp.applyTime})</td>
+					   <td>
+							#translate('ORD_BACK_MONEY_STATUS',$!{ordItem.rBackApplyResp.status})
+					   </td>
+					   <td>#moneyNum($!{ordItem.rBackApplyResp.realMoney})</td>
+					   <td>#moneyNum($!{ordItem.rBackApplyResp.backMoney})</td>
+					   
+					   <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{ordItem.rBackApplyResp.refundTime})</td>
+					   <td>
+							#if($!{ordItem.rBackApplyResp.payType} == "1")
+            					线上退款
+            				#elseif($!{ordItem.rBackApplyResp.payType} == "0")
+            					线下退款
+            				#end
+					   </td>
+					   <td>
+						#if($!{ordItem.rBackApplyResp.isCompenstate}=="0")
+						是
+						#else
+						否
+						#end
+					   </td>
+					   <td>
+					   #if($!{ordItem.rBackApplyResp.status} == "00")
+							#if($!{ordItem.rBackApplyResp.isCompenstate}!=0)
+								<a href="javascript:void(0);" class="detail">查看详情</a>
+							#else
+								<a href="javascript:void(0);" class="compensatedetail">查看详情</a>
+							#end
+						#elseif($!{ordItem.rBackApplyResp.status} =="01")
+							<a href="javascript:void(0);" class="queryRefund">确认退款</a>|
+							#if($!{ordItem.rBackApplyResp.isCompenstate}!=0)
+								<a href="javascript:void(0);" class="detail">查看详情</a>
+							#else
+								<a href="javascript:void(0);" class="compensatedetail">查看详情</a>
+							#end
+						#else
+							#if($!{ordItem.rBackApplyResp.isCompenstate}!=0)
+								<a href="javascript:void(0);" class="detail">查看详情</a>
+							#else
+								<a href="javascript:void(0);" class="compensatedetail">查看详情</a>
+							#end
+						#end
+					   </td>
+    			   </tr>
+			   #end
+    		#end
+         </tbody>
+       </table>
+    </div>
+    <div class="pagination bPage pagination-right">
+        <div id="pageControlbar" class="ecppage" data-total-page="$!{resp.pageCount}" data-total-row="$!{resp.count}" data-page-size="$!{resp.pageSize}" data-page-number="$!{resp.pageNo}" data-status="begin"></div>
+    </div>
+	<input type = "hidden" id="site1" value="#siteInfo('1')"/>
+	<input type = "hidden" id="site2" value="#siteInfo('2')"/>

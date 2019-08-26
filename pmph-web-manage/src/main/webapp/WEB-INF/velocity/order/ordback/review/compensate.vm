@@ -1,0 +1,112 @@
+#parse("/module/mod-grid.vm")
+#parse("/module/mod-form.vm")
+#parse("/order/requestPayment.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.date.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/other/order.util.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/ordback/compensate.js?version=$!{JS_VERSION}" ></script>
+<div class="well well-submitForm">
+	<form id="submitForm" class="form-horizontal required-validate" style="margin-bottom: 0px;">
+	  <input type="hidden" id="realMoney" name="realMoney" >
+	   <input type="hidden" id="orderId" name="orderId" >
+	    <input type="hidden" id="staffName" name="staffName" >
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="control-group">
+				<label class="control-label">订单编号：</label>
+				<div class="controls" style="line-height: 33px;">
+					 <span id='orderIdspan'></span>					
+				</div>
+			</div>
+		</div>
+		<div class="span3">
+            <div class="control-group">
+                <label class="control-label">交易金额：</label>
+                <div class="controls" style="line-height: 33px;">
+                	<span id='realMoneyspan'></span>                 
+                </div>
+            </div>
+        </div>
+		<div class="span3">
+            <div class="control-group">
+                <label class="control-label">补偿性退款金额：</label>
+                <div class="controls">
+                   <input type="text" id="backMoney" class="input-large required"  name="backMoney" min="0.01" max="9999999999" placeholder="请输入退款金额" >
+                </div>
+            </div>
+        </div>
+		<div class="clear"></div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="control-group">
+				<label class="control-label">收款人会员号：</label>
+				<div class="controls" style="line-height: 33px;">
+					 <span id='staffNamespan'></span>
+					
+				</div>
+			</div>
+		</div>	
+		<div class="clear"></div>
+	</div>
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="control-group">
+				<label class="control-label">备注：</label>
+				<div class="controls">
+					 <textarea rows="4" style="width:800px;" class="input-large required" id="memo" name="memo" id="checkCont" maxlength="80"></textarea>			
+				</div>
+			</div>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+	<div class="row-fluid" style="margin-bottom: 10px;">
+		<div class="pull-right">
+			<a class="btn btn-info" id="btn_submit"  href="javascript:void(0);" style="vertical-align:text-bottom;"><i class="icon-ok icon-white"></i> 提交</a>
+			<a class="btn" id="btn_return" href="javascript:void(0);" style="vertical-align:text-bottom;"><i class="icon-reply"></i> 返回</a>
+		</div>
+	</div>
+	</form>
+</div>
+<hr/>
+<div class="well well-searchForm">
+	<form id="searchForm" class="form-horizontal required-validate" style="margin-bottom: 0px;">
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="control-group">
+				<label class="control-label">订单编号：</label>
+				<div class="controls">
+					 <input type="text" id="grid_orderId" name="orderId" class="input-medium" value="" placeholder="">
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+            <div class="control-group">
+                <label class="control-label">开始日期：</label>
+
+                <input type="text" class="input-small Wdate" id="begdate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'enddate\')}'})" name="begDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+            </div>
+        </div>
+        <div class="span4">
+            <div class="control-group">
+                <label class="control-label">结束日期：</label>
+
+                <input type="text" class="input-small Wdate" id="enddate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begdate\')}'})" name="endDate"  value="$!date.format('yyyy-MM-dd',$!{endDate})">
+            </div>
+        </div>
+		<div class="clear"></div>
+	</div>
+	</form>
+</div>
+
+<div class="row-fluid" style="margin-bottom: 10px;">
+	<div class="pull-right">
+		<a class="btn btn-info" id="btnFormBaseSearch" href="javascript:void(0);"><i class="icon-search icon-white"></i> 查询</a>
+		<a class="btn" id="btnFormReset" href="javascript:void(0);"><i class="icon-refresh"></i> 重置</a>
+	</div>
+</div>
+
+<div class="row-fluid">
+	<table id="dataGridTable"></table>
+</div>
+		

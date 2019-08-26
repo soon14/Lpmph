@@ -1,0 +1,12 @@
+<div class="logo">
+	##更改logo图片取站点    2016.6.21 zhanbh
+    <h1><a 
+    	#if($null.isnull($CONTEXT_PATH) || $CONTEXT_PATH =="")
+            href="/"
+        #else
+            href="$CONTEXT_PATH"
+        #end>
+        <img src="#siteLogo()" alt="#siteName()"/>
+        </a>
+    </h1>
+</div>

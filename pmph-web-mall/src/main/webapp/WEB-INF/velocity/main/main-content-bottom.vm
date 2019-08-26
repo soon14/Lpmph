@@ -1,0 +1,50 @@
+<!--快速导航-->
+<div class="wrap1200 clearfix speed-nav">
+    <dl>
+        <dt>
+            <span class="shop-guide"></span>
+            购物指南
+        </dt>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-shop" target="_blank">购物流程</a></dd>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-problem" target="_blank">常见热点问题</a></dd>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-contact" target="_blank">联系我们</a></dd>
+    </dl>
+    <dl>
+        <dt>
+            <span class="payment"></span>
+            支付方式
+        </dt>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-pay" target="_blank">网上支付</a></dd>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-bank" target="_blank">银行转账</a></dd>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-post" target="_blank">邮局汇款</a></dd>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-door" target="_blank">上门支付</a></dd>
+    </dl>
+    <dl>
+        <dt>
+            <span class="delivery-m"></span>
+            配送方式
+        </dt>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-reg" target="_blank">邮政挂号</a></dd>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-delivery" target="_blank">快递送货</a></dd>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-come" target="_blank">上门自提</a></dd>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-other" target="_blank">其他方式</a></dd>
+    </dl>
+    <dl>
+        <dt>
+            <span class="return"></span>
+            会员和积分
+        </dt>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-menber" target="_blank">会员卡使用介绍</a></dd>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-mright" target="_blank">会员权益说明</a></dd>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-validity" target="_blank">积分有效期</a></dd>
+    </dl>
+    <dl>
+        <dt>
+            <span class="servic-v"></span>
+            售后服务
+        </dt>
+        <dd><a href="$CONTEXT_PATH/homepage/staticlink?page=help-refund" target="_blank">退、换货流程</a></dd>
+        <dd><a href="$!{CONTEXT_PATH}/info/infodetail?id=24016" target="_blank">退款操作流程</a></dd>
+        <dd><a href="$!{CONTEXT_PATH}/info/infodetail?id=24017" target="_blank">退货操作流程</a></dd>
+    </dl>
+</div>

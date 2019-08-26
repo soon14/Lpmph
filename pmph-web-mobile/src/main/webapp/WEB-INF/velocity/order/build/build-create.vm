@@ -1,0 +1,233 @@
+#parse("/module/mod-form.vm")
+
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/build/util.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/build/build-create.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/public/jquery.area.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/amazeLoad/amazeLoad.js"></script>
+
+<header class="am-header am-header-fixed">
+    <div class="am-header-title">
+        确认订单
+    </div>
+    <div class="am-header-left am-header-nav top-left">
+		<a href="$CONTEXT_PATH/order/cart/list">
+            <i class="public-arrowleft"></i>
+        </a> 
+    </div>
+</header>
+<div class="ui-content-fixBottom" style="padding-bottom: 50px" id="fixBottom">
+	<form id="submitForm">
+		<!-- 收货地址 -->
+        #parse("/order/build/build-custaddr.vm")
+		
+		<!-- 支付方式 -->
+        #parse("/order/build/build-payway.vm")
+		
+		<!-- 店铺商品 -->
+		#parse("/order/build/build-shopgds.vm")
+		
+		<!--优惠券展示位置开始（完全无隐藏的;notpad中那个是有隐藏域的，现在这个点击某一优惠券完全没反应，接下来需要做的就是1、显示点击效果，点击后通过js点击对应的隐藏的优惠券）-->
+		<div class="odr-con" style="border-top:2px solid #e7e6e6;background-color:#ffffff;">
+			#if($!{coupCounts}>0)	
+			<div class="ord-q ord-q-pad js_build_coupaon" id="showCoups" style="margin-top: 0px;">
+					优惠券 <span class="c-orange btn">$!{coupCounts}张可用</span>
+					<span class="ui-arrow ui-arrow-right pull-right mt25"></span>
+				<div class="pull-right c-orange coup-money" style="block;">
+					<span class="yang" id="yangSpan">&yen;</span>
+					<span id="coupMoneySpan">0.00</span>
+				</div>
+					<!-- 使用优惠券 canvas -->
+					<div id="build_canvas_coupon" class="am-offcanvas slidePage">
+						<div class="am-offcanvas-bar am-offcanvas-bar-flip">
+							<div class="am-offcanvas-content">							
+								<header class="am-header am-header-fixed">
+									<div class="am-header-title">
+											使用优惠券
+									</div>
+									<div class="am-header-left am-header-nav top-left js_canvas_coupon">
+										<a class="">
+											<i class="public-arrowleft"></i>
+										</a>
+									</div>
+								</header>
+								<div class="ui-content-fixBottom ff">
+									<div class="am-tabs" data-am-tabs="{noSwipe: 1}">
+										<ul class="am-tabs-nav am-nav am-nav-tabs ">
+											<li class="am-active"><a href="javascript: void(0)">可用优惠券($!{coupCounts})</a></li>
+										</ul>
+										#foreach($ordMain in $!{preOrdMainList})   ##根据店铺遍历所有可用优惠券
+										#set($index = $velocityCount - 1)  ##当前索引，店铺 
+										#set($coups = $!{coupOrdSkuMap.get($ordMain.cartId)})
+										#if($!{coupSizeMap.get($ordMain.shopId)}!=0)
+										<div class="am-tabs-bd">
+											<p style="font-size: 0.40625rem;"><b>$!{ordMain.shopName}优惠券</b></p>
+											<div class="am-tab-panel am-active">
+												<div class="coupon-list" style="padding-top: 0px;padding-bottom: 0px;">
+													<div class="item">
+														<ul class="ilist js_build_coupItems">
+															
+															#foreach($coupItems in $!coups)
+															#set($coupItemsIndex = $velocityCount - 1)
+																<div class="js_build_coupItemBean">
+																															#foreach($coupItem in $!{coupItems.coupDetails})
+																	#set($coupItemIndex = $velocityCount - 1)
+																	<li class="js_build_coupItem" style="margin-bottom: 0px;">
+																		<div class="opt">
+																			#set($skus = '')
+																			#foreach($coupSku in $!coupIdskuIdMap.get($coupItems.coupId).coupSkuRespDTO)
+																				#set($skus = $skus + $coupSku.skuId + ',')
+																			#end
+																			
+																			<input id="a$coupItems.coupId$coupItemsIndex$coupItemIndex" type="checkbox" class="ui-checkbox3 js_build_coupCheck" value="$!{coupItem.coupValue}"/>
+																			<label for="a$coupItems.coupId$coupItemsIndex$coupItemIndex" class="js_build_coupCheck_la_show" shopId="$!{ordMain.shopId}"></label>
+																		</div>
+																		<div class="cont">
+																			<div class="txt-hd">
+																				<!-- 券类型 -->
+																				<span class="conpon-sp">优惠券</span>
+																				$!{coupItem.coupName} 
+																				#if($!{coupItem.noExpress} != "1") 
+																					#if($!{coupItem.coupValue})
+																						#set($coupValue = $coupItem.coupValue / 1000.0)
+																						#if($!coupItem.discountCoup == '1')
+																						$coupValue折
+																						#else
+																						#moneyNum($!{coupItem.coupValue}) 元
+																						#end
+																					#end
+																				#end  
+																			</div>
+																			<div class="txt-block">
+																				<!-- 使用范围 -->
+																				<label>使用范围 :</label>
+																				<div>
+																					#if($!{coupItem.conditionsShow}) 
+																						$!{coupItem.conditionsShow}
+																					#else
+																						全品类
+																					#end 
+																				</div>
+																			</div>
+																			<div class="txt-block">
+																				<!-- 有效期至 -->
+																				<label>有效期至:</label>
+																				<div>$!date.format('yyyy.MM.dd',$!{coupItem.inactiveTime})</div>
+																			</div>
+																		</div> 
+																	</li>
+																	#end
+																</div>
+															#end
+														</ul>
+													</div>
+												</div>
+											</div>									
+										</div>
+										#end								
+										#end
+										<div class="o-pad-box js_canvas_coupon_show">确认</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+			#end
+		</div>
+		<!--优惠券展示位置结束-->
+		
+		
+		<!--发票展示位置开始-->
+		<div class="bdr-btn odr-pay " style="border-bottom:3px solid #e7e6e6;padding-bottom: 10px;">
+			<div class="paytit">发票信息</div>
+			<ul class="am-avg-sm-3 paylist">
+				<li class="">
+					<div class="js_build_invoice paybox active" invoice="0">不开票</div>
+				</li>
+				<li>
+					<div class="js_build_invoice paybox" invoice="1">开票</div>
+				</li>
+			</ul>
+			<div id="build_rOrdInvoice">
+				<input type="hidden" name="invoiceType" id="mainBillType" value="2">
+				
+				<input type="hidden" name="rOrdInvoiceCommRequest.invoiceType" id="billType" value="1">
+				<input type="hidden" name="rOrdInvoiceCommRequest.invoiceTitle" id="billTitle" >
+				<input type="hidden" name="rOrdInvoiceCommRequest.taxpayerNo" id="taxpayerNo" >
+				<input type="hidden" name="rOrdInvoiceCommRequest.invoiceContent" id="billContent" >
+				<input type="hidden" name="rOrdInvoiceCommRequest.detailFlag" id="detailFlag" value="0">
+				
+				<input type="hidden" name="rOrdInvoiceTaxRequest.invoiceTitle" id="billInvoiceTitle" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.taxpayerNo" id="billTaxpayerNo" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.contactInfo" id="billContactInfo" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.phone" id="billPhone" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.bankName" id="billBankName" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.acctInfo" id="billAcctInfo" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.vfsId2" id="billVfsId2" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.takerName" id="billTakerName" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.takerPhone" id="billTakerPhone" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.takerProvince" id="billTakerProvince" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.takerCity" id="billTakerCity" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.takerCounty" id="billTakerCounty" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.takerAddress" id="billTakerAddress" >
+				<input type="hidden" name="rOrdInvoiceTaxRequest.invoiceContent" id="billInvoiceContent" >
+			</div>
+		</div>
+		<!--发票展示位置结束-->
+		
+		<!-- 资费信息 start -->
+        <div class="odr-box01 odr-pad clearfix">
+            <div class="ord-price">
+                <div class="ord-ib">共计$!{orderAmounts}件商品&nbsp;&nbsp;总商品金额：<span class="c-orange" id="build_orderMoneys" moneys="$!{orderMoneys}" >&yen;#moneyNum($!{orderMoneys})</span></div>
+            </div>
+            <div class="ord-price">
+                <div class="ord-ib">运费&nbsp;&nbsp;小计：<span class="c-orange" id="build_realExpressFees">&yen;#moneyNum($!{realExpressFees})</span></div>
+            </div>
+			#if($acctSizes!=0)
+            <div class="ord-price">
+                <div class="ord-ib">资金账户：<span class="c-orange" id="build_acct_fees">-&yen;0.00</span></div>
+            </div>
+			#end
+			#set($coupShopSize = 0)
+            #foreach($item in $coupSizeMap.entrySet())
+                #set($coupShopSize = $coupShopSize + $item.value)
+            #end
+			#if($!{coupShopSize}!=0)
+            <div class="ord-price">
+                <div class="ord-ib">优惠券：<span class="c-orange" id="build_coup_fees">-&yen;0.00</span></div>
+            </div>
+			#end
+			#if($!{discountMoneys}!=0)
+            <div class="ord-price">
+                <div class="ord-ib">促销优惠：<span class="c-orange">-&yen;#moneyNum($!{discountMoneys})</span></div>
+            </div>
+			#end
+            <div class="ord-price">
+                <div class="ord-ib">应付总额：<span class="c-orange js_calc_allMoney">&yen;#moneyNum($!{allMoney})</span></div>
+            </div>
+        </div>
+		<!-- 资费信息 end -->
+		<!-- 表单数据 -->
+		<!-- 收货地址 -->
+		<input id="addrId" name="addrId" type="hidden" value="$!{var_custaddr.id}" />
+		<!-- 支付方式 -->
+		<input id="payType" name="payType" type="hidden" />
+		<!-- 是否有实体商品 -->
+		<input id="gdsType" name="gdsType" type="hidden" />
+		<!-- 用户id -->
+		<input type="hidden" id="staffId" value="$!{staffId}"/>
+		<input id="mainHashKey" name="mainHashKey" type="hidden" value="$!{mainHashKey}"/>
+		
+	</form>
+	<!-- 收货地址管理 -->	
+	#parse("/order/build/build-custaddr-canvas.vm")
+	<!-- 发票信息管理 -->
+	#parse("/order/build/build-invoice-canvas.vm")
+
+</div>
+<div class="am-navbar am-cf am-navbar-mall pay-bar payBar">
+    <div class="pad-box">
+        <div class="pad-pri"><span>应付总额：</span><span class="c-orange ft26 js_calc_allMoney">&yen;#moneyNum($!{allMoney})</span></div>
+        <a id="submitOrd" href="javascript:void(0);" style="font-size: 16px;" class="btn btn-gw">去付款</a>
+    </div>
+</div>

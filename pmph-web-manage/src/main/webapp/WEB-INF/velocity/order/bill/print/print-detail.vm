@@ -1,0 +1,116 @@
+#parse("/sys/sys_param.vm")
+<link href="$!{RESOURCE_PATH}/bootstrap/core/2.3.2/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="$!{CSS_PATH}/reset.css" type="text/css" rel="stylesheet">
+<style type="text/css">
+	.detail {
+        width: 700px;
+        margin: 0 auto;
+        font-size: 14px;
+    }
+    .detail hr{
+        border: 1px solid black;
+    }
+    .detail h2 {
+        font-size: 24px;
+        text-align: center;
+        line-height: 80px;
+    }
+    .table-detail {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    .table-detail td {
+        padding: 5px;
+    }
+    .table{
+        border: 2px solid black;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+		border-collapse:collapse;
+		border-spacing:0;
+    }
+    .table th{
+        text-align: center;
+        border: 1px solid black;
+
+    }
+    .table td{
+        border: 1px solid black;
+    }
+    .table td:first-child {
+        text-align: center;
+    }
+    .table-bordered thead:first-child tr:first-child>th:first-child,.table-bordered thead:first-child tr:first-child>th:last-child,.table-bordered tbody:last-child tr:last-child>td:first-child,.table-bordered tbody:last-child tr:last-child>td:last-child{
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+    } 
+</style> 
+<div class="detail">
+    <h2>北京人卫文化传播有限公司 销售明细单</h2>
+    <hr>
+    <table class="table-detail">
+        <tbody>
+        <tr>
+            <td>订购单号：$!{sOrderDetailsMain.id}</td>
+            <td>销售类型：<span style="font-weight:bold;">零售</span></td>
+            <td></td>
+        </tr>
+        <tr>
+			<td>单位名称：$!{sOrderDetailsComm.invoiceTitle}</td>
+            <td>订购册数：$!{sOrderDetailsMain.orderAmount}</td>  
+        </tr>
+        <tr> 
+            <td>订购码洋：#moneyNum($!{sOrderDetailsMain.basicMoney})</td>
+            <td>订购实洋：#moneyNum($!{sOrderDetailsMain.realMoney}) 
+				#if($!{sOrderDetailsMain.realExpressFee}!=0)
+					#set($realExpressFee = $!{sOrderDetailsMain.realExpressFee}/100)
+					（含运费$!{realExpressFee}元）
+				#end
+			</td>
+        </tr>
+        <tr>
+        #if($!{sOrderDetailsComm.taxpayerNo})
+			<td>纳税人识别号：$!{sOrderDetailsComm.taxpayerNo}</td>
+		#end
+        	<td>发票金额：#moneyNum($!{sOrderDetailsComm.invoiceMoney})</td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>条码</th>
+            <th>书名</th>
+            <th>定价</th>
+            <th>册数</th>
+            <th>折扣</th>
+            <th>实洋</th>
+        </tr>
+        </thead>
+        <tbody>
+         #foreach($!ordersub in $!sOrderDetailsSubs)
+    			<tr>
+					<td>$!velocityCount</td>
+                    <td>$!ordersub.zsCode</td>
+                    <td>$!ordersub.gdsName</td>
+					<td style="text-align:right;">#moneyNum($!ordersub.basePrice)</td>
+                    <td style="text-align:right;">$!ordersub.orderAmount</td>
+					<td style="text-align:right;">
+						#if($!{ordersub.discountPrice} == 0)
+							#set($discount = 10000)
+						#else
+							#set($discount = $!{ordersub.discountPrice}*10000/$!{ordersub.basePrice})
+						#end 
+						#moneyNum($!discount)
+					</td>
+                    <td style="text-align:right;">#moneyNum($!ordersub.discountMoney)</td>
+                </tr>
+			#end
+        
+        </tbody>
+    </table> 
+</div> 

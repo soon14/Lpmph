@@ -1,0 +1,56 @@
+<!-- 首页 人卫网站-->
+#parse("/rwgw/sys/sys_param.vm")
+#if(${respList} && 0 < ${respList.size()})
+<div class="box-head">
+    <i class="box-ticon ticon-web"></i>
+</div>
+<div class="box-body">
+    <div class="jcarousel-wrapper">
+        <a id="page2-prev" class="swipe-page prev"><i></i></a>
+        <a id="page2-next" class="swipe-page next"><i></i></a>
+
+        <div class="web-list jcarousel">
+            <ul class="webs">
+            	#foreach($leaflet in ${respList})
+                <li>
+                    <div class="imgHover">
+                        <div class="imgBox">
+                        	<a href="$!{leaflet.linkUrl}"><img src="$!{leaflet.vfsUrl}" alt="$!{leaflet.advertiseTitle}"/></a>
+                        </div>
+                        #if($!{leaflet.nailVfsUrl} && '' != $!{leaflet.nailVfsUrl})
+                        <div class="imgBox imgShow">
+                        	<a href="$!{leaflet.linkUrl}"><img src="$!{leaflet.nailVfsUrl}" alt="$!{leaflet.advertiseTitle}"/></a>
+                        </div>
+                       	#end
+                    </div>
+                    <p class="web-name"><a href="$!{leaflet.linkUrl}">$!{leaflet.advertiseTitle}</a></p>
+                </li>
+                #end
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            var jcarousel = $('.jcarousel');
+            jcarousel.on('jcarousel:reload jcarousel:create', function(){
+                var carousel = $(this),
+                    width = carousel.innerWidth();
+                if (width >= 600) {
+                    width = width / 8;
+                } else if (width >= 350) {
+                    width = width / 2;
+                }
+                carousel.jcarousel('items').css('width', Math.ceil(width) + 'px');
+            }).jcarousel({
+               wrap: 'circular'
+            });
+            $('.swipe-page.prev').jcarouselControl({
+               target: '-=1'
+            });
+            $('.swipe-page.next').jcarouselControl({
+               target: '+=1'
+            });
+        });
+    </script>
+</div>
+#end

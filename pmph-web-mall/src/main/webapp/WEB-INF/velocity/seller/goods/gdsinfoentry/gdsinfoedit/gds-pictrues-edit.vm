@@ -1,0 +1,235 @@
+<div class="seller-box" id="gds-pictrues" style="margin-top: 10px;">
+    <div class="head">
+        <h3>商品图片</h3>
+    </div>
+    <div class="well well-searchForm" style="background-color: #ffffff;border:none; -webkit-border-radius:none;-moz-border-radius: none;border-radius:none;-webkit-box-shadow: none;-moz-box-shadow:none; box-shadow: none;">
+
+            <div class="alert">
+                700*700以上图片可以在宝贝详情页主图提供图片放大功能
+            </div>
+            <div class="seller-imgs clearfix" style="height:auto;">
+            	##属性4000值
+				#set($prop_4000 = '')
+				##属性4001值
+				#set($prop_4001 = '')
+
+				#set($allPropMaps = $!{gdsInfo.allPropMaps})
+
+
+				#if($allPropMaps)
+					#if($allPropMaps.get('4000'))
+						#set($prop_4000 = $allPropMaps.get('4000').values[0].propValue)
+					#end
+					#if($allPropMaps.get('4001'))
+						#set($prop_4001 = $allPropMaps.get('4001').values[0].propValue)
+					#end
+				#end
+
+
+				  #set($hasMain = '0')
+				  ##foreach开始
+				  #foreach($media in $!{gdsInfo.medias})
+					    ##if开始
+                        #if($!{media.mediaType}!="1")
+
+						#else
+    					     #set($hasMain = '1')
+    						 <div class="item">
+    							  <div class="imgcont">
+									#if($velocityCount==1)
+                                      <i class="sl-icon icon-zt"></i>
+									#end
+                                      <img id="image$velocityCount" src="$!{media.URL}"  alt="" onerror="">
+                                      ##<a href="#" class="imgclose" >x</a>
+                                  </div>
+        						  <div class="text-center">
+        								<input name="mainPicVfsId"
+            								   picName=""
+            								   mediaRtype="$!{media.mediaRtype}"
+            								   mediaId="$!{media.mediaId}"
+            								   mediaType="$!{media.mediaType}"
+            								   id="picVfsId$velocityCount"
+            								   type="hidden"
+            								   value="$!{media.mediaUuid}"
+            								   main="$velocityCount"/>
+                                             <span class="sbtn a-upload">
+            								  #if($velocityCount==1)
+            								  <font color="red">*</font>
+            								           上传主图
+            							     #else
+            									上传辅图
+            								 #end
+            							      <input class="com_input" index="$velocityCount" uploadimage="upload-pictures" type="file" id="detailPic$velocityCount" name="detailPic"/>
+        								  </span>
+                                   </div>
+    					     </div>
+						#end
+						##if结束
+					#end
+			        ##foreach结束
+
+				    ##$hasMain =='0'开始
+    				#if($hasMain =='0')
+            			<div class="item">
+                                <div class="imgcont">
+									<i class="sl-icon icon-zt"></i>
+                                    <img id="image1" src="${aiTool.genImageUrl('','124x124!')}"  alt="" onerror=""/>
+    								##<a href="#" class="imgclose">x</a>
+                                </div>
+								<div class="text-center">
+									<input name="mainPicVfsId"
+										   picName=""
+										   mediaRtype="$!{media.mediaRtype}"
+										   mediaType="$!{media.mediaType}"
+										   id="picVfsId1"
+										   type="hidden"
+										   value="$!{media.mediaUuid}"
+										   main="1"/>
+        								   <div class="text-center">
+                                              <span class="sbtn a-upload">
+                								  <font color="red">*</font>上传主图
+                							      <input class="com_input" index="1" uploadimage="upload-pictures" type="file" id="detailPic1" name="detailPic"/>
+            								  </span>
+                                          </div>
+								</div>
+                        </div>
+            		#end
+    				##$hasMain =='0'结束
+				## foreach开始
+				#foreach($m in $upPictrueAmount)
+					#if($hasMain=='0')
+        				#set($count = $velocityCount + 1)
+        			#else
+        				#set($count = $velocityCount + $!{gdsInfo.medias.size()})
+        			#end
+                    <div class="item">
+						<div class="imgcont">
+							  <img id="image$count" src="${aiTool.genImageUrl('','124x124!')}"  alt="" onerror=""/>
+                              ##<a href="#" class="imgclose">x</a>
+                        </div>
+                        <div class="text-center">
+							<input name="mainPicVfsId"
+								   picName=""
+								   mediaRtype=""
+								   mediaType=""
+								   id="picVfsId$count"
+								   type="hidden"
+								   value=""
+								   main="$count"/>
+							<span class="sbtn a-upload">
+								上传辅图
+								<input class="com_input" index="$count" uploadimage="upload-pictures" type="file" id="detailPic$count"  name="detailPic"/>
+						    </span>
+                        </div>
+                   </div>
+				#end
+
+
+		            <div class="item">
+		                <div class="imgcont">
+		                    <img id="image99" src="${aiTool.genImageUrl($prop_4000,'124x124!')}"  alt="" onerror=""/>
+		                </div>
+		                <div class="text-center">
+		                    <input name="mainPicVfsId" picName="" mediaRtype="" mediaId="" mediaType="" id="picVfsId99" type="hidden" value="$prop_4000" main="99"/>
+		                    <span class="sbtn a-upload">
+								上传图片
+								<input class="com_input" index="99"  uploadimage="upload-pictures" type="file" id="detailPic99" name="detailPic"/>
+							</span>
+		                    <div class="commodity_txt">
+								产品版权页图片
+		                    </div>
+		                </div>
+					</div>
+
+					 <div class="item">
+		                <div class="imgcont">
+		                    <img id="image100" src="${aiTool.genImageUrl($prop_4001,'124x124!')}"  alt="" onerror=""/>
+		                </div>
+		                <div class="text-center">
+		                    <input name="mainPicVfsId" picName="" mediaRtype="" mediaId="" mediaType="" id="picVfsId100" type="hidden" value="$!prop_4001" main="100"/>
+							<span class="sbtn a-upload">
+								上传图片
+								<input class="com_input" index="100"  uploadimage="upload-pictures" type="file" id="detailPic100" name="detailPic"/>
+		                    </span>
+		                    <div class="commodity_txt">
+								产品包装条形码特写
+		                    </div>
+		                </div>
+					</div>
+
+        </div>
+      <div class="seller-tpltab" style="margin-top: 20px;">
+		        <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#img-tpl" data-toggle="tab">图片空间</a></li>
+                                    ##<li><a href="#video-tpl" data-toggle="tab">视频中心</a></li>
+									<div class="alert">温馨提示：点击选中商品图片的图片显示框，再双击图片空间中的图片，即可添加图片。</div>
+                </ul>
+
+                <div class="tab-content">
+					## 图片空间START
+                    <div class="tab-pane active" id="img-tpl">
+                        <div class="row-fluid form-horizontal">
+                            <div class="span5">
+                                <div class="control-group">
+                                    <label class="control-label">分类：</label>
+                                    <div class="controls">
+										<select class="input-mediue" id="picCatgCode">
+                                            #foreach($list in $!{mediaTypeList})
+                                                <option value="$!{list.spCode}">$!{list.spValue}</option>
+                                            #end
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="span6">
+                                <div class="control-group">
+                                    <label class="control-label">名称：</label>
+                                    <div class="controls">
+    									<input type="text" class="input-medium" id="mediaName" placeholder="输入图片名称"/>
+                                        <span class="sbtn sbtn-blue" onclick="searchMedia()">搜索</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pmrg-tpls">
+                            <div class="tpls clearfix" id="mediaList">
+                            </div>
+                        </div>
+                    </div>
+					## 图片空间END
+					## 视频中心START
+					<div class="tab-pane" id="video-tpl">
+                        <div class="row-fluid  form-horizontal">
+                            <div class="span4">
+                                <div class="control-group">
+                                    <label class="control-label">分类：</label>
+                                    <div class="controls">
+										 <select>
+										 </select>
+                                    </div>
+                                </div>
+                            </div>
+							<div class="span6">
+                                <div class="control-group">
+                                    <label class="control-label">名称：</label>
+                                    <div class="controls">
+    									<input type="text" class="input-medium" placeholder="输入图片名称"/>
+                                        <span class="sbtn sbtn-blue">搜索</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pmrg-tpls">
+                            <div class="tpls clearfix">
+                            </div>
+                        </div>
+                    </div>
+					## 视频中心END
+                </div>
+            </div>
+            <div class="moreimg clearfix" id="more-pictrue">
+                                                更多（从图片库选择）&nbsp;<i class="icon-caret-down"></i>
+            </div>
+        </div>
+</div>

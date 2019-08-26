@@ -1,0 +1,42 @@
+#custInfo()
+<!--头部 begin-->
+<div id="header">
+    <div class="w">
+        <div class="topBg-left"> 您好，欢迎光临人卫官网</div>
+        <div class="topBG-right">
+        	<input type="hidden" id="mallsiteurl" name="mallsiteurl" value="#siteInfoURL('1')" />
+            <div class="search" id="rwgwsearch">
+                <div class="ser-wrap">
+                    <input type="text" class="itxt" id="searchkeyword" placeholder="图书搜索"/>
+                    <input type="button" class="ibtn" id = "rwgwdosearch" value="图书搜索"/>
+                </div>
+                <span class="hz-icon"></span>
+            </div>
+            <ul class="top-nav">
+                <li class="item">
+                	#if(${cust.staffCode})
+					<a href="#" class="pos">$!{cust.staffCode}</a>	
+					#else
+		  			<a href="$CONTEXT_PATH/login/gwpage" class="pos"> 登录</a>
+					#end
+                </li>
+                <li class="item">
+                	#if(${cust.staffCode})
+                	<a href="$CONTEXT_PATH/login/logout" class="pos">退出</a>	
+                	#else
+                	<a href="$CONTEXT_PATH/login/register" class="pos">注册</a>
+                	#end
+                </li>
+                <li class="item dropdown">
+                	<a href="#" class="pos">
+                		<img src="$IMAGE_PATH/topIcon01.png" alt=""/>中文 <b class="gwIcon-arrow"></b></a>
+                    <ul class="language">
+                        <li><a href="#siteInfoURL('5')"><img src="$IMAGE_PATH/topIcon02.png" alt=""/>英文</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="$BUSIJS_PATH/main/rwgw-search.js"></script>
+<!--头部 end-->

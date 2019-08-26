@@ -1,0 +1,573 @@
+#macro (showSpringFieldError $field)
+	#springBind("$field")
+    #foreach($e in $status.errorMessages)
+        <span>${e}</span>
+	#end
+#end
+
+##展示短地址
+#macro (addr $addr $length)
+	#set($smalladdr = $!addr)
+	#set($max = 50)
+	#if(!$null.isNull($length))
+		#set($max = $length)
+	#end
+	#if(!$null.isNull($addr) && $addr.length()>=$max)
+		#set($smalladdr = $addr.substring(0,$max) + "....")
+	#end
+	$!smalladdr
+#end
+#macro (showSpringAllError $model)
+	#springBind("$model")
+    #if($status.errors.hasErrors())
+        ## Global error messages
+        #foreach($e in $status.errorMessages)
+            <span>${e}</span><br/>
+        #end
+        ## Field error messages
+        #foreach($f in $status.errors.fieldErrors)
+		    #showSpringFieldError("$model.${f.field}")
+			<br/>
+	    #end
+	#end
+#end
+
+
+##wangbh
+##根据key获取公共参数集合，封装成select
+##required true/false 是否必填 value:默认选中
+#macro(select $key $name $required $value)
+#set($list = ${paramTools.getParamDTOList($key)})
+	<select name="$name" id="$name"  class="input-large #if($required)required#end">
+			#if(!$required)
+				<option value="">
+					--请选择--
+                </option>
+			#end
+			#foreach($attr in $list)
+			<option value="$!{attr.spCode}" #if($value==$!{attr.spCode}) selected #end>
+			#escapeHtml($!{attr.spValue})
+            </option>
+		#end
+    </select>
+	
+#end
+
+##zhanbh
+##根据key获取公共参数集合，封装成select
+##required true/false 是否必填 value:默认选中
+##$blank  true/false 是否显示请选择
+#macro(selectBox $key $name $required $blank $value)
+#set($list = ${paramTools.getParamDTOList($key)})
+	<select name="$name" id="$name"  class="input-large #if($required)required#end">
+			#if($blank)
+				<option value="">
+					--请选择--
+                </option>
+			#end
+			#foreach($attr in $list)
+			<option value="$!{attr.spCode}" #if($value==$!{attr.spCode}) selected #end>
+			#escapeHtml($!{attr.spValue})
+            </option>
+		#end
+    </select>
+	
+#end
+
+
+##wangbh
+##code转字符
+#macro(translate $name $code)
+#set($val = ${paramTools.translate($name,$code)})
+#escapeHtml($val)
+#end
+
+##wangbh
+##code转字符
+#macro(areaName $code)
+#set($val = ${paramTools.getAreaName($code)})
+#escapeHtml($val)
+#end
+
+###将Map数据展示为下拉列表的信息；
+### add by yugn 2014.7.31
+#macro(displayMapParam $list $defaultCode)
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list.entrySet())
+			#if($null.isNull($defaultCode))
+				<option value=${param.key}>#escapeHtml(${param.value})</option>
+			#else
+				#if($defaultCode == ${param.key})
+					<option value=${param.key} selected='selected'>#escapeHtml(${param.value})</option>
+				#else 
+					<option value=${param.key}>#escapeHtml(${param.value})</option>
+				#end
+			#end
+			
+		#end
+	#end
+#end
+
+##用于将参数名称对应的参数列表 展示为 下拉框列表信息；
+##将原来直接获取map的方法修改为，获取List对象的方式，保证数据的排序；
+### add by yugn 2014.7.31
+#macro(listParam $paramName $defaultCode)
+	##set($list = ${paramTools.list($paramName)})##
+	##displayMapParam($list,$defaultCode)##
+	#set($list = ${paramTools.getParamDTOList($paramName)})
+	#foreach($attr in $list)
+    <option value="$!{attr.spCode}" #if($defaultCode==$!{attr.spCode}) selected='selected' #end>
+		#escapeHtml($!{attr.spValue})
+    </option>
+	#end
+#end
+
+####金额展示，前面统一带 &yen; 符号；
+#macro(money $input)##
+#if($input)##
+####下面的输出，距离行首的位置，千万不能有空格，否则输出到 text 之类的输入框中，会出现空格字符；
+&yen;${aiNumber.showMoney("$input")}##
+#end
+#end
+
+####金额展示，前面统一带 &yen; 符号；
+#macro(moneyDecimal $input)##
+#if($input)##
+####下面的输出，距离行首的位置，千万不能有空格，否则输出到 text 之类的输入框中，会出现空格字符；
+&yen;${aiNumber.showMoneyByTwoDecimal("$input")}##
+#end
+#end
+
+####金额展示，前面不带 &yen; 符号；
+#macro(moneyNum $input)
+#if($input)##
+####下面的输出，距离行首的位置，千万不能有空格，否则输出到 text 之类的输入框中，会出现空格字符；
+${aiNumber.showMoneyByTwoDecimal("$input")}##
+#end
+#end
+
+####百分号展示，后面带 % 符号；
+#macro(showPercentNum $input)
+#if($input)##
+####下面的输出，距离行首的位置，千万不能有空格，否则输出到 text 之类的输入框中，会出现空格字符；
+${aiNumber.showPercentNum("$input")}%##
+#end
+#end
+
+####百分号展示，后面不带 % 符号；
+#macro(showPercentNumNotPer $input)
+#if($input)##
+####下面的输出，距离行首的位置，千万不能有空格，否则输出到 text 之类的输入框中，会出现空格字符；
+${aiNumber.showPercentNum("$input")}##
+#end
+#end
+##企业列表输出
+#macro(companylist $defaultCode $status)
+	
+	#set($list = ${constant.getComapnyCache()})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list)
+			#if($status && $param.status && $status != $param.status)
+			#else
+    			#if($null.isNull($defaultCode))
+    				<option value=$!{param.id}>#escapeHtml($!{param.companyName})</option>
+    			#else
+    				#if($defaultCode == $!{param.id})
+    					<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.companyName})</option>
+    				#else 
+    					<option value=$!{param.id}>#escapeHtml($!{param.companyName})</option>
+    				#end
+    			#end
+			#end
+		#end
+	#end
+#end
+
+##店铺列表输出
+#macro(shoplist $defaultCode)
+	
+	#set($list = ${constant.getShopCache()})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list)
+			#if($null.isNull($defaultCode))
+				<option value=$!{param.id}>#escapeHtml($!{param.shopName})</option>
+			#else
+				#if($defaultCode == $!{param.id})
+					<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.shopName})</option>
+				#else 
+					<option value=$!{param.id}>#escapeHtml($!{param.shopName})</option>
+				#end
+			#end
+			
+		#end
+	#end
+#end
+
+##店铺列表输出
+#macro(shoplist $defaultCode $exceptCode)
+	
+	#set($list = ${constant.getShopCache()})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list)
+			#if($param.id != $exceptCode)
+				#if($null.isNull($defaultCode))
+					<option value=$!{param.id}>#escapeHtml($!{param.shopName})</option>
+				#else
+					#if($defaultCode == $!{param.id})
+						<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.shopName})</option>
+					#else 
+						<option value=$!{param.id}>#escapeHtml($!{param.shopName})</option>
+					#end
+				#end
+			#end
+		#end
+	#end
+#end
+
+
+##店铺列表输出
+#macro(shopStatuslist $defaultCode $status)
+	
+	#set($list = ${constant.getShopCache()})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list)
+			#if(!$status)
+					#if($null.isNull($defaultCode))
+						<option value=$!{param.id}>$!{param.shopName}</option>
+					#else
+						#if($defaultCode == $!{param.id})
+							<option value=$!{param.id} selected='selected'>$!{param.shopName}</option>
+						#else 
+							<option value=$!{param.id}>$!{param.shopName}</option>
+						#end
+					#end
+			#else
+				#if($status==$!{param.shopStatus})
+					#if($null.isNull($defaultCode))
+					<option value=$!{param.id}>$!{param.shopName}</option>
+					#else
+						#if($defaultCode == $!{param.id})
+							<option value=$!{param.id} selected='selected'>$!{param.shopName}</option>
+						#else 
+							<option value=$!{param.id}>$!{param.shopName}</option>
+						#end
+			 		#end
+	       		#end
+			#end
+		#end
+	#end
+#end
+
+##店铺列表输出
+#macro(shopStatuslist $defaultCode $status $exceptCode)
+	
+	#set($list = ${constant.getShopCache()})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list)
+			#if($param.id != $exceptCode)
+				#if(!$status)
+						#if($null.isNull($defaultCode))
+							<option value=$!{param.id}>$!{param.shopName}</option>
+						#else
+							#if($defaultCode == $!{param.id})
+								<option value=$!{param.id} selected='selected'>$!{param.shopName}</option>
+							#else 
+								<option value=$!{param.id}>$!{param.shopName}</option>
+							#end
+						#end
+				#else
+					#if($status==$!{param.shopStatus})
+						#if($null.isNull($defaultCode))
+						<option value=$!{param.id}>$!{param.shopName}</option>
+						#else
+							#if($defaultCode == $!{param.id})
+								<option value=$!{param.id} selected='selected'>$!{param.shopName}</option>
+							#else 
+								<option value=$!{param.id}>$!{param.shopName}</option>
+							#end
+				 		#end
+		       		#end
+				#end
+			#end
+		#end
+	#end
+#end
+
+#macro(process $status $statuslist)
+	            <!--进度条-->
+<div id="process" class="section4">
+	#foreach($item in $!statuslist)
+		#if($!statuslist.indexOf($item)<$!statuslist.indexOf($mystatus))
+			<div class="node ready">
+                <ul>
+                    <li class="tx1">&nbsp;</li>
+                    <li class="tx2">$!status.get($item)</li>
+                </ul>
+			</div>
+			<div class="proce ready">
+                <ul>
+                    <li class="tx1">&nbsp;</li>
+                </ul>
+			</div>
+			
+			#else
+				#if($!statuslist.indexOf($item)<($!statuslist.size() - 1))
+					#if($!status.get($item)==""||$null.isNull($!status.get($item)))
+					#else
+					<div class="node wait">
+                        <ul>
+                            <li class="tx1">&nbsp;</li>
+                            <li class="tx2">$!status.get($item)</li>
+                        </ul>
+                    </div>
+                    <div class="proce wait">
+                        <ul>
+                            <li class="tx1">&nbsp;</li>
+                        </ul>
+                    </div>
+					#end
+				#else
+					<div class="node wait">
+                        <ul>
+                            <li class="tx1">&nbsp;</li>
+                            <li class="tx2">$!status.get($item)</li>
+                        </ul>
+					</div>
+				#end
+		#end
+	#end
+    </div>
+<!--进度条 end-->
+#end
+
+###根据图片ID，和规格生成图片URL；
+#macro(genImageUrl $id $size)
+${aiTool.genImageUrl($id,$size)}
+#end
+
+###用于对源字符串进行 HTML 转换；
+#macro (escapeHtml $source)
+#if($source)##
+${aiTool.escapeHtml("$source")}##
+#end
+#end
+
+
+##商品目录下拉框输出 liyong
+#macro(catlogList $defaultCode $status)
+	
+	#set($list = ${constant.getGdsCatlog()})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list)
+			#if(!$status)
+    			#if($null.isNull($defaultCode))
+    				<option value=$!{param.id}>#escapeHtml($!{param.catlogName})</option>
+    			#else
+    				#if($defaultCode == $!{param.id})
+    					<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.catlogName})</option>
+    				#else 
+    					<option value=$!{param.id}>#escapeHtml($!{param.catlogName})</option>
+    				#end
+    			#end
+			#else
+				#if($status == ${param.status})
+    				#if($null.isNull($defaultCode))
+        				<option value=$!{param.id}>#escapeHtml($!{param.catlogName})</option>
+        			#else
+        				#if($defaultCode == $!{param.id})
+        					<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.catlogName})</option>
+        				#else 
+        					<option value=$!{param.id}>#escapeHtml($!{param.catlogName})</option>
+        				#end
+					#end
+			    #end
+		    #end
+		#end
+	#end
+#end
+
+
+##优惠券类型列表输出  huangjx
+#macro(couptypelist $defaultCode)
+	
+	#set($list = ${constant.searchCoupTypeCache()})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list)
+			#if($null.isNull($defaultCode))
+				<option value=$!{param.id}>#escapeHtml($!{param.coupTypeName})</option>
+			#else
+				#if($defaultCode == $!{param.id})
+					<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.coupTypeName})</option>
+				#else 
+					<option value=$!{param.id}>#escapeHtml($!{param.coupTypeName})</option>
+				#end
+			#end
+			
+		#end
+	#end
+#end
+
+
+##站点列表输出  jiangzh
+#macro(siteList $defaultCode)
+	
+	#set($list = ${constant.querySiteListCache()})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list)
+			#if($null.isNull($defaultCode))
+				<option value=$!{param.id} #if ($!{param.isdefault}=='1') selected='selected' #end>#escapeHtml($!{param.siteName})</option>
+			#else
+			    #if($defaultCode == "")
+			       <option value=$!{param.id} #if ($!{param.isdefault}=='1') selected='selected' #end>#escapeHtml($!{param.siteName})</option>
+				#elseif($defaultCode == $!{param.id})
+					<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.siteName})</option>
+				#else 
+					<option value=$!{param.id}>#escapeHtml($!{param.siteName})</option>
+				#end
+			#end
+			
+		#end
+	#end
+#end
+
+##菜单 by wangbh
+#macro(menu)
+	#set($list = ${constant.getMenuByStaffCache()})
+#end
+
+
+##会员信息获取
+#macro(custInfo)
+	
+	#set($cust = ${constant.getCustInfo()})
+	
+#end
+
+##站点URL jiangzh
+#macro(siteInfo $siteId)
+	
+#set($site = ${constant.siteCache("$!{siteId}")})
+#if($null.isnull($site))
+#else$!{site.siteUrl}#end	
+#end
+
+##站点名称 jiangzh   传参 ‘1’，或者‘’
+#macro(siteName $siteId)
+#set($site = ${constant.siteName("$!{siteId}")})
+#if($null.isnull($site))
+#else
+$!{site.siteName}#end
+#end
+
+##站点logojiangzh   传参 ‘1’，或者‘’
+#macro(siteLogo $siteId $size)
+#set($site = ${constant.siteName("$!{siteId}")})
+#if($null.isnull($site))
+#else
+#genImageUrl($!{site.siteLogo},$!{size})#end
+#end
+
+##站点对象 zhanbh  传参 ‘1’，或者‘’
+#macro(siteObj $siteId)
+#set($siteObj = ${constant.siteName("$!{siteId}")})
+#end
+
+##书号输出  panjs
+#macro(bookNum $isbn)
+	#if($null.isNull($isbn))
+	#else
+		#set($books = $isbn.split("-"))
+		#if($books.size() >= 4)
+			#set($book = $!books[3])
+			$!book
+		#end	
+	#end
+#end
+
+##展示短地址
+#macro (gdsName $addr $length)
+	#set($smalladdr = $!addr)
+	#set($max = 50)
+	#if(!$null.isNull($length))
+		#set($max = $length)
+	#end
+	#if(!$null.isNull($addr) && $addr.length()>=$max)
+		#set($smalladdr = $addr.substring(0,$max) + "....")
+	#end
+	$!smalladdr
+#end
+
+##所属模板
+#macro(templateList $defaultCode)
+	
+	#set($list = ${constant.queryTemplateListCache("$defaultCode")})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+	#else
+		#foreach($param in $list)
+			#if($null.isNull($defaultCode))
+				<option value=$!{param.id} >#escapeHtml($!{param.templateName})</option>
+			#else
+			    #if($defaultCode == "")
+			       <option value=$!{param.id}>#escapeHtml($!{param.templateName})</option>
+				#elseif($defaultCode == $!{param.id})
+					<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.templateName})</option>
+				#else 
+					<option value=$!{param.id}>#escapeHtml($!{param.templateName})</option>
+				#end
+			#end
+			
+		#end
+	#end
+#end
+
+
+##转义商品类型名称
+#macro(gdsTypeName $id)
+ #set($val = ${constant.gdsTypeName("$id")})
+ $!{val}
+#end
+
+##判断商品类型是否需要库存
+#macro(isNeedStock $id)
+ #set($val = ${constant.isNeedStock("$id")})
+ $!{val}
+#end
+
+##判断商品类型是否允许购买多次
+#macro(isBuyMore $id)
+ #set($val = ${constant.isBuyMore("$id")})
+ $!{val}
+#end
+
+#macro(webManageLogo $size)
+   #set($logoUUID = ${paramTools.getSysConfigCode("MANAGE_LOGO_FILE_SERIAL")})
+   #genImageUrl($logoUUID,$size)
+#end
+

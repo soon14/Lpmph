@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+	<url>
+		<homePage>/login</homePage>
+		<loginPage>/login/pageInit</loginPage>
+		<logoutPage>http://132.37.5.191:14300/woego</logoutPage>
+		<notLogin>http://132.37.5.191:14300/woego</notLogin>
+		<notPermit>/permission/noPermission</notPermit>
+		<sessionExpired>http://132.37.5.191:14300/woego</sessionExpired>
+		<contextPage>http://www.woego.cn/woego</contextPage>
+		<mallPage>http://localhost:8080/woego-web-mall</mallPage>
+		<managePage>http://localhost:8080/woego-web-manage</managePage>
+		<openfirehttp>http://10.8.0.213:7070/http-bind/</openfirehttp>
+		<!-- <openfirehttp>http://localhost:7070/http-bind/</openfirehttp> -->
+		<!-- <imServer>@imserver/WEB</imServer> -->
+		<imServer>@imsever/WEB</imServer>
+		<openfireServer>http://10.8.0.213:9092</openfireServer>
+	</url>
+	<!-- 行为分析相关参数 -->
+	<xwrankmallcode>100</xwrankmallcode><!-- 行为分析排行榜远程服务请求商城编码 -->
+	<xwrankurl>/service/getGoodsRank</xwrankurl><!-- 行为分析排行榜远程服务请求相对地址 -->
+	<xwrecommendurl>/service/recommendGoods</xwrecommendurl><!-- 行为分析猜你喜欢远程服务请求相对地址 -->
+</application>

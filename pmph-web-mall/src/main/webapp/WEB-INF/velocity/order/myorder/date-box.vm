@@ -1,0 +1,25 @@
+
+#parse("/module/mod-form.vm")
+#parse("/sys/sys_param.vm")
+<div class="row-fluid clearfix date-box">
+    <form class="form-horizontal">
+        <div class="span5">
+            <div class="control-group">
+                <label class="control-label">开始日期：</label>
+
+                <input type="text" class="input-small Wdate" id="begdate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'enddate\')}'})" name="begDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+            </div>
+        </div>
+        <div class="span5">
+            <div class="control-group">
+                <label class="control-label">结束日期：</label>
+
+                <input type="text" class="input-small Wdate" id="enddate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begdate\')}'})" name="endDate"  value="$!date.format('yyyy-MM-dd',$!{endDate})">
+            </div>
+        </div>
+        <div class="span2">
+            <button class="btn">查询</button>
+        </div>
+
+    </form>
+</div>

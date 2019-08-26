@@ -1,0 +1,24 @@
+#parse("/sys/sys_param.vm")
+<!-- 表单需要引用的脚本、样式库 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery.validate.js"></script>
+
+<!-- 表单工具集合 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.form.js"></script>
+<!-- 日期处理集合 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.date.js"></script>
+<!-- 表单验证定义及国际化 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/e.validate.method.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/e.regional.zh.js"></script>
+
+<!-- 选择器统一入口 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/e.selector.js"></script>
+
+<!-- Bootstrap风格日期插件 
+<link rel="stylesheet" type="text/css" href="$!{RESOURCE_PATH}/bootstrap/plugin/datetimepicker/css/bootstrap-datetimepicker.min.css" />
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/plugin/datetimepicker/js/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/plugin/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+-->
+#parse("/module/mod-date.vm")
+<!-- 基于bootstrap的表单处理 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/extend/js/b.validate.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/extend/js/b.form.js"></script>

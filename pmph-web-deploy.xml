@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ai.ecp.pmph</groupId>
+        <artifactId>ecp-pmph</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>pom.xml</relativePath>
+    </parent>
+    <groupId>com.ai.ecp.pmph</groupId>
+    <artifactId>pmph-web-deploy</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>pmph-web-deploy</name>
+    <description>pmph-web-deploy</description>
+
+
+    <modules>
+        <module>pmph-web-mall</module>
+        <module>pmph-web-mobile</module>
+        <module>pmph-web-mobile-point</module>
+        <module>pmph-web-im</module>
+        <module>pmph-web-manage</module>
+        <module>pmph-web-mall-point</module>
+        <module>pmph-web-official</module>
+    </modules>
+</project>

@@ -1,0 +1,613 @@
+@charset "utf-8";
+/* 商品类型选择 begin */
+.pmgr-lay {
+  height: 100%;
+  /* .lay{
+     position: absolute;
+     top: -1px;
+     left: 100%;
+     margin-left: 12px;
+     display: none;
+
+   }*/
+}
+.pmgr-lay ul {
+  width: 100%;
+  margin: 0px;
+}
+.pmgr-lay li {
+  list-style-type: none;
+  height: 30px;
+  margin: 0px;
+}
+.pmgr-lay .search {
+  background: #f2f7fd;
+  padding: 5px;
+}
+.pmgr-lay .icon-search {
+  position: absolute;
+  margin-top: 7px;
+  margin-left: 5px;
+}
+.pmgr-lay .input-wrap {
+  margin: 0 auto;
+  position: relative;
+}
+.pmgr-lay .input-wrap input {
+  border: 1px solid #ddd;
+  vertical-align: middle;
+  background-color: #fafafa;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  margin: 0;
+  padding-left: 20px;
+  width: 91%;
+}
+.pmgr-lay .d-text {
+  line-height: 30px;
+  position: relative;
+}
+.pmgr-lay .selected {
+  background-color: #d5e4fb;
+}
+.pmgr-lay .lay-wrap {
+  height: 310px;
+  voerflow-y: auto;
+  overflow-x: hidden;
+}
+.pmgr-lay .more {
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  font-size: 20px;
+}
+.pmgr-lay .type-list {
+  border: 1px solid #dddddd;
+  width: 32%;
+  float: left;
+  margin-left: 10px;
+  position: relative;
+}
+.pmgr-lay .type-list-wrap {
+  overflow-y: hidden;
+  width: 100%;
+}
+.pmgr-lay .sel-tip {
+  width: 93%;
+  margin: 20px auto;
+  font-size: 14px;
+}
+/* 商品类型选择 begin */
+.btn-wrap {
+  text-align: center;
+  margin-top: 20px;
+}
+/* 商品录入 begin */
+.topsave {
+  position: absolute;
+  right: 10px;
+  top: 0;
+}
+.pmgr-in .heading {
+  margin-top: 30px;
+  padding-bottom: 10px;
+}
+.pmgr-in .tab-pane {
+  position: relative;
+}
+.pmgr-in .checkbox-dq .item {
+  margin-bottom: 10px;
+}
+.pmgr-in .type-t {
+  height: 30px;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+.pmgr-in .type-t .t {
+  font-weight: bold;
+  font-size: 18px;
+}
+.pmgr-in .type-t .btn {
+  font-size: 12px;
+  margin-top: 5px;
+}
+.pmgr-in .text-error a {
+  color: #fe0002;
+}
+.pmgr-in .table-striped th,
+.pmgr-in .table-striped td {
+  text-align: center;
+}
+.pmgr-in .gg-sel input[type="checkbox"] {
+  width: 15px;
+  height: 15px;
+}
+.pmgr-in .gg-sel label {
+  display: inline-block;
+}
+.pmgr-in .gg-sel .cr {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 3px;
+  vertical-align: middle;
+}
+.pmgr-ggtb,
+.pmgr-pritb {
+  width: 450px;
+}
+.pmgr-ggtb th,
+.pmgr-pritb th,
+.pmgr-ggtb td,
+.pmgr-pritb td {
+  text-align: center;
+  vertical-align: middle;
+}
+.pmgr-ggtb .input-small,
+.pmgr-pritb .input-small {
+  height: 15px;
+}
+.pmgr-pritb {
+  width: 340px;
+}
+.pmgr-pritb td,
+.pmgr-pritb th {
+  width: 40%;
+  text-align: left;
+}
+.pmgr-pritb .lh {
+  width: 20%;
+}
+.pmgr-pritb tfoot {
+  color: #0088cc;
+}
+.pmgr-pritb tfoot .icon-plus-sign {
+  margin-right: 4px;
+}
+.pmgr-imgs .item {
+  margin-right: 20px;
+  float: left;
+}
+.pmgr-imgs .item:last-child {
+  margin-right: 0px;
+}
+.pmgr-imgs .item .text-center {
+  margin: 10px 0;
+}
+.pmgr-imgs .imgcont {
+  width: 122px;
+  height: 122px;
+  border: 1px solid #dcdcdc;
+  text-align: center;
+  line-height: 120px;
+  background-color: #f8f8f8;
+  font-size: 15px;
+  cursor: pointer;
+}
+.pmgr-imgs .imgcont img {
+  vertical-align: baseline;
+}
+.pmgr-imgs .imgcont.active,
+.pmgr-imgs .imgcont:active,
+.pmgr-imgs .imgcont:hover {
+  width: 120px;
+  height: 120px;
+  border-width: 2px;
+  border-color: #ffd961;
+}
+.pmgr-imgup {
+  color: #666666;
+}
+.pmgr-imgup .moreimg {
+  margin-right: 100px;
+  cursor: pointer;
+}
+.pmgr-imgup .mtxt {
+  margin-top: 3px;
+  margin-left: 5px;
+}
+.pmgr-imgup .icon {
+  font-size: 25px;
+}
+.pmgr-tpltab .tab-content {
+  width: 100%;
+  margin: 0 auto;
+}
+.pmrg-tpls {
+  overflow: hidden;
+  margin: 20px auto;
+  width: 98%;
+}
+.pmrg-tpls .item {
+  cursor: pointer;
+  float: left;
+  margin-right: 20px;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+.pmrg-tpls .item.active,
+.pmrg-tpls .item:active,
+.pmrg-tpls .item:hover {
+  border-color: #ffd961;
+}
+.pmrg-tpls .item .dec {
+  position: absolute;
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
+  left: 0px;
+  bottom: 0px;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  background-color: #7f7f7f;
+  filter: alpha(opacity=50);
+  opacity: 0.5;
+}
+.pmgr-bqllist {
+  width: 400px;
+}
+.pmgr-bqllist .selbq {
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.btn-wrap-save .btn {
+  width: 100px;
+  font-size: 15px;
+}
+.text-red {
+  color: red;
+}
+.text-tip {
+  color: #999;
+}
+.switch-tt .pull-right {
+  margin-right: 20px;
+}
+.switch-tt .active {
+  background-color: #006dcc;
+  color: #fff;
+}
+.imgup-show {
+  width: 195px;
+  height: 195px;
+}
+.input-cal {
+  position: relative;
+  display: inline-block;
+  margin-left: 0px!important;
+}
+.input-cal .icon-calendar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.gjpri-td {
+  display: none;
+}
+/* 商品录入 end */
+/* 新建运输模板 begin */
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 4px 0 0;
+  margin-top: 1px;
+  line-height: normal;
+}
+.controls .radio,
+.controls .checkbox {
+  line-height: 18px;
+}
+.transtpl-tb {
+  width: 90%;
+}
+.transtpl-tb th,
+.transtpl-tb td {
+  vertical-align: middle;
+  text-align: center;
+}
+.transtpl-tb th .input-mini,
+.transtpl-tb td .input-mini {
+  margin: 0 5px;
+}
+.pmropt {
+  color: #0088cc;
+  cursor: pointer;
+}
+/* 选择地区 */
+.citytb td {
+  vertical-align: middle;
+}
+.citytb ul,
+.citytb li {
+  list-style: none;
+  margin: 0px;
+}
+.citytb .ftd {
+  width: 60px;
+}
+.citytb .ltd {
+  border-left-width: 0;
+}
+.citytb .fitem {
+  position: relative;
+  padding: 5px 10px;
+}
+.citytb .active {
+  background: #EDEAB0;
+}
+.citytb .active .child {
+  display: block;
+}
+.citytb .child {
+  position: absolute;
+  padding: 10px;
+  padding-right: 0px;
+  z-index: 1;
+  left: 0;
+  top: 100%;
+  width: 300px;
+  background: #EDEAB0;
+  display: none;
+}
+.citytb .child li {
+  min-width: 90px;
+}
+.citytb .itxt {
+  width: 100%;
+  height: 100%;
+}
+.citytb .itxt span {
+  cursor: pointer;
+}
+.citytb label {
+  display: inline-block;
+  position: relative;
+  padding-left: 20px;
+}
+.citytb label:before {
+  text-decoration: inherit;
+  display: inline-block;
+  content: " ";
+  width: 14px;
+  height: 14px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  top: 2px;
+}
+.citytb label.allsel:before {
+  color: green;
+  content: "\f00c";
+  font-family: FontAwesome;
+  line-height: 12px;
+}
+.citytb label.partsel:before {
+  background-color: green;
+  border-width: 3px;
+  border-color: #fff;
+  height: 8px;
+  width: 8px;
+}
+.citytb input[type="checkbox"] {
+  display: none;
+  margin-right: 3px;
+}
+.citytb li {
+  float: left;
+}
+/* 选择地区 */
+/* 新建运输模板 end */
+.pmr_rkc {
+  padding-left: 342px;
+  margin-top: -1px;
+}
+.pmr_rkc01 {
+  padding-left: 342px;
+  margin-top: -1px;
+}
+.rknav {
+  width: 300px;
+  margin-left: -342px;
+  border: 1px solid #ddd;
+}
+.rknav .rk-search {
+  position: relative;
+  background-color: #f1f1f1;
+  padding: 10px 0;
+}
+.rknav .rk-search input {
+  width: 160px;
+  margin: 0 auto;
+  background-color: #fafafa;
+  border: 1px solid #dddddd;
+  border-radius: 0px;
+  display: block;
+}
+.rknav .icon-search {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  cursor: pointer;
+}
+.rknav .tree-w {
+  padding: 5px 10px;
+}
+.rk-editc {
+  width: 100%;
+}
+.rk-editc .heading {
+  padding: 15px 0px;
+}
+.rk-editc .text-warning {
+  height: 30px;
+  line-height: 30px;
+  margin-left: 10px;
+}
+.rk-btns {
+  padding: 20px 0px;
+  margin-bottom: 0px;
+}
+.rk-alert {
+  margin-top: 10px;
+  width: 300px;
+}
+/*商品录入 选择平台树*/
+.dg-tree {
+  width: 500px;
+  margin: 0 auto;
+  border: 0 none;
+}
+.dg-tree .rk-search {
+  background-color: #fff;
+}
+.dg-tree .rk-search input {
+  width: 480px;
+}
+.dg-tree .tree-w {
+  border: 1px solid #ddd;
+}
+/* 多选下拉 */
+.mutiselect {
+  position: relative;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  width: 206px;
+  display: inline-block;
+  height: 20px;
+  padding: 4px 6px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #555555;
+  vertical-align: middle;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.mutiselect .head {
+  height: 100%;
+  width: 100%;
+}
+.mutiselect .selarrow {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+.mutiselect .body {
+  position: absolute;
+  left: 0px;
+  top: 100%;
+  list-style: none;
+  display: none;
+  margin: 0px;
+  width: 100%;
+  border: 1px solid #cccccc;
+  z-index: 3;
+  background-color: #ffffff;
+}
+.mutiselect .item {
+  list-style: none;
+  padding: 5px 10px;
+}
+.mutiselect .item:hover {
+  background-color: #f2f2f2 ;
+}
+.mutiselect .selcheckbox {
+  float: right;
+}
+.mutiselect .item span {
+  word-wrap: break-word;
+  overflow: hidden;
+}
+.wenzi-label {
+  width: 150px;
+  float: left;
+  padding-top: 5px;
+}
+.red {
+  color: #ff0000;
+}
+.row-fluid input[class*="span"] + input[class*="span"] {
+  display: inline-block;
+}
+.form-horizontal .control-label {
+  width: 120px;
+  float: left;
+  padding-top: 5px;
+  text-align: right;
+}
+.rk-alert01 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: red;
+  width: auto;
+}
+.imgup-show {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+.imgup-show img {
+  width: 200px;
+  height: 200px;
+}
+.form-inline .checkbox {
+  vertical-align: inherit;
+  margin-right: 50px;
+}
+.form-inline .checkbox input[type="checkbox"] {
+  margin-top: 3px;
+}
+.lay a {
+  background-color: #fff;
+  display: block;
+  padding: 0 10px;
+  text-decoration: none;
+  color: #666666;
+}
+.lay a:hover,
+.lay a.selected {
+  background-color: #d5e4fb;
+}
+.red {
+  color: red;
+}
+.table td.text-center {
+  text-align: center;
+  background-color: #002a80;
+}
+.pmgr-lay .more-01 {
+  position: absolute;
+  right: 10px;
+  top: 4px;
+  font-size: 12px;
+}
+.tpls {
+  height: 220px;
+  overflow-y: auto;
+}
+.logo-img img {
+  width: 100px;
+}
+.deliver-img {
+  width: 100px;
+  height: 100px;
+}
+.table td {
+  vertical-align: middle;
+}
+.borderb {
+  border: 1px solid #ddd;
+}
+.rknav-height {
+  height: 600px;
+  border-top-width: 0 ;
+  border-left-width: 0 ;
+  border-bottom-width: 0 ;
+}

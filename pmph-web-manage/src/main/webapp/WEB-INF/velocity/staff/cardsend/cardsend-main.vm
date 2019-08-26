@@ -1,0 +1,53 @@
+
+<div>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+  	<li role="presentation" 
+	  	#if(${tab} == '1')
+	    	class="active"
+	    #end
+  	><a href="#cardbind" aria-controls="cardbind" role="tab" data-toggle="tab">会员卡绑定查询</a></li>
+    <li role="presentation"
+    	#if(${tab} == '2')
+	    	class="active"
+	    #end
+	><a href="#home" aria-controls="home" role="tab" data-toggle="tab">发卡记录管理</a></li>
+    <li role="presentation"
+    	#if(${tab} == '3')
+	    	class="active"
+	    #end
+	><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">发卡人信息</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+  	<div role="tabpanel" id="cardbind"
+  		#if(${tab} == '1')
+	    	class="tab-pane active"
+	    #else
+	    	class="tab-pane"
+	    #end
+	>
+		#parse("/staff/cardsend/cardbind-list.vm")
+	</div>
+    <div role="tabpanel" id="home" 
+		#if(${tab} == '2')
+	    	class="tab-pane active"
+	    #else
+	    	class="tab-pane"
+	    #end
+	>
+		#parse("/staff/cardsend/cardsend-list.vm")
+	</div>
+    <div role="tabpanel" id="profile" 
+		#if(${tab} == '3')
+	    	class="tab-pane active"
+	    #else
+	    	class="tab-pane"
+	    #end
+	>
+		#parse("/staff/cardsend/carderinfo-list.vm")
+	</div>
+	
+  </div>
+</div>

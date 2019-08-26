@@ -1,0 +1,24 @@
+#parse("sys/sys_param.vm")
+
+#if(${recommendTypeList} && $recommendTypeList.size() > 0)
+    <ul class="new-tit clearfix">
+        <i class="dicon dicon-tit5"></i>
+    	#foreach($recommendType in $!{recommendTypeList})
+    		<li><a  href="javascript:void(0)" id="$!{recommendType.spCode}" isLoad="no" #if($velocityCount==1) class="active" #end>$!{recommendType.spValue}</a></li>
+    	#end
+    </ul>
+    <div class="new-con clearfix" style="height: 386px;">
+    	#foreach($recommendType in $!{recommendTypeList})
+    		<div class="clearfix #if($velocityCount > 1) hide #end recommend-div" id="recommendDIV_$!{recommendType.spCode}">
+    			<div class='loading-small'></div>
+    		</div>
+    	#end
+    </div>
+#else
+    <ul class="new-tit clearfix">
+    
+    </ul>
+    <div class="new-con clearfix" style="height: 386px;">
+    		<div class='pro-empty'>亲，这家伙太懒，暂未配置数据！</div>
+    </div>
+#end

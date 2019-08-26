@@ -1,0 +1,75 @@
+#parse("/module/mod-form.vm")
+#parse("/module/mod-grid.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/cardsend/cardbind-list.js?version=$!{JS_VERSION}" ></script>
+
+<div id="main">
+    <div class="well well-searchForm">
+        <form id="bindSearchForm" class="form-horizontal" style="margin-bottom: 0px;">
+            <div class="row-fluid">
+                <div class="span4">
+                    <label class="control-label">绑定方式：</label>
+                    <div class="controls">
+                        <select style="width:160px" name="bindType" id="bindType" class="input-block-level">
+                            <option value="">--请选择--</option>
+                            <option value="1">线上申请</option>
+                            <option value="0">线下发卡</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="span4">
+                    <label class="control-label">会员卡号：</label>
+                    <div class="controls">
+                        <input type="text" name="custCardId" id="custCardId2" class="input-medium" value="" placeholder="">
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="control-group">
+                        <label class="control-label">所属群组：</label>
+                        <div class="controls">
+                            <input type="text" name="cardGroup" id="cardGroup" class="input-medium" value="" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="row-fluid">
+                <div class="span4">
+                    <div class="control-group">
+                        <label class="control-label">联系人姓名：</label>
+                        <div class="controls">
+                            <input type="text" name="contactName" id="contactName" class="input-medium" value="" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="control-group">
+                        <label class="control-label">联系人手机：</label>
+                        <div class="controls">
+                            <input type="text" name="contactPhone" id="contactPhone" class="input-medium" value="" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </form>
+    </div>
+    <div class="row-fluid" style="margin-bottom: 10px;">
+        <div class="span6">
+            <a class="btn" id="btn_excel_export" href="javascript:void();"><i class="icon-download-alt"></i>导出数据</a>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-info" id="bindBtnFormSearch" href="javascript:void();"><i class="icon-search"></i> 查询</a>
+            <a class="btn" id="bindBtnFormReset" href="javascript:void();"><i class="icon-refresh"></i> 重置</a>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <table id="bindDataGridTable"></table>
+    </div>
+    <form id="excelBindFrom" action="${CONTEXT_PATH}/card/exportBindExcel" method="POST">
+        <input type="hidden" name="contactName" id="contactName1" value="" />
+        <input type="hidden" name="contactPhone" id="contactPhone1" value="" />
+        <input type="hidden" name="bindType" id="bindType1" value="" />
+        <input type="hidden" name="cardGroup" id="cardGroup1" value="" />
+        <input type="hidden" name="custCardId" id="custCardId1" value="" />
+    </form>
+</div>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<head>
+
+#parse("/sys/sys_head.vm")
+
+</head>
+
+<body >
+		<div class="open_content">
+	    $screen_content
+	</div>
+	
+</body>

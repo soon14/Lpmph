@@ -1,0 +1,5 @@
+#parse("/rwgw-en/sys/sys_param.vm")
+<div class="w ecp-component homepage-ad-top hide" data-status="1" data-place-size="1" data-place-id="1401" data-place-width="1040" data-place-height="65" data-module="ecp-component/leaflet/leaflet-top">
+     <div class="wb-ad ad-top-list">
+     </div>
+</div>

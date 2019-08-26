@@ -1,0 +1,41 @@
+#clock-box {
+    padding-left: 10px;
+    display: inline-block;
+    border-top: 0;
+    color: #777;
+    text-shadow: white 0 1px 1px;
+    text-decoration: none;
+    font: normal 12px 'Helvetica Neue', Arial, Helvetica;
+    white-space: nowrap;
+    -webkit-transition: top ease-out 100ms;
+    -moz-transition: top ease-out 100ms;
+    -o-transition: top ease-out 100ms;
+    transition: top ease-out 100ms;
+} 
+.jqclock {
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    border: #D1D1D1 solid 1px;
+    margin-top: 1px;
+} 
+.clockdate {
+    float: left;
+    background: white;
+    padding: 3px;
+    font-size: 14px;
+    font-family: "Courier";
+    color: red;
+    margin: 2px;
+    display: block;
+} 
+.clocktime {
+    float: left;
+    background: white;
+    padding: 3px;
+    font-size: 14px;
+    font-family: "Courier";
+    color: red;
+    margin: 2px;
+    display: block;
+}

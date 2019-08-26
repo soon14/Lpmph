@@ -1,0 +1,7 @@
+@CHARSET "UTF-8";
+.ZebraDialog {
+	z-index: 2001;
+}
+.ZebraDialogOverlay {
+	z-index: 2000;
+}

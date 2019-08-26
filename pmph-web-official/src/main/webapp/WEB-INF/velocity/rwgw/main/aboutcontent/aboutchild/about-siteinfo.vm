@@ -1,0 +1,14 @@
+#parse("/rwgw/sys/sys_param.vm")
+
+<div class="w-left">
+    <dl>
+		#if(${siteInfoList} && $siteInfoList.size() > 0)
+        	#foreach($siteInfo in $!{siteInfoList})
+        		##<dt class="siteinfoitem" id="siteinfo-$!{siteInfo.id}" data-id="$!{siteInfo.id}" data-name="#escapeHtml($!{siteInfo.siteInfoName})" data-channel-id="$!{siteInfo.channelId}" style="cursor:pointer;">#escapeHtml($!{siteInfo.siteInfoName})</dt>
+				<dt class="siteinfoitem" id="siteinfo-$!{siteInfo.id}" data-id="$!{siteInfo.id}" data-name="#escapeHtml($!{siteInfo.siteInfoName})" data-channel-id="$!{siteInfo.channelId}" style="cursor:pointer;">
+					<a href="#siteInfoURL('3')/about?siteInfoId=$!{siteInfo.id}" title="$!{siteInfo.siteInfoName}">#escapeHtml($!{siteInfo.siteInfoName})</a>				
+				</dt>				
+			#end
+    	#end
+    </dl>
+</div>

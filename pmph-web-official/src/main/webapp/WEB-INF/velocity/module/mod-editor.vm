@@ -1,0 +1,4 @@
+#parse("/sys/sys_param.vm")
+<!-- 表单需要引用的脚本、样式库 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/kindeditor/lang/zh_CN.js"></script>

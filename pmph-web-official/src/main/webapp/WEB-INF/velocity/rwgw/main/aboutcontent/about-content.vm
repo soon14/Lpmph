@@ -1,0 +1,43 @@
+#parse("/rwgw/sys/sys_param.vm")
+<link rel="stylesheet" href="$!{CSS_PATH}/rwgw-style-china.css" />
+<script type="text/javascript" src="$BUSIJS_PATH/main/main-content.js"></script>
+<script type="text/javascript" src="$BUSIJS_PATH/main/about.js"></script>
+
+<!--内容 begin-->
+<div id="content-c">
+	
+    <!--关于我们导航 begin-->
+    #parse("/rwgw/main/aboutcontent/aboutchild/about-nav.vm")
+	<!--关于我们导航 end-->
+	
+    <div class="w" >
+        <div class="w-main">
+			##这些初始化信息  只在初始化页面时会用到 
+			##父级网站信息
+			<input type="hidden" id="topSiteInfoName" name="topSiteInfoName" value="#escapeHtml($!{topSiteInfo.siteInfoName})" />
+			##当前网站信息
+			<input type="hidden" id="siteInfoId" name="siteInfoId" value="$!{siteInfo.id}" />
+			<input type="hidden" id="siteInfoName" name="siteInfoName" value="#escapeHtml($!{siteInfo.siteInfoName})" />
+			##只有栏目找不到对应网站信息时  才会返回栏目信息
+			<input type="hidden" id="channelId" name="channelId" value="$!{channel.id}" />
+			<input type="hidden" id="channelName" name="channelName" value="#escapeHtml($!{channel.channelName})" />
+			##有文章会返回文章信息
+			<input type="hidden" id="articleId" name="articleId" value="$!{article.id}" />
+			<input type="hidden" id="articleTitle" name="articleTitle" value="#escapeHtml($!{article.articleTitle})" />
+			<input type="hidden" id="menuType" name="menuType" value="$!{menuType}" />
+			##官网新版默认列表样式
+			<input type="hidden" id="deMenuType" name="deMenuType" value="list2" />
+			
+			<!--网站信息列表 begin-->
+            #parse("/rwgw/main/aboutcontent/aboutchild/about-siteinfo.vm")
+			<!--网站信息列表 end-->
+			
+			<!--栏目列表或者文章详情 end-->
+			<div class="w-right"  id="aboutDetail">
+			
+			</div>
+			<!--栏目列表或者文章详情 end-->
+        </div>
+    </div>
+</div>
+<!--内容 end-->

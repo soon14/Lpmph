@@ -1,0 +1,8 @@
+#parse("/rwgw/sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/main/rwgw-get-html.js"></script>
+<div class="w-right-p" style ="padding-bottom:0px;">
+	<div class = "webDef">
+		<input type="hidden" id="articleStaticUrl" name="articleStaticUrl" value="$!{staticHtml}" />
+		<div id ="articleContent"></div>
+	</div>
+</div>

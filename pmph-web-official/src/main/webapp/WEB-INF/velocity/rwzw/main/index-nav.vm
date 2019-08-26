@@ -1,0 +1,11 @@
+#custInfo()
+#siteInfo('1')
+	<!--导航begin-->
+    <div class="wrap100 menuBg" >
+        <div class="container">
+           
+			<div class="menu-content ecp-component channel-shader" data-status="1" data-place-size="5" data-site-id="4" data-type="1" data-platform-type="01" data-channel-type="01" data-module="ecp-component/rwzw/channel-shader">
+			</div>
+             
+		</div>
+	</div>

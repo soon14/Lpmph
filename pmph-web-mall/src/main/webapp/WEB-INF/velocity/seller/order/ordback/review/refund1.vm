@@ -1,0 +1,101 @@
+#parse("sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/ordback/refund1.js?version=$!{JS_VERSION}"></script>
+
+<div class="seller-mainR">
+    <div class="main">
+        <div class="seller-well">
+            <form id="searchForm" action="" class="form-horizontal required-validate">
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">店铺名称：</label>
+                            <div class="controls">
+                                <select name="shopId" id="" class="input-block-level" >
+									##<option value="">请选择</option>
+                                    ###shopStatuslist('','1')
+									#sellerList($!{shopId})
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+			            <div class="control-group">
+			                <label class="control-label">开始日期：</label>
+			                <div class="controls">
+			                    <input type="text" style="width:150px;" class="input-small required Wdate" id="begDate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" name="begDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+			                </div>
+			            </div>
+        			</div>
+					<div class="span4">
+			            <div class="control-group">
+			                <label class="control-label">截止日期：</label>
+			                <div class="controls">
+			                    <input type="text" style="width:150px;" class="input-small required Wdate" id="endDate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begDate\')}'})" name="endDate"  value="$!date.format('yyyy-MM-dd',$!{endDate})">
+			                </div>
+			            </div>
+			        </div>
+					<div class="clear"></div>
+				</div>
+					
+                <div class="row-fluid">
+					<div class="span4">
+						<label class="control-label">站点：</label>
+							<div class="controls">
+							<select style="width:160px"  id="siteId" name="siteId">
+								<option value="">--请选择--</option>
+								#siteList()
+							</select>
+						</div>
+					</div>
+			        <div class="span4">
+			            <div class="control-group">
+			                <label class="control-label">订单编号：</label>
+			                <div class="controls">
+			                    <input type="text" id="orderId" name="orderId" class="input-medium" value="" placeholder="">
+			                </div>
+			            </div>
+			        </div>
+			        <div class="span4">
+						<label class="control-label">补偿性退款：</label>
+							<div class="controls">
+							<select style="width:160px"  id="isCompensate" name="isCompensate">
+								<option value="">--请选择--</option>
+								<option value="0">是</option>
+								<option value="1">否</option>
+							</select>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+                <div class="row-fluid" style="margin-bottom: 10px;">
+                    <div class="control-group">
+                        <div class="pull-left">
+							<span class="sbtn sbtn-blue" id="btnCompensate"><i class="icon-search"></i> 补偿性退款申请</span>
+						</div>
+                        <div class="controls">
+                            <div class="pull-right">
+                                <span class="sbtn sbtn-blue" id="btnFormSearch"><i class="icon-search"></i> 查询</span>
+                                <span class="sbtn" id="btnFormReset"><i class="icon-asterisk icon-color"></i> 重置</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+		<input type="hidden" name="resetBegDate" id="resetBegDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+    	<input type="hidden" name="resetEndDate" id="resetEndDate" value="$!date.format('yyyy-MM-dd',$!{endDate})">
+        <div class="seller-tab">
+			<ul class="tab-nav" id="refundTab">
+                <li class="active first" id="refundTodo"><span class="item">待处理</span></li>
+            </ul>
+            <div class="tab-content" >
+				<div class="nItem" id="order-contentDiv">
+					#parse("/seller/order/ordbackgdslist/order-refund-todo.vm")
+                </div>
+            </div>
+        </div>
+		<form action="" accept-charset="" id="backreviewForm" method="" onsubmit=""> </form>
+    	<input type = "hidden" id="site1" value="#siteInfo('1')"/>
+    	<input type = "hidden" id="site2" value="#siteInfo('2')"/>
+    </div>
+</div>

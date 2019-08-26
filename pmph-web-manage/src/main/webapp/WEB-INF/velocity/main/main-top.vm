@@ -1,0 +1,29 @@
+
+<script type="text/javascript" src="$!{BUSIJS_PATH}/common/dashboard/main-top.js?version=$!{JS_VERSION}" ></script>
+
+    <!-- header -->
+    <header>
+		#custInfo()
+        <div class="navbar navbar-fixed-top" id="headerBar">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="brand" href="${CONTEXT_PATH}/login/workbench">
+                        ##<img src="$!logoImageUrl" alt="" id="logoPath"/>
+						<img src="#webManageLogo()" alt="" id="logoPath"/>
+                    </a>
+                    <ul class="nav navbarlist pull-right">
+                        <li><a href="#">$!{cust.staffCode} <span class="iicon iicon-head"><!--img src="" alt=""/--></span></a></li>
+                        <li><a  id="saleAnalyze" class="c-red" href="$saleAnalyze"><i class="iicon iicon-PC"></i> 经营分析</a></li>
+                        #if($!{imAnalyUrl} != '' && $!{imAnalyUrl} != '0')
+                        <!--	<li><a  href="$imAnalyUrl"><i class="iicon iicon-custom"></i> 客服绩效</a></li>-->
+                        #end
+                        <li><a href="${CONTEXT_PATH}/staffadmin/admininfo" id="linkStaffAdminInfo"><i class="iicon iicon-info"></i> 我的资料</a></li>
+                        <li><a href="${CONTEXT_PATH}/staffadmin/pwd" id="linkChangePassword"><i class="iicon iicon-password"></i> 修改密码</a></li>
+                        <li><a href="$CONTEXT_PATH/j_spring_security_logout"><i class="iicon iicon-exit"></i> 退出</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header -->
+

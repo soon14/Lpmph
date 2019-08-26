@@ -1,0 +1,1476 @@
+	#parse("/sys/sys_param.vm")
+    <link rel="Stylesheet" type="text/css" href="$!{CSS_PATH}/order.css"></link>
+    <style>
+	.pay-list .paymz {
+    background-color: #ff0000;
+    border: 1px solid #ff0000;
+    border-radius: 2px;
+    color: #fff;
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    width: 56px;
+	}
+    .paytb {
+        width:100%;
+    }
+	.paytb-zp{
+	color: #999
+	}
+    .prom-notice {
+        font-size: 12px;
+        color: #ff4f4a;
+    }
+    .paytb .p-name {
+        width: 220px;
+    }
+    .paytb .p-pri {
+        color: #ff0000;
+    }
+    .paytb .p-state {
+        text-align: right;
+    }
+    .paytb .p-nature {
+        width: 10px;
+    }
+    .toggle-bd .tab-cont .item {
+	    padding: 5px 18px;
+	    border: 0px #A3D1EC;
+	}
+	._shop_wrap{
+	    overflow: hidden;
+        background: #f9f9f9;
+        margin-bottom: 20px;
+	}
+	.border-top{
+		border:none;
+	}
+	.p-img{
+		background-color: #ffffff;
+    	width: 80px;
+    	border: 1px solid #b6b2b2;
+	}
+	.paytb td {
+	    padding: 10px;
+	}
+	.pay-box .body {
+    	border-bottom: 1px solid #dddddd;
+    	padding-left:20px;
+    }
+    .pay-box .pay-row {
+	    padding: 0;
+	}
+	.pay-box .head{
+		padding-left: 0px;
+	}
+	
+	.coupon_wrap{
+            width: 100%;
+            border: 1px solid #f6f6f6;
+        }
+        .coupon_wrap .coupon_tib,.coupon_wrap .coupon_money{
+            width: 100%;
+            height: 40px;
+            background-color: #f6f6f6;
+            font-size: 14px;
+            line-height: 40px;
+        }
+        .coupon_tib a{
+            display: inline-block;
+            width: 80px;
+            height: 100%;
+            color: black;
+            text-decoration: none;
+            text-align: center;
+        }
+        .curActive{
+            background-color: #ffffff;
+        }
+        .coupon_money p{
+            color: #ff0000;
+        }
+        .coupon_tit{
+        	##sheight:100px;
+        }
+        .coupon_tit,.coupon_wrap .coupon_money{
+            font-size: 13px;
+            padding-left: 20px;
+            box-sizing: border-box;
+        }
+        .coupon_wrap .coupon_money{
+            font-weight: bold;
+        }
+        .toggle-bd .spit-line {
+		    border:none;
+		}
+	</style>
+
+    <script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/iCheck/icheck.js"></script>
+
+	<script type="text/javascript" src="$!{BUSIJS_PATH}/order/build/util.js"></script>
+    <script type="text/javascript" src="$!{BUSIJS_PATH}/order/build/build-create.js"></script>
+    <script>
+    	//"到店支付"按钮点击事件方法
+    	function addTips(obj){
+    		var value=$(obj).children("span").html();
+    		if(value=="到店支付"){
+    			//新增提示弹框
+    			eDialog.alert('到店支付需要您亲自到出版社付款，才能发货！');
+    		}
+			if(value=="银行转账"){
+				//新增银行转账提示弹框
+    			eDialog.alert('在办理汇款时，请您务必在电汇单上的用途栏注明订单号，方便我们及时查询发货！有问题请及时联系客服，客服电话：4008989100');
+			}
+    	}
+        $(function () {
+            $('.toggle-hd').click(function () {
+                $(this).parents(".bill-toggle").find(".toggle-bd").toggle();
+            });
+
+            U.tab('#teamTab', '#teamTabc');
+
+            $('#delbill').click(function(){
+                U.alertInfo("您确定要删除该发票信息吗？");
+            });
+
+            $('#modzttm').click(function(){
+                bDialog.open({
+                    title : "自提时间",
+                    width : 540,
+                    height : 300,
+                    url : 'payztTime_dialog.html'
+                });
+            });
+            $('.sendmd a').click(function(){
+                if($(this).hasClass('zt')){
+                    $('.zt-list').show();
+                }else{
+                    $('.zt-list').hide();
+                }
+            });
+
+
+            $('.sl-addr').live('hover',function(event){
+					if(event.type == 'mouseenter'){
+						$(this).addClass('hover');
+					}else{
+						$(this).removeClass('hover');
+					}
+            });
+
+			$('.order-switch a').click(function () {
+                $(this).siblings().removeClass('checked')
+                    .find('input[type="radio"]').attr('checked', false);
+                $(this).addClass('checked')
+                    .find('input[type="radio"]').attr('checked', true);
+			});
+        });
+
+    </script>
+	<style>
+	.micon-up{
+          background-image:url("$!{IMAGE_PATH}/iconNew.png");
+          background-repeat: no-repeat;
+          display: inline-block;
+          vertical-align: middle;
+          transform: rotate(180deg);
+          -webkit-transform: rotate(180deg);
+          -moz-transform: rotate(180deg);
+          -o-transform: rotate(180deg);
+        }
+	</style>
+	#if($!{exception})
+		 <h1>$!{exception}</h1>
+	#end
+
+<input type="hidden" value="$!{jumpFlag}" id="jumpFlag">
+<input type="hidden" value="" id="newaddr">
+<div id="header">
+    <div class="wrap1200 logoBg">
+        <ul class="pay-step">
+            <li>
+                 <div class="s-txt">
+                     我的购物信息
+                 </div>
+                <div class="s-num">
+                    1
+                </div>
+            </li>
+            <li class="active">
+                <div class="s-txt">
+                    填写核对订单信息
+                </div>
+                <div class="s-num">
+                  2
+                </div>
+            </li>
+            <li>
+                <div class="s-txt">
+                    成功提供订单
+                </div>
+                <div class="s-num">
+                  3
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+###常量定义#
+#set($addrCanNo = "")
+#set($showNum  = 2)
+#set($acctSizes = 0)
+<div id="content" class="pay">
+    <div class="wrap1200">
+        <h2>
+            填写并核对订单信息
+        </h2>
+
+
+		<form action="$!{CONTEXT_PATH}/order/build/submitOrder" method="post" id="submitForm">
+			<!-- 优惠券和折扣券隐藏域 -->
+			<input type="hidden" class="_coupon_hash_key" name="couponHashKey" value="">
+            <div class="pay-box">
+
+                    <div class="pay-row" id="cust_addr">
+                        <h3 class="head">
+                            收货人信息
+                            <a class="hright pmropt" href="javascript:void(0)">新增收货地址</a>
+                        </h3>
+                        <div class="body" >
+							<input type="hidden" class="_staffId" id="$!{staffId}"/>
+        					#foreach($!item in $!{addrs})
+        						#set($isCheck = "")
+
+            						#if($velocityCount == 1)
+        								#set($isCheck = "checked")
+        							#end
+        						#set($hide = "")
+        							#if($velocityCount > $showNum)
+        								#set($hide = "style='display:none'")
+        							#end
+
+        						<div class="sl-addr mt10" $!{hide} id="$!{item.id}">
+                                <div class="order-switch">
+                                    <a class="$isCheck" href="javascript:void(0)">
+										#if($velocityCount == 1)
+										<input class="pay1" type="radio" name="addrId" value="$!{item.id}" checked="checked"></input>
+                                        $!{item.contactName}
+                                        <b></b>
+										#else
+										<input class="pay1" type="radio" name="addrId" value="$!{item.id}"></input>
+                                        $!{item.contactName}
+                                        <b></b>
+										#end
+                                    </a>
+                                </div>
+                                <span class="sl-name">
+                                    $!{item.contactName} #areaName($!{item.province}) #areaName($!{item.cityCode}) #areaName($!{item.countyCode}) #addr($!{item.chnlAddress}, 31) #mobile($!{item.contactPhone})
+                                </span>
+                                ##收货人地址详情
+                                <span class="hid-buy-message" style="display:none">
+                                    #areaName($!{item.province}) #areaName($!{item.cityCode}) #areaName($!{item.countyCode}) #addr($!{item.chnlAddress}, 31)
+                                </span>
+                                ##收货人姓名
+								<span class="hid-buy-name" style="display:none">
+									$!{item.contactName}
+								</span>
+								##收货人电话号码
+								<span class="hid-buy-phone" style="display:none">
+									#mobile($!{item.contactPhone})
+								</span>
+                                <div class="addMgr">
+                                  <span class="_default">#if($!{item.usingFlag} == "1")默认地址#else设为默认地址#end</span>
+                                  <span class="_update">修改</span>
+                                  <span class="_delete">删除</span>
+                                </div>
+                            </div>
+        					#end
+        						<div class="addropt">
+									更多地址
+                                    <i class="micon"></i>
+                                </div>
+                                <div class="addrlist">
+
+                                </div>
+
+                        </div>
+                    </div>
+
+    			 <!-- 买家备注 -->
+                    <div class="pay-row">
+                        <h3 class="head">
+							 买家备注
+                        </h3>
+						<div class="body">
+                            <textarea id="buyerMsg" rows="3"  class="tarea" style="width: 406px;" placeholder="给卖家留言" maxlength="85"></textarea>
+                        </div>
+                    </div>
+    				<!--地址-->
+                    <!--<input type="hidden" name="addrId" value="" id="addrId"></input>-->
+                    <div class="pay-row" id="pay_type">
+                        <h3 class="head">
+							支付方式
+                        </h3>
+                        #set($list = ${paramTools.getParamDTOList("ORD_PAY_TYPE")})
+
+                        <div class="body">
+                            <div class="order-switch payWay" >
+                            #foreach($attr in $list)
+								<a onclick="addTips(this)" index="$!{attr.spCode}" #if($velocityCount==1)class="checked" #end href="javascript:void(0)">
+	                                <input class="pay1" type="radio" name="payType" value="$!{attr.spCode}" #if($velocityCount==1) checked="checked" #end></input>
+	                                <span>#escapeHtml($!{attr.spValue})</span>
+	                                <b></b>
+                                </a>
+							#end
+                            </div>
+                        </div>
+                    </div>
+					<h3 class="head">
+					            送货清单
+					</h3>
+    				#foreach($ordMain in $!{preOrdMainList})
+    				##新增一个隐藏输入框，记录主订单中所有子订单的所属店铺ID，为了后台代码确认优惠码的所属店铺
+    				<input id="input4CoupCode" type="hidden" value="$!{ordMain.shopId}"/>
+					#set($index = $velocityCount - 1)
+					<input type="hidden" name="sumbitMainList[$!index].buyerMsg" value=""/>
+					
+    			    <div class="_shop _shop_wrap">
+    			    	<!--根据是否是电子教材将订单的展示分为两种类型，一种是包含纸质书的店铺订单展示，一种是只有电子教材的店铺订单展示(只有电子教材的订单默认不展示配送方式)-->
+                        #if($!{ordMain.getIsVirtual()} == "0" && $!{ordMain.getIsPlatCatgs()} == "0")
+                            <div class="pay-row mt10" style=" float:  left;width: 31%; height: 100%;background-color: #f9f9f9;margin-top: 0;padding:0;">
+                            <h3 class="head" style="padding-left:10px;font-weight:normal;">
+								 配送方式
+                           </h3>
+                            <div class="body _deliver_type" style="border:none;padding-left: 20px;margin-bottom: 10px;">
+                           <input type="hidden" class="_ordMain_shopId" value="$ordMain.shopId">
+                           <input type="hidden" class="_realExpressFee" value="$!{ordMain.getRealExpressFee()}"></input>
+                           <input type="hidden" class="_ordPromReduceMoney" value="$!{ordMain.getOrdPromReduceMoney()}"></input>
+                           <input type="hidden" name="sumbitMainList[$!index].orderMoney" class="_orderMoney" value="$!{ordMain.getOrderMoney()}"></input>
+                           <input type="hidden" name="sumbitMainList[$!index].realExpressFee" class="_realExpressFees" value="$!{ordMain.getRealExpressFee()}"></input>
+                           <input type="hidden" name="sumbitMainList[$!index].discountMoney" class="_discountMoney" value="$!{discountPriceMoneyMap.get($ordMain.getCartId())}"></input>
+                           #set($realMoney = ($!{ordMain.getOrderMoney()} - $!{discountPriceMoneyMap.get($ordMain.getCartId())} + $!{ordMain.getRealExpressFee()}))
+                           <input type="hidden" name="sumbitMainList[$!index].realMoney" class="_realMoney" value="$!{realMoney}"></input>
+                           <input type="hidden" class="_shopDiscounts" value="0" name="sumbitMainList[$!index].shopDiscountMoney"></input>
+                            <div class="order-switch sendmd">
+                                <!--配#方式input 0快# 1上门-->
+                                #set($name="sumbitMainList[$!index].deliverType")
+                                #set($code = $!{deliverTypes.get($ordMain.getShopId())})
+
+                                #distribution_way($code,$name)
+                            </div>
+                            <span id="deliverType" class="itxt-tip" style="display:none;border: 0px">配送速度较慢7-10天 </span>
+                            <span class="itxt-tip" style="border: 0px">节假日不发货，工作日支付后第二天发货 </span>
+        					</div>
+        					</div>
+							<div class="pay-row mt10" style="float:  left;width: 69%; height: 100%;background-color: #f3fbfe; margin-top: 0;padding:0;">
+                            <h3 class="head" style="font-weight:normal;">
+                                <span style="font-size: 14px;">商家：</span>
+                                $!{ordMain.shopName}
+                            </h3>
+                            <div class="body" style="padding-left: 0;border:none;margin-bottom: 15px;">
+
+                                    <div class="pay-list" style="border:none;margin-bottom: 15px;">
+                                        #set($shopProm ="")
+                                        #set($shopProm = $!{cartProm.cartPromDTOMap.get($!{ordMain.cartId})})
+                                        ##设置赠品信息
+                                        #set($shopGiftContent = "")
+                                        #set($shopSplitStr = "")
+                                        #if($shopProm.promGiftDTOList && $shopProm.promGiftDTOList.size()>0)
+                                            #foreach($giftInfo in $shopProm.promGiftDTOList)
+                                                #if($velocityCount > 1)
+                                                    #set($shopSplitStr = "、")
+                                                #end
+                                                #set($shopGiftContent = $shopGiftContent + $shopSplitStr + $giftInfo.giftName + " X " + $giftInfo.everyTimeCnt)
+                                            #end
+                                        #end
+
+                                    <div class="hd">
+                                        <h4 style="display:none;">
+                                            商品清单
+                                            <!--<span class="pull-right c-red">返现：<span class="shopDiscount">0.00</span></span>-->
+                                        </h4>
+
+                                        <div>
+                                            #if(${shopProm.promInfoDTO.nameShort})
+                                          <span class="paymz">
+                                              $!{shopProm.promInfoDTO.nameShort}
+                                          </span>
+                                            #end
+                                          <span class="shopPromMessage">
+                                            #if($shopProm.ifFulfillProm)
+                                                $!{shopProm.promTypeMsgResponseDTO.fulfilMsg}
+                                            #else
+                                                $!{shopProm.promTypeMsgResponseDTO.noFulfilMsg}
+                                            #end
+                                          </span>
+                                          <span style="float: right;" class="discount">
+                                            <!-- 店铺优惠相关字段 -->
+                                            <input type="hidden" class="_shopPromDiscountPrice" value="$!shopProm.discountPrice"></input>
+                                            <input type="hidden" class="_shopPromDiscountAmount" value="$!shopProm.discountAmount"></input>
+                                            <input type="hidden" class="_shopPromDiscountMoney" value="$!shopProm.discountMoney"></input>
+                                            <input type="hidden" class="_shopPromDiscountPriceMoney" value="$!shopProm.discountMoney"></input>
+                                            <!--<i id="shopCount">${aiNumber.showMoneyByTwoDecimal("$ordSub.buyPrice")}</i>-->
+                                            #set($showDiscountMoney = $shopProm.discountMoney + $shopProm.discountMoney)
+                                            <input type="hidden" class="_showDiscountMoney" value="$!showDiscountMoney"></input>
+                                            ##if($showDiscountMoney != 0)
+                                          </span>
+                                        </div>
+                                        <!-- 店铺的赠品信息展示 -->
+                                        <div class="_shop-info-show paytb-zp" style="#if($null.isNull(shopGiftContent) || "$!shopGiftContent"=="")display:none;#end">【店铺赠品】<span>$!{shopGiftContent}</span></div>
+                                        <div class="_shopBottomBorder"></div>
+                                    </div>
+                                    <div class="bd">
+                                        <table class="paytb">
+                                            #set($ordSubIndex = 0)
+
+                                            #foreach($groups in $!{ordMain.groupLists})
+                                                <tr><td colspan="6" >
+                                                        <b>【套装】原装选件套装促销</b>
+                                                </td></tr>
+
+                                                #set($groupOrderMoney = 0)
+                                            #foreach($group in $groups)
+
+
+                                                #set($addrCanNo = $addrCanNo + $group.gdsType)
+                                                #set($groupitemIndex = $velocityCount - 1)
+
+
+                                                #set($groupitemProm = $!{cartProm.cartPromItemDTOMap.get($!{group.cartItemId})})
+                                                #set($groupitemGiftContent = "")
+                                                #if($groupitemProm.promGiftDTOList && $groupitemProm.promGiftDTOList.size()>0)
+                                                    #foreach($groupgiftInfo in $groupitemProm.promGiftDTOList)
+                                                        #set($groupitemGiftContent = $groupitemGiftContent + $groupgiftInfo.giftName + " X " + $groupgiftInfo.everyTimeCnt + "；")
+                                                    #end
+                                                #end
+
+                                                <tr>
+                                                <td class="p-img">
+                                                    <a href="$!{CONTEXT_PATH}$!{group.gdsUrl}"  target="_blank">
+                                                        <img src="#genImageUrl($!group.getPicId(),'200x200!')" alt="" width="48" height="48" />
+                                                    </a>
+                                                </td>
+                                                <td class="p-name" id="$group.cartItemId">
+                                                    <a href="$!{CONTEXT_PATH}$!{group.gdsUrl}" target="_blank">
+                                                        $!{group.gdsName}
+                                                    </a>
+                                                    <br>
+                                                    <!-- 商品满足/不满足优惠活动的提示文本 -->
+                                                    <label class="prom-notice" id="prom-notice" >
+                                                        #if($groupitemProm)
+                                                            #if($groupitemProm.ifFulfillProm)
+                                                                $!{groupitemProm.promTypeMsgResponseDTO.fulfilMsg}
+                                                            #else
+                                                                $!{groupitemProm.promTypeMsgResponseDTO.noFulfilMsg}
+                                                            #end
+                                                        #end
+                                                        &nbsp;
+                                                    </label>
+                                                </td>
+                                                    <td class="p-nature">
+                                                        $!{group.skuInfo}
+                                                    </td>
+                                                <td class="cell p-type">
+                                                   $!{group.gdsCateName}&nbsp;
+                                                 </td>
+                                                <td class="p-pri">
+
+                                                    #set($groupPrice = $groupitemProm.discountCaclPrice)
+                                                    ##set($groupPrice = $group.buyPrice)
+                                                    #if($groupPrice == $groupitemProm.discountFinalPrice)
+                                                        &yen;${aiNumber.showMoneyByTwoDecimal("$!groupPrice")}
+                                                    #else
+                                                        <p><b>&yen;${aiNumber.showMoneyByTwoDecimal("$!groupitemProm.discountFinalPrice")}</b></p>
+                                                        <p style="color: #999"><del>&yen;${aiNumber.showMoneyByTwoDecimal("$!groupPrice")}</del></p>
+                                                    #end
+
+                                                </td>
+                                                <td class="p-num">
+                                                    #set($groupAm = 0)
+                                                    #if(!$null.isNull($!{group.orderAmount}))
+                                                        #set($groupAm = $!{group.orderAmount})
+                                                    #end
+                                                    #set($groupOrderMoney = $groupOrderMoney + ($!groupitemProm.discountFinalPrice * $!groupAm))
+                                                    x $groupAm
+                                                </td>
+                                                <td class="p-state">
+
+                                                    <!-- 单品优惠相关字段 -->
+                                            <input type="hidden" class="_itemPromDiscountPrice" value="$!groupitemProm.discountPrice"></input>
+                                            <input type="hidden" class="_itemPromDiscountAmount" value="$!groupitemProm.discountAmount"></input>
+                                            <input type="hidden" class="_itemPromDiscountMoney" value="$!groupitemProm.discountMoney"></input>
+                                            <input type="hidden" class="_itemPromDiscountPriceMoney" value="$!groupitemProm.discountMoney"></input>
+                                            #set($groupitemshowDiscountMoney= $!groupitemProm.discountMoney + $!groupitemProm.discountMoney)
+                                            ##set($itemshowDiscountMoney= $!itemProm.discountMoney)
+                                            <input type="hidden" class="_itemshowDiscountMoney" value="$!groupitemshowDiscountMoney">
+
+
+                                                    #stcokStatus($!{group.stockAvailCount},$!{group.gdsType})
+                                                </td>
+                                            </tr>
+                                            <tr><td colspan="6" class="paytb-zp" style="#if($null.isNull(groupitemGiftContent) || "$!groupitemGiftContent"=="")display:none;#end">
+                                                $!groupitemGiftContent
+                                            </td>
+                                            #end
+                                            <tr><td colspan="6" class="text-right paytb-zp-price">
+                                                    套装价：<span class="red"><b>&yen;${aiNumber.showMoneyByTwoDecimal("$!groupOrderMoney")}</b></span>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;##x1套
+                                            </td></tr>
+                                            #end
+
+
+
+
+
+                                            #foreach($ordSub in $!{ordMain.preOrdSubList})
+                                                #set($itemIndex = $velocityCount - 1)
+                                                #set($ordsubitemIndex = $itemIndex + $ordSubIndex)
+
+                                                #set($addrCanNo = $addrCanNo + $ordSub.gdsType)
+                                                #set($itemIndex = $velocityCount - 1)
+
+                                                #set($itemProm = $!{cartProm.cartPromItemDTOMap.get($!{ordSub.cartItemId})})
+                                                #set($itemGiftContent = "")
+                                                #if($itemProm.promGiftDTOList && $itemProm.promGiftDTOList.size()>0)
+                                                    #foreach($giftInfo in $itemProm.promGiftDTOList)
+                                                        #set($itemGiftContent = $itemGiftContent + $giftInfo.giftName + " X " + $giftInfo.everyTimeCnt + "；")
+                                                    #end
+                                                #end
+
+                                            <tr class="border-top">
+                                                <td class="p-img">
+                                                    <a href="$!{CONTEXT_PATH}$!{ordSub.gdsUrl}"  target="_blank">
+                                                        <img src="#genImageUrl($!ordSub.getPicId(),'200x200!')" alt="" width="48" height="48" />
+                                                    </a>
+                                                </td>
+                                                <td class="p-name" id="$!ordSub.cartItemId">
+                                                    <a href="$!{CONTEXT_PATH}$!{ordSub.gdsUrl}" target="_blank">
+                                                        $!{ordSub.gdsName}
+                                                    </a>
+                                                    <label class="prom-notice" id="prom-notice" >
+                                                        #if($itemProm)
+                                                            #if($itemProm.ifFulfillProm)
+                                                                $!{itemProm.promTypeMsgResponseDTO.fulfilMsg}
+                                                            #else
+                                                                $!{itemProm.promTypeMsgResponseDTO.noFulfilMsg}
+                                                            #end
+                                                        #end
+                                                        &nbsp;
+                                                    </label>
+                                                </td>
+                                                <td class="p-nature">
+                                                   $!{ordSub.skuInfo}
+                                                </td>
+                                                <td class="cell p-type">
+                                                   $!{ordSub.gdsCateName}&nbsp;
+                                                 </td>
+                                                <td class="p-pri"  id="$!{ordSub.skuId}" value="$!{itemProm.discountFinalPrice}" basePrice = "$!{ordSub.basePrice}" amount="$!{ordSub.orderAmount}">
+                                                    #set($ordSubPrice = $itemProm.discountCaclPrice)
+                                                    ##set($ordSubPrice = $ordSub.buyPrice)
+                                                    #if($ordSubPrice == $itemProm.discountFinalPrice)
+                                                        &yen;${aiNumber.showMoneyByTwoDecimal("$!ordSubPrice")}
+                                                    #else
+                                                        <p><b>&yen;${aiNumber.showMoneyByTwoDecimal("$!itemProm.discountFinalPrice")}</b></p>
+                                                        <p style="color: #999"><del>&yen;${aiNumber.showMoneyByTwoDecimal("$!ordSubPrice")}</del></p>
+                                                    #end
+
+
+                                                </td>
+                                                <td class="p-num">
+                                                    #set($subAm = 0)
+                                                    #if(!$null.isNull($!{ordSub.orderAmount}))
+                                                        #set($subAm = $!{ordSub.orderAmount})
+                                                    #end
+                                                    x $subAm
+                                                </td>
+                                                <td class="p-state">
+                                                    <!--<label class="prom-notice" id="prom-notice" >
+                                                        #if($itemProm)
+                                                            #if($itemProm.ifFulfillProm)
+                                                                $!{itemProm.promTypeMsgResponseDTO.fulfilMsg}
+                                                            #else
+                                                                $!{itemProm.promTypeMsgResponseDTO.noFulfilMsg}
+                                                            #end
+                                                        #end
+                                                    </label>-->
+                                                    <!-- 单品优惠相关字段 -->
+                                            <input type="hidden" class="_itemPromDiscountPrice" value="$!itemProm.discountPrice"></input>
+                                            <input type="hidden" class="_itemPromDiscountAmount" value="$!itemProm.discountAmount"></input>
+                                            <input type="hidden" class="_itemPromDiscountMoney" value="$!itemProm.discountMoney"></input>
+                                            <input type="hidden" class="_itemPromDiscountPriceMoney" value="$!itemProm.discountMoney"></input>
+                                            #set($itemshowDiscountMoney= $!itemProm.discountMoney + $!itemProm.discountMoney)
+                                            ##set($itemshowDiscountMoney= $!itemProm.discountMoney)
+                                            <input type="hidden" class="_itemshowDiscountMoney" value="$!itemshowDiscountMoney">
+                                                    #stcokStatus($!{ordSub.stockAvailCount},$!{ordSub.gdsType})
+                                                </td>
+
+                                            </tr>
+                                            <tr style="height:15px;">
+                                            	<td colspan="6" class="paytb-zp" style="#if($null.isNull(itemGiftContent) || "$!itemGiftContent"=="")display:none;#end">
+                                                    $!itemGiftContent
+                                            	</td>
+                                            </tr>
+                                            #end
+										
+                                        </table>
+                                    </div>
+                                </div>
+                                ##每笔订单中展示运费
+								<div style=" text-align:right;padding-right:35px;">
+									运费：<span class="_express1" style="color:red;font-weight:bold;">&yen;#moneyNum($!{ordMain.realExpressFee})</span>	
+								</div>
+                            </div>
+                        </div>
+                        ##现金账户初始位置开始
+                        #*
+                        #set($acctSize = $!{ordMain.ordAcctInfoList.size()})
+                        #set($acctSizes = $acctSizes + $acctSize)
+                        #if($acctSize!=0)
+                        <div style="margin-left: 10px;" class="pay-row ">
+                            <div class="bill-toggle">
+                                <div class="toggle-hd">
+                                    <b></b>现金账户
+                                </div>
+                                <div class="toggle-bd">
+                                    <div class="tab-cont">
+                                        <div class="item _acctInfo">
+
+                                            #foreach($acctInfo in $!{ordMain.ordAcctInfoList})
+                                                #set($acctIndex = $velocityCount - 1)
+
+                                            <div style="display:none" class="_use">
+                                                 $!{acctInfo.acctName}账户，最大可使用#moneyNum($!{acctInfo.deductOrderMoney})元，已使<span class="_haveused">0</span>元<a class="red" href="javascript:void(0)"> 取消使用 </a>
+                                            </div>
+                                            <div class="item-input">
+                                                <input type="hidden" class="_acctInfo_deduct" value="0" name="sumbitMainList[$!index].ordAcctInfoList[$!acctIndex].deductOrderMoney">
+                                                <input type="hidden" class="_deductOrderMoney" value="$!{acctInfo.deductOrderMoney}">
+												<input type="hidden" class="_acctInfo_shopId" value="$ordMain.shopId">
+                                                $!{acctInfo.acctName}账户，最大可
+#moneyNum($!{acctInfo.deductOrderMoney})元，<input type="text" class="_deduct"> 元 <a href="javascript:void(0)" class="_useacct"> 使用</a>
+                                            </div>
+                                            #end
+                                            <p class="spit-line"></p>
+                                            <!--<div>
+                                             共使用了			  <span class="c-red"> 0  </span>张优惠券 可以优惠
+                                              <span class="c-red"> 0.00 </span>  元
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        #end
+						*#
+						##现金账户初始位置结束
+						##优惠券初始位置开始						
+						<div id="$!{ordMain.shopId}">
+							#if($!{coupSizeMap.get($ordMain.shopId)}!=0)
+								<div style="margin-left: 10px; margin-top:10px;display:none;" class="pay-row ">
+									#set($coups = $!{coupOrdSkuMap.get($ordMain.cartId)})
+									<div class="bill-toggle">
+										<div class="toggle-hd">
+											<b></b>使用优惠券
+										</div>
+										<div class="toggle-bd" style="display: none;">
+											<ul id="teamTab" class="tab-o clearfix">
+												<li class="active">可用优惠券<em>($!{coupSizeMap.get($ordMain.shopId)})</em></li>
+											##<li>不可用优惠券<em class="grey">(0)</em></li>
+											</ul>
+											<div id="teamTabc" class="tab-cont">
+												<div class="$!{ordMain.shopId}">
+													<div class="_coupItems item">
+														<input type="hidden" class="_coup_shopId" value="$ordMain.shopId">
+														<input type="hidden" class="_coupShopValue" value="0"></input>
+														<p style="margin-bottom: 5px;"><b>请选择要使用的优惠券</b></p>
+														#foreach($coupItems in $!coups)
+															#set($coupItemsIndex = $velocityCount - 1)
+														<div class="_coupItemBean">
+															<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupId" value="$coupItems.coupId"></input>
+															<input type="hidden" class="_coupItemBeanChecked" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].checked" value=""></input>
+															#foreach($coupItem in $!{coupItems.coupDetails})
+																<div class="_coupItem">
+																#set($coupItemIndex = $velocityCount - 1)
+																<div style="display:none">
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].id" value="$coupItem.id"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].coupId" value="$coupItem.coupId"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].coupNo" value="$coupItem.coupNo"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].coupValue" value="$coupItem.coupValue"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].coupName" value="$coupItem.coupName"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].noExpress" value="$coupItem.noExpress"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].discountCoup" value="$!coupItem.discountCoup"/>
+																	<input type="hidden" class="_coupItemChecked" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].checked" value=""/>
+																</div>
+																	<p class="checkbox-box">
+																		<input type="checkbox" value="" id="$!{coupItem.coupId}">
+																		#set($skus = '')
+																		#foreach($coupSku in $!coupIdskuIdMap.get($coupItems.coupId).coupSkuRespDTO)
+																			#set($skus = $skus + $coupSku.skuId + ',')
+																		#end
+																		<input type="hidden" value="$!skus" class="_skuIds"/>
+																		<input type="hidden" value="$!{coupItem.coupValue}" class="_coupValue">
+																		<input type="hidden" value="$!{coupItem.noExpress}" class="_noExpress">
+																		<input type="hidden" value="$!{coupItem.discountCoup}" class="_discountCoup">
+																		$!{coupItem.coupName} <em>
+																			$!{coupItem.coupValueShow}</em>
+																			#if($!{coupItem.coupValueShow})
+																				#if($!coupItem.discountCoup == '1')
+																				折
+																				#else
+																				元
+																				#end
+																			#end
+																		 (有效期至$!date.format('yyyy.MM.dd',$!{coupItem.inactiveTime}))
+																	</p>
+																</div>
+															#end
+														</div>
+														#end
+													</div>
+													#*<div class="item" style="display: none;">
+														<div class="tip">
+															此处仅展示不符合本次订单商品使用的优惠券<a target="_blank" href="">[了解优惠券使用规则]</a>
+														</div>
+														<div class="virtual-from">
+															<table class="table-v">
+																<tbody>
+																<tr>
+																	<td style="width:20px;"><input type="checkbox"></td>
+																	<td style="width:130px;">299-30</td>
+																	<td style="width:150px;">仅可购买合生元自营指</td>
+																	<td style="width:140px;">有效期至2015-12-31</td>
+																	<td>所结算商品中没有符合条件的商品</td>
+																</tr>
+																<tr>
+																	<td><input type="checkbox"></td>
+																	<td>299-30</td>
+																	<td>仅可购买合生元自营指</td>
+																	<td>有效期至2015-12-31</td>
+																	<td>所结算商品中没有符合条件的商品</td>
+																</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>*#
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							#end
+						</div>
+						##优惠券初始位置结束
+						##优惠码初始位置开始
+						#set($ifcoupCodeOpen=${paramTools.getSysConfigCode("COUP_CODE_STATUS")})
+						#if($!ifcoupCodeOpen==1)
+							<div style="margin-left: 10px; margin-top:10px;display:none;" class="pay-row ">
+								<div class="bill-toggle toggle-down">
+									<div class="toggle-bd">
+										<div class="tab-cont">
+											<div class="item _coupcode">
+												<div style="display:none" class="_use">
+													<input type="hidden" class="_coupcode_shopId" value="$ordMain.shopId">
+													<input type="hidden" name="sumbitMainList[$!index].coupCode" class="_coupcode_value" value=""></input>
+													<input type="hidden" class="_coupcode_money" value="0" name="sumbitMainList[$!index].coupCodeMoney">
+													<input type="hidden" class="_coupcode_hash_key" value="" name="sumbitMainList[$!index].hashKey">
+																																	  您使用的优惠码为：<span class="_coupcodevalue_view"></span>，该优惠码已优惠<span class="_coupcode_money_view"></span>元      <a class="red" href="javascript:void(0)">取消使用 </a>
+												</div>
+												<div class="item-input">
+														请输入您的优惠码：<input type="text" class="_coup" style="width:250px;" maxlength="16"> <a href="javascript:void(0)" class="_usecode"> 使用</a>
+												</div>
+												<p class="spit-line"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						#end
+						##优惠码初始位置结束
+						#else
+							<div class="body _deliver_type" style="border:none;padding-left: 20px;margin-bottom: 10px;display:none">
+						    <input type="hidden" class="_ordMain_shopId" value="$ordMain.shopId">
+        			        <input type="hidden" class="_realExpressFee" value="$!{ordMain.getRealExpressFee()}"></input>
+                            <input type="hidden" class="_ordPromReduceMoney" value="$!{ordMain.getOrdPromReduceMoney()}"></input>
+                            <input type="hidden" class="_orderMoney" value="$!{ordMain.getOrderMoney()}"></input>
+                            <input type="hidden" name="sumbitMainList[$!index].realExpressFee" class="_realExpressFees" value="$!{ordMain.getRealExpressFee()}"></input>
+                            <input type="hidden" name="sumbitMainList[$!index].discountMoney" class="_discountMoney" value="$!{discountPriceMoneyMap.get($ordMain.getCartId())}"></input>
+                            #set($realMoney = ($!{ordMain.getOrderMoney()} - $!{discountPriceMoneyMap.get($ordMain.getCartId())} + $!{ordMain.getRealExpressFee()}))
+                            <input type="hidden" name="sumbitMainList[$!index].realMoney" class="_realMoney" value="$!{realMoney}"></input>
+                            <input type="hidden" class="_shopDiscounts" value="0" name="sumbitMainList[$!index].shopDiscountMoney"></input>
+                            <div class="order-switch sendmd">
+                            <input  type="hidden" class="pay1" type="radio" name="sumbitMainList[$!index].deliverType" value="2"  checked="checked"></input>
+                            </div>
+                            </div>
+						<div class="pay-row mt10" style="float:  left;width: 100%; height: 100%;background-color: #f3fbfe; margin-top: 0;padding:0;">
+                            <h3 class="head" style="font-weight:normal;">
+                                <span style="font-size: 14px;">商家：</span>
+                                $!{ordMain.shopName}
+                            </h3>
+                            <div class="body" style="padding-left: 0;border:none;margin-bottom: 15px;">
+
+                                    <div class="pay-list" style="border:none;margin-bottom: 15px;">
+                                        #set($shopProm ="")
+                                        #set($shopProm = $!{cartProm.cartPromDTOMap.get($!{ordMain.cartId})})
+                                        ##设置赠品信息
+                                        #set($shopGiftContent = "")
+                                        #set($shopSplitStr = "")
+                                        #if($shopProm.promGiftDTOList && $shopProm.promGiftDTOList.size()>0)
+                                            #foreach($giftInfo in $shopProm.promGiftDTOList)
+                                                #if($velocityCount > 1)
+                                                    #set($shopSplitStr = "、")
+                                                #end
+                                                #set($shopGiftContent = $shopGiftContent + $shopSplitStr + $giftInfo.giftName + " X " + $giftInfo.everyTimeCnt)
+                                            #end
+                                        #end
+
+                                    <div class="hd">
+                                        <h4 style="display:none;">
+                                            商品清单
+                                            <!--<span class="pull-right c-red">返现：<span class="shopDiscount">0.00</span></span>-->
+                                        </h4>
+
+                                        <div>
+                                            #if(${shopProm.promInfoDTO.nameShort})
+                                          <span class="paymz">
+                                              $!{shopProm.promInfoDTO.nameShort}
+                                          </span>
+                                            #end
+                                          <span class="shopPromMessage">
+                                            #if($shopProm.ifFulfillProm)
+                                                $!{shopProm.promTypeMsgResponseDTO.fulfilMsg}
+                                            #else
+                                                $!{shopProm.promTypeMsgResponseDTO.noFulfilMsg}
+                                            #end
+                                          </span>
+                                          <span style="float: right;" class="discount">
+                                            <!-- 店铺优惠相关字段 -->
+                                            <input type="hidden" class="_shopPromDiscountPrice" value="$!shopProm.discountPrice"></input>
+                                            <input type="hidden" class="_shopPromDiscountAmount" value="$!shopProm.discountAmount"></input>
+                                            <input type="hidden" class="_shopPromDiscountMoney" value="$!shopProm.discountMoney"></input>
+                                            <input type="hidden" class="_shopPromDiscountPriceMoney" value="$!shopProm.discountMoney"></input>
+                                            <!--<i id="shopCount">${aiNumber.showMoneyByTwoDecimal("$ordSub.buyPrice")}</i>-->
+                                            #set($showDiscountMoney = $shopProm.discountMoney + $shopProm.discountMoney)
+                                            <input type="hidden" class="_showDiscountMoney" value="$!showDiscountMoney"></input>
+                                            ##if($showDiscountMoney != 0)
+                                          </span>
+                                        </div>
+                                        <!-- 店铺的赠品信息展示 -->
+                                        <div class="_shop-info-show paytb-zp" style="#if($null.isNull(shopGiftContent) || "$!shopGiftContent"=="")display:none;#end">【店铺赠品】<span>$!{shopGiftContent}</span></div>
+                                        <div class="_shopBottomBorder"></div>
+                                    </div>
+                                    <div class="bd">
+                                        <table class="paytb">
+                                            #set($ordSubIndex = 0)
+
+                                            #foreach($groups in $!{ordMain.groupLists})
+                                                <tr><td colspan="6" >
+                                                        <b>【套装】原装选件套装促销</b>
+                                                </td></tr>
+
+                                                #set($groupOrderMoney = 0)
+                                            #foreach($group in $groups)
+
+
+                                                #set($addrCanNo = $addrCanNo + $group.gdsType)
+                                                #set($groupitemIndex = $velocityCount - 1)
+
+
+                                                #set($groupitemProm = $!{cartProm.cartPromItemDTOMap.get($!{group.cartItemId})})
+                                                #set($groupitemGiftContent = "")
+                                                #if($groupitemProm.promGiftDTOList && $groupitemProm.promGiftDTOList.size()>0)
+                                                    #foreach($groupgiftInfo in $groupitemProm.promGiftDTOList)
+                                                        #set($groupitemGiftContent = $groupitemGiftContent + $groupgiftInfo.giftName + " X " + $groupgiftInfo.everyTimeCnt + "；")
+                                                    #end
+                                                #end
+
+                                                <tr>
+                                                <td class="p-img">
+                                                    <a href="$!{CONTEXT_PATH}$!{group.gdsUrl}"  target="_blank">
+                                                        <img src="#genImageUrl($!group.getPicId(),'200x200!')" alt="" width="48" height="48" />
+                                                    </a>
+                                                </td>
+                                                <td class="p-name" id="$group.cartItemId">
+                                                    <a href="$!{CONTEXT_PATH}$!{group.gdsUrl}" target="_blank">
+                                                        $!{group.gdsName}
+                                                    </a>
+                                                    <br>
+                                                    <!-- 商品满足/不满足优惠活动的提示文本 -->
+                                                    <label class="prom-notice" id="prom-notice" >
+                                                        #if($groupitemProm)
+                                                            #if($groupitemProm.ifFulfillProm)
+                                                                $!{groupitemProm.promTypeMsgResponseDTO.fulfilMsg}
+                                                            #else
+                                                                $!{groupitemProm.promTypeMsgResponseDTO.noFulfilMsg}
+                                                            #end
+                                                        #end
+                                                        &nbsp;
+                                                    </label>
+                                                </td>
+                                                    <td class="p-nature">
+                                                        $!{group.skuInfo}
+                                                    </td>
+                                                <td class="cell p-type">
+                                                   $!{group.gdsCateName}&nbsp;
+                                                 </td>
+                                                <td class="p-pri">
+
+                                                    #set($groupPrice = $groupitemProm.discountCaclPrice)
+                                                    ##set($groupPrice = $group.buyPrice)
+                                                    #if($groupPrice == $groupitemProm.discountFinalPrice)
+                                                        &yen;${aiNumber.showMoneyByTwoDecimal("$!groupPrice")}
+                                                    #else
+                                                        <p><b>&yen;${aiNumber.showMoneyByTwoDecimal("$!groupitemProm.discountFinalPrice")}</b></p>
+                                                        <p style="color: #999"><del>&yen;${aiNumber.showMoneyByTwoDecimal("$!groupPrice")}</del></p>
+                                                    #end
+
+                                                </td>
+                                                <td class="p-num">
+                                                    #set($groupAm = 0)
+                                                    #if(!$null.isNull($!{group.orderAmount}))
+                                                        #set($groupAm = $!{group.orderAmount})
+                                                    #end
+                                                    #set($groupOrderMoney = $groupOrderMoney + ($!groupitemProm.discountFinalPrice * $!groupAm))
+                                                    x $groupAm
+                                                </td>
+                                                <td class="p-state">
+
+                                                    <!-- 单品优惠相关字段 -->
+                                            <input type="hidden" class="_itemPromDiscountPrice" value="$!groupitemProm.discountPrice"></input>
+                                            <input type="hidden" class="_itemPromDiscountAmount" value="$!groupitemProm.discountAmount"></input>
+                                            <input type="hidden" class="_itemPromDiscountMoney" value="$!groupitemProm.discountMoney"></input>
+                                            <input type="hidden" class="_itemPromDiscountPriceMoney" value="$!groupitemProm.discountMoney"></input>
+                                            #set($groupitemshowDiscountMoney= $!groupitemProm.discountMoney + $!groupitemProm.discountMoney)
+                                            ##set($itemshowDiscountMoney= $!itemProm.discountMoney)
+                                            <input type="hidden" class="_itemshowDiscountMoney" value="$!groupitemshowDiscountMoney">
+
+
+                                                    #stcokStatus($!{group.stockAvailCount},$!{group.gdsType})
+                                                </td>
+                                            </tr>
+                                            <tr><td colspan="6" class="paytb-zp" style="#if($null.isNull(groupitemGiftContent) || "$!groupitemGiftContent"=="")display:none;#end">
+                                                $!groupitemGiftContent
+                                            </td>
+                                            #end
+                                            <tr><td colspan="6" class="text-right paytb-zp-price">
+                                                    套装价：<span class="red"><b>&yen;${aiNumber.showMoneyByTwoDecimal("$!groupOrderMoney")}</b></span>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;##x1套
+                                            </td></tr>
+                                            #end
+
+
+
+
+
+                                            #foreach($ordSub in $!{ordMain.preOrdSubList})
+                                                #set($itemIndex = $velocityCount - 1)
+                                                #set($ordsubitemIndex = $itemIndex + $ordSubIndex)
+
+                                                #set($addrCanNo = $addrCanNo + $ordSub.gdsType)
+                                                #set($itemIndex = $velocityCount - 1)
+
+                                                #set($itemProm = $!{cartProm.cartPromItemDTOMap.get($!{ordSub.cartItemId})})
+                                                #set($itemGiftContent = "")
+                                                #if($itemProm.promGiftDTOList && $itemProm.promGiftDTOList.size()>0)
+                                                    #foreach($giftInfo in $itemProm.promGiftDTOList)
+                                                        #set($itemGiftContent = $itemGiftContent + $giftInfo.giftName + " X " + $giftInfo.everyTimeCnt + "；")
+                                                    #end
+                                                #end
+
+                                            <tr class="border-top">
+                                                <td class="p-img">
+                                                    <a href="$!{CONTEXT_PATH}$!{ordSub.gdsUrl}"  target="_blank">
+                                                        <img src="#genImageUrl($!ordSub.getPicId(),'200x200!')" alt="" width="48" height="48" />
+                                                    </a>
+                                                </td>
+                                                <td class="p-name" id="$!ordSub.cartItemId">
+                                                    <a href="$!{CONTEXT_PATH}$!{ordSub.gdsUrl}" target="_blank">
+                                                        $!{ordSub.gdsName}
+                                                    </a>
+                                                    <label class="prom-notice" id="prom-notice" >
+                                                        #if($itemProm)
+                                                            #if($itemProm.ifFulfillProm)
+                                                                $!{itemProm.promTypeMsgResponseDTO.fulfilMsg}
+                                                            #else
+                                                                $!{itemProm.promTypeMsgResponseDTO.noFulfilMsg}
+                                                            #end
+                                                        #end
+                                                        &nbsp;
+                                                    </label>
+                                                </td>
+                                                <td class="p-nature">
+                                                   $!{ordSub.skuInfo}
+                                                </td>
+                                                <td class="cell p-type">
+                                                   $!{ordSub.gdsCateName}&nbsp;
+                                                 </td>
+                                                <td class="p-pri"  id="$!{ordSub.skuId}" value="$!{itemProm.discountFinalPrice}" basePrice = "$!{ordSub.basePrice}" amount="$!{ordSub.orderAmount}">
+                                                    #set($ordSubPrice = $itemProm.discountCaclPrice)
+                                                    ##set($ordSubPrice = $ordSub.buyPrice)
+                                                    #if($ordSubPrice == $itemProm.discountFinalPrice)
+                                                        &yen;${aiNumber.showMoneyByTwoDecimal("$!ordSubPrice")}
+                                                    #else
+                                                        <p><b>&yen;${aiNumber.showMoneyByTwoDecimal("$!itemProm.discountFinalPrice")}</b></p>
+                                                        <p style="color: #999"><del>&yen;${aiNumber.showMoneyByTwoDecimal("$!ordSubPrice")}</del></p>
+                                                    #end
+
+
+                                                </td>
+                                                <td class="p-num">
+                                                    #set($subAm = 0)
+                                                    #if(!$null.isNull($!{ordSub.orderAmount}))
+                                                        #set($subAm = $!{ordSub.orderAmount})
+                                                    #end
+                                                    x $subAm
+                                                </td>
+                                                <td class="p-state">
+                                                    <!--<label class="prom-notice" id="prom-notice" >
+                                                        #if($itemProm)
+                                                            #if($itemProm.ifFulfillProm)
+                                                                $!{itemProm.promTypeMsgResponseDTO.fulfilMsg}
+                                                            #else
+                                                                $!{itemProm.promTypeMsgResponseDTO.noFulfilMsg}
+                                                            #end
+                                                        #end
+                                                    </label>-->
+                                                    <!-- 单品优惠相关字段 -->
+                                            <input type="hidden" class="_itemPromDiscountPrice" value="$!itemProm.discountPrice"></input>
+                                            <input type="hidden" class="_itemPromDiscountAmount" value="$!itemProm.discountAmount"></input>
+                                            <input type="hidden" class="_itemPromDiscountMoney" value="$!itemProm.discountMoney"></input>
+                                            <input type="hidden" class="_itemPromDiscountPriceMoney" value="$!itemProm.discountMoney"></input>
+                                            #set($itemshowDiscountMoney= $!itemProm.discountMoney + $!itemProm.discountMoney)
+                                            ##set($itemshowDiscountMoney= $!itemProm.discountMoney)
+                                            <input type="hidden" class="_itemshowDiscountMoney" value="$!itemshowDiscountMoney">
+                                                    #stcokStatus($!{ordSub.stockAvailCount},$!{ordSub.gdsType})
+                                                </td>
+
+                                            </tr>
+                                            <tr style="height:15px;">
+                                            	<td colspan="6" class="paytb-zp" style="#if($null.isNull(itemGiftContent) || "$!itemGiftContent"=="")display:none;#end">
+                                                    $!itemGiftContent
+                                            	</td>
+                                            </tr>
+                                            #end
+										
+                                        </table>
+                                    </div>
+                                </div>
+                                ##每笔订单中展示运费
+								<div style=" text-align:right;padding-right:35px;">
+									运费：<span class="_express1" style="color:red;font-weight:bold;">&yen;#moneyNum($!{ordMain.realExpressFee})</span>	
+								</div>
+                            </div>
+                        </div>
+                        ##现金账户初始位置开始
+                        #*
+                        #set($acctSize = $!{ordMain.ordAcctInfoList.size()})
+                        #set($acctSizes = $acctSizes + $acctSize)
+                        #if($acctSize!=0)
+                        <div style="margin-left: 10px;" class="pay-row ">
+                            <div class="bill-toggle">
+                                <div class="toggle-hd">
+                                    <b></b>现金账户
+                                </div>
+                                <div class="toggle-bd">
+                                    <div class="tab-cont">
+                                        <div class="item _acctInfo">
+
+                                            #foreach($acctInfo in $!{ordMain.ordAcctInfoList})
+                                                #set($acctIndex = $velocityCount - 1)
+
+                                            <div style="display:none" class="_use">
+                                                 $!{acctInfo.acctName}账户，最大可使用#moneyNum($!{acctInfo.deductOrderMoney})元，已使<span class="_haveused">0</span>元<a class="red" href="javascript:void(0)"> 取消使用 </a>
+                                            </div>
+                                            <div class="item-input">
+                                                <input type="hidden" class="_acctInfo_deduct" value="0" name="sumbitMainList[$!index].ordAcctInfoList[$!acctIndex].deductOrderMoney">
+                                                <input type="hidden" class="_deductOrderMoney" value="$!{acctInfo.deductOrderMoney}">
+												<input type="hidden" class="_acctInfo_shopId" value="$ordMain.shopId">
+                                                $!{acctInfo.acctName}账户，最大可
+#moneyNum($!{acctInfo.deductOrderMoney})元，<input type="text" class="_deduct"> 元 <a href="javascript:void(0)" class="_useacct"> 使用</a>
+                                            </div>
+                                            #end
+                                            <p class="spit-line"></p>
+                                            <!--<div>
+                                             共使用了			  <span class="c-red"> 0  </span>张优惠券 可以优惠
+                                              <span class="c-red"> 0.00 </span>  元
+                                            </div>-->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        #end
+						*#
+						##现金账户初始位置结束
+						##优惠券初始位置开始						
+						<div id="$!{ordMain.shopId}">
+							#if($!{coupSizeMap.get($ordMain.shopId)}!=0)
+								<div style="margin-left: 10px; margin-top:10px;display:none;" class="pay-row ">
+									#set($coups = $!{coupOrdSkuMap.get($ordMain.cartId)})
+									<div class="bill-toggle">
+										<div class="toggle-hd">
+											<b></b>使用优惠券
+										</div>
+										<div class="toggle-bd" style="display: none;">
+											<ul id="teamTab" class="tab-o clearfix">
+												<li class="active">可用优惠券<em>($!{coupSizeMap.get($ordMain.shopId)})</em></li>
+											##<li>不可用优惠券<em class="grey">(0)</em></li>
+											</ul>
+											<div id="teamTabc" class="tab-cont">
+												<div class="$!{ordMain.shopId}">
+													<div class="_coupItems item">
+														<input type="hidden" class="_coup_shopId" value="$ordMain.shopId">
+														<input type="hidden" class="_coupShopValue" value="0"></input>
+														<p style="margin-bottom: 5px;"><b>请选择要使用的优惠券</b></p>
+														#foreach($coupItems in $!coups)
+															#set($coupItemsIndex = $velocityCount - 1)
+														<div class="_coupItemBean">
+															<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupId" value="$coupItems.coupId"></input>
+															<input type="hidden" class="_coupItemBeanChecked" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].checked" value=""></input>
+															#foreach($coupItem in $!{coupItems.coupDetails})
+																<div class="_coupItem">
+																#set($coupItemIndex = $velocityCount - 1)
+																<div style="display:none">
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].id" value="$coupItem.id"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].coupId" value="$coupItem.coupId"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].coupNo" value="$coupItem.coupNo"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].coupValue" value="$coupItem.coupValue"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].coupName" value="$coupItem.coupName"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].noExpress" value="$coupItem.noExpress"/>
+																	<input type="hidden" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].discountCoup" value="$!coupItem.discountCoup"/>
+																	<input type="hidden" class="_coupItemChecked" name="sumbitMainList[$!index].coupCheckBean[$!coupItemsIndex].coupDetails[$!coupItemIndex].checked" value=""/>
+																</div>
+																	<p class="checkbox-box">
+																		<input type="checkbox" value="" id="$!{coupItem.coupId}">
+																		#set($skus = '')
+																		#foreach($coupSku in $!coupIdskuIdMap.get($coupItems.coupId).coupSkuRespDTO)
+																			#set($skus = $skus + $coupSku.skuId + ',')
+																		#end
+																		<input type="hidden" value="$!skus" class="_skuIds"/>
+																		<input type="hidden" value="$!{coupItem.coupValue}" class="_coupValue">
+																		<input type="hidden" value="$!{coupItem.noExpress}" class="_noExpress">
+																		<input type="hidden" value="$!{coupItem.discountCoup}" class="_discountCoup">
+																		$!{coupItem.coupName} <em>
+																			$!{coupItem.coupValueShow}</em>
+																			#if($!{coupItem.coupValueShow})
+																				#if($!coupItem.discountCoup == '1')
+																				折
+																				#else
+																				元
+																				#end
+																			#end
+																		 (有效期至$!date.format('yyyy.MM.dd',$!{coupItem.inactiveTime}))
+																	</p>
+																</div>
+															#end
+														</div>
+														#end
+													</div>
+													#*<div class="item" style="display: none;">
+														<div class="tip">
+															此处仅展示不符合本次订单商品使用的优惠券<a target="_blank" href="">[了解优惠券使用规则]</a>
+														</div>
+														<div class="virtual-from">
+															<table class="table-v">
+																<tbody>
+																<tr>
+																	<td style="width:20px;"><input type="checkbox"></td>
+																	<td style="width:130px;">299-30</td>
+																	<td style="width:150px;">仅可购买合生元自营指</td>
+																	<td style="width:140px;">有效期至2015-12-31</td>
+																	<td>所结算商品中没有符合条件的商品</td>
+																</tr>
+																<tr>
+																	<td><input type="checkbox"></td>
+																	<td>299-30</td>
+																	<td>仅可购买合生元自营指</td>
+																	<td>有效期至2015-12-31</td>
+																	<td>所结算商品中没有符合条件的商品</td>
+																</tr>
+																</tbody>
+															</table>
+														</div>
+													</div>*#
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							#end
+						</div>
+						##优惠券初始位置结束
+						##优惠码初始位置开始
+						#set($ifcoupCodeOpen=${paramTools.getSysConfigCode("COUP_CODE_STATUS")})
+						#if($!ifcoupCodeOpen==1)
+							<div style="margin-left: 10px; margin-top:10px;display:none;" class="pay-row ">
+								<div class="bill-toggle toggle-down">
+									<div class="toggle-bd">
+										<div class="tab-cont">
+											<div class="item _coupcode">
+												<div style="display:none" class="_use">
+													<input type="hidden" class="_coupcode_shopId" value="$ordMain.shopId">
+													<input type="hidden" name="sumbitMainList[$!index].coupCode" class="_coupcode_value" value=""></input>
+													<input type="hidden" class="_coupcode_money" value="0" name="sumbitMainList[$!index].coupCodeMoney">
+													<input type="hidden" class="_coupcode_hash_key" value="" name="sumbitMainList[$!index].hashKey">
+																																	  您使用的优惠码为：<span class="_coupcodevalue_view"></span>，该优惠码已优惠<span class="_coupcode_money_view"></span>元      <a class="red" href="javascript:void(0)">取消使用 </a>
+												</div>
+												<div class="item-input">
+														请输入您的优惠码：<input type="text" class="_coup" style="width:250px;" maxlength="16"> <a href="javascript:void(0)" class="_usecode"> 使用</a>
+												</div>
+												<p class="spit-line"></p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						#end
+						##优惠码初始位置结束
+						#end
+                    </div>
+                    #end
+            ##</div>
+            <div class="pay-row lrow" style="border-bottom:1px solid #dddddd;">
+                            <h3 class="head">
+                                发票信息
+                            </h3>
+                            <div class="body">
+                                <div class="pay-bill _bill_info" style="margin: 10px 20px;">
+                                    <span id="billTypeText">不开发票</span>
+                                    <span id="billUnitText">&nbsp;</span>
+                                    <span id="billContentText">&nbsp;</span>
+                                    <span id="taxpayerNoText">&nbsp;</span>
+                                    <span id="modbill"><a href="javascript:void(0);" id="billModify" >修改</a></span>
+                                    <!-- <span id="delbill"><a href="javascript:void(0);" id="billDelete" >删除</a></span> -->
+                                    <input type="hidden" name="invoiceType" id="mainBillType" value="2">
+
+                                    <input type="hidden" name="rOrdInvoiceCommRequest.invoiceType" id="billType" value="2">
+                                    <input type="hidden" name="rOrdInvoiceCommRequest.invoiceTitle" id="billTitle" >
+                                    <input type="hidden" name="rOrdInvoiceCommRequest.invoiceContent" id="billContent" >
+                                    <input type="hidden" name="rOrdInvoiceCommRequest.detailFlag" id="detailFlag" value="0">
+									<input type="hidden" name="rOrdInvoiceCommRequest.taxpayerNo" id="taxpayerNo" >
+
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.invoiceTitle" id="billInvoiceTitle" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.taxpayerNo" id="billTaxpayerNo" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.contactInfo" id="billContactInfo" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.phone" id="billPhone" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.bankName" id="billBankName" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.acctInfo" id="billAcctInfo" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.vfsId2" id="billVfsId2" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.takerName" id="billTakerName" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.takerPhone" id="billTakerPhone" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.takerProvince" id="billTakerProvince" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.takerCity" id="billTakerCity" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.takerCounty" id="billTakerCounty" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.takerAddress" id="billTakerAddress" >
+                                    <input type="hidden" name="rOrdInvoiceTaxRequest.invoiceContent" id="billInvoiceContent" >
+                                </div>
+                            </div>
+                        </div>
+                        ##优惠券展示开始位置
+                  		<h3 class="head">
+                                	使用优惠券
+                        </h3>
+                        
+                        ##tab开始
+                        <div class="coupon_wrap">
+						    <div class="coupon_tib">
+						    	#if($!{coupCounts}!=0)
+						        	<a href="javascript:void(0);" id="couponJuan" class="curActive" onclick="couponTabA(this)">优惠券</a>
+						        #end
+						        #if($!ifcoupCodeOpen==1)
+						        	<a href="javascript:void(0);" id="couponMa" onclick="couponTabA(this)">优惠码</a>
+						        #end
+						        ##优惠券隐藏框
+					        	<input type="hidden" id="couponJuanInput" value="$!{coupCounts}"/>
+					        	##优惠码隐藏框
+					        	<input type="hidden" id="couponMaInput" value="$!ifcoupCodeOpen"/>
+						    </div>
+						    <div class="coupon_tit">
+						        #if($!{coupCounts}!=0)
+									#foreach($ordMain in $!{preOrdMainList})
+									#set($index = $velocityCount - 1)
+									#set($coups = $!{coupOrdSkuMap.get($ordMain.cartId)})
+										#if($!{coupSizeMap.get($ordMain.shopId)}!=0)
+											<div class="toggle-bd youhuiquan" style="display:block;">
+												##<ul id="teamTab" class="tab-o clearfix">
+													##<li class="active">可用优惠券<em>($!{coupSizeMap.get($ordMain.shopId)})</em></li>
+												##</ul>
+												<div id="teamTabc" class="tab-cont" style="background: #ffffff;">
+													<div class="_coupItems item" style="margin: 10px;padding-left:0;margin-left:0">
+														<p style="margin-bottom: 5px;"><b>$!{ordMain.shopName}优惠券</b></p>
+														##<p style="margin-bottom: 5px;"><b>请选择要使用的优惠券</b></p>
+														#foreach($coupItems in $!coups)
+														#set($coupItemsIndex = $velocityCount - 1)
+														<div class="_coupItemBean">
+															#foreach($coupItem in $!{coupItems.coupDetails})
+																<div class="_coupItem">
+																	<p class="checkbox-box">
+																		<input type="checkbox" onclick="Coupon(this)">
+																		<input type="hidden" id="couponIdHidden" value="$!{coupItem.coupId}">
+																		<input type="hidden" id="couponShopIdHidden" value="$!{ordMain.shopId}">
+																		$!{coupItem.coupName} <em>
+																			$!{coupItem.coupValueShow}</em>
+																			#if($!{coupItem.coupValueShow})
+																				#if($!coupItem.discountCoup == '1')
+																				折
+																				#else
+																				元
+																				#end
+																			#end
+																		 (有效期至$!date.format('yyyy.MM.dd',$!{coupItem.inactiveTime}))
+																	</p>
+																</div>
+															#end
+														</div>
+														#end
+													</div>
+												</div>
+											</div>
+										#end
+									#end
+								#end
+								#set($ifcoupCodeOpen=${paramTools.getSysConfigCode("COUP_CODE_STATUS")})
+								#if($!ifcoupCodeOpen==1)
+									<div class="toggle-bd" id="youhuima">
+										<div class="tab-cont" style="background: #ffffff;">
+											<div class="item _coupcode" style="margin-top: 20px;padding-left:0;margin-left:0">
+												<div style="display:none" class="_use" id="coupCodeDiv">
+													<input type="hidden" class="_coupcode_shopId" value="">
+													<input type="hidden" class="_coupcode_discount_money" value="0.00">
+													您使用的优惠码为：<span class="_coupcodevalue_view"></span>，该优惠码已优惠<span class="_coupcode_money_view"></span>元      <a class="red" href="javascript:void(0)" onclick="noUseCoupCode(this)">取消使用 </a>
+												</div>
+												<div class="item-input-coupcode">
+													请输入您的优惠码：<input type="text" class="_coup" style="width:250px;margin-bottom: 0px;" maxlength="16"> <a href="javascript:void(0)" onclick="useCoupCode(this)" style="background: #ff6a00;padding: 4px 10px;color: white;border: 1px solid #ec5e00;"> 使用</a>
+												</div>
+												<p class="spit-line"></p>
+											</div>
+										</div>
+									</div>
+								#end
+						    </div>
+						    <div class="coupon_money">
+						        <p>抵用金额：￥ <span id="sumDiscountMoney">0.00</span></p>
+						    </div>
+						</div>
+						</div>
+						##tab结束
+						
+            <div class="pay-count mt20 mb40">
+                <div class="cwrap">
+                    <div class="pitem">
+                        <label class="pl">
+                            <b>$!{orderAmounts}</b>件商品，总商品金额：
+                        </label>
+                        <span class="pv" id="order_moneys">&yen;#moneyNum($!{orderMoneys})</span>
+                        <input type="hidden" id="order_money_total" value="$!{orderMoneys}">
+                    </div>
+                    <div class="pitem">
+                        <label class="pl">
+                            运费：
+                        </label>
+                        <span class="pv" id="real_express_fees">&yen;#moneyNum($!{realExpressFees})</span>
+                    </div>
+					#if($acctSizes!=0)
+					<div class="pitem">
+                        <label class="pl">
+                            资金账户：
+                        </label>
+                        <span class="pv" id="acct_fees">- &yen;0.00</span>
+                    </div>
+					#end
+                    #set($coupShopSize = 0)
+                    #foreach($item in $coupSizeMap.entrySet())
+                        #set($coupShopSize = $coupShopSize + $item.value)
+                    #end
+                    #if($!{coupShopSize}!=0)
+                        <div class="pitem">
+                            <label class="pl">
+                                优惠券：
+                            </label>
+                            <span class="pv" id="coup_fees" >- &yen;0.00</span>
+                        </div>
+                    #end
+                     #if($!ifcoupCodeOpen==1)
+                    <div class="pitem">
+                        <label class="pl">
+                            优惠码：
+                        </label>
+                        <span class="pv" id="coupcode_fees">- &yen;0.00</span>
+                    </div>
+                    #end
+                    #if($!{discountMoneys}!=0)
+                        <div class="_shop_coup pitem">
+                            <label class="pl">
+                                促销优惠：
+                            </label>
+                            <span class="pv" id="shop_coup">- &yen;#moneyNum($!{discountMoneys})</span>
+                        </div>
+                    #end
+                    <div class="pitem">
+                        <label class="pl">
+                            应付总额：
+                        </label>
+                        <span class="pv" id="all_money">&yen;#moneyNum($!{allMoney})</span>
+                    </div>
+
+
+                    <div class="pzs" style="background: #f7f7f7;padding-bottom:3px;padding-top: 12px;">
+                        <label class="pl" style="margin-bottom:8px">
+                          应付总额：
+                        </label>
+                        <span class="total" style="margin-right:0px;">&yen;#moneyNum($!{allMoney})</span></br>
+                        <span class="buyAdderssView" style="color: #999999">
+                        	##收货人地址
+                        </span></br>
+                    </div>
+                </div>
+                <div class="pzs">
+	                <span class="mbtn mbtn-red" id="submitOrd">
+	                           提交订单
+                    </span></br>
+                </div>
+                <div class="pull-right mt10">
+            		<a href="$!{CONTEXT_PATH}/order/cart/list" style="color:#0088cc" class="mt10">返回购物车</a>
+            	</div>
+
+            ##</div>
+
+			<input type="hidden" id="_gdsType" value="$addrCanNo" name="gdsType"></input>
+            <input type="hidden" id="sourceKey" value="$!{sourceKey}" name="sourceKey"></input>
+            <input type="hidden" id="mainHashKey" value="$!{mainHashKey}" name="mainHashKey"></input>
+		</form>
+    </div>
+</div>
+
+<div id="addTemplate" style="display:none">
+	<div class="sl-addr mt10">
+        <div class="order-switch">
+            <a class="" href="javascript:void(0)">
+                <input class="pay1" type="radio" name="addrId" value=""/>
+
+                <b></b>
+            </a>
+        </div>
+        <span class="sl-name">
+
+        </span>
+        ##收货人地址详情
+        <span class="hid-buy-message" style="display:none">
+
+        </span>
+        ##收货人姓名
+        <span class="hid-buy-name" style="display:none">
+
+        </span>
+        ##收货人电话号码
+        <span class="hid-buy-phone" style="display:none">
+
+        </span>
+        <div class="addMgr">
+          <span class="_default">设为默认地址</span>
+          <span class="_update">修改</span>
+          <span class="_delete">删除</span>
+        </div>
+     </div>
+</div>

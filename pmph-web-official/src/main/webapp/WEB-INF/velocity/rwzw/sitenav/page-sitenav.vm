@@ -1,0 +1,14 @@
+#parse("/sys/sys_param.vm")
+<div class="body body-bg">
+    <!--导航2begin-->
+    <div class="wrap100">
+        <div class="nav-contanier ecp-component site-nav-shader" data-site-id="4" data-status="1" data-site-info-type="01"  data-url="/rwzw/sitenav/child/site-info-nav" data-module="ecp-component/rwzw/site-nav-shader">
+
+        </div>
+    </div>
+    <!--导航2 end-->
+</div>
+<input type="hidden"  name="item" id="item" value="$!{item}"/>
+<script >
+$('#zwlogo').attr('src',$webroot+'images/logo-dh.png');
+</script>

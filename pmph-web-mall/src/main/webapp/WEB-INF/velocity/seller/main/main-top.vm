@@ -1,0 +1,63 @@
+#parse("/sys/sys_param.vm")
+<script type="text/javascript">
+
+/*获取用户未读站内消息数量*/
+var getBuyMsgInsite = function(){
+	$.eAjax({
+		url : GLOBAL.WEBROOT + '/msginsite/msginsitecnt',
+		dataType : "json",
+		success : function(result) {
+			$("#msgInsite").html('(' + result.msgCnt + ')');
+			if(result.msgcustflag == "1"){
+				$("#selmsgInsite").html('(' + result.msgCnt1 + ')');
+			}
+		}
+	});
+}
+
+$(function(){
+	//每次加载页面时，重新获取一次。
+	getBuyMsgInsite();
+	
+})
+
+function mOver()
+{
+	//getSelMsgInsite();
+	getBuyMsgInsite();
+}
+</script>
+<link href="$!{CSS_PATH}/yscss.css" type="text/css" rel="stylesheet">
+<!--header-->
+<div id="seller-header">
+    <div class="wrap1200">
+        <div class="hl">
+            <a class="logo" href="$!{CONTEXT_PATH}/homepage">
+				<img src="#siteLogo('','200x40!')" alt=""/>
+			</a>
+            <span class="split"></span>
+            <a class="txt" href="$!{CONTEXT_PATH}/seller/shopdashboard/index">卖家中心</a>
+        </div>
+        <ul class="hr">
+			#custInfo()
+				#if(${cust.staffCode})
+            <li>您好，<a href="$!{CONTEXT_PATH}/buyercenter/index">$!{cust.staffCode}</a> <a href="$!{CONTEXT_PATH}/login/logout">退出</a></li>
+			#else
+				<li>您好，<a href="$!{CONTEXT_PATH}/login/page">请登录</a> <a href="$!{CONTEXT_PATH}/login/register">免费注册</a></li>
+				#end
+            <li><span class="split">|</span><a href="$!{CONTEXT_PATH}/order/all">我的订单</a></li>
+            <li class="drapdown"><span class="split">|</span><a href="#" onmouseover="mOver()">我的消息<i class="caret-down"></i></a>
+               <div class="topdwonWrap">
+                   <div class="topdwon downc">
+                       <p><a href="$!{CONTEXT_PATH}/msginsite/msgindex">买家消息 <span class="red" id="msgInsite">(0)</span></a></p>
+                       #if($!{cust.custShopFlag}=='1')
+                       <p><a href="$!{CONTEXT_PATH}/seller/msginsite/msgindex">卖家消息 <span class="red" id="selmsgInsite">(0)</span></a></p>
+                       #end
+                   </div>
+               </div>
+            </li>
+            <li><span class="split">|</span><a href="$!{CONTEXT_PATH}/buyercenter/index">个人中心</a></li>
+            <li><span class="split">|</span><a href="javascript:void(0)" class = "ecpaddfavorite">添加收藏夹</a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,96 @@
+#parse("sys/sys_param.vm")
+<title>订单支付页-#siteName('')</title>
+	<link href="$!{CSS_PATH}/order.css" type="text/css" rel="stylesheet"/>
+	<link href="$!{CSS_PATH}/reset.css" type="text/css" rel="stylesheet"/>
+	<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/extend/bus.selector.js"></script>
+	<script type="text/javascript" src="$BUSIJS_PATH/main/main-content.js"></script>
+	<script type="text/javascript" src="$!{BUSIJS_PATH}/order/pay/pay-way.js?version=$!{JS_VERSION}" ></script>
+  
+<div id="content">
+    <div class="wrap1200">
+        <div class="order-sb-state">
+            <div class="sus-tip">
+                <table width="100%" border="0">
+                    <tbody>
+                    <tr>
+                        <td class="mstate-icc">
+                           <i class="mstate"></i>
+                        </td>
+                        <td>
+                            <p class="txt">
+                                <strong style="font-size: 20px;">您的订单已提交成功!</strong>
+                                <strong class="c-gray">
+                                   
+                                </strong>
+                                <strong class="c-gray"> 
+                                </strong>
+                            </p>
+                           <!-- <ul class="odetail pway-detail">
+                                <li>
+                                    <label>金额：</label>
+                                    <span class="c-red">3000.00元</span>
+                                </li>
+                                <li>
+                                    <label>订单：</label>
+                                    <span>233444493484848585893</span>
+                                </li> 
+                            </ul>
+							<!--上门支付-->
+                            #if($!{payType}=='1')
+							<div class="online-way">
+                                <hr>
+                                <h2>上门支付</h2>
+                                <p><label>地址：</label>北京市朝阳区潘家园南里19号人卫大厦一层大堂吧</p>
+                                <p><label>电话：</label>4008989100</p>
+                                <div>
+									<img src="$!{IMAGE_PATH}/order/order-pay.gif"/>
+                                </div>
+							</div>
+							#end
+                            <!--邮局汇款方式-->
+                            #if($!{payType}=='2')
+                            <div class="online-way">
+                                <hr>
+                                <h2>邮局汇款方式</h2>
+                                <p><label>汇款地址：</label>北京朝阳区潘家园南里19号世界医药图书大厦B座人民卫生出版社</p>
+                                <p><label>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编：</label>100021</p>
+                                <p><label>收&nbsp;&nbsp;款&nbsp;&nbsp;人：</label>邮购部</p>
+                                <p>收款时间一般为款汇出后的3-5个工作日内。</p>
+                                <p class="c-red" style="line-height: 30px;">注意事项： </p>
+                                <p style="height:35px;">在办理汇款时，请您在电汇单上附言栏中注明订单号<span class="c-red">（非常重要！！！）</span>。因为邮局方面的原因，您留下的订单号可能无法在电汇单上显示出来，这样将造成我们无法查到订单号以致延误订单发出。请您务必确认是否在汇款单中留好订单号。 
+								如果在您汇款一段时间后，订单仍然没有确认收款，请与我们在线客服联系</p>
+                            </div>
+							#end
+                            <!--银行转账方式-->
+                            #if($!{payType}=='3')
+							<div class="online-way">
+                                <hr>
+                                <h2>银行转账方式</h2>
+                                <p>（*请您到银行对公业务窗口办理）</p>
+                                <p><label>开&nbsp;&nbsp;户&nbsp;&nbsp;名：</label>北京人卫文化传播中心</p>
+                                <p><label>开&nbsp;&nbsp;户&nbsp;&nbsp;行：</label>农行北京南三环支行</p>
+                                <p><label>帐&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号：</label>11200601040012356</p>
+                                <p>收款时间一般为款汇出后的3个工作日内。</p>
+                                <p class="c-red" style="line-height: 30px;"><b>注意事项：</b> </p>
+                                <p style="height:60px;">在办理汇款时，请您在电汇单上用途栏中注明订单号（非常重要！！！），因为银行方面的原因，您留下的订单号可能无法在电汇单上显示出来，这样将造成我们无法查到订单号以致延误订单发出。建议您可以登录官网完善您的汇款信息，方便我们第一时间查询到款，帮您发货。
+								如果在您汇款一段时间后，订单仍然没有收款，请与我们在线客服联系，或拨打客服电话:4008989100。</p>
+                            </div>
+							#end 
+							#if($!{showLCFlag} != "0")
+								<div>您的订单中包含了 临床助手 的商品，获取激活码可到临床助手 (<a class="c-blue" style="text-decoration:underline;" href="http://ccdas.ipmph.com/">http://ccdas.ipmph.com/</a>) 或者商城的用户消息中获得。咨询电话：010-59787423(郑老师)、010-59787534(于老师)</div>
+							#end
+							#if($!{showYYFlag} != "0")
+								<div>您的订单中包含了 用药助手 的商品，获取激活码可到用药助手 (<a class="c-blue" style="text-decoration:underline;" href="http://pharmacy.ipmph.com/">http://pharmacy.ipmph.com/</a>) 或者商城的用户消息中获得。咨询电话：010-59787092(何老师)、010-59787198(孙老师)</div>
+							#end
+							#if($!{showYJKFlag} != "0")
+								<div>您的订单中包含了 约健康助手 的商品，获取激活码可到约健康助手 (<a class="c-blue" style="text-decoration:underline;" href="https://www.ehealthship.com/">https://www.ehealthship.com/</a>) 或者商城的用户消息中获得。咨询电话：010-59787249(周老师)</div>
+							#end
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div> 

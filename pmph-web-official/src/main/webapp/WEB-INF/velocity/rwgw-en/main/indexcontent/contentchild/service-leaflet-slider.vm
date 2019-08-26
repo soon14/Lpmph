@@ -1,0 +1,16 @@
+#parse("/rwgw-en/sys/sys_param.vm")
+<div style="height:304px;"  class="box">
+	<div class="box-head">
+		<i class="box-ticon ticon-service"></i>
+	</div>
+	<div class="box-body">
+		<!--图片轮播 begin-->
+		<div id='mySwipe' class='swipe ecp-component main-service-slider' data-status="1" data-place-size="12" data-place-id="1402" data-place-width="245" data-place-height="155" data-module="ecp-component/leaflet/main-service-slider">
+			<div class='swipe-wrap main-service-slider-img'>
+			</div>
+			<ul id="swipePage" class="carousel-indicators main-service-slider-num">
+			</ul>
+		</div>
+		<!--图片轮播 end-->
+	</div>
+</div>

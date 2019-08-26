@@ -1,0 +1,18 @@
+#parse("/rwgw/sys/sys_param.vm")
+#if(${siteInfoList.size()} > 0)
+<script type="text/javascript" src="$BUSIJS_PATH/rwzw/site-info-nav.js"></script>
+<div class="nav-head">
+	<ul class="clearfix" id="navH">
+	#foreach($siteInfo in ${siteInfoList})
+		<li class="siteinfoitem" data-site-info-id = "$!{siteInfo.id}"><a href="javascript:void(0);">$!{siteInfo.siteInfoName}</a></li>
+	#end
+	</ul>
+</div>
+<div class="nav-body" id="navC">
+    #foreach($siteInfo in ${siteInfoList})
+	<div class="nav-box siteinfodiv siteinfo$!{siteInfo.id} " style="display:none;">
+		<input class="siteinfostaticUrl" type="hidden" name="articleStaticUrl" value="$!{siteInfo.staticUrl}" />
+	</div>
+	#end
+</div>
+#end

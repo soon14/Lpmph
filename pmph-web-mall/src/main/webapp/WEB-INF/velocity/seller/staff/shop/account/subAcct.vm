@@ -1,0 +1,107 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+<link rel="stylesheet" href="$!{CSS_PATH}/calendar-pro.css">
+<script type="text/javascript" src="$!{RESOURCE_PATH}/javascript/holder/holder.js" ></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/extend/bus.selector.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/staff/shop/account/shopAcct.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/staff/shop/account/calendar-pro.js" ></script>
+<div class="seller-well" style="padding: 10px;">
+
+	<div class="shopAcctList-wrap">
+			<div class="shopAcctList-tit">
+				<p class="shopAcctList-txt">我的资产</p>
+				<a href="javascript:void(0);" class="change-shop">切换店铺<span class="change-shop-icon">&nbsp;</span></a>
+			</div>
+			<div class="shopAcctList-showCount">
+				<div class="counter-tit-money">
+					<p>账户总资产（元）</p>
+					<p>	1000.00</p>
+				</div>
+				<div class="counter-tit-money">
+					<p>&nbsp;</p>
+					<p>=</p>
+				</div>
+				<div class="counter-tit-money">
+					<p>可用余额<span class="span-counter-iconyu">&nbsp;</span></p>
+					<p>	1000.00</p>
+				</div>
+				<div class="counter-tit-money">
+					<p>&nbsp;</p>
+					<p>+</p>
+				</div>
+				<div class="counter-tit-money">
+					<p>不可用余额<span class="span-counter-iconyu">&nbsp;</span></p>
+					<p>	1000.00</p>
+				</div>
+			</div>
+			<div class="shopAcctList-detailBtn">
+				<div class="shopAcctList-charts">
+					<p>90%</p>
+				</div>
+				<div class="shopAcctList-balance">
+					<p>可用余额</p>
+					<p>1000.00</p>
+				</div>
+				<div class="shopAcctList-wdr-btn">
+					
+					<!-- 标准，可用状态类名 class="wdr-btn-ok"  不可用状态 类名 class="wdr-btn-no" 根据条件显示所需要的-->
+					<a href="javascript:viod(0);" class="wdr-btn-ok" style=" color: #ffffff;">申请提现</a>
+					
+					<a href="javascript:viod(0);" class="wdr-btn-showDetail" style=" color: #ffffff;">查看所有提现申请进度</a>
+					<br>
+					<a href="javascript:viod(0);" class="wdr-btn-no" style=" color: #ffffff;">申请提现</a>
+				</div>
+			</div>
+		</div>
+		<div class="shopAcctList-payments">
+			<p class="shopAcctList-txt">收支明细</p>
+			<div class="payments-header">
+				<a href="javascript:viod(0);" class="payments-curMonth" style=" color: #ffffff;">当前月</a>
+				结算月账单：<span>￥10000.22</span>
+				<a href="javascript:viod(0);" class="payments-prexMonth">上个月</a>
+				结算月账单：<span>￥10000.22</span>
+			</div>
+			<div class="select-btn">
+				<div class="calendar-box demo-box"></div>
+			</div>
+		</div>
+
+
+   ## <form action="" class="form-horizontal required-validate" id="subAcctSearchForm">
+    ##    <div class="row-fluid">
+     ##   </div>
+   ## </form> 
+</div>
+##<div class="sbtn-group" >
+##</div>
+##<div class="main-inner">
+    ##<table class="seller-table table-striped">
+    ##	<thead>
+      ##  <tr>
+        	
+        ##</tr>
+        ##</thead>
+        ##<tbody>
+        	
+		##</tbody>
+	##</table>
+##</div>
+<script>
+	$('.calendar-box').calendar({
+        ele : '.demo-box', //依附
+        title : '收支明细',
+     // beginDate : '2018-5-01',
+     // endDate : '2018-12-04',
+     //清拼接此格式
+        data : [
+            {date:'2018-5-01',data:'收：￥107.77,支：￥107.77'},
+            {date:'2018-5-02',data:'收：￥107.77,支：￥107.77'},
+            {date:'2018-5-03',data:'收：￥107.77,支：￥107.77'},
+            {date:'2018-5-14',data:'收：￥107.77,支：￥107.77'},
+            {date:'2018-5-15',data:'收：￥107.77,支：￥107.77'},
+            {date:'2018-5-16',data:'收：￥107.77,支：￥107.77'},
+            {date:'2018-5-17',data:'收：￥107.77,支：￥107.77'}                          
+        ]
+    });
+    // $('.calendar-box').calendarGetActive();
+</script>

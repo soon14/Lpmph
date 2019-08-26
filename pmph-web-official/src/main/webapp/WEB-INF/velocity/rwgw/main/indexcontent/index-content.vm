@@ -1,0 +1,35 @@
+#parse("/rwgw/sys/sys_param.vm")
+<link rel="stylesheet" href="$!{CSS_PATH}/rwgw-index-china.css" />
+<script type="text/javascript" src="$RESOURCE_PATH/jquery/jcarousel-master/jquery.jcarousel.min.js"></script>
+<script type="text/javascript" src="$BUSIJS_PATH/main/main-content.js"></script>
+## 一般是一个大标题分成一个子vm文件
+
+## 热点新闻与人卫公告  start
+#parse("/rwgw/main/indexcontent/contentchild/hot-news-and-announce.vm")
+## 热点新闻与人卫公告  end
+
+## 图书  start
+#parse("/rwgw/main/indexcontent/contentchild/floor-books.vm")
+## 图书   end
+
+## 智慧数字  start  
+#parse("/rwgw/main/indexcontent/contentchild/intelligent-digit.vm")
+## 智慧数字   end
+
+<div class="gwIndex-book">
+## 医学教育  start  
+#parse("/rwgw/main/indexcontent/contentchild/medicine-edu.vm")
+## 医学教育   end
+
+## 人卫科技  start  
+#parse("/rwgw/main/indexcontent/contentchild/rw-technology.vm")
+## 人卫科技   end
+</div>
+
+## 期刊  start  
+#parse("/rwgw/main/indexcontent/contentchild/magazine.vm")
+## 期刊   end
+
+## 人卫网站  start  
+#parse("/rwgw/main/indexcontent/contentchild/rw-sites.vm")
+## 人卫网站    end

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>我的订单-#siteName('')</title>
+<meta charset="UTF-8"></meta>
+#parse("sys/sys_head.vm")
+<link href="$!{RESOURCE_PATH}/qTip2/jquery.qtip.css" type="text/css" rel="stylesheet"/>
+<link href="$!{CSS_PATH}/reset.css" type="text/css" rel="stylesheet"/>
+<link href="$!{CSS_PATH}/member.css" type="text/css" rel="stylesheet"/>
+<style>
+    body{word-break: break-all;}
+</style>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/order-list.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/qTip2/jquery.qtip.js?version=$!{JS_VERSION}"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/order-express.js?version=$!{JS_VERSION}"></script>
+</head>
+
+<body>
+	<input type="hidden" id="status" value="$!{status}"></input>
+<!--顶部 begin-->
+<div id="header" class="clearfix">
+	#parse("/main/main-site-nav.vm")
+</div>
+<!--content-->
+    <div class="wrap1200 ">
+        <div id="content" class="clearfix">
+            #parse("/main/main-buyer-menu.vm")
+			$screen_content
+				
+			<!--详情-->
+			<form action="$!{CONTEXT_PATH}/order/myorder/detail" method="POST" id="detailForm">
+				<input type="hidden" name="orderId" value=""/>
+			</form>
+			</div>
+
+    </div>
+<!--快速导航-->
+#parse("/main/main-content-bottom.vm")
+<!--底部 begin-->
+<div id="footer" class="text-center">
+	#parse("/main/main-bottom.vm")
+</div>
+<!--底部 end-->
+</body>
+</html>

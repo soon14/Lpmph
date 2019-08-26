@@ -1,0 +1,136 @@
+#parse("/module/mod-form.vm")
+<style type="text/css">
+.error {
+color: #C62626;
+}
+</style>
+<script type="text/javascript">
+	$(function(){   
+	    $("#modifyBackMoney").keyup(function(){      
+	        $(this).val($(this).val().replace(/^\./g,"").replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3').replace(/[^\d.]/g,''));      
+	    }).bind("paste",function(){  
+	        $(this).val($(this).val().replace(/^\./g,"").replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3').replace(/[^\d.]/g,''));       
+	    }).css("ime-mode", "disabled"); 
+
+    	$('#save_money_btn').click(function(){
+    		if(!$("#saveForm").valid()) {
+    			return false;
+    		}
+    		var data = [];
+    		var ordId=$('#orderId').val();
+			var scale = $('#scale').val();
+			var backId = $('#backId').val();
+			var backMoney = $('#backMoney').val();			
+			var reduCulateScore = $('#reduCulateScore').val();
+			var modifyBackMoney = $('#modifyBackMoney').val();
+			var staffId = $('#staffId').val();
+			var isLastFlag = $('#isLastFlag').val();
+			var memo = $('#memo').val();			
+			backMoney = toDecimal(backMoney);
+			modifyBackMoney = toDecimal(modifyBackMoney*100);
+			if(modifyBackMoney==null||modifyBackMoney==''){
+				eDialog.alert("调整后退款金额不能为空！");
+				return ;
+			}
+			if(isNaN(modifyBackMoney)){
+				$('#modifyBackMoney').val('');
+				$('#modifyBackMoney').focus();
+				eDialog.alert("退款金额必须为数字！");
+				return;
+			}
+			if(modifyBackMoney<=0){
+				eDialog.alert("调整后退款金额必须大于0！");
+				return;
+			}			
+			if(memo==null||memo==''){
+				eDialog.alert("调整原因不能为空！");
+				return ;
+			}
+
+			if(modifyBackMoney.length>0){
+				eDialog.alert("调整金额不合法，请重新输入！");
+				return ;
+			}
+	    	data.push({name:'orderId',value:ordId});
+			data.push({name:'scale',value:scale});
+		   	data.push({name:'staffId',value:staffId});
+			data.push({name:'backId',value:backId});
+			data.push({name:'backMoney',value:backMoney});
+			data.push({name:'reduCulateScore',value:reduCulateScore});
+			data.push({name:'modifyBackMoney',value:modifyBackMoney});
+			data.push({name:'memo',value:memo});
+			data.push({name:'lastFlag',value:isLastFlag});
+
+			$.eAjax({
+				url:GLOBAL.WEBROOT+'/seller/refundReview/checkBackMoney',
+				data:data,
+				success:function(result){
+					if(result.resultFlag=='ok'){
+						$.eAjax({
+							url:GLOBAL.WEBROOT+'/seller/backReview/modifyBackMoney',
+							data:data,
+							success:function(result){
+								top.window.location.href=GLOBAL.WEBROOT+'/seller/backReview/review?backId='+backId+'&orderId='+ordId;
+							},
+							failure:function(){
+								
+							}
+				    	});    
+					}else{
+						eDialog.alert("调整金额不能大于订单可退金额！");
+						return ;
+					}
+				},
+				failure:function(){
+					return false;
+				}
+	    	}); 
+    		
+			
+   		 });
+   		 
+   		 $('#close_btn').click(function(){
+   		   	parent.bDialog.closeCurrent();   		 
+   		 });
+   	});
+   	//功能：将浮点数四舍五入，取小数点后2位 
+	function toDecimal(x) { 
+	 var f = parseFloat(x); 
+	 if (isNaN(f)) { 
+	  return; 
+	 } 
+	 f = Math.round(x*100)/100; 
+	 return f; 
+	} 
+</script>
+
+<div id="updateBackMoney" style="padding:10px">
+<form id="saveForm" class="form-horizontal required-validate" style="margin-bottom: 0px;">  	
+ 	<input type = "hidden" id="orderId" value="$!{ordReturnRefundReqVO.orderId}"/>
+	<input type = "hidden" id="scale" value='$!{ordReturnRefundReqVO.scale}'/>
+    <input type = "hidden" id="backMoney" value='$!{ordReturnRefundReqVO.backMoney}'/>
+    <input type = "hidden" id="reduCulateScore" value='$!{ordReturnRefundReqVO.reduCulateScore}'/>
+    <input type = "hidden" id="backId" value='$!{ordReturnRefundReqVO.backId}'/>
+    <input type = "hidden" id="staffId" value='$!{ordReturnRefundReqVO.staffId}'/>
+	<input type = "hidden" id="isLastFlag" value='$!{ordReturnRefundReqVO.lastFlag}'/>
+    <div class="control-group">
+        
+        <label class="control-label">退款金额：</label>
+        <div class="controls">
+        	<input type="text" id="modifyBackMoney" class="input-large required" name="modifyBackMoney"  placeholder="请输入退款金额" max="99999999999999" min="0.01">          
+        </div>
+    </div>
+	<div class="control-group">
+        <label class="control-label">调整原因：</label>
+        <div class="controls">
+        	<textarea rows="4" style="width:350px;" id="memo" class="input-large required" name="memo" id="checkCont" maxlength="80"></textarea>	  
+        </div>
+    </div>
+    <div class="control-group">		
+        <div align="center">   
+        	<a class="btn btn-info" id="save_money_btn"><i class=" icon-ok-sign icon-white"></i> 确定</a>             
+            <a class="btn" id="close_btn"><i class=" icon-remove-sign icon-white"></i> 返回</a>
+        </div>
+	</div>
+</form>
+</div>

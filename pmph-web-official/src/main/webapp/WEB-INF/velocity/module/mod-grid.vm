@@ -1,0 +1,18 @@
+#parse("/sys/sys_param.vm")
+<!-- 表格插件需要引用的脚本、样式库 -->
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/jquery/datatables/css/jquery.dataTables.css" type="text/css">
+
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/jquery/datatables/extras/TableTools/css/dataTables.tableTools.min.css" type="text/css">
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/jquery/datatables/extras/ColReorder/css/dataTables.colReorder.min.css" type="text/css">
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/jquery/datatables/css/dataTables.bootstrap2.css" type="text/css">
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/jquery/datatables/css/jquery.dataTables_extend.css" type="text/css">
+
+
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/datatables/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/datatables/extras/TableTools/dataTables.tableTools.min.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/datatables/extras/ColReorder/dataTables.colReorder.min.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/datatables/extras/Bootstrap/dataTables.bootstrap2.js"></script>
+
+<!-- datatables基于bootstrap风格的二次封装 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/e.grid.js"></script>

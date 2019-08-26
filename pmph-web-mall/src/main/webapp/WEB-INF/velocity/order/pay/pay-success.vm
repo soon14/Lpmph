@@ -1,0 +1,109 @@
+#parse("/module/mod-form.vm")
+#parse("sys/sys_param.vm")
+<link href="$!{CSS_PATH}/order.css" type="text/css" rel="stylesheet"/>
+<link href="$!{CSS_PATH}/reset.css" type="text/css" rel="stylesheet"/>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/extend/bus.selector.js"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/pay/pay-success.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$BUSIJS_PATH/main/main-content.js"></script>
+
+<!--主要内容 begin--> 
+<div id="content">
+    <div class="wrap1200">
+        <div class="order-sb-state">
+            <div class="sus-tip">
+                <table width="100%" border="0">
+					<input type="hidden" id="shopId" value="100" />
+                    <tbody><tr>
+                        <td class="mstate-icc">
+                           <i class="mstate"></i>
+                        </td>
+                        <td>
+                            <p class="txt">$!realMoney
+                                <strong style="font-size: 20px;">您成功付款！</strong>
+                            </p>
+                            <ul class="odetail">
+                                <li>
+                                    <label>订单编号：</label>
+                                    <span class="c-orange">$!{showOrderIds}</span>
+                                </li> 
+                                <li>
+                                    <label>付款时间：</label>
+                                    <span class="c-gray">$!date.format('yyyy-MM-dd HH:mm:ss ',$!{payTime})</span>
+                                </li>  
+                                <li>
+                                    <span class="c-gray">
+                                                                                         您可能需要：
+                                    </span>
+									#if($!{siteId} == "1")
+										#if($orderIdList && $!{orderIdList.size()} == 1)
+										<a class="c-red" href="$!{CONTEXT_PATH}/ord/detail/$!{orderId}">查看该订单</a>
+                                        <span class="c-gray" style="margin: 0 5px">|</span>
+										#end
+                                        <a href="$!{CONTEXT_PATH}/order/pay" class="c-red">我的订单</a>
+								    #else
+										#if($orderIdList && $!{orderIdList.size()} == 1)
+										<a class="c-red" href="$!{CONTEXT_PATH}/ord/point/detail/$!{orderId}">查看该订单</a>
+                                        <span class="c-gray" style="margin: 0 5px">|</span>
+                                        #end
+										<a href="$!{CONTEXT_PATH}/order/point/pay" class="c-red">我的订单</a>
+									#end
+                                    
+                                </li>
+                                #if($!{showAppUrlFlag} == "1")
+                                <li>
+									<a class="c-red" href="http://textbooks.ipmph.com/books/app/download?SiteID=33">数字教材APP下载页URL</a>
+                                    <span class="c-gray" style="margin: 0 5px">|</span>
+                                    <a class="c-red" href="http://books.ipmph.com/books/app/download?SiteID=34">电子书APP下载页URL</a>
+                                </li>
+								#end
+								#if($!{showXfkFlag} == "1")
+								<li>	
+									<a class="c-red" href="http://lib.pmph.com/">数字图书馆URL</a>
+									<span class="c-gray" style="margin: 0 5px">|</span>电子书/电子课程 咨询电话：4006300567
+								</li>
+								#end
+								#if($!{showLCFlag} != "0")
+								<li>	
+									<span>您的订单中包含了 临床助手 的商品，获取激活码可到临床助手 (<a class="c-blue" style="text-decoration:underline;" href="http://ccdas.ipmph.com/">http://ccdas.ipmph.com/</a>) 或者商城的用户消息中获得。咨询电话：010-59787423(郑老师)、010-59787534(于老师)</span>
+								</li>
+								#end
+								#if($!{showYYFlag} != "0")
+								<li>	
+									<span>您的订单中包含了 用药助手 的商品，获取激活码可到用药助手 (<a class="c-blue" style="text-decoration:underline;" href="http://pharmacy.ipmph.com/">http://pharmacy.ipmph.com/</a>) 或者商城的用户消息中获得。咨询电话：010-59787092(何老师)、010-59787198(孙老师)</span>
+								</li>
+								#end
+								#if($!{showYJKFlag} != "0")
+								<li>	
+									<span>您的订单中包含了 约健康 的商品，如需使用商品，请到约健康 (<a class="c-blue" style="text-decoration:underline;" href="https://www.ehealthship.com/">https://www.ehealthship.com/</a>) 或者商城的用户消息中查看。咨询电话：010-59787249(周老师)</span>
+								</li>
+								#end
+                            </ul>
+                        </td>
+                    </tr>
+                    #if($!{showZzsFlag} == "1")
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div>
+                                    #if($!{dispatchType} == "0")  #*0 平邮(邮局挂号) 1 快递 2自提*#
+                                        <span class="itxt-tip" style="border: 0px">预计在 3个工作日内发货，节假日顺延 </span>
+                                    #elseif($!{dispatchType} == "1")
+                                        <span class="itxt-tip" style="border: 0px">预计在 1 个工作日内发货，节假日顺延 </span>
+                                    #elseif($!{dispatchType} == "2")
+                                        #if($!{containZCFlag} == "1")
+                                            <span class="itxt-tip" style="border: 0px">提书联系电话：4008989100 </span>
+                                        #end
+                                    #end
+                                </div>
+                            </td>
+                        </tr>
+                    #end
+                    </tbody>
+                </table>
+
+        </div>
+    </div>
+</div> 
+
+<!--主要内容 end-->
+

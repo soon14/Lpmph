@@ -1,0 +1,102 @@
+#set($pCount = 0)
+#foreach($param in $!{gdsDetailInfo.skuInfo.gdsProps})
+	#if($!{param.ifBasic}=='1')
+		#set($show = '0')
+		#foreach($value in $!{param.values})
+    		#if($!{value.propValue} && $!{value.propValue} !="")
+				#set($show = '1')
+			#end
+		#end
+		#if($show=='1')
+			#set($pCount = $pCount + 1)
+            <div class="item">
+                <label>
+                    $!{param.propName}
+                </label>
+                <span>
+                    #foreach($value in $!{param.values})
+						#if(${param.id}=='1029')
+							#moneyNum($!{value.propValue})
+						#else
+							$!{value.propValue}
+						#end
+        			#end
+                </span>
+            </div>
+		#end
+	#end
+#end
+#if($pCount>0)
+<div class="line-dash"></div>
+#end
+<div class="item">
+    <label>
+        分类路径
+    </label>
+	<div id="cate-root-list" class="item-right"></div>
+</div>
+<div class="item">
+    <label>
+        库&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存
+    </label>
+    <span class="c-green" id="showStockStatus">
+		##if($!{gdsDetailInfo.gdsTypeId}=='2')
+		#if($!{gdsDetailInfo.gdsTypeRespDTO.ifNeedstock} == '0')
+			充足
+		#else
+			$!{stockStatusDesc}
+		#end
+		
+    </span>
+</div>
+<div class="line-dash"></div>
+#foreach($param in $!{gdsDetailInfo.params})
+    <div class="item mb20">
+        <label>
+            选择$!{param.propName}
+        </label>
+        <div class="check-switch">
+            #foreach($value in $!{param.values})
+                #set($selected = '')
+                #foreach($skuprop in $!{gdsDetailInfo.skuInfo.props})
+                    #foreach($skuValue in $!{skuprop.values})
+                        #if($!{skuValue.id}==$!{value.id})
+                            #set($selected = 'selected')
+                        #end
+                    #end
+                #end
+                <label class=$selected>
+                    <input type="checkbox" name="skuprop" valueId="$!{value.id}" propId="$!{param.id}" propName="$!{param.propName}" value="$!{value.propValue}"/>
+                    $!{value.propValue}
+                </label>
+            #end
+        </div>
+    </div>
+#end
+<div class="item mb20" id="buyWayForAlone">
+	
+</div>
+
+<div class="item">
+    <label>
+        我  要  买
+    </label>
+    
+		#if(!$constant.isBuyMore("$gdsDetailInfo.gdsTypeId"))
+			<span id="purchaseAmount" gdsTypeId="$!{gdsDetailInfo.gdsTypeId}">1</span>
+		#else
+			<div class="count-input">
+    			<a href="javascript:void(0)" class="minus" id="reduceCount">-</a>
+    			<input name="" gdsTypeId="$!{gdsDetailInfo.gdsTypeId}" class="itxt" id="purchaseAmount" type="text" value="1" max="#if($!{gdsType.ifBuyonce}=='0')1#elseif($!{stockStatus}=='00' && $ifPage=='1')999999999#else$!{gdsDetailInfo.skuInfo.realAmount}#end">
+    			<a href="javascript:void(0)" class="add" id="addCount">+</a>
+			</div>	
+		#end
+       
+	
+<span>
+    $!{gdsInfoUnit}
+</span>
+<div class="item-right"><div class="alert pro-alert"  id="orderAlert" style="display:none;">购买量已超过实际库存</div></div>
+<span><font id="realAmount" style="display:none;">#if($!{gdsDetailInfo.gdsTypeId}=='2')1#elseif(($!{stockStatus}=='00' && $ifPage=='1')||$!{gdsType.ifNeedstock}=='0')999999999#else$!{gdsDetailInfo.skuInfo.realAmount}#end</font>
+</span>
+</div>

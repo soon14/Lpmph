@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>#siteName('1')管理平台</title> 
+#parse("/sys/sys_head_open.vm")
+</head>
+
+<body>
+
+$screen_content
+
+</body>
+</html>

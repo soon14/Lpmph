@@ -1,0 +1,95 @@
+#parse("sys/sys_param.vm")
+<title>退款申请 -积分商城</title>
+<!--content-->
+<div id="content" class="pay">
+    <div class="wrap1200">
+        <form class="pay-form form-horizontal required-validate" id="applyForm" action=""  method="post" >
+		<div class="ret-container">
+            <div class="ret-box">
+                <div class="head">
+                    <h3>订单信息</h3>
+                </div>
+                <div class="body">
+                    <table class="ret-detail">
+                        <thead>
+                        <tr>
+                            <td style="width:100px">书号</td>
+                            <td style="width:100px">商品图片</td>
+                            <td style="width:350px">商品名称</td>
+                            <td style="width:150px">价格</td>
+                            <td style="width:100px">商品数量</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        #foreach($!backOrderSub in $!backApplyOrdSubResps)
+						#set($backIndex = $velocityCount - 1)
+    					<tr class="bg-fff"> 
+                            <td><div class="border-right">$!{backOrderSub.zsCode} </div></td>
+                            <td><div class="border-right"><a href="#siteInfo(2)$!backOrderSub.gdsUrl" target="_blank"><img src="#genImageUrl($!backOrderSub.getPicId(),'200x200!')" width="48"></img></a></div></td>
+                            <td><div class="border-right"><a href="#siteInfo(2)$!backOrderSub.gdsUrl" target="_blank">$!backOrderSub.gdsName</a></div></td>
+                            <td><div class="border-right">
+									#if($!{backOrderSub.score})
+										$!{backOrderSub.score}积分
+									#end
+									#if($!{backOrderSub.score} && $!{backOrderSub.discountPrice})
+										+
+									#end
+									#money($!backOrderSub.discountPrice)
+							</div></td>
+                            <td><div class="border-right">x $!backOrderSub.orderAmount</div></td>
+							<input type="hidden" name="rBackOrdSubReqs[$!{backIndex}].orderId" id="orderId" value="$!{orderId}">
+    						<input type="hidden" name="rBackOrdSubReqs[$!{backIndex}].orderSubId" id="orderSubId" value="$!{backOrderSub.orderSubId}">
+    						<input type="hidden" name="rBackOrdSubReqs[$!{backIndex}].num" id="orderAmount" value="$!{backOrderSub.orderAmount}">
+                        </tr>
+    					#end 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ret-box">
+                <div class="head">
+                    <h3>退款须知</h3>
+                </div>
+                <div class="body">
+                    <div class="know">
+                        <p>1、数字产品不允许退款</p>
+                        <p>2、已使用的优惠券不退</p>
+                    </div>
+                </div>
+            </div> 
+            <div class="ret-box">
+                <div class="head">
+                    <h3>退款原因</h3>
+                </div>
+                <div class="body">
+					<input type="hidden" name="orderId" id="orderId" value="$!{orderId}">
+					<input type="hidden" name="backTypeName" id="backTypeName" value="">	
+                    <form class="form-horizontal">
+                        <div class="control-group">
+                            <label class="control-label" >退款原因：</label>
+                            <div class="controls">
+                                <select style="width:160px"  id="" name="backType">
+            						#listParam('ORD_BACK_MONEY_TYPE')
+            					</select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >问题描述：</label>
+                            <div class="controls">
+                                <textarea rows="3" id="backDesc" name="backDesc" maxlength="100" class="c-area required htmlcheck"></textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+							<div class="controls">
+								<button type="button" class="btn btn-success" id="btn_apply"><i class="icon-ok"></i> 提交</button>
+								<button type="button" class="btn btn-primary" id="btnReturn"><i class="icon-ban-circle"></i> 关闭</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        </form>
+    </div>
+</div>

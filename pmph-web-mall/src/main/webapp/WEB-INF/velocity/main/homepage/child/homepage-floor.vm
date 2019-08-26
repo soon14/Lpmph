@@ -1,0 +1,86 @@
+<!--楼层1 图书 图书销售榜-->
+<div class="wrap1200 clearfix new-box">
+    <div class="book-box clearfix">
+
+        <!--图书 start -->
+        <div class="rw-book ecp-component homepage-floorvm" data-status="1"
+             data-gds-size="8" data-tab-size="5" data-place-id="8" data-ad-place-id="17"
+             data-place-width="150" data-place-height="150"
+             data-module="ecp-component/floor/homepage-floorvm">
+            <div class="new-tit">
+                <ul id="digitn" class="new-tit-list">
+
+                </ul>
+            </div>
+            <div class="new-con clearfix new-con-bor" style="height: 545px;">
+                <div class="new-con-left">
+                    <ul class="new-list">
+
+                    </ul>
+                </div>
+                <div id="digitc" class="floorvm-content">
+
+                </div>
+            </div>
+        </div>
+        <!--图书    end -->
+
+        <!--图书销售榜    start -->
+        <div class="new-rank ecp-component sidebar-gds-ranking"
+             data-status="1" data-gds-size="10" data-tab-size="4"
+             data-place-id="11" data-place-width="80" data-place-height="80"
+             data-module="ecp-component/ranking/home-sidebar-ranking">
+            <div class="new-tit">
+                <i class="k-icon"></i> <span class="floor-name"></span>
+            </div>
+            <div class="new-con new-con-bg" style="height: 545px">
+                <div class="floor-tabs"></div>
+                <div class="gds-info"></div>
+            </div>
+        </div>
+        <!--图书销售榜  end-->
+    </div>
+</div>
+<!--楼层1 图书 图书销售榜   end -->
+
+<!--楼层2 数字 数字产品销售榜-->
+<div class="wrap1200 clearfix new-box">
+    <div class="book-box clearfix">
+        <!--数字  start-->
+        <div class="rw-book ecp-component homepage-floorvm" data-status="1" data-gds-size="8" data-tab-size="5" data-place-id="9" data-ad-place-id="18" data-place-width="150" data-place-height="150"  data-module="ecp-component/floor/homepage-floorvm">
+            <div class="new-tit">
+                <ul id="digitn" class="new-tit-list">
+
+                </ul>
+            </div>
+            <div class="new-con clearfix new-con-bor" style="height: 545px;">
+                <div class="new-con-left">
+                    <ul class="new-list">
+
+                    </ul>
+                </div>
+                <div id="digitc" class="floorvm-content">
+                </div>
+            </div>
+        </div>
+        <!--数字  end -->
+
+        <!--数字产品销售榜          start-->
+        <div class="new-rank ecp-component sidebar-gds-ranking"
+             data-status="1" data-gds-size="10" data-tab-size="4"
+             data-place-id="12" data-place-width="80" data-place-height="80"
+             data-module="ecp-component/ranking/home-sidebar-ranking">
+            <div class="new-tit">
+                <i class="k-icon"></i> <span class="floor-name"></span>
+            </div>
+            <div class="new-con new-con-bg" style="height: 545px">
+                <div class="floor-tabs">
+                </div>
+                <div class="gds-info">
+                </div>
+            </div>
+        </div>
+        <!--数字产品销售榜  end-->
+    </div>
+</div>
+<!--楼层2  数字 数字产品销售榜  end-->

@@ -1,0 +1,9 @@
+<div class="recommend-right">
+    <div class="box box2h ecp-component new-sale-shader" data-gds-size="6" data-menu-type="1" data-status="11"
+		data-shop-id="100" data-place-size="2" data-place-width="80" data-place-height="116" data-version-type="1"
+		data-module="ecp-component/newbooksale/new-sale-shader">
+
+		<div class="box-tit"></div>
+		<div class="box-con slide new-sale-content" style="height: 161px"></div>
+	</div>
+</div>

@@ -1,0 +1,153 @@
+#parse("sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/orderUpdate/order-grid.js?version=$!{JS_VERSION}"></script>
+<form id="exportForm" action="$!{CONTEXT_PATH}/ordExport/exportPageOrd" target="_blank" method="post" style="display:none">
+    <input type="hidden" name="exportInfo" id="exportInfo" value="0">
+    <input type="hidden" name="exportType" id="exportType" value="0">
+</form>
+<div class="seller-mainR">
+    <div class="main">
+        <div class="seller-well">
+            <form id="searchForm" action="" class="form-horizontal required-validate">
+                <div class="row-fluid">
+			        <div class="span4">
+			            <div class="control-group">
+			                <label class="control-label">店铺名称：</label>
+			                <div class="controls">
+			                    <select name="shopId" id="" class="input-block-level" >
+									##<option value="">请选择</option>
+			                        ###shopStatuslist('','1')
+									#sellerList($!{shopId})
+			                    </select>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="span4">
+			            <div class="control-group">
+			                <label class="control-label">开始日期：</label>
+			                <div class="controls">
+			                    <input type="text" style="width:150px;" class="input-small required Wdate" id="begDate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" name="begDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+			                </div>
+			            </div>
+					</div>
+					<div class="span4">
+			            <div class="control-group">
+			                <label class="control-label">结束日期：</label>
+			                <div class="controls">
+			                    <input type="text" style="width:150px;" class="input-small required Wdate" id="endDate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begDate\')}'})" name="endDate"  value="$!date.format('yyyy-MM-dd',$!{endDate})">
+			                </div>
+			            </div>
+			        </div>
+					<div class="clear"></div>
+				</div>
+			    <div class="row-fluid">
+					<div class="span4">
+					<label class="control-label">订单状态：</label>
+						<div class="controls">
+						<select class="input-medium"  id="" name="status">
+							<option value="">--请选择--</option>
+							#listParam('ORD_ORDER_STATUS')
+						</select>
+						</div>
+					</div>
+					<div class="span4">
+						<div class="control-group">
+							<label class="control-label">订单编号：</label>
+							<div class="controls">
+								<input type="text" name="orderId" class="input-medium" value="" placeholder="">
+							</div>
+						</div>
+					</div>
+					<div class="span4">
+						<div class="control-group">
+							<label class="control-label">收货人姓名：</label>
+							<div class="controls">
+								<input type="text" name="contactName" class="input-medium" value="" placeholder="">
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			    <div class="row-fluid">
+					<div class="span4">
+					<label class="control-label">是否开发票：</label>
+						<div class="controls">
+						<select class="input-medium"  id="" name="invoiceType">
+							<option value="">--请选择--</option>
+							<option value="1">#escapeHtml("是")</option>
+							<option value="2">#escapeHtml("否")</option>
+						</select>
+						</div>
+					</div>
+					<div class="span4">
+						<label class="control-label">支付方式：</label>
+			            <div class="controls">
+			                <select class="input-medium"  id="payType" name="payType">
+			                    <option value="">--请选择--</option>
+								#listParam('ORD_PAY_TYPE')
+			                </select>
+			            </div>
+					</div>
+					<div class="span4">
+						<div class="control-group">
+							<label class="control-label">会员名：</label>
+							<div class="controls">
+								<input type="text" name="staffCode" class="input-medium" value="" placeholder="">
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+			    <div class="row-fluid">
+					<div class="span4">
+					<label class="control-label">是否支付：</label>
+						<div class="controls">
+						<select class="input-medium"  id="payFlag" name="payFlag">
+							<option value="">--请选择--</option>
+							<option value="1">#escapeHtml("是")</option>
+							<option value="0">#escapeHtml("否")</option>
+						</select>
+						</div>
+					</div>
+					<div class="span4">
+						<div class="control-group">
+							<label class="control-label">支付通道：</label>
+							<div class="controls">
+								<select name="payWay" class="input-medium"  id="payWay"  >
+									<option value="">--请选择--</option>
+									#listParam('ORD_PAY_WAY')
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="row-fluid">
+					<div class="span4"></div>
+				    <div class="span4"></div>
+			        <div class="control-group">
+			            <div class="controls">
+			                <div class="pull-right">
+			                    <span class="sbtn sbtn-blue" id="btnFormSearch"><i class="icon-search"></i> 查询</span>
+			                    <span class="sbtn" id="btnFormReset"><i class="icon-asterisk icon-color"></i> 重置</span>
+			                </div>
+			            </div>
+			         </div>
+				</div>
+            </form>
+        </div>
+		<input type="hidden" name="resetBegDate" id="resetBegDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+		<input type="hidden" name="resetEndDate" id="resetEndDate" value="$!date.format('yyyy-MM-dd',$!{endDate})">
+        <div class="seller-tab">
+		   <div class="tab-content" >
+				<div class="nItem" id="order-contentDiv">
+					#parse("/seller/order/ordbackgdslist/order-detail-todo.vm")
+		        </div>
+		    </div>
+		</div>
+		<form action="" accept-charset="" id="backreviewForm" method="" onsubmit=""> </form>
+		<input type = "hidden" id="site1" value="#siteInfo('1')"/>
+		<input type = "hidden" id="site2" value="#siteInfo('2')"/>
+    </div>
+</div>
+
+

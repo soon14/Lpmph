@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>ecp-pmph</artifactId>
+        <groupId>com.ai.ecp.pmph</groupId>
+        <version>1.30-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <groupId>com.ai.ecp.pmph</groupId>
+    <artifactId>pmph-aip-services-client</artifactId>
+    <version>1.30-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-services-aip-client</artifactId>
+            <version>${ecp-busi-core.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>pmph-aip-services-client</finalName>
+
+        <sourceDirectory>../src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>../src/main/resources</directory>
+                <includes>
+                    <include>dubbo/client/ecp-*.xml</include>
+                    <include>message/**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <excludes>
+                        <exclude>com/ai/ecp/**/dubbo/impl/**</exclude>
+                        <exclude>com/ai/ecp/**/dubbo/impl/**/*.txt</exclude>
+                        <exclude>**/*.txt</exclude>
+                    </excludes>
+                    <includes>
+                        <include>com/ai/ecp/**/dubbo/**</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <useUniqueVersions>false</useUniqueVersions>
+                        </manifest>
+                    </archive>
+                    <excludes>
+                        <exclude>com/ai/ecp/**/dubbo/impl/**</exclude>
+                    </excludes>
+                    <includes>
+                        <include>com/ai/ecp/**/dubbo/**</include>
+                        <include>dubbo/client/ecp-services-client-*.xml</include>
+                        <include>message/**/*.properties</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,68 @@
+#parse("/module/mod-scroll.vm")
+<div class="body">
+ <!--期刊-->
+    <div class="wrap100">
+        <div class="container">
+            <div class="new-box-border mt20">
+                <h2 class="qk-tit pl20"><i class="qk-icon qk-icon-tit"></i>期刊
+                    <span>Journal </span>
+                </h2>
+
+                <ul class="row-fluid journal-list ecp-component zw-qk-list" data-status="1" data-place-size="16" data-place-id="29" data-place-width="240" data-place-height="240" data-module="ecp-component/rwzw/zw-qk-list">
+                    <!--<li class=""><a href="http://csyjz.pmph.com/" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro04.jpg" alt="创伤与急诊电子杂志"/>
+                        <p class="journal-font">创伤与急诊电子杂志</p></a>
+					</li>
+                    <li class=""><a href="http://lcpwk.pmph.com/" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro05.jpg" alt="临床普外科电子杂志"/>
+                        <p class="journal-font">临床普外科电子杂志</p></a>
+					</li>
+                    <li class=""><a href="http://syqgyz.pmph.com/" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro06.jpg" alt="实用器官移植电子杂志"/>
+                        <p class="journal-font">实用器官移植电子杂志</p></a>
+					</li>
+                    <li class=""><a href="http://sgwk.pmph.com/" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro07.jpg" alt="食管外科电子杂志"/>
+                        <p class="journal-font">食管外科电子杂志</p></a>
+					</li>					
+                    <li class=""><a href="http://fyyx.pmph.com/" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro08.jpg" alt="发育医学电子杂志"/>
+                        <p class="journal-font">发育医学电子杂志</p></a>
+					</li>
+                    <li class=""><a href="http://mnwk.pmph.com/" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro09.jpg" alt="泌尿外科杂志（电子版）"/>
+                        <p class="journal-font">泌尿外科杂志（电子版）</p></a>
+					</li>					
+                    <li class=""><a href="http://zggzbzz.j-ditan.com/" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro10.jpg" alt="中国肝脏病杂志"/>
+                        <p class="journal-font">中国肝脏病杂志</p></a>
+					</li>					
+                    <li class=""><a href="http://www.yixueqianyan.cn/" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro11.jpg" alt="中国医学前沿杂志"/>
+                        <p class="journal-font">中国医学前沿杂志</p></a>
+					</li>					
+                    <li class=""><a href="http://chinjpd.yywkt.cn/" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro12.jpg" alt="中国产前诊断杂志"/>
+                        <p class="journal-font">中国产前诊断杂志</p></a>
+					</li>	
+                    <li class=""><a href="http://www.jvscn.com/" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro13.jpg" alt="中国血管外科杂志"/>
+                        <p class="journal-font">中国血管外科杂志</p></a>
+					</li>	
+                    <li class=""><a href="http://www.jdocn.com/" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro14.jpg" alt="消化肿瘤杂志（电子版）"/>
+                        <p class="journal-font">消化肿瘤杂志（电子版）</p></a>
+					</li>	
+					
+					
+                    <li class=""><a href="" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro19.jpg" alt="消化肿瘤杂志（电子版）"/>
+                        <p class="journal-font">肝癌电子杂志</p></a>
+					</li>	
+                    <li class=""><a href="" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro20.jpg" alt="消化肿瘤杂志（电子版）"/>
+                        <p class="journal-font">肿瘤代谢杂志</p></a>
+					</li>	
+                    <li class=""><a href="" target="_blank"><img src="$IMAGE_PATH/pro/qk-pro21.jpg" alt="消化肿瘤杂志（电子版）"/>
+                        <p class="journal-font">足踝外科电子杂志</p></a>
+					</li>-->						
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.ql-banner').scrollLoading({
+        callback: function (obj) {
+            $(obj).animate({'opacity': 1}, 1000);
+        }
+    });
+	$('#zwlogo').attr('src',$webroot+'images/logo-qk.png');
+</script>

@@ -1,0 +1,82 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+<link href="$!{RESOURCE_PATH}/bootstrap/extend/css/bootstrap_page.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/staff/custservice/custservice-grid.js?version=$!{JS_VERSION}" ></script>
+<div class="seller-well">
+    <form id="searchForm" class="form-horizontal" style="margin-bottom: 0px;">
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">客服姓名：</label>
+                    <div class="controls">
+                        <input type="text" name="hotlinePerson" class="input-block-level" value="" /> 
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">所属店铺：</label>
+                    <div class="controls">
+                        <select id="shopId" name="shopId" class="input-block-level">
+    						#sellerList()
+    					</select>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">客服类型：</label>
+                    <div class="controls">
+                        <select name="moduleType" class="input-block-level">
+                            <option value="">--请选择--</option>
+                            <option value="0">综合客服</option>
+                            <option value="1">绩效客服</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">状态：</label>
+                    <div class="controls">
+                        <select name="status" class="input-block-level">
+                            <option value="">--请选择--</option>
+                            <option value="1">有效</option>
+                            <option value="0">无效</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </form>
+</div>
+<div class="sbtn-group" style="margin-bottom: 10px;">
+    <div class="span8">
+		<span class="sbtn sbtn-blue" id="btn_code_add"><i class="icon-plus"></i> 新增</span>
+		<span class="sbtn " id="btn_code_edit"><i class="icon-edit"></i> 编辑</span>
+		<span class="sbtn " id="btn_code_valid"><i class="icon-ok-sign"></i> 生效</span>
+		<span class="sbtn sbtn-danger" id="btn_code_invalid"><i class="icon-remove-sign icon-white"></i> 失效</span>
+    </div>
+	<div class="btn-wrap btn-w-right">
+    	<span class="sbtn sbtn-blue" id="btnFormSearch"><i class="icon-search"></i> 查询</span>
+        <span class="sbtn" id="btnFormReset"><i class="icon-asterisk icon-color"></i> 重置</span>
+    </div>
+</div>
+<div class="main-inner">
+	<div id='stockListDiv'>
+     	#parse("/seller/staff/custservice/list/custservice-list.vm")
+	</div>
+</div>
+
+<form id="editForm" action="${CONTEXT_PATH}/seller/custservice/edit" method="POST">
+    <input type="hidden" name="id" id="id" />
+</form>
+		
+		
+		
+		
+		

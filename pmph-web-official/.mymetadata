@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="pmph-web-official"
+  id="myeclipse.1537250997215"
+  context-root="/pmph-web-official"
+  j2ee-spec="1.7"
+  archive="pmph-web-official.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

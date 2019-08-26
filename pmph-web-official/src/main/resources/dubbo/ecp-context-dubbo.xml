@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+     ">  
+     <!--
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:dubbo/ecp-dubbo.properties</value>
+			</list>
+		</property>
+	</bean>
+    -->
+    <dubbo:application name="${default.dubbo.appname}"/>
+    <!-- 使用zookeeper注册中心暴露服务地址 -->  
+    <dubbo:registry id="ecpRegistry" address="${default.dubbo.registry.address}" protocol="${default.dubbo.registry.protocol}"  file="${default.dubbo.registry.file}" />
+    
+    <import resource="classpath*:/dubbo/client/ecp-services-client-*.xml"/>
+</beans>  

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	 xmlns:tx="http://www.springframework.org/schema/tx"
+	 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.1.xsd" 
+	default-autowire="byName" >
+
+	<context:component-scan base-package="com.ai.ecp.**.dubbo" use-default-filters="false">  
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+
+    <bean id="cc" class="com.ai.paas.ConfigurationCenter" init-method="init">
+        <constructor-arg value="10.8.0.213:22181"/>
+        <!--第二个参数 D 或者 P；D表示开发模式；P表示生产环境-->
+        <constructor-arg value="P"/>
+        <property name="auth" value="8a78075ed3a684eca481221b2e5a1e4ea88587df2a24f820"/>
+    </bean>
+	<!-- 配置文件加載，@Config結合使用或者注入bean時使用${} -->
+	<bean class="com.ailk.butterfly.core.web.spring.ExtendedPropertyPlaceholderConfigurer" id="propertyConfigurer" init-method="init">
+		<property name="confCenter" ref="cc"></property>
+		<property name="loadListeners">
+			<list>
+				<bean class="com.ailk.butterfly.core.config.XMLLoaderListener" p:resource="classpath:application.xml"></bean>
+			</list>
+		</property>
+		
+		<property name="locations">
+			<list>
+				<!--<value>classpath*:mapp.properties</value>-->
+				<value>classpath:dubbo/ecp-dubbo.properties</value>
+				<value>classpath:wx.properties</value>
+			</list>
+		</property>
+		
+	</bean>
+         
+     <!-- 异常信息处理页面 
+     <bean class="com.ailk.woego.exception.WoegoHandlerExceptionResolver">
+     		<property name= "contentNegotiationManager" ref= "contentNegotiationManager"/>  
+     </bean>-->
+ 	
+     <bean class="com.ailk.butterfly.core.web.cookie.CookiesConfig">
+		<property name="configs">
+			<map>
+		    	<entry key="__login_info__">
+		     		<bean class="com.ailk.butterfly.core.web.cookie.CookieModel">
+		     			<property name="cookieName" value="__sid__" />
+		     			<property name="domain" value=".fly.com" />
+		     			<property name="path" value="/" />
+		     			<property name="age" value="-1" />
+		     			<property name="encrypt" value="true" />
+		     			<property name="encryptKey" value="ZhS38VT9$9mQ%TeIWF@iYtu8NKcIarBI" />
+		     			<property name="expireTime" value="__a__" />
+		     		</bean>
+		    	</entry>
+		   </map>
+		</property>
+	</bean>
+	<!-- 
+	<bean class="com.ai.ecp.base.util.ApplicationContextUtil"></bean>
+	 -->
+    <!-- 引入app端模板 
+	<context:component-scan base-package="com.ailk.woego.app.action">
+       <context:include-filter type="regex" expression=".*Action" />
+    </context:component-scan>-->
+	<import resource="classpath*:com/ailk/butterfly/mapp/applicationContext-butterfly.xml"/>
+	
+	<!--引入dubbo的说明-->
+	<import resource="classpath:dubbo/ecp-context-dubbo.xml"/>
+	<import resource="classpath:applicationContext-security.xml"/>
+	<import resource="classpath:applicationContext-wx.xml"/>
+</beans>

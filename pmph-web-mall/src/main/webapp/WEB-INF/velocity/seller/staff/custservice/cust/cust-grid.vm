@@ -1,0 +1,52 @@
+#parse("/sys/sys_param.vm")
+#parse("/sys/sys_open_head.vm")
+<link href="$!{CSS_PATH}/seller-reset.css" type="text/css" rel="stylesheet">
+<link href="$!{CSS_PATH}/seller.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/staff/custservice/cust/cust-grid.js?version=$!{JS_VERSION}" ></script>
+
+        <div class="seller-mainR">
+            <div class="main">
+                <div class="seller-well">
+                    <form class="form-horizontal required-validate" id="searchForm" >
+                        <div class="row-fluid">
+	                              <div class="span6">
+	                                <div class="control-group">
+	                                    <label class="control-label">账号：</label>
+	                                    <div class="controls">
+	                                        <input type="text" style="width:160px" name="staffCode" id="staffCode" class="input-medium" placeholder=""/>
+											<input type="hidden" name="code" id="code" value="$!{staffCode}"/>
+	                                    </div>
+	                                </div>
+	                            </div>
+                				<div class="span4">
+                					<div class="control-group">
+                						<label class="control-label">店铺：</label>
+                						<div class="controls">
+                							<select name="shopId" id="shopId" class="input-medium" >
+                									#sellerList()
+                							</select>
+                						</div>
+                					</div>
+                				</div>
+                        </div>
+                    </form>
+                </div>
+              
+                
+                
+	                <div class="main-inner">
+	                    <div class="sbtn-group">
+		                    <!--添加图标-->
+								<span class="sbtn sbtn-blue" id="btnFormCheck"><i class="icon-plus"></i> 确定</span>
+						   <div class=" btn-w-right">
+                                <span class="sbtn sbtn-blue"  id="btnFormSearch"><i class="icon-search"></i> 查询</span>
+                                <span class="sbtn" id="btnFormReset"><i class="icon-asterisk icon-color"></i> 重置</span>
+                            </div>
+						</div>
+						
+	               		<div style="overflow-x:auto;" id="stockListDiv">
+		                    	#parse("/seller/staff/custservice/cust/list/cust-list.vm")
+		                 </div>
+	                </div>
+			   </div>
+          </div>

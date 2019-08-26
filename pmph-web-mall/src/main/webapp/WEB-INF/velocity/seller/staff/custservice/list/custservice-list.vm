@@ -1,0 +1,55 @@
+#parse("sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+ <link href="$!{CSS_PATH}/seller-reset.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="$BUSIJS_PATH/seller/staff/custservice/custservice-third-list.js?version=$!{JS_VERSION}"></script>
+       <table class="seller-table" style="margin-top: 15px">
+         <thead>
+           <tr>
+               <td>选择</td>
+               <td>会员名</td>
+               <td>所属店铺</td>
+               <td>客户类型</td>
+               <td>客服姓名</td>
+               <td>客服电话</td>
+               <td>订单修改</td>
+               <td>上线接待人数</td>
+               <td>状态</td>
+               <td>生成时间</td>
+           </tr>
+         </thead>
+        <tbody>
+			
+    		#if($!{resp.getList().size()} <= 0)
+                    		<tr><td colspan='12'>没有符合条件的记录。</td></tr>
+    		#else
+				#foreach($!ordItem in $!resp.list)
+        		   <tr>
+					   <input type="hidden" id="ids" value="$!{ordItem.shopId}"/>
+                       <td ><input type="radio" name="shopName"  value="$!{ordItem.id}" status="$!{ordItem.status}"/></td>
+                       <td>$!{ordItem.staffCode}</td>
+                       <td>$!{ordItem.shopName}</td>
+                       <td>$!{ordItem.moduleType}</td>
+                       <td>$!{ordItem.hotlinePerson}</td>
+                       <td>$!{ordItem.hotlinePhone}</td>
+					    #if($!{ordItem.orderEdit}=='1')
+                        <td>开</td>
+						#else
+                        <td>关</td>	
+						#end
+                       <td>$!{ordItem.receptionCount}</td>
+					   #if($!{ordItem.status}=='0')
+                       <td>失效</td>
+					   #else
+                       <td>正常</td>
+					   #end
+					   <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{ordItem.createTime})</td>
+    			   </tr>
+			   #end
+    		#end
+         </tbody>
+       </table>
+    <div class="fav-opt clearfix" >
+                        <div class="row-fluid">
+                			<div id="pageControlbar" class="ecppage" data-total-page="$!{resp.totalPage}" data-total-row="$!{resp.totalRow}" data-page-size="$!{resp.pageSize}" data-page-number="$!{resp.pageNumber}" data-status="begin"></div>
+                		</div>
+                    </div>

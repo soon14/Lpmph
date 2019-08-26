@@ -1,0 +1,17 @@
+@CHARSET "UTF-8";
+
+.qtip {
+	font-size: 12px;
+	line-height: 16px;
+}
+
+.qtip-red {
+	color: white;
+}
+
+.qtip-bootstrap-error{
+	background-color: #F2DEDE;
+	color: #B94A48;
+	border: 1px solid #EED3D7;
+	filter:alpha(Opacity=90);-moz-opacity:0.9;opacity: 0.9;
+}

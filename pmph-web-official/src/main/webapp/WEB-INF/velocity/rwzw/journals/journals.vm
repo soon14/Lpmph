@@ -1,0 +1,99 @@
+#parse("/module/mod-scroll.vm")
+#parse("/sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/rwzw/journals.js"></script>
+<div class="body">
+    <!--期刊banner begin-->
+    <div class="ecp-component zw-journals-slider" data-status="1" data-homepage-is-show="1" data-place-size="1" data-place-id="31" data-place-width="1920" data-place-height="336" data-menu-type="2" data-module="ecp-component/rwzw/zw-journals-slider">
+	
+	
+	</div>
+    <!--期刊banner end-->
+
+    <!--期刊new-->
+    <div class="wrap100 ">
+        <div class="container">
+			<div class="new-box-r">
+                    <div class="new-box-con new-box-border">
+                        <h2 class="qk-tit pl10"><i class="qk-icon qk-icon-tit"></i>关于期刊
+                            <span>About </span>
+                        </h2>
+
+                        <div class="qk-con">
+                            <p>主管：中华人民共和国卫生部</p>
+
+                            <p>主办：人民卫生出版社</p>
+
+                            <p>传真：010-59787211</p>
+                        </div>
+                    </div>
+                    <div class="new-box-con01 new-box-border mt20">
+                        <h2 class="qk-tit pl10"><i class="qk-icon qk-icon-tit"></i>广告征集
+                            <span>Advertisement </span>
+                        </h2>
+
+                        <div class="qk-con">
+                            <p>北京保康广告公司</p>
+
+                            <p>电话：010-59787247</p>
+
+                            <p>邮件：putiming1967@163.com</p>
+
+                            <div class="pull-right mr10"><a href="javascript:void(0);" id="advertiser">详细信息 &gt;</a></div>
+                        </div>
+                    </div>
+                </div>
+            <div class="new-box font14">
+                
+                <div class="new-box-l new-box-border">
+                    <h2 class="qk-tit pr20 pl20"><i class="qk-icon qk-icon-tit"></i>期刊新闻
+                        <span>News</span>
+                        <span class="c-blue" style="float: right"><a href="javascript:void(0);" id="more">more</a> </span></h2>
+                    <div class="pad-box ecp-component article-list-shader" data-status="1" data-homepage-is-show="1" data-place-size="5" data-place-id="26" data-place-width="240" data-place-height="176" data-menu-type="2" data-module="ecp-component/rwzw/article-list-shader">
+                       
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--期刊-->
+    <div class="wrap100">
+        <div class="container">
+            <div class="new-box-border mt20">
+                <h2 class="qk-tit pl20"><i class="qk-icon qk-icon-tit"></i>期刊
+                    <span>Journal </span>
+                </h2>
+
+                <ul class="row-fluid journal-list ecp-component zw-qk-list" data-status="1" data-place-size="4" data-place-id="27" data-place-width="240" data-place-height="240" data-module="ecp-component/rwzw/zw-qk-list">
+					  <!-- <li class=""><a href="http://zgyk.pmph.com/"><img src="$IMAGE_PATH/pro/qk-pro01.jpg" alt="中国医刊"/>
+
+                        <p class="journal-font">中国医刊</p></a></li>
+                    <li class=""><a href="http://zglcyszz.pmph.com/"><img src="$IMAGE_PATH/pro/qk-pro16.jpg" alt="中国临床医生杂志"/>
+
+                        <p class="journal-font">中国临床医生杂志</p></a></li>
+                    <li class=""><a href="http://shyjk.pmph.com/"><img src="$IMAGE_PATH/pro/qk-pro17.jpg" alt="生活与健康"/>
+
+                        <p class="journal-font">生活与健康</p>
+                    </a></li>
+                  <li class=""><a href="$CONTEXT_PATH/journals-electronic"><img src="$IMAGE_PATH/pro/qk-pro18.jpg" alt="电子期刊"/>
+
+                        <p class="journal-font">电子期刊</p></a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+	    <form id="moreForm" action="${CONTEXT_PATH}/journalslist" method="POST">
+			<input type="hidden"  name="pageNumber" id="pageNumber" value="1"/>
+			<input type="hidden"  name="pageSize" id="pageSize" value="6"/>
+			<input type="hidden"  name="placeId" id="placeId" value="26"/>
+        </form>
+		
+		  <form id="advertiserForm" action="${CONTEXT_PATH}/adlist" method="POST">
+			<input type="hidden"  name="pageNumber" id="pageNumber" value="1"/>
+			<input type="hidden"  name="pageSize" id="pageSize" value="6"/>
+			<input type="hidden"  name="placeId" id="placeId" value="28"/>
+        </form>
+</div>
+	<script>
+		$('#zwlogo').attr('src',$webroot+'images/logo-qk.png');
+</script>

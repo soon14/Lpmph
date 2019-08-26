@@ -1,0 +1,51 @@
+#parse("/module/mod-form.vm")
+
+<script type="text/javascript" src="$!{BUSIJS_PATH}/common/login/main-login.js"></script>
+<style type="text/css">
+	html,body {
+      background-color: #fff;
+    }
+</style>
+<header class="am-header am-header-fixed">
+    <div class="am-header-title">
+		登录
+    </div>
+</header>
+<div class="ui-content">
+	<input type="hidden" name="Referer" id="Referer" value="$!{Referer}"/>
+    <div class="lg-logo">
+        <img src="$!IMAGE_PATH/logo-login.png" alt="" />
+    </div>
+    <div class="lg-con">
+        <form class="am-form lg-form" id="loginform">
+            <div class="login-box">
+    			<div class="am-form-group am-form-icon lg-bb">
+                    <i class="icon icon-user-lg"></i>
+                    <input type="text" class="am-form-field" name="j_username" placeholder="用户名">
+                </div>
+                <div class="am-form-group am-form-icon lg-bb">
+                    <i class="icon icon-psw-lg"></i>
+                    <input type="password" class="am-form-field" name="j_password" placeholder="密码">
+                </div>
+            </div>
+            <div class="am-checkbox">
+                <label>
+                   <a href="$CONTEXT_PATH/forget/index" style="color: #ff6b01;">忘记密码？</a>
+                </label>
+            </div>
+			<input type="hidden" name="openId" value='$!{openId}' placeholder="微信的openId"/>
+            <div class="vt-btn"><a href="javascript:void(0);" id="loginsubmit" class="wbtn">确认登录</a></div>
+        </form>
+    </div>
+	
+	<div class="lg-share">
+        <ul class="clearfix">
+            <!-- <li><img src="$!IMAGE_PATH/login-reg01.png" alt=""/></li> -->
+            <li id='weibologin'><img src="$!IMAGE_PATH/login-reg02.png" alt=""/></li>
+            <li id='qqlogin'><img src="$!{IMAGE_PATH}/login-reg04.png" alt=""/></li>
+           
+        </ul>
+    </div>
+	
+    <a href="$CONTEXT_PATH/register" class="lg-href">没有账号？快来注册</a>
+</div>

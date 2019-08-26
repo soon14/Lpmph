@@ -1,0 +1,97 @@
+ <!--规格属性 begin-->
+<div id="gds-attr" class="fd-block" #if($!{rspDto.params.size()}>0)#else style="display:none"#end>
+    <div class="well-tit">
+    	<span>参数属性</span>
+    </div>
+    <div class="well well-searchForm">
+        <div class="groups clearfix">
+    		#foreach($params in $!{rspDto.params})
+    			#set($style="display:block")
+				#if($!{params.id} =='4000' || $!{params.id} =='4001')
+					#set($style="display:none")
+				#end
+    		#set($mod = $velocityCount % 2)
+    		#if(1 == $mod)
+    			<div class="row-fluid">
+    		#end
+    		<div class="span6" style="$style">
+				 <div class="control-group">
+        		 <label class="control-label" id="$!{params.id}">#if($!{params.ifHaveto} =='1' && $!{params.propValueType}==$!{PROP_VALUE_TYPE_3})<span style="color:red">*</span>#end$!{params.propName}：</label>
+                    <div class="controls">
+                        #if($!{params.propValueType}==$!{PROP_VALUE_TYPE_1})
+        					#if($!{params.propInputType}=='1')
+        						##文本（数字或者字符）
+        						<input type="text" name="autoParamInput1$velocityCount" ifBasic="$!{params.ifBasic}" ifmulti="input" valueId="" propType="$!{params.propType}" class="input-large #if($!{params.ifHaveto} =='1')required #end #if($!{params.id}==1029)priceNumber priceLength#end autoParam" propId="$!{params.id}" propName="$!{params.propName}" #if($!{params.id}==1029) id="paperChange$!{params.id}"#end/>
+        					#elseif($!{params.propInputType}=='2')
+        						##日期
+        						<input style="width:211px;" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="autoParamInput1$velocityCount" ifBasic="$!{params.ifBasic}" ifmulti="input" valueId="" propType="$!{params.propType}" class="input-large #if($!{params.ifHaveto} =='1')required #end Wdate autoParam" propId="$!{params.id}" propName="$!{params.propName}" value=""/>
+        					#else
+        						<input type="text" name="autoParamInput1$velocityCount" ifBasic="$!{params.ifBasic}" ifmulti="input" valueId="" propType="$!{params.propType}" class="input-large #if($!{params.ifHaveto} =='1')required #end autoParam" propId="$!{params.id}" propName="$!{params.propName}"/>
+        					#end
+        				 #elseif($!{params.propValueType}==$!{PROP_VALUE_TYPE_2})
+        					<select name="a1$velocityCount" ifmulti="single" ifBasic="$!{params.ifBasic}" propType="$!{params.propType}" class="#if($!{params.ifHaveto} =='1')required#end autoParam" id="$!{params.id}" propId="$!{params.id}" propName="$!{params.propName}" #if($!{params.id}==1028)onchange="paperChange(this,'attr')"#end>
+        						<option value="">--请选择--</option>
+                                #foreach($list in $!{params.values})
+        							#if($!{list.id})
+        							<option value="$!{list.id}">$!{list.propValue}</option>
+        							#end
+        						#end
+                            </select>
+        				 #elseif($!{params.propValueType}==$!{PROP_VALUE_TYPE_3})
+        					  <div id="mutisel" class="mutiselect">
+        						 <input type="text" name="mutil1$velocityCount" ifBasic="$!{params.ifBasic}" ifHavaeto="$!{params.ifHaveto}" ifmulti="multi" propType="$!{params.propType}" valueId='' propId="$!{params.id}" propName="$!{params.propName}" class="input-large head #if($!{params.ifHaveto} =='1')required #end autoParam" />
+                                <div class="selarrow">
+                                    <i class="sel-drop icon-chevron-down"></i>
+                                </div>
+                                <ul class="body" name="mutisel">
+        							#foreach($list in $!{params.values})
+                                      <li class="item">
+                                          <label>
+                                              <span>
+        											$!{list.propValue}
+                                              </span>
+                                              <input class="selcheckbox" id="$!{list.id}" value="$!{list.propValue}" name="type" type="checkbox"/>
+                                          </label>
+                                      </li> 
+        							#end
+                                </ul>
+                            </div>
+        				 #end
+                    </div>
+        		 </div>
+    		</div>
+    		 #if(0 == $mod || ($velocityCount == $!{rspDto.params.size()} && 1 == $mod))
+    			</div>
+    		#end
+    		#end
+    	</div>
+    </div>
+</div>
+<!--规格属性 end-->
+<!--附件start-->
+ <div id="gds-attr" class="fd-block" #if($!{rspDto.fileParam.size()}>0)#else style="display:none"#end>
+<div class="well-tit">
+	<span>附件</span>
+</div>
+<div class="well well-searchForm">
+    <div class="groups clearfix">
+		#foreach($params in $!{rspDto.fileParam})
+		<div class="row-fluid">
+		 <div class="control-group">
+		 <label class="control-label" id="$!{params.id}">$!{params.propName}：</label>
+            <div class="controls">
+				##文件
+				<input type="text" id="file$!{params.id}" style="width:211px;" class="input-large #if($!{params.ifHaveto} =='1')required #end autoParamFile" value="" name="autoParamFile$velocityCount" ifBasic="$!{params.ifBasic}" ifmulti="input" valueId="" propType="$!{params.propType}" propId="$!{params.id}" propName="$!{params.propName}"/>
+				<a href="javascript:;" class="btn file-wrap">上传文件
+					<input class="upFileTyle" type="file" name="uploadFileObj" id="uploadFileObj" ifBasic="$!{params.ifBasic}" ifmulti="input" valueId="" propType="$!{params.propType}" propId="$!{params.id}" propName="$!{params.propName}" value=""/>
+                </a>
+				<button type="button" onclick="cancelFile(this)" style="display:none;">取消</button>
+            </div>
+		 </div>
+		</div>
+		#end
+	</div>
+</div>
+ </div>
+
+<!--附件end-->

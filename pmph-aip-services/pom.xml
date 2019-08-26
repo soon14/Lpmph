@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>ecp-pmph</artifactId>
+        <groupId>com.ai.ecp.pmph</groupId>
+        <version>1.30-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ai.ecp.pmph</groupId>
+    <artifactId>pmph-aip-services-server</artifactId>
+    <version>1.30-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <ecp-aip-data.version>1.1.15-RELEASE</ecp-aip-data.version>
+    </properties>
+
+    <dependencies>
+
+        <!--依赖 核心版本的aip后场服务包 -->
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-services-aip-server</artifactId>
+             <version>${ecp-busi-core.version}</version>
+            <!--<version>1.1.19-SNAPSHOT</version>-->
+        </dependency>
+		<dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-services-aip-third-server</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ai.ecp.aip</groupId>
+            <artifactId>ecp-aip-data</artifactId>
+            <version>${ecp-aip-data.version}</version>
+        </dependency>
+        <!--httpclient-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.3</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>pmph-aip-services-server</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- 打成jar包 -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <useUniqueVersions>true</useUniqueVersions>
+                        </manifest>
+                        <manifestEntries>
+                            <Class-Path>etc/</Class-Path>
+                        </manifestEntries>
+                    </archive>
+                    <includes>
+                        <include>**/*.class</include>
+                        <include>dubbo/server/*.xml</include>
+                        <include>message/**/*.properties</include>
+                        <include>spring/**/*.xml</include>
+                        <include>sqlMapper/**/*.xml</include>
+                        <include>ecp-*.xml</include>
+                        <include>ConfigSource.properties</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+
+</project>

@@ -1,0 +1,26 @@
+	#parse("/sys/sys_param.vm")
+	<meta http-equiv="keywords" content="人卫商城,人卫智慧服务商城,人卫智城,人卫智慧商城"/>
+    <meta http-equiv="description" content="人卫智慧服务商城-专业的医学图书商城，万余种人卫图书等您来买~促销、满减、积分换礼......活动多多~出版社直接发货，正版保证，安全无忧"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<!--<meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible" />-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-store"/>
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
+	
+    <link href="$!{IMAGE_PATH}/favicon.ico" mce_href="$!{IMAGE_PATH}/favicon.ico" rel="bookmark shortcut icon" type="image/x-icon" media="screen" />
+    <link rel="shortcut icon" href="$!{IMAGE_PATH}/favicon.ico">
+    
+	<meta id="global" contextpath="$!{CONTEXT_PATH}" version="$!{JS_VERSION}"></meta>
+	<meta id="mallSiteUrl" contextpath="$!{MALL_SITE_URL}" version="$!{JS_VERSION}"></meta>
+	#parse("/sys/sys_js_header_open.vm")
+	<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery.metadata.js"></script>
+    <script language="javascript">
+	    $.metadata.setType("attr", "validate");
+	    GLOBAL = {
+	        WEBROOT:$("#global").attr("contextpath"),
+		    VERSION:$("#global").attr("version"),
+			MALLSITEURL:$("#mallSiteUrl").attr("contextpath")
+	    };
+    </script>
+	

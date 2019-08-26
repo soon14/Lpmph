@@ -1,0 +1,76 @@
+#parse("sys/sys_param.vm")
+<link href="$CSS_PATH/seller-reset.css" type="text/css" rel="stylesheet">
+<link href="$CSS_PATH/seller.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/seller-detail-list.js?version=$!{JS_VERSION}"></script>
+    <div style="overflow-x: auto;">
+       <table class="seller-table table-striped">
+         <thead>
+           <tr>
+               <td>订单编号</td>
+               <td>商品名称</td>
+               <td>书号</td>
+               <td>一级分类</td>
+               <td>二级分类</td>
+               <td>三级分类</td>
+               <td>四级分类</td>
+               <td>购买单价</td>
+               <td>购买数量</td>
+               <td>购买总金额</td>
+               <td>支付方式</td>
+               <td>活动商品</td>
+               <td>购买日期</td>
+			   <td>会员名</td>
+			   <td>联系人</td>
+			   <td>联系电话</td>
+			   <td  style="width: 125px">联系地址</td>
+           </tr>
+         </thead>
+        <tbody>
+			
+    		#if($null.isNull($resp) || $resp.count == 0)
+    	       <tr class="odd">
+                    <td class="kong" colspan="17">很遗憾，暂无数据</td>
+                </tr>
+    		#else
+				#foreach($!ordItem in $!resp.getResult())
+        		   <tr>
+                       <td><a href="javascript:void(0);" class="orderId">$!{ordItem.orderId}</a></td>
+					   <td class="td-hhtxt">
+    						<div style="width: 150px">
+    							$!{ordItem.gdsName}
+                            </div>
+					   </td>
+					   <td>$!{ordItem.zsCode}</td>
+					   <td>$!{ordItem.category01}</td>
+					   <td>$!{ordItem.category02}</td>
+					   <td>$!{ordItem.category03}</td>
+					   <td>$!{ordItem.category04}</td>
+					   <td>#moneyNum($!{ordItem.discountPrice})</td>
+					   <td>$!{ordItem.orderAmount}</td>
+					   <td>#moneyNum($!{ordItem.realMoney})</td>
+					   <td>#translate('ORD_PAY_TYPE',$!{ordItem.payType})</td>
+					   <td>
+							#if($null.isNull($ordItem.isProm))
+								否
+							#else
+								是
+							#end
+					   </td>
+					   <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{ordItem.orderTime})</td>
+					   <td>$!{ordItem.staffCode}</td>
+					   <td>$!{ordItem.contactName}</td>
+					   <td>$!{ordItem.contactPhone}</td>
+					   <td class="td-hhtxt">
+    						<div style="width: 250px">
+    							$!{ordItem.chnlAddress}
+                            </div>
+					   </td>
+    			   </tr>
+			   #end
+    		#end
+         </tbody>
+       </table>
+    </div>
+    <div class="pagination bPage pagination-right">
+        <div id="pageControlbar" class="ecppage" data-total-page="$!{resp.pageCount}" data-total-row="$!{resp.count}" data-page-size="$!{resp.pageSize}" data-page-number="$!{resp.pageNo}" data-status="begin"></div>
+    </div>

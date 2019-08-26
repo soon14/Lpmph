@@ -1,0 +1,125 @@
+#parse("/module/mod-grid.vm")
+#parse("/module/mod-form.vm")
+#parse("/order/pic/pic-cover.vm")
+<link rel="stylesheet" href="$!{CSS_PATH}/order/backreview.css" type="text/css">
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/order/ordback/backreview.js?version=$!{JS_VERSION}" ></script>
+<style type="text/css">
+.modal-dialog {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    position: relative;
+    width: auto;
+    z-index: 1050;
+}
+.order-return{
+	border:none; 
+}
+.ret-box-border{
+	border: 1px solid #e3e3e3;
+	margin: 10px 0;
+}
+.body-bgColor{
+    background-color: #ffffff;
+}
+</style>
+<!--订单-->
+<div class="order-return">
+    <div class="ret-box ret-box-border">
+        <div class="head">
+            <h3>订单信息</h3>
+        </div>		
+        <div class="body body-bgColor">
+			#set($ordurl = "/ord/orderdetails/")
+            <p>订单编号：<a href="${CONTEXT_PATH}$ordurl${compensateBackResp.SOrderDetailsMain.id}" target="_blank">$!{compensateBackResp.SOrderDetailsMain.id}</a></p>
+            <table class="table table-bordered ">
+                <thead>
+                <tr>
+					<th class="thclass" width='150px'>书号</th>
+                    <th class="thclass">商品名称</th>
+                    <th class="thclass" width='150px'>购买价格</th>
+                    <th class="thclass" width='150px'>购买数量</th>               
+					<th class="thclass" width='150px'>退款金额</th>
+                </tr>
+                </thead>
+                <tbody>
+					#foreach($!orderDetailsSub in $!compensateBackResp.orderDetailsSubs)
+					<tr>
+						<td><div class="border-right">$!orderDetailsSub.zsCode</div></td>
+						<td><div class="border-right"><a href="#siteInfo($!compensateBackResp.backApplyResp.siteId)$!{orderDetailsSub.gdsUrl}" target="_blank">$!{orderDetailsSub.gdsName}</a></div></td>										
+							<td><div class="border-right">#money($!orderDetailsSub.discountMoney)</div></td>
+    						<td><div class="border-right">$!orderDetailsSub.orderAmount</div></td>
+    						#if($!velocityCount == 1)
+    							<td rowspan="$!compensateBackResp.orderDetailsSubs.size()" style="vertical-align:middle" ><div class="border-right" style="text-align:center">#money($!compensateBackResp.backApplyResp.backMoney)</div></td>
+    						#end
+						
+                    </tr>
+					#end
+                </tbody>
+            </table>          
+        </div>  
+    </div>
+	#if($!compensateBackResp.backTrackResps || $null.isNull($!compensateBackResp.backTrackResps))
+		<div class="ret-box ret-box-border">
+			<div class="head">
+				<h3>操作信息</h3>
+			</div>
+			<div class="body body-bgColor">
+                <table class="table table-bordered ">
+                    <thead>
+                    <tr>
+                        <th class="thclass" width='150px'>操作节点</th>
+                        <th class="thclass" width='150px'>操作人</th>
+                        <th class="thclass" width='150px'>操作时间</th>
+                        <th class="thclass" width='150px'>操作意见</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+						#foreach($rBackTrackResp in $compensateBackResp.backTrackResps)
+                        <tr >
+                            <td><div class="border-right">$!{rBackTrackResp.nodeDesc}</div></td>
+                            <td><div class="border-right">$!{rBackTrackResp.staffName}</div></td>
+                            <td><div class="border-right">$!date.format('yyyy-MM-dd HH:mm:ss',$!{rBackTrackResp.createTime})</div></td>
+                            <td><div class="border-right">$!{rBackTrackResp.remark}</div></td>
+                        </tr>
+						#end
+                    </tbody>
+                </table>
+                </tbody>
+			</div>
+        </div>
+	#end
+</div>
+<div class="order-return" style="margin-top: 15px;">
+    <div class="ret-box ret-box-border">
+    <div class="body body-bgColor">
+    <form class="form-horizontal">
+        <div class="row-fluid">
+			<label class="control-label" for="inputWarning">退款方式：</label>			
+    			<label class="radio inline">
+    			<input type="radio" name="payway" id="online" value="1" checked="checked">
+    				线上退款
+    			</label>
+			<div class="clear"></div>
+		</div>
+        <div class="control-group">
+            <label class="control-label">审核意见：</label>
+            <div class="controls">
+                <textarea rows="3" class="c-area" name="checkDesc" id="checkDesc" maxlength="100"></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+				<a class="btn btn-info" id="allow"><i class=" icon-ok-sign icon-white"></i> 通过</a>
+				<a class="btn" id="unallow"><i class=" icon-remove-sign icon-white"></i> 不通过</a>
+				<a class="btn" id="return"><i class="icon-reply icon-white"></i> 返回</a>
+            </div>
+        </div>
+    </form></div></div>
+	<input type = "hidden" id="orderId" value="$!{compensateBackResp.SOrderDetailsMain.id}"/>
+	<input type = "hidden" id="backId" value="$!{compensateBackResp.backApplyResp.backId}"/>
+	<input type = "hidden" id="applyType" value="$!{compensateBackResp.backApplyResp.applyType}"/>
+    <input type = "hidden" id="status" value='$!{compensateBackResp.backApplyResp.status}'/>
+</div>
+
+

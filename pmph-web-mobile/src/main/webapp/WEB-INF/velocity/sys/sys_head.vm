@@ -1,0 +1,28 @@
+	#parse("/sys/sys_param.vm")
+	<title>#siteName('')</title>
+	<meta http-equiv="keywords" content="ASIA,ECP,人民卫生出版社"/>
+    <meta http-equiv="description" content="ASIA,ECP,人民卫生出版社"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<!--<meta content="IE=EmulateIE7" http-equiv="X-UA-Compatible" />-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> -->
+	
+    <link href="$!{IMAGE_PATH}/favicon.ico" mce_href="$!{IMAGE_PATH}/favicon.ico" rel="bookmark shortcut icon" type="image/x-icon" />
+    
+	<meta id="global" contextpath="$!{CONTEXT_PATH}" version="$!{JS_VERSION}"></meta>
+	#parse("/sys/sys_js_header.vm")
+	#parse("/sys/sys_ui_header.vm") 
+	<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery.metadata.js"></script>
+    <script language="javascript">
+	    $.metadata.setType("attr", "validate");
+	    GLOBAL = {
+	        WEBROOT:$("#global").attr("contextpath"),
+		    VERSION:$("#global").attr("version")
+	    };
+    </script>
+   

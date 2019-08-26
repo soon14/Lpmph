@@ -1,0 +1,38 @@
+<!-- 首页模型教具-->
+#parse("/rwgw/sys/sys_param.vm")
+<div class="box-head">
+    <span class="tit">$!{floorRespDTO.floorName}</span>
+    #if(${floorRespDTO} && ${floorRespDTO.linkUrl} && '' != ${floorRespDTO.linkUrl})
+    <a class="r-opt" href="$!{floorRespDTO.linkUrl}">
+        more
+    	<i class="micon micon-more"></i>
+    </a>
+    #end
+</div>
+<div class="box-body">
+	#if($floorAdRespList && 0 < ${floorAdRespList.size()})
+    <ul class="panel-realia-list">
+    	#foreach($floorAd in ${floorAdRespList})
+        <li #if(3 > ${velocityCount})class="topmag"#end>
+            <img src="$!{floorAd.vfsUrl}" alt="$!{floorAd.advertiseTitle}"/>
+            <div class="hBg-details" data-href = "$!{floorAd.linkUrl}">
+                <h3 class="dTit">$!{floorAd.advertiseTitle}</h3>
+                <span class="dBtn">查看详情 >></span>
+            </div>
+        </li>
+        #end
+    </ul>
+    #else
+    <div class ='pro-empty'>#if($!{errorMessage})$!{errorMessage}#else 亲，暂无数据 #end</div>
+	#end
+</div>
+<script type="text/javascript">
+	$(function(){
+		$(".hBg-details").unbind("click.ad").bind("click.ad",function(){
+			var adHref = $(this).data("href");
+			if(adHref){
+				window.location.href = adHref;
+			}
+		})
+	});
+</script>

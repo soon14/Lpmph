@@ -1,0 +1,118 @@
+#parse("sys/sys_param.vm")
+<title>退款退货记录查询 -人卫商城</title> 
+<script>
+	$(function() {
+		U.tab(".ret-pzn", ".r-item",{defItem: 1});
+		
+	});
+</script>
+<style type="text/css">
+/*退货退款*/
+.ret-pzn {
+	overflow: hidden;
+	text-align: center;
+}
+
+.ret-pzn li {
+	float: left;
+	padding: 0 20px;
+	height: 35px;
+	line-height: 35px;
+	cursor: pointer;
+}
+
+.ret-pzn li.active,.ret-pzn li:hover {
+	color: #fff;
+	background-color: #ff6a00;
+}
+
+.ret-pzn li:hover {
+	background-color: #FFA14B;
+}
+</style>
+
+
+<div id="main">
+	<div class="mbox order-list">
+		<div class="point-tab clearfix mt10">
+			<ul id="teamTab" class="ret-pzn">
+				<li id="01">退款查询</li>
+				<li id="02" class="active">退货查询</li>
+			</ul>
+		</div>
+		<div class="mbox-body r-item" style="padding-top: 10px;"> 
+			<table class="table table-c table-bordered">
+				<thead>
+					<tr>
+						<th>退货编号</th>
+						<th>订单号</th>
+						<th>交易金额</th>
+						<th>退款金额</th>
+						<th>申请时间</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					#foreach($!gdsItem in $!resp.getResult()) 
+						#if($!gdsItem.rBackApplyResp != "")
+    						#set($gdsSub = $!gdsItem.getrBackApplyResp())
+        					<tr class="order-sub-tb">
+								<input type="hidden" id="backId" name="backId" value="$!{gdsSub.backId}"/>
+								<input type="hidden" id="orderId" name="orderId" value="$!{gdsSub.orderId}"/>
+								<input type="hidden" id="siteId" name="siteId" value="$!{gdsSub.siteId}"/>
+        						<td>$!{gdsSub.backId}</td>
+        						<td>
+									#if($!{gdsSub.siteId} == 1)
+										<a href="$!{CONTEXT_PATH}/ord/detail/$!{gdsSub.orderId} " target="_blank">$!{gdsSub.orderId}</a>
+									#elseif($!{gdsSub.siteId} == 2)
+										<a href="$!{CONTEXT_PATH}/ord/point/detail/$!{gdsSub.orderId} " target="_blank">$!{gdsSub.orderId}</a>
+									#end
+								</td>
+								<td>
+									#if($!{gdsSub.siteId} == 2)
+										$!{gdsSub.orderScore}积分 +
+									#end
+									#money($!{gdsSub.realMoney})
+								</td>
+        						<td>
+									#if($!{gdsSub.siteId} == 2 && $!{gdsSub.status} != "00")
+    									#if($!{gdsSub.orderScore})
+    										$!{gdsSub.orderScore}积分
+    									#end
+    									#if($!{gdsSub.orderScore} && $!{gdsSub.backMoney} && $!{gdsSub.status} != "00")
+    										+
+    									#end
+									#end
+									#money($!{gdsSub.backMoney})
+								</td>
+        						<td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{gdsSub.applyTime})</td>
+        						<td>
+									#if($!{gdsSub.status} == "00" || $!{gdsSub.status} == "06" || $!{gdsSub.status} == "07")
+##										#translate("ORD_BACK_GDS_STATUS","00")
+										待审核
+									#else
+										#translate("ORD_BACK_GDS_STATUS",$!{gdsSub.status})
+									#end
+								</td>
+        						<td style="text-align:center">
+        							<a href="javascript:void(0)" class="_returnDetail">查看详情</a><br>
+									#if($!{gdsSub.status} == '01')
+										<a href="javascript:void(0)" class="_returnBack mbtn mbtn-red">确认发货</a> 
+    								#end 
+        						</td> 
+        					</tr> 
+						#end
+					 #end
+				</tbody>
+			</table>
+          
+		</div>
+		<div class="row-fluid">
+			<div id="pageControlbar" class="ecppage" data-total-page="${resp.pageCount}" data-total-row="${resp.count}" data-page-size="${resp.pageSize}" data-page-number="${resp.pageNo}" data-status="begin"></div>
+		</div>
+		<form id='listForm' target="_blank">		
+		</form>
+	</div>
+
+</div>

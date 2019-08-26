@@ -1,0 +1,66 @@
+#parse("sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/ordbackgdslist/order-detail-todo.js?version=$!{JS_VERSION}"></script>
+
+    <div style="overflow-x: auto;">
+       <table class="seller-table table-striped">
+         <thead>
+           <tr>
+               <td>订单编号</td>
+               <td>下单日期</td>
+               <td>支付时间</td>
+               <td>实付金额</td>
+               <td>订单状态</td>
+               <td>退款退货标识</td>
+               <td>手机号码</td>
+               <td>收货人姓名</td>
+               <td>支付方式</td>
+               <td>支付通道</td>
+               <td>会员名</td>
+               <td>商铺名称</td>
+           </tr>
+         </thead>
+        <tbody>
+			
+    		#if($null.isNull($resp) || $resp.count == 0)
+    	       <tr class="odd">
+                    <td class="kong" colspan="12">很遗憾，暂无数据</td>
+                </tr>
+    		#else
+				#foreach($!ordItem in $!resp.getResult())
+        		   <tr>
+					   <input type="hidden" name="siteId" value="$!{ordItem.siteId}">
+					   <input type="hidden" name="payType" value="$!{ordItem.payType}">
+					   <td><a href="javascript:void(0);" class="orderId">$!{ordItem.orderId}</a></td>
+					   <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{ordItem.orderDate})</td>
+					   <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{ordItem.payTime})</td>
+					   <td>#moneyNum($!{ordItem.realMoney})</td>
+					   <td>
+							#translate('ORD_ORDER_STATUS',$!{ordItem.status})
+					   </td>
+					   <td>
+					   		#if($!{ordItem.orderTwoStatus}=='0701')
+					   		退货流程中
+					   		#elseif($!{ordItem.orderTwoStatus}=='0801')
+					   		退款流程中
+					   		#else
+					   		#end
+					   </td>
+					   <td>$!{ordItem.contactPhone}</td>
+					   <td>$!{ordItem.contactName}</td>
+					   <td>
+						   #translate('ORD_PAY_TYPE',$!{ordItem.payType})
+					   </td>
+					   <td>
+					       #translate('ORD_PAY_WAY',$!{ordItem.payWay})
+					   </td>
+					   <td>$!{ordItem.staffName}</td>
+					   <td>$!{ordItem.shopName}</td>
+    			   </tr>
+			   #end
+    		#end
+         </tbody>
+       </table>
+    </div>
+    <div class="pagination bPage pagination-right">
+        <div id="pageControlbar" class="ecppage" data-total-page="$!{resp.pageCount}" data-total-row="$!{resp.count}" data-page-size="$!{resp.pageSize}" data-page-number="$!{resp.pageNo}" data-status="begin"></div>
+    </div>

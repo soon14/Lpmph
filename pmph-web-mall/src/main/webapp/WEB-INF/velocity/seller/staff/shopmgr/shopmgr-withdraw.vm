@@ -1,0 +1,178 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/javascript/holder/holder.js" ></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/extend/bus.selector.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/staff/shopmgr-withdraw.js?version=$!{JS_VERSION}" ></script>
+<style>
+	  .rulelist {
+			color: #999;
+	  }
+</style>
+<!--金额数字显示偏红色类名 span-money 偏绿色 类名 money-canuse  可根据金额类型选择类名-->
+
+<div class="seller-well">
+	<div class="wdr-container">
+		<!--多店铺-->
+	    <div id="multShop" class="seller-layout seller-body" style="display:none;margin-top:0;">
+	        <div class="seller-tit seller-font">我的店铺</div>
+	        <div class="shop-scroll">
+	            <ul class="seller-list clearfix" id="shopList">
+	                
+	            </ul>
+	            <div class="slide-page clearfix">
+	                <ul id="shopSlideList">
+	                    <li>
+	                        <a class="active" href="javascript:"></a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+	    <!--多店铺 end-->
+        <div class="wdr-info-wrap">
+            <div class="wdr-shop-name">
+                	店铺名称：<span class="shop-name-txt"></span>
+            </div>
+            <div class="wdr-shop-money">
+                <div>
+                    	账户可用余额：<span class="span-money" id="shop-acct-acctBalance" style="font-size:20px;">&yen;0.00</span>
+                </div>
+                <div>
+                   	 申请提现金额：<span class="span-money" id="shop-acct-application" style="font-size:20px;">&yen;0.00</span>
+                   	 <input type="hidden" id="shop-acct-app-input" value="0"/>
+                </div>
+            </div>
+        </div>
+        <div class="wdr-calendar">
+            <div class="wdr-tab-year">
+                <span class="wdr-year-prev" id="prev-year">&nbsp;</span>
+                <span class="wdr-year-current" id="current-year">$!{currentYear}</span>
+                <span class="wdr-year-next" id="next-year">&nbsp;</span>
+            </div>
+            <div class="wdr-month">
+                <!-- 可根据获取的数据动态添加 table 样式css 在reset.css中-->
+                <table  cellpadding="0" cellspacing="0" width="100%" id="shopAcctBillMonthTab">
+                    <tr>
+                        <td>
+                            <!--金额数据存放处-->
+                            <p class="wdr-month-num" id="month0" month="01">1月</p>
+                            <p class="wdr-month-showmoney"><span class="span-money"></span></p>
+                            <p class="wdr-month-state"></p>
+                            <!--每一个td中都有span 对号 状态 当未提现时 增加类名：wdr-money-state-ok-->
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden" value="0"></input>
+                        </td>
+                        <td>
+                            <p class="wdr-month-num" id="month1" month="02">2月</p>
+                            <p class="wdr-month-showmoney"><span class="span-money"></span></p>
+                            <p class="wdr-month-state"></p>
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden"></input>
+                        </td>
+                        <td>
+                            <!--标签里有&nbsp; 占位 去除标签原有的一些样式-->
+                            <p class="wdr-month-num" id="month2" month="03">3月</p>
+                            <p class="wdr-month-showmoney"><span class="span-money"></span></p>
+                            <p class="wdr-month-state"></p>
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden"></input>
+                        </td>
+                        <td id="aaa">
+                            <!--月份-->
+                            <p class="wdr-month-num" id="month3" month="04">4月</p>
+                            <!--当前金额-->
+                            <p class="wdr-month-showmoney">&nbsp;</p>
+                            <!--金额状态-->
+                            <p class="wdr-month-state"></p>
+                            <!--是否提现 未提现 加类名 wdr-money-state-ok-->
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden"></input>
+                        </td>
+                        <td>
+                            <p class="wdr-month-num" id="month4" month="05">5月</p>
+                            <p class="wdr-month-showmoney">&nbsp;</p>
+                            <p class="wdr-month-state"></p>
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden"></input>
+                        </td>
+                        <td>
+                            <p class="wdr-month-num" id="month5" month="06">6月</p>
+                            <p class="wdr-month-showmoney">&nbsp;</p>
+                            <p class="wdr-month-state">&nbsp;</p>
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p class="wdr-month-num" id="month6" month="07">7月</p>
+                            <p class="wdr-month-showmoney">&nbsp;</p>
+                            <p class="wdr-month-state">&nbsp;</p>
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden"></input>
+                        </td>
+                        <td>
+                            <p class="wdr-month-num" id="month7" month="08">8月</p>
+                            <p class="wdr-month-showmoney">&nbsp;</p>
+                            <p class="wdr-month-state"></p>
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden"></input>
+                        </td>
+                        <td>
+                            <p class="wdr-month-num" id="month8" month="09">9月</p>
+                            <p class="wdr-month-showmoney">&nbsp;</p>
+                            <p class="wdr-month-state">&nbsp;</p>
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden"></input>
+                        </td>
+                        <td>
+                            <p class="wdr-month-num" id="month9" month="10">10月</p>
+                            <p class="wdr-month-showmoney">&nbsp;</p>
+                            <p class="wdr-month-state">&nbsp;</p>
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden"></input>
+                        </td>
+                        <td>
+                            <p class="wdr-month-num" id="month10" month="11">11月</p>
+                            <p class="wdr-month-showmoney">&nbsp;</p>
+                            <p class="wdr-month-state">&nbsp;</p>
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden"></input>
+                        </td>
+                        <td>
+                            <p class="wdr-month-num" id="month11" month="12">12月</p>
+                            <p class="wdr-month-showmoney">&nbsp;</p>
+                            <p class="wdr-month-state">&nbsp;</p>
+                            <span class="wdr-money-state">&nbsp;</span>
+                            <input type="hidden"></input>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>
+        	<h3 style="font-size:15px">温馨提示:</h3>
+			<div style="font-size:12px">
+                <ul class="rulelist">
+					<li>
+						<p>1、选择的月份要连续；</p>
+					</li>
+					<li>
+						<p>2、不可跨年选取月份；</p>
+					</li>
+					<li>
+						<p>3、请优先选择最早可提现月份进行提现；</p>
+					</li>
+				</ul>
+            </div>
+        </div>
+    </div>
+    <div class="submitBtn">
+    	<span class="sbtn sbtn-blue current-btn" id="btnApply">提交申请</span>
+    </div>
+</div>
+<script>
+	$(document).ready(function(){ 
+		$(".wdr-year-current").html(new Date().getFullYear());
+	}); 
+</script>

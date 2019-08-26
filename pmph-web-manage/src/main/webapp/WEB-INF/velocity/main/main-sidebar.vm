@@ -1,0 +1,275 @@
+   #parse("/sys/sys_param.vm")
+
+
+
+
+    <!-- sidebar -->
+    <a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="隐藏侧边栏"><i class="icon-caret-left"></i>隐藏侧边栏</a>
+
+    <div class="sidebar">
+        <div class="sidetit"><i class="iicon iicon-def"></i>首页
+                            <span class="pull-right home-r">
+                                <i class="iicon iicon-minuscril"></i>
+                                <i class="iicon iicon-addcril"></i>
+                            </span>
+        </div>
+        <div class="antiScroll">
+            <div class="antiscroll-inner">
+                <div class="antiscroll-content">
+                    <div class="sidebar_inner">
+
+
+                        <div id="side_accordion" class="accordion">
+                            <!-- 遍历第一层菜单 -->
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse1" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind01"></i> 目录 <i
+                                            class="pull-right icon-angle-down icon-large"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse1">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse2" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind02"></i> 客户管理 <i
+                                            class="pull-right icon-angle-down arrow-font"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse2">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse3" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind03"></i> 订单管理 <i
+                                            class="pull-right icon-angle-down arrow-font"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse3">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse4" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind04"></i> 商品管理 <i
+                                            class="pull-right icon-angle-down arrow-font"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse4">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse5" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind05"></i> 优惠券管理 <i
+                                            class="pull-right icon-angle-down arrow-font"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse5">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse6" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind06"></i> 系统管理 <i
+                                            class="pull-right icon-angle-down arrow-font"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse6">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse7" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind07"></i> CMS管理 <i
+                                            class="pull-right icon-angle-down arrow-font"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse7">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse8" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind08"></i> 积分商城管理 <i
+                                            class="pull-right icon-angle-down arrow-font"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse8">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse9" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind09"></i> 促销管理 <i
+                                            class="pull-right icon-angle-down arrow-font"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse9">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse10" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind10"></i> 搜索管理 <i
+                                            class="pull-right icon-angle-down arrow-font"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse10">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse11" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind11"></i> 配置表 <i
+                                            class="pull-right icon-angle-down arrow-font"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse11">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-group">
+                                <div class="accordion-heading sdb_h_active">
+                                    <a href="#collapse12" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="iicon iicon-ind12"></i> 消息中心 <i
+                                            class="pull-right icon-angle-down arrow-font"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse in" id="collapse12">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+                                            <li class=""><a href="javascript:void(0);">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class="active"><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                            <li class=""><a href="../manage_index.html">
+                                                内容内容内容内容内容 </a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="push"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- sidebar -->

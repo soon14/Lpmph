@@ -1,0 +1,145 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>ecp-pmph</artifactId>
+        <groupId>com.ai.ecp.pmph</groupId>
+        <version>1.30-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    <groupId>com.ai.ecp.pmph</groupId>
+    <artifactId>pmph-services-client</artifactId>
+    <version>1.30-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-services-demo-client</artifactId>
+            <version>${ecp-busi-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-services-staff-client</artifactId>
+            <version>${ecp-busi-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-services-prom-client</artifactId>
+            <version>${ecp-busi-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-services-cms-client</artifactId>
+            <version>${ecp-busi-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-services-goods-client</artifactId>
+            <version>${ecp-busi-core.version}</version>
+
+        </dependency>
+
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-services-coupon-client</artifactId>
+            <version>${ecp-busi-core.version}</version>
+
+        </dependency>
+
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-services-sys-client</artifactId>
+            <version>${ecp-busi-core.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-services-order-client</artifactId>
+            <version>${ecp-busi-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-services-search-client</artifactId>
+            <version>${ecp-busi-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ai.ecpcore</groupId>
+            <artifactId>ecp-common-intefaces</artifactId>
+            <version>${ecp-busi-core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ai.ecp</groupId>
+            <artifactId>ecp-server-start-client</artifactId>
+            <version>${ecp-server-start-client.version}</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>pmph-services-client</finalName>
+
+        <sourceDirectory>../src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>../src/main/resources</directory>
+                <includes>
+                    <include>dubbo/client/ecp-*.xml</include>
+                    <include>message/**/*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <excludes>
+                        <exclude>com/ai/ecp/*/dubbo/impl/**</exclude>
+                        <exclude>com/ai/ecp/*/dubbo/impl/**/*.txt</exclude>
+                        <exclude>**/*.txt</exclude>
+                    </excludes>
+                    <includes>
+                        <include>com/ai/ecp/*/dubbo/**</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <useUniqueVersions>false</useUniqueVersions>
+                        </manifest>
+                    </archive>
+                    <excludes>
+                        <exclude>com/ai/ecp/*/dubbo/impl/**</exclude>
+                    </excludes>
+                    <includes>
+                        <include>com/ai/ecp/*/dubbo/**</include>
+                        <include>dubbo/client/ecp-*.xml</include>
+                        <include>message/**/*.properties</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -1,0 +1,45 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/staff/shopacctdetail/seller-shopacct-withdraw-list.js?version=$!{JS_VERSION}"></script>
+
+	<table class="seller-table table-striped">
+       <thead>
+	       <tr>
+	           <td>提现流水号</td>
+	       	   <td>提现申请ID</td>
+	           <td>申请时间</td>
+	           <td>申请人</td>
+	           <td>提现日期</td>
+	           <td>提现金额</td>
+	           <td>操作</td>
+	       </tr>
+       </thead>
+       <tbody>
+       #if(!$withdrawResp.getResult())
+			<tr><td class="kong" colspan='7'>很遗憾，暂无数据</td></tr>
+		#end
+		#foreach( $lst in $withdrawResp.getResult())
+       	<tr>
+           <td>$!{lst.id}</td>
+           <td class="applyId">$!{lst.applyId}</td>
+           <td>
+            	$!date.format('yyyy-MM-dd HH:mm:ss',$!{lst.applyTime})
+           </td>
+           <td>$!{lst.applyStaffCode}</td>
+           <td>
+            	$!date.format('yyyy-MM-dd HH:mm:ss',$!{lst.withdrawTime})
+           </td>
+           <td>#money($!{lst.withdrawMoney})</td>
+           <td>
+           		<a href='javascript:void(0)' class="seeWithdrawApply">查看详情</a> |
+                <a href='javascript:void(0)' onclick="" >打印</a>
+           </td>
+       	</tr>
+        #end
+       </tbody>
+   </table>
+	<div class="fav-opt clearfix" style="margin-top: 20px;">
+        <div class="row-fluid">
+			<div id="pageControlbarWithdraw" class="ecppage" data-total-page="$!{withdrawResp.pageCount}" data-total-row="$!{withdrawResp.count}" data-page-size="$!{withdrawResp.pageSize}" data-page-number="$!{withdrawResp.pageNo}" data-status="begin"></div>
+		</div>
+    </div>

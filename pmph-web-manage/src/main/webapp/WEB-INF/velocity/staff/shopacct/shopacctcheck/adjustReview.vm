@@ -1,0 +1,79 @@
+#parse("/module/mod-grid.vm")
+#parse("/module/mod-form.vm")
+#parse("/order/pic/pic-cover.vm")
+<link rel="stylesheet" href="$!{CSS_PATH}/order/backreview.css" type="text/css">
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/shopacct/shopacctcheck/adjustReview.js?version=$!{JS_VERSION}"></script>
+<style type="text/css">
+.modal-dialog {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    position: relative;
+    width: auto;
+    z-index: 1050;
+}
+</style>
+    <div class="well-tit mt10">
+		<span>申请单号：$!{rBackApplyId}</span>
+		<input type="hidden" id="id" value="$!{rBackApplyId}"/>
+		<span style="margin-left:200px;">申请单状态：$!{rBackApplyStatus}</span>
+	</div>
+    <div class="well-tit mt10">
+		<span>
+			账单结算日：$!{rBackApplyBillDay}
+        </span>
+		<span style="margin-left:200px;margin-top:20px">
+			店铺名称：$!{rBackApplyShopName}
+        </span>
+	</div>
+    <div class="well-tit mt10">调账金额：#moneyNum($!{rBackApplyMoney})</div>
+    <div class="well-tit mt10">备注说明：$!{rBackApplyApplyDesc}</div>
+	#if(!$rBackTrack || $null.isNull($!rBackTrack))
+	#else
+		<div class="ret-box">
+			<div class="head">
+				<h3>操作信息</h3>
+			</div>
+			<div class="body">
+                <table class="table table-bordered ">
+                    <thead>
+                    <tr>
+                        <th class="thclass" width='150px'>操作节点</th>
+                        <th class="thclass" width='150px'>操作人</th>
+                        <th class="thclass" width='150px'>操作时间</th>
+                        <th class="thclass" width='150px'>操作意见</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+						
+						#foreach($rBackTrack in $rBackTrack)
+                        <tr >
+                            <td><div class="border-right">$!{rBackTrack.nodeDesc}</div></td>
+                            <td><div class="border-right">$!{rBackTrack.createName}</div></td>
+                            <td><div class="border-right">$!date.format('yyyy-MM-dd HH:mm:ss',$!{rBackTrack.createTime})</div></td>
+                            <td><div class="border-right">$!{rBackTrack.remark}</div></td>
+                        </tr>
+						#end
+                        
+                    </tbody>
+                </table>
+                </tbody>
+			</div>
+        </div>
+	#end
+</div>
+<form class="form-horizontal">
+<div class="control-group">
+            <label class="control-label">审核意见：</label>
+            <div class="controls">
+                <textarea rows="3" class="c-area" name="checkDesc" id="checkDesc" maxlength="512"></textarea>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+				<a class="btn btn-info" id="allow"><i class=" icon-ok-sign icon-white"></i>通过</a>
+				<a class="btn" id="unallow"><i class=" icon-remove-sign icon-white"></i> 不通过</a>
+				<a class="btn" id="return"><i class="icon-reply icon-white"></i> 返回</a>
+        </div>
+</div>
+</form>	

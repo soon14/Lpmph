@@ -1,0 +1,66 @@
+	#parse("/sys/sys_param.vm")
+	 #parse("/sys/sys_head.vm")
+	 #parse("/module/mod-form.vm")
+		<link href="$!{CSS_PATH}/seller-reset.css" type="text/css" rel="stylesheet">
+    <link href="$!{CSS_PATH}/seller.css" type="text/css" rel="stylesheet">
+<link href="$!{RESOURCE_PATH}/bootstrap/extend/css/bootstrap_page.css" rel="stylesheet" type="text/css" media="screen"/>
+ <script type="text/javascript" src="$!{BUSIJS_PATH}/seller/goods/gift/list/gift-skulist.js?version=$!{JS_VERSION}" ></script>
+<input type="hidden" id ="shopId" value="$shopId"/>
+<div class="seller-mainR">
+            <div class="main">
+                <div class="seller-well">
+                    <form action="" class="form-horizontal required-validate" id="giftSkuForm">
+                            <div class="row-fluid">
+                                <div class="span4">
+                                    <div class="control-group">
+                                        <label class="control-label">商品名称：</label>
+                                        <div class="controls">
+													
+                                         <input placeholder="输入商品名称" type="text" class="input-block-level" name="skuName" id="skuName"/>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span4">
+                                    <div class="control-group">
+                                        <label class="control-label">商品编码：</label>
+                                        <div class="controls">
+                                            <input placeholder="商品编码" type="text" class="input-block-level" name="gdsId" id="gdsId"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span4">
+                                    <div class="control-group">
+                                        <label class="control-label">ISBN：</label>
+                                        <div class="controls">
+                                            <input placeholder="输入ISBN" type="text" class="input-block-level" name="isbn" id ="isbn"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                         
+                     
+                        </form>
+                </div>
+				
+				
+				<div class="sbtn-group">
+                    <!--查询，重置移动到这里，添加btn-w-right样式，重置按钮添加icon-color-->
+                    <div class="btn-wrap btn-w-right">
+                        <span class="sbtn sbtn-blue" id="giftSkuSearchBtn"><i class="icon-search"></i> 查询</span>
+                        <span class="sbtn" id="giftSkuResetBtn"><i class="icon-asterisk icon-color"></i> 重置</span>
+                    </div>
+					  </div>
+                <div class="main-inner">
+                 
+				<div id='giftSkuListDiv'>
+                  #parse("/seller/goods/gift/list/sku-list.vm")
+                	
+				</div>
+                  
+
+                </div>
+
+            </div>
+        </div>

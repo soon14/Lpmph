@@ -1,0 +1,106 @@
+#parse("/module/mod-scroll.vm")
+#parse("/sys/sys_param.vm")
+<div class="body">
+    <!--轮播图片-->
+    <div class="scoll">
+    <div id='mySwipe' class='swipe index-swipe ecp-component zw-ad-slider' data-status="1" data-place-size="4" data-place-id="24" data-place-width="1920" data-place-height="445" data-module="ecp-component/leaflet/zwapp-leaflet-slider">
+        <div class='swipe-wrap main-ad-slider-img'>
+           <!-- <div><a href="http://exam.ipmph.com/rwtkkhdxz/" target="_blank"><img src="$IMAGE_PATH/app-banner.jpg" alt=""/></a></div>
+            <div><a href="http://exam.ipmph.com/jt/sjye/phone.html#client" target="_blank"><img src="$IMAGE_PATH/app-banner02.jpg" alt=""/></a></div>
+            <div><a href="http://textbooks.ipmph.com/books/app/download?SiteID=33" target="_blank"><img src="$IMAGE_PATH/app-banner03.jpg" alt=""/></a></div>-->
+        </div>
+        <span class="prev" onclick='mySwipe.prev()'></span>
+        <span class="next" onclick='mySwipe.next()'></span>
+		 
+    </div>
+   <ul id="swipePage" class="carousel-indicators yuand main-ad-slider-num">
+    </ul>
+</div>
+    <!--APP切换-->
+    <div class="wrap100 app-show" >
+        <div class="container">
+            <hr/>
+            <div class="row-fluid app">
+                <ul class="app-tit02 clearfix ecp-component zw-app-list" data-status="1" data-place-size="10" data-place-id="25" data-place-width="70" data-place-height="70" data-module="ecp-component/leaflet/zw-app-list">
+                   <!-- <li>
+                        <a href="http://textbooks.ipmph.com/books/app/download?SiteID=33" target="_blank"><img src="$IMAGE_PATH/app01.png">
+                        <div class="all all-app">
+                            <p class="all-tit"><span> 人卫教材</span></p>
+                            <p class="all-con"><span>人民卫生出版社交互式数字教材通过在纸质教材内容的基础上增加富媒体内容和交互功能，以帮助医学生学习医学科学知识为目标······</span></p>
+                        </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://medbooks.ipmph.com/medical/upload/appdownload.zhtml" target="_blank"><img src="$IMAGE_PATH/app11.png">
+                        <div class="all all-app">
+                            <p class="all-tit"><span> 人卫临床知识库</span></p>
+                            <p class="all-con"><span>人卫临床知识库汇集4000余本西医、中医学术著作及近万段医学视频，包括参考书数据库、病例数据库、药物数据库、疾病数据······</span></p>
+                        </div>
+                            </a>
+                    </li>
+                    <li>
+                        <a href="http://books.ipmph.com/books/app/download?SiteID=34" target="_blank"><img src="$IMAGE_PATH/app02.png">
+                        <div class="all all-app">
+                            <p class="all-tit"><span> 人卫电子书</span></p>
+                            <p class="all-con"><span>人卫电子书城是人民卫生出版社运营的电子书销售阅读平台，第一时间为读者提供最新最好的医药健康类图书。</span></p>
+                        </div>
+                            </a>
+                    </li>
+                    <li>
+                        <a href="https://itunes.apple.com/cn/app/anatomical-illustration-acupuncture/id528468143?mt=8" target="_blank"><img src="$IMAGE_PATH/app03.png">
+                        <div class="all all-app">
+                            <p class="all-tit"><span> Anatomical Illustration of Acupuncture Points</span></p>
+                            <p class="all-con"><span>Are you an acupuncturist who wants to improve your needling skills? Are you a student that wonders what structures ······</span></p>
+                        </div>
+                            </a>
+                    </li>
+                    <li>
+                        <a href="https://itunes.apple.com/us/app/tcm-library-for-iphone/id1057608230?mt=8" target="_blank"><img src="$IMAGE_PATH/app09.png">
+                        <div class="all all-app">
+                            <p class="all-tit"><span> TCMLibrary</span></p>
+                            <p class="all-con"><span>为了向世界传播来自中国纯正的中医药知识，人民卫生出版社组织海内外中医药专家编写了一套既能反映纯正的中医药知识······</span></p>
+                        </div></a>
+                    </li>
+                    <li>
+                        <a href="https://itunes.apple.com/cn/app/ear-acupuncture/id544549664?mt=8" target="_blank"><img src="$IMAGE_PATH/app05.png">
+                        <div class="all all-app">
+                            <p class="all-tit"><span> Ear Acupuncture</span></p>
+                            <p class="all-con"><span>This APP is a great tool for self-study and continuing education, as well as an essential reference for instructors of ······</span></p>
+                        </div></a>
+                    </li>
+                    <li>
+                        <a href="http://exam.ipmph.com/jt/sjye/phone.html#client" target="_blank"><img src="$IMAGE_PATH/app04.png">
+                        <div class="all all-app">
+                            <p class="all-tit"><span> 医考学堂</span></p>
+                            <p class="all-con"><span>医考学堂是人民卫生出版社旗下网站卫人网对应的移动学习客户端。该应用主要为医学考试提供在线辅导，包括看课件、在线练习······</span></p>
+                        </div></a>
+                    </li>
+                    <li>
+                        <a href="https://itunes.apple.com/cn/app/moxibustion/id555864605?mt=8" target="_blank"><img src="$IMAGE_PATH/app06.png">
+                        <div class="all all-app">
+                            <p class="all-tit"><span> Moxibustion</span></p>
+                            <p class="all-con"><span>This clinical practice APP can be used for self-study as advanced learning material, a reference for teaching······</span></p>
+                        </div></a>
+                    </li>
+                    <li>
+                        <a href="http://exam.ipmph.com/rwtkkhdxz/" target="_blank"><img src="$IMAGE_PATH/app07.png">
+                        <div class="all all-app">
+                            <p class="all-tit"><span> 医考题库</span></p>
+                            <p class="all-con"><span>医考题库是人民卫生出版社旗下网站卫人网对应的移动学习客户端。该应用主要为医学考试提供在线辅导，包括看随机练习试题······</span></p>
+                        </div></a>
+                    </li>
+                    <li>
+                        <a href="https://itunes.apple.com/cn/app/scalp-acupuncture/id579620682?mt=8" target="_blank"><img src="$IMAGE_PATH/app08.png">
+                        <div class="all all-app">
+                            <p class="all-tit"><span> Scalp Acupuncture</span></p>
+                            <p class="all-con"><span>This APP is a great tool for self-study and continuing education, as well as an essential reference for instructors  ······</span></p>
+                        </div></a>
+                    </li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script >
+$('#zwlogo').attr('src',$webroot+'images/logo-hy.png');
+</script>

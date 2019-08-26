@@ -1,0 +1,125 @@
+<!-- 管理收货地址 -->
+<style>
+	.error{color:red}
+</style>
+<div id="build_canvas_custaddr" class="am-offcanvas slidePage">
+  <div class="am-offcanvas-bar am-offcanvas-bar-flip">
+      <div class="am-offcanvas-content">
+			<!-- 收货地址管理 -->
+            <header class="am-header am-header-fixed">
+                <div class="am-header-title">
+						收货地址管理
+                </div>
+                <div id="canvas_custaddr" class="am-header-left am-header-nav top-left">
+                    <a class="">
+                        <i class="public-arrowleft"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="ui-content" id="js_addrlist">
+				#foreach($item in $!addrs)
+                <div class="odr-box odr-pad #if($var_custaddr && ($item.id == $var_custaddr.id))odr-check#end js_addrunit">
+					<div id="build_custaddr_bro">
+                        <div class="r-address">
+                            <i class="icon icon-name"></i>
+                            <div>$!{item.contactName}<span class="c-orange mlr">|</span> #mobile($!{item.contactPhone})</div>
+							<input type="hidden" id="addrunit_contactName" value="$!{item.contactName}" />
+							<input type="hidden" id="addrunit_contactPhone" value="$!{item.contactPhone}" />
+                        </div>
+                        <div class="r-address">
+                            <i class="icon icon-adr"></i>
+                            <div class="adre">
+                                <span class="adre-w">#areaName($!{item.province}) #areaName($!{item.cityCode}) #areaName($!{item.countyCode}) #addr($!{item.chnlAddress}, 30)</span>
+								<input type="hidden" id="addrunit_province" value="$!{item.province}" />
+								<input type="hidden" id="addrunit_cityCode" value="$!{item.cityCode}" />
+								<input type="hidden" id="addrunit_countyCode" value="$!{item.countyCode}" />
+								<input type="hidden" id="addrunit_chnlAddress" value="$!{item.chnlAddress}" />
+								<input type="hidden" id="addrunit_postCode" value="$!{item.postCode}" />
+                            </div>
+                        </div>
+					</div>
+                    <hr/>
+                    <div class="edit-adr">
+                        <div>
+                            <input type="radio" name="radioaddr" id="radioaddr$item.id" class="ui-checkbox js_build_radioaddr" #if($item.usingFlag == 1)checked#end value="$item.id"/>
+                            <label for="radioaddr$item.id">默认地址</label>
+                        </div>
+                        <div class="ed-icon"><span class="js_build_editaddr"><i class="icon icon-e-edit"></i>编辑</span><span class="js_build_deladdr" deladdr="$item.id"><i class="icon icon-e-del"></i>删除</span>
+                        </div>
+                    </div>
+                </div>
+				#end
+                <div class="reg-b">
+                    <button type="button" class="wbtn" id="build_newcustaddr">+ 新增收货地址</button>
+                </div>
+            </div>
+
+			
+		</div>
+	</div>
+</div>
+
+<!-- 新增/编辑收货地址 -->
+<div id="build_canvas_custaddr_edit" class="am-offcanvas slidePage">
+	<div class="am-offcanvas-bar am-offcanvas-bar-flip">
+		<div class="am-offcanvas-content">
+
+            <header class="am-header am-header-fixed">
+                <div class="am-header-title">
+                        <span id="build_addr_title">编辑</span>收货地址
+                </div>
+                <div class="am-header-left am-header-nav top-left">
+                    <a id="canvas_custaddr_edit">
+                        <i class="public-arrowleft"></i>
+                    </a>
+                </div>
+            </header>
+            <div class="ui-content">
+                <div class="odr-box wpay-list">
+                    <form id="build_form_editaddr" class="am-form am-form-horizontal addr-form required-validate">
+                        <div class="am-form-group">
+                            <label for="" class="am-u-sm-2 am-form-label"><font style="color:red">*</font>收&nbsp;&nbsp;货&nbsp;&nbsp;人</label>
+                            <div class="am-u-sm-10">
+                                <input type="text" name="contactName" maxlength="16" class="required" placeholder="收货人">
+								<input type="hidden" name="id" value="" />
+                            </div>
+                        </div>
+            
+                        <div class="am-form-group">
+                            <label for="" class="am-u-sm-2 am-form-label"><font style="color:red">*</font>手机号码</label>
+                            <div class="am-u-sm-10">
+                                <input type="text" name="contactPhone" class="required mobilePhone" placeholder="手机号码" maxlength="11" />
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="" class="am-u-sm-2 am-form-label"><font style="color:red">*</font>所在地区</label>
+                            <div class="am-u-sm-10">
+								<!-- area -->
+								<select area-defaultvalue="" value="" area-children="city-code" area-level="province" area-type="admin" id="p-code" name="province" class="jquery-area span2 "><option value="110000">北京</option><option value="120000">天津</option><option value="130000">河北</option><option value="140000">山西</option><option value="150000">内蒙古</option><option value="210000">辽宁</option><option value="220000">吉林</option><option value="230000">黑龙江</option><option value="310000">上海</option><option value="320000">江苏</option><option value="330000">浙江</option><option value="340000">安徽</option><option value="350000">福建</option><option value="360000">江西</option><option value="370000">山东</option><option value="410000">河南</option><option value="420000">湖北</option><option value="430000">湖南</option><option value="440000">广东</option><option value="450000">广西</option><option value="460000">海南</option><option value="500000">重庆</option><option value="510000">四川</option><option value="520000">贵州</option><option value="530000">云南</option><option value="540000">西藏</option><option value="610000">陕西</option><option value="620000">甘肃</option><option value="630000">青海</option><option value="640000">宁夏</option><option value="650000">新疆</option><option value="710000">台湾</option><option value="810000">香港</option><option value="820000">澳门</option></select>
+                                <select area-defaultvalue="" value="" area-children="county-code" area-level="city" area-type="admin" id="city-code" name="cityCode" class="jquery-area span2 " area-province="110000"><option value="110100">市辖区</option><option value="110200">县</option></select>
+                                <select area-defaultvalue="" value="" area-children="" area-level="county" area-type="admin" id="county-code" name="countyCode" class="jquery-area span2 " area-city="110100" area-province="110000"><option value="110101">东城区</option><option value="110102">西城区</option><option value="110105">朝阳区</option><option value="110106">丰台区</option><option value="110107">石景山区</option><option value="110108">海淀区</option><option value="110109">门头沟区</option><option value="110111">房山区</option><option value="110112">通州区</option><option value="110113">顺义区</option><option value="110114">昌平区</option><option value="110115">大兴区</option><option value="110116">怀柔区</option><option value="110117">平谷区</option></select>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="" class="am-u-sm-2 am-form-label"><font style="color:red">*</font>详细地址</label>
+                            <div class="am-u-sm-10">
+##                                <input type="text" name="chnlAddress" class="required" placeholder="详细地址" maxlength="30" />
+                                <textarea type="text" name="chnlAddress" placeholder="详细地址" class="required" requiredInfo="请您填写收货人详细地址" maxlength="100" minlength="0"  value=""></textarea>
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label for="" class="am-u-sm-2 am-form-label"><font style="color:red">*</font>邮政编码</label>
+                            <div class="am-u-sm-10">
+                                <input type="text" name="postCode" placeholder="邮政编码" class="required number" maxlength="6">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="reg-b">
+                    <button class="wbtn" id="build_addr_save">保存地址信息</button>
+                </div>
+            </div>
+		
+		</div>
+	</div>
+</div>

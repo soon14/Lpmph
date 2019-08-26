@@ -1,0 +1,5 @@
+#parse("/rwgw/sys/sys_param.vm")
+<div class="w">
+    <div class="box ecp-component leaflet-vm-shader" data-status="1" data-place-size="100" data-place-id="1207"  data-return-url = "/rwgw/main/componentVM/rwgw-zh/leaflet/rw-size-slide" data-module="ecp-component/leaflet/leaflet-vm-shader">
+    </div>
+</div>

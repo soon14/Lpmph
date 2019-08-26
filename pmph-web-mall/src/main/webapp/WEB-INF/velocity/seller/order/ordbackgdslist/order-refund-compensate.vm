@@ -1,0 +1,59 @@
+#parse("sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/ordbackgdslist/order-refund-compensate.js?version=$!{JS_VERSION}"></script>
+
+    <div style="overflow-x: auto;">
+       <table class="seller-table table-striped">
+         <thead>
+           <tr>
+               <td>订单编号</td>
+               <td>下单日期</td>
+               <td>支付时间</td>
+               <td>实付金额</td>
+               <td>订单状态</td>
+               <td>手机号码</td>
+               <td>收货人姓名</td>
+               <td>支付方式</td>
+               <td>支付通道</td>
+               <td>会员名</td>
+               <td>商铺名称</td>
+               <td>操作</td>
+           </tr>
+         </thead>
+        <tbody>
+			
+    		#if($null.isNull($resp) || $resp.count == 0)
+    	       <tr class="odd">
+                    <td class="kong" colspan="8">很遗憾，暂无数据</td>
+                </tr>
+    		#else
+				#foreach($!ordItem in $!resp.getResult())
+        		   <tr>
+					   <td><a href="javascript:void(0);" class="orderId">$!{ordItem.id}</a></td>
+					   <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{ordItem.orderTime})</td>
+					   <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{ordItem.payTime})</td>
+					   <td>
+					   	  <span class="realMoney">#moneyNum($!{ordItem.realMoney})</span>
+					   </td>
+					   <td>#translate('ORD_BACK_GDS_STATUS',$!{ordItem.status})</td>
+					   <td>$!{ordItem.contactPhone}</td>
+					   <td>$!{ordItem.contactName}</td>
+					   <td>#translate('ORD_PAY_TYPE',$!{ordItem.payType})</td>
+					   <td>#translate('ORD_PAY_WAY',$!{ordItem.payWay})</td>
+					   <td><span class="staffName">$!{ordItem.staffName}</span></td>
+					   <td>$!{ordItem.shopName}</td>
+					   <td>
+					   	#if($!{ordItem.hasBack})
+					   	#else
+					   		##<a href="javascript:void(0);" class="operation">选择</a>
+					   		<a href="#" class="operation">选择</a>
+					   	#end
+					   </td>
+    			   </tr>
+			   #end
+    		#end
+         </tbody>
+       </table>
+    </div>
+    <div class="pagination bPage pagination-right">
+        <div id="pageControlbar" class="ecppage" data-total-page="$!{resp.pageCount}" data-total-row="$!{resp.count}" data-page-size="$!{resp.pageSize}" data-page-number="$!{resp.pageNo}" data-status="begin"></div>
+    </div>

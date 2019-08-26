@@ -1,0 +1,152 @@
+#parse("/sys/sys_param.vm")
+<style type="text/css">
+	
+	@media print{ 
+		@page {
+    		size: A4 landscape;
+    		margin: 0cm;
+        }
+		.print {
+    		font-size:12px;
+        }
+		.noneprint{display:none;}
+	}  
+	.detail {
+        width: 98%;
+        margin: 0 auto;
+        font-size: 12px;
+    }
+    .detail hr{
+        border: 1px solid black;
+    }
+    .detail h2 {
+        font-size: 24px;
+        text-align: center;
+        line-height: 60px;
+    }
+    .table-detail {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    .table-detail td {
+        padding: 5px;
+    }
+    .table{
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+		border-collapse:collapse;
+		border-spacing:0;
+    }
+    .table th{
+        text-align: center;
+        border: 1px solid black;
+
+    }
+    .table td{
+		text-align: center;
+        border: 1px solid black;
+    }
+    .table td:first-child {
+        text-align: center;
+    }
+    .table-bordered thead:first-child tr:first-child>th:first-child,.table-bordered thead:first-child tr:first-child>th:last-child,.table-bordered tbody:last-child tr:last-child>td:first-child,.table-bordered tbody:last-child tr:last-child>td:last-child{
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+    } 
+</style>  
+<div class="detail">
+	<h2>退款管理单</h2> 
+	<div class="noneprint"> 
+		<a class="btn" id="btnPrint" href="#" onclick="window.print()"><i class="icon-print"></i> 打印</a>
+	</div>
+	<hr>   
+     #foreach($!orderBack in $!orderBackList)
+	 <div style="page-break-inside:avoid;">
+		<table class="table table-bordered print" >
+		 #if($velocityCount == 1)
+			 <tr>
+    			<th width="4%">No.</th>
+                <th width="6%">退款编号</th>
+                <th width="9%">商户订单号</th>
+                <th width="9%">订单编号</th>
+                <th width="6%">支付方式</th>
+                <th width="7%">支付通道</th>
+                <th width="8%">支付时间</th>
+    			<th width="8%">申请日期</th>  
+    			<th width="7%">申请单状态</th>
+    			<th width="5%">交易金额</th>
+    			<th width="5%">退款金额</th>
+    			<th width="8%">退款时间</th>
+    			<th width="5%">退款方式</th>
+    			<th width="7%">补偿性退款</th>
+            </tr>
+		#end
+		<tr>
+			<td width="4%">$!velocityCount</td>
+            <td width="6%">$!orderBack.rBackApplyResp.backId</td>
+			<td width="9%">$!orderBack.rBackApplyResp.payTranNo</td>
+            <td width="9%">$!orderBack.rBackApplyResp.orderId</td>
+			<td width="6%">
+                #if($!{orderBack.payType} == "0")
+					线上支付
+				#elseif($!{orderBack.payType} == "1")
+					上门支付
+				#elseif($!{orderBack.payType} == "2")
+					邮局汇款
+				#elseif($!{orderBack.payType} == "3")
+					银行转账
+				#end 
+			</td>
+			<td width="7%">
+				#if($!{orderBack.payWay} == "9002")
+					鸿支付
+				#elseif($!{orderBack.payWay} == "9003")
+					支付宝
+				#elseif($!{orderBack.payWay} == "9004")
+					农行支付
+				#elseif($!{orderBack.payWay} == "9006")
+					微信支付
+				#elseif($!{orderBack.payWay} == "9007")
+					微信扫码支付
+			    #elseif($!{orderBack.payWay} == "9008")
+					微信App支付
+				#end 
+			</td>
+			<td width="8%" >$!date.format('yyyy-MM-dd HH:mm:ss',$!orderBack.rBackApplyResp.payTime)</td>
+			<td width="8%" >$!date.format('yyyy-MM-dd HH:mm:ss',$!orderBack.rBackApplyResp.applyTime)</td>
+			<td width="7% style="text-align:center;">
+				#if($!{orderBack.rBackApplyResp.status} == "00")
+					待审核
+				#elseif($!{orderBack.rBackApplyResp.status} == "01")
+					同意退款
+				#elseif($!{orderBack.rBackApplyResp.status} == "04")
+					已退款
+				#elseif($!{orderBack.rBackApplyResp.status} == "05")
+					拒绝退款
+				#end 
+			</td>
+			<td width="5%">#moneyNum($!orderBack.rBackApplyResp.realMoney)</td>
+			<td width="5%">#moneyNum($!orderBack.rBackApplyResp.backMoney)</td>
+			<td width="8%">$!date.format('yyyy-MM-dd HH:mm:ss',$!orderBack.rBackApplyResp.refundTime)</td>
+            <td width="5%">
+				#if($!{orderBack.rBackApplyResp.payType} == "1")
+					线上退款
+				#elseif($!{orderBack.rBackApplyResp.payType} == "0")
+					线下退款
+				#end 
+			</td>
+			<td width="7%">
+				#if($!{orderBack.rBackApplyResp.isCompenstate} == "0")
+					是
+				#else
+					否
+				#end 
+			</td>
+		</tr> 
+    </table> 
+	</div>
+	#end  
+</div>  

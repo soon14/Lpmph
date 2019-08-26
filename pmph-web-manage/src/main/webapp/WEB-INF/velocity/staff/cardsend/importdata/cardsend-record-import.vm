@@ -1,0 +1,18 @@
+#parse("/module/mod-upload.vm")
+
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/jquery/highlight/styles/sunburst.css" type="text/css">
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/highlight/highlight.pack.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/cardsend/cardsend-record-import.js?version=$!{JS_VERSION}" ></script>
+
+<div class="row-fluid">
+	<div class="">
+		<div class="uploadifyMainBox" style="margin-top: 5px;">
+			<input id="excelFileInput" type="file" name="excelFile" />
+			<div id="attachmentFileQueue" class="alert alert-info uploadify-queue" style=""></div>
+			<a class="btn btn-info" data-loading-text="处理中..." id="fileUploaderUpload" href="#"><i class="icon-upload-alt"></i> 正式导入</a>
+		</div>
+		<div align="right" style="margin-top: 5px;">
+			
+		</div>
+	</div>
+</div>

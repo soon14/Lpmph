@@ -1,0 +1,21 @@
+<div class="ui-tab pro-tjs mt20" style="padding-left: 200px;">
+                <ul class="tabn">
+					<li class="active">
+                        <a href="javascript:;" class="gdsRecommend" value="commondCat">相关推荐</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" value="mainRecommond">重点推荐</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" class="gdsRecommend" value="commondAuthor">相同作者推荐</a>
+                    </li>
+                </ul>
+                <div class="tabc">
+                    <div class="citem active" id="commondCat">
+                    </div>
+					 <div class="citem" id="mainRecommond">
+                    </div>
+                    <div class="citem" id="commondAuthor">
+                    </div>
+                </div>
+            </div>

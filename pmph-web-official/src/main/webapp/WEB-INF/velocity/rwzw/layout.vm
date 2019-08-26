@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>$!{title}</title>
+	<link rel="shortcut icon" href="$IMAGE_PATH/favicon.ico" type="image/x-icon" />
+	#parse("/sys/sys_param.vm")
+	#parse("/sys/sys_head.vm")
+	<script type="text/javascript" src="$BUSIJS_PATH/rwzw/main-content.js"></script>
+</head>
+<body>
+	<div class="top-fix">
+<!--右侧的楼层导航-->
+   #parse("/rwzw/main/index-head.vm")
+
+<!--顶部 begin-->
+#parse("/rwzw/main/index-nav.vm")
+<!--顶部 end-->
+</div>
+
+<!-- 悬浮的二维码 begin   zhanbh   2016.4.18  征集作品   zhanbh 2016.5.14 -->
+#if($!{showEwm} != 'no')
+<div class="ewm-box">
+    <div class="ewm"><img src="$IMAGE_PATH/ewm.png" alt="二维码" style="width:170px" /></div>
+    #*<div class="zjzp">
+    	<a href="http://mp.weixin.qq.com/s?__biz=MzIzNjA4ODE1NA==&mid=2649770879&idx=3&sn=ddee22d539c08a241ea48ef4fa4c1e1d&scene=1&srcid=04288tMedGbn7dOobm1k2Qci&from=singlemessage&isappinstalled=0#wechat_redirect">
+    		<img src="$IMAGE_PATH/zw-zjzp.png" alt="征集作品" style="width:170px" />
+    	</a>
+    </div>*#
+</div>
+#end
+<!-- 悬浮的二维码 begin   zhanbh   2016.4.18 -->
+
+<div class="body">
+	$screen_content
+</div>
+<!--内容 end-->
+
+<!--底部 begin-->
+#parse("/rwzw/main/index-floor.vm")
+<!--快速导航 end-->
+<!--底部 end-->
+</body>
+</html>

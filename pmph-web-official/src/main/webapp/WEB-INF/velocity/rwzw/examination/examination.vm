@@ -1,0 +1,82 @@
+#parse("/module/mod-scroll.vm")
+#siteInfo('1')
+<!--广告-->
+<div class="wrap100">
+    <div class="scrollLoad exam-f ks-bg01" style="opacity: 0.1;filter:alpha(opacity=10)">
+        <!--<div class="container xs-img01">-->
+            <!--<div class="xs-font01"><img src="../images/xs-font01.png"> </div>-->
+            <!--<div class="xs-btn01"><img src="../images/xs-btn01.png"> </div>-->
+        <!--</div>-->
+		 <a href="${siteUrl}homepage?page=testbook" class="font-d" target="_blank">考试用书</a>
+		 <div class="link link-f1">
+            <div class="link-logo"></div>
+                  <span class="link-c">
+					考试用书
+                    <a href="${siteUrl}homepage?page=testbook" class="font-d" target="_blank">考试用书</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+
+    <div class="scrollLoad exam-f ks-bg02">
+        <div class="container">
+            <div class="bg02-text" style="position: relative; top: 10px;opacity: 0.1;filter:alpha(opacity=10)">
+                <div class="ks-font02"><a href="http://exam.ipmph.com/learncenter/Exam/ExamIndex.zhtml" target="_blank"><img src="$IMAGE_PATH/ks-font02.png" /></a> </div>
+            </div>
+        </div>
+		  <div class="link link-f2">
+            <div class="link-logo"></div>
+                  <span class="link-c">
+                   <a href="http://exam.ipmph.com/learncenter/Exam/ExamIndex.zhtml" target="_blank">增值服务</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+
+    <div class="scrollLoad exam-f ks-bg03">
+        <div class="container ">
+            <div class="bg03-text"  style="top: 20px; position: relative;opacity: 0.1;filter:alpha(opacity=10)">
+                <div class="ks-font03"><a href="http://exam.ipmph.com/" target="_blank"><img src="$IMAGE_PATH/ks-font03.png"/></a> </div>
+            </div>
+        </div>
+		 <div class="link link-f3">
+            <div class="link-logo"></div>
+                  <span class="link-c">
+                   <a href="http://exam.ipmph.com/" target="_blank">考试课程</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+    <div class="scrollLoad exam-f ks-bg04" >
+        <div class="container" >
+            <div class="ks-font04" style="position: relative; top: 30px;opacity: 0.1;filter:alpha(opacity=10)"><a href="http://exam.ipmph.com/rwtkkhdxz/" target="_blank"><img src="$IMAGE_PATH/ks-font04.png"></img></a></div>
+        </div>
+		 <div class="link link-f4">
+            <div class="link-logo"></div>
+                  <span class="link-c">
+                  <a href="http://exam.ipmph.com/rwtkkhdxz/" target="_blank">人卫医考题库</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+     <script>
+        $('.scrollLoad').scrollLoading({
+            callback:function(obj){
+                if($(obj).hasClass('ks-bg01'))
+                {
+                    $(obj).animate({'opacity':1},2000);
+                }
+                else if($(obj).hasClass('ks-bg02')){
+                    $(obj).find('.bg02-text').animate({'top':0,'opacity':1},1000);
+                }
+                else if($(obj).hasClass('ks-bg03')){
+                    $(obj).find('.bg03-text').animate({'top':0,'opacity':1},1000);
+                }
+                else if($(obj).hasClass('ks-bg04')){
+                    $(obj).find('.ks-font04').animate({'top':0,'opacity':1},1000);
+                }
+            }
+        });
+		$('#zwlogo').attr('src',$webroot+'images/logo-ks.png');
+    </script>
+</div>

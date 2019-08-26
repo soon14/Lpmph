@@ -1,0 +1,42 @@
+<!-- 首页智慧数据 下 的广告列表-->
+#parse("/rwgw/sys/sys_param.vm")
+#if(${respList} && 0 < ${respList.size()})
+<div class="banner-swipe">
+    <div id='mySwipe-$!{placeDto.id}' class='swipe'>
+        <div class='swipe-wrap'>
+        	#foreach($leaflet in ${respList})
+            <div class="item"><a href="$!{leaflet.linkUrl}"><img src="$!{leaflet.vfsUrl}" alt="$!{leaflet.advertiseTitle}"/></a></div>
+        	#end
+        </div>
+    </div>
+    <ul id="swipePage-$!{placeDto.id}" class="circular">
+        #foreach($leaflet in ${respList})
+        <li class="page0$!{velocityCount} #if( 1 == $!{velocityCount} ) active #end"></li>
+        #end
+    </ul>
+    <div class="bannerArrow">
+        <span class="prevArrow"><i class="arrowLeft"></i></span>
+        <span class="nextArrow"><i class="arrowRight"></i></span>
+    </div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		var swipe = document.getElementById('mySwipe-$!{placeDto.id}');
+	    if (swipe) {
+	    	var bullets = $('#swipePage-$!{placeDto.id} li');
+	        window["mySwipe-$!{placeDto.id}"] = Swipe(swipe, {
+	            // startSlide: 4,
+	            auto: 5000,
+	            callback: function (pos) {
+	                bullets.eq(pos).addClass('active').siblings().removeClass('active');
+	            }
+	        });
+	        bullets.click(function () {
+	        	window["mySwipe-$!{placeDto.id}"].slide($(this).index());
+	        });
+	        $(".prevArrow").unbind("click.mySwipe").bind("click.mySwipe",window["mySwipe-$!{placeDto.id}"].prev);
+		    $(".nextArrow").unbind("click.mySwipe").bind("click.mySwipe",window["mySwipe-$!{placeDto.id}"].next);
+	    }
+	});
+</script>
+#end

@@ -1,0 +1,20 @@
+#set($layout="/common/upload/layout.vm")
+#parse("/module/mod-form.vm")
+#parse("/module/mod-upload.vm")
+
+
+<script type="text/javascript" src="$!{BUSIJS_PATH}/common/upload/common-upload.js?version=$!{JS_VERSION}" ></script>
+
+
+<h3 class="heading">公用上传插件 <small>使用Flash进行上传控制</small></h3>
+<div class="">
+	<div class="uploadifyMainBox" style="margin-top: 5px;">
+		<div id="attachmentFileQueue" class="alert alert-info uploadify-queue" style="height: 250px;"></div>
+		
+		<div class="">
+			<a class="btn btn-success pull-right" id="btnUploadDone" style="margin-left: 5px;"><i class="icon-ok"></i>完成上传</a>
+			<a class="btn pull-right" data-loading-text="处理中..." id="btnFileUploaderUpload" href="#"><i class="icon-upload-alt"></i> 文件上传</a>
+			<input id="attachmentFileInput" type="file" name="dataReportFile" />
+		</div>
+	</div>
+</div>

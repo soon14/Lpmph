@@ -1,0 +1,46 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/staff/shopacctdetail/seller-shopacct-adjust-list.js?version=$!{JS_VERSION}"></script>
+
+	<table class="seller-table table-striped">
+       <thead>
+	       <tr>
+	           <td>调账流水号</td>
+	       	   <td>调账类型</td>
+	           <td>调账申请ID</td>
+	           <td>调账时间</td>
+	           <td>调账结算日</td>
+	           <td>调账结算月</td>
+	           <td>调账金额</td>
+	           <td>申请人</td>
+	       </tr>
+       </thead>
+       <tbody>
+       #if(!$adjustResp.getResult())
+			<tr><td class="kong" colspan='8'>很遗憾，暂无数据</td></tr>
+		#end
+		#foreach( $lst in $adjustResp.getResult())
+       	<tr>
+           <td>$!{lst.id}</td>
+           <td>
+	           #if($!{lst.optType}=='31')调账收入
+	           #else 调账支出
+	           #end
+           </td>
+           <td>$!{lst.adjId}</td>
+           <td>
+            	$!date.format('yyyy-MM-dd HH:mm:ss',$!{lst.adjTime})
+           </td>
+           <td>$!{lst.billDay}</td>
+           <td>$!{lst.billMonth}</td>
+           <td>#money($!{lst.adjMoney})</td>
+           <td>$!{lst.applyStaffCode}</td>
+       	</tr>
+        #end
+       </tbody>
+   </table>
+	<div class="fav-opt clearfix" style="margin-top: 20px;">
+        <div class="row-fluid">
+			<div id="pageControlbarAdjust" class="ecppage" data-total-page="$!{adjustResp.pageCount}" data-total-row="$!{adjustResp.count}" data-page-size="$!{adjustResp.pageSize}" data-page-number="$!{adjustResp.pageNo}" data-status="begin"></div>
+		</div>
+    </div>

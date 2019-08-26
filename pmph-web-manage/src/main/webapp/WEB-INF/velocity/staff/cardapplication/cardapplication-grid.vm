@@ -1,0 +1,96 @@
+#parse("/module/mod-form.vm")
+#parse("/module/mod-grid.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.date.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/cardapplication/cardapplication-grid.js?version=$!{JS_VERSION}" ></script>
+<style type="text/css">
+table {
+    table-layout: fixed;
+    /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+}
+
+td {
+    width: 100%;
+    word-break: keep-all;
+    /* 不换行 */
+    white-space: nowrap;
+    /* 不换行 */
+    overflow: hidden;
+    /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow: ellipsis;
+    /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+</style>
+
+<div class="well well-searchForm">
+    <form id="searchForm" class="form-horizontal" style="margin-bottom: 0px;">
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">会员等级：</label>
+                    <div class="controls">
+                        <select style="width:160px" name="custLevelCode">
+                            <option value="">
+                                --请选择--
+                            </option>
+                            #listParam("STAFF_CUST_LEVEL")
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">审核状态：</label>
+                    <div class="controls">
+                        <select style="width:160px" name="checkStatus">
+                            <option value="">--请选择--</option>
+                            <option value="0">待审核</option>
+                            <option value="1">审核通过</option>
+                            <option value="2">审核不通过</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">申请开始时间：</label>
+                    <div class="controls">
+                        <input type="text" class="input-large Wdate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="selTimeFrom" value="$!date.format('yyyy-MM-dd',$!{dateFrom})" />
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">申请截止时间：</label>
+                    <div class="controls">
+                        <input type="text" class="input-large Wdate" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="selTimeEnd" value="$!date.format('yyyy-MM-dd',$!{dateEnd})" />
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </form>
+</div>
+<div class="row-fluid" style="margin-bottom: 10px;">
+    <div class="span8">
+        <a class="btn" id="btn_code_pass" href="#"><i class="icon-ok"></i> 审核通过</a>
+        <a class="btn" id="btn_code_no_pass" href="#"><i class="icon-remove"></i> 审核不通过</a>
+    </div>
+    <div class="pull-right">
+        <a class="btn btn-info" id="btnFormSearch" href="#"><i class="icon-search"></i> 查询</a>
+        <a class="btn" id="btnFormReset" href="#"><i class="icon-refresh"></i> 重置</a>
+    </div>
+</div>
+<div class="row-fluid">
+    <table id="dataGridTable"></table>
+</div>
+<form id="editForm" action="${CONTEXT_PATH}/cust/edit" method="POST">
+    <input type="hidden" name="staffId" id="staffId" />
+</form>
+
+		
+		
+		
+		

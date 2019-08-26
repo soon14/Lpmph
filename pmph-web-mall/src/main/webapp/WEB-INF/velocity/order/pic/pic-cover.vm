@@ -1,0 +1,7 @@
+#parse("/sys/sys_param.vm")
+<style type="text/css">
+	.modal-body {    
+    	overflow-y: auto!important;
+	}
+</style>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/pic/pic-cover.js?version=$!{JS_VERSION}"></script>

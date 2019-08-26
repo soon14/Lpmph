@@ -1,0 +1,9 @@
+<div class="logo pull-left">
+    <a #if($null.isnull($CONTEXT_PATH) || $CONTEXT_PATH =="")
+            href="/"
+        #else
+            href="$CONTEXT_PATH"
+        #end>
+        <img src="#siteLogo('2')" alt="#siteName('2')"/>
+    </a>
+</div>

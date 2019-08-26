@@ -1,0 +1,13 @@
+<div id="footer" class="text-center">
+	<!--
+    <div class="">
+		<a href="#">关于我们</a> 
+		<a href="#">联系我们</a> 
+		<a href="#">招贤纳士</a> 
+		<a href="#">网站声明</a>
+	</div>
+	-->
+	#siteObj()
+    <p>$!{siteObj.siteAddress}</p>
+    <p><img class="bhh" width="20px" height="20px" src="$!{IMAGE_PATH}/ghs.png" alt=""/><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502031112" target="_blank">京公网安备 11010502031112号</a> $!{siteObj.caseNo} #if($!{siteObj.copyrightCompany} && $!{siteObj.copyrightCompany} != '')©$!{siteObj.copyrightCompany}#end</p>
+</div>

@@ -1,0 +1,17 @@
+#parse("/rwgw/sys/sys_param.vm")
+<div class="w">
+	<div class="searchBlock">
+	    <ul class="breadcrumb clearfix">
+	        <li class="p1" id="breadcrumb-0" style="display:none;"><span class="home-icon"></span><span class="bread-name"></span></li>
+	        <li class="p1" id="breadcrumb-1" style="display:none;"><span class="divider">&gt;</span><a href="javascript:void(0);" class="bread-name"></a></li>
+	        <li class="p1" id="breadcrumb-2" style="display:none;"><span class="divider">&gt;</span><a href="javascript:void(0);" class="bread-name"></a></li>
+	    </ul>
+	    <div class="search" id="article-search" style="display:none;">
+            <div class="ser-wrap">
+                <input type="text" class="itxt" placeholder="请输入关键字">
+                <input type="button" class="ibtn" value="文章搜索">
+            </div>
+            <span class="hz-icon"></span>
+        </div>
+	</div>
+</div>

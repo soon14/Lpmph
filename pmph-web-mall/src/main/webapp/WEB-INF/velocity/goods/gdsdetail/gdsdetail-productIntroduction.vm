@@ -1,0 +1,154 @@
+<div class="pro-intro clearfix">
+	#if($!{gdsDetailInfo.skuInfo.platCatgs.indexOf("<1200>")} != -1)
+       <div class="rw-icon rw-icon-lele" style="right:860px;"></div>
+    #elseif($!{gdsDetailInfo.skuInfo.platCatgs.indexOf("<1201>")} != -1)
+	   <div class="rw-icon rw-icon-ltea" style="right:860px;"></div>
+	#end
+	#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get("1027").values})
+        #if($!{value.id}=='308')
+            <div class="onLine_services_lele"></div>
+		#end
+    #end
+    <div class="preview">
+        <div id="gdsPictrueZujian">
+            <!--引用图片滑动组件begin-->
+            <div class="ecp-component gdsPictrueSlide" data-pictrue-num="4" data-gds-id="$!{gdsDetailInfo.id}" data-sku-id="$!{gdsDetailInfo.skuInfo.id}" data-pictrue-height="60" data-pictrue-width="60" data-pictrue-more-height="700" data-pictrue-more-width="700"  data-module="ecp-component/gds-pictrue-slider">
+                <div id="gdsPictrueSlide"></div>
+            </div>
+            <!--引用图片滑动组件end-->
+        </div>
+		#if($!{gdsDetailInfo.skuInfo.gdsStatus} == '11')
+            <div class="share" id="shareMoreFunction">
+              #custInfo()
+    			 <a href="javascript:void(0);" class="imUrl" target="_blank">
+    					<span class="imInfo" style="display:none">
+    						$!{cust.staffCode}#$!{gdsDetailInfo.shopId}#2#$!{gdsDetailInfo.id}
+    					</span>
+    					 <i class="micon micon-imkf" ></i>联系客服
+    				</a>
+				
+				<a href="javascript:void(0);" id="addCollect">
+                    <i class="micon micon-coll" ></i>
+    					收藏商品
+                </a>
+                <span id="p-share">
+                            <i class="micon micon-pshare"></i>
+                            分享
+                </span>
+                ##<label>
+    			##收藏人气：
+                ##</label>
+                ##<span>
+                    ##3376
+                ##</span>
+                ##<a href="#">
+                    ##<i class="micon micon-large"></i>
+                    ##查看大图
+                ##</a>
+    			#set($values = '')
+    			#set($ifReadOnline = '0')
+    			#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get('1031').values})
+                	#if($!{value.id}=='310')
+    					#set($ifReadOnline = '1')
+    				#end
+				#end
+				#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get('1026').values})
+					#if($!{value.propValue} && $!{value.propValue} !="")
+                		<a href="javascript:void(0);" id="readPdf" value="$!{value.propValue}">
+                			<i class="micon micon-page"></i>
+                			试读章节
+                		</a>
+					#end
+				#end
+				#parse("/goods/gdsdetail/gds-share.vm")
+            </div>
+		#end
+    </div>
+		
+    <div class="detail">
+        <h3>
+            $!{gdsDetailInfo.gdsName}<span id="gdsName-extends-desc"></span>
+        </h3>
+        <div class="dec">
+            $!{gdsDetailInfo.gdsSubHead}
+        </div>
+		
+		#if($!{gdsDetailInfo.skuInfo.gdsStatus} == '11')
+		<div class="seckill-active clearfix" id="seckill-countDown" style="display:none;">
+                <span id="promTitle"></span>
+                <div class="seckill-time">
+					<span id="prompt"></span>：
+                    <div class="time-box" id="time-box">
+						<span class="day">00</span>天
+						<span class="hour">00</span>时
+						<span class="minute">00</span>分
+						<span class="second">00</span>秒
+                    </div>
+                </div>
+         </div>
+		#end
+		
+		
+		#if($!{gdsDetailInfo.skuInfo.gdsStatus} == '11')
+			<div class="cont" id="gds_sale_down">
+				#parse("/goods/gdsdetail/gdsdetail-gdsonsale.vm")
+			</div>
+		#else
+			<div class="cont" id="gds_sale_down">
+				#parse("/goods/gdsdetail/gdsdetail-gdsdown.vm")
+			</div>
+		#end
+	</div>
+	<!--店铺左侧 begin-->
+	#if($!{shopShow}=='1')
+	<div class="shop_right_info">
+	<!--店铺内容根据id填充-->
+		##<div id="shopInfo">
+			##<input type="hidden" value="$!shopId" id="shopId"/>
+			##parse("/goods/gdsdetail/list/shop-info.vm")
+		##</div>
+	<!--店铺展示内容 begin-->
+		##css样式 reset.css 样式可以根据的读取的数据做出相应调整
+		#parse("/goods/gdsdetail/list/gds-shop-info.vm")
+		#parse("/goods/gdsdetail/gdsdetail-qrcode.vm")
+	<!--店铺展示内容 end-->
+	</div>
+	#end
+	<!--店铺左侧 end-->
+</div>
+#set($values = '')
+#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get('1001').values})
+	#set($values = $!{value.propValue})
+#end
+#set($isbn = '')
+#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get('1002').values})
+	#set($isbn = $!{value.propValue})
+#end
+#set($biaozhunisbn = '')
+#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get('1032').values})
+	#set($biaozhunisbn = $!{value.propValue})
+#end
+<input type="hidden" value="$ifReadOnline" id="offerReadOnline"/>
+<input type="hidden" value="$values" id="authorValue"/>
+<input type="hidden" value="1001" id="authorPropId"/>
+<input type="hidden" value="$isbn" id="ISBN"/>##包含ISBN开头 和/R的
+<input type="hidden" value="$biaozhunisbn" id="BIAOZHUNISBN"/>##标准的ISBN号
+<input type="hidden" value="$!{gdsDetailInfo.id}" id="gdsId"/>
+<input type="hidden" value="$!{gdsDetailInfo.ifLadderPrice}" id="ifLadderPrice"/>
+<input type="hidden" value="$!{gdsDetailInfo.gdsName}" id="gdsName"/>
+<input type="hidden" value="$!{gdsDetailInfo.shopId}" id="shopId"/>
+<input type="hidden" value="$!{gdsDetailInfo.skuInfo.id}" id="skuId"/>
+<input type="hidden" value="$!{gdsDetailInfo.mainCatgs}" id="mainCatgs"/>
+<input type="hidden" value="$!{gdsDetailInfo.gdsTypeId}" id="gdsTypeId"/>
+<input type="hidden" value="$!{gdsType.ifFree}" id="ifFree"/>
+<input type="hidden" value="$!{gdsType.ifBuyonce}" id="ifBuyonce"/>
+<input type="hidden" value="$!{gdsType.ifNeedstock}" id="ifNeedstock"/>
+<input type="hidden" value="$!{gdsDetailInfo.skuInfo.skuProps}" id="skuProps"/>
+<input type="hidden" value="$!{shopName}" id="shopName"/>
+<input type="hidden" value="$!{gdsDetailInfo.gdsTypeId}" id="gdsTypeId"/>
+<input type="hidden" value="$!{STOCK_LACK_THRESHOLD}" id="STOCK_LACK_THRESHOLD"/>
+<input type="hidden" value="$!{STOCK_HARDTOGET_THRESHOLD}" id="STOCK_HARDTOGET_THRESHOLD"/>
+<input type="hidden" value="$!{gdsDetailInfo.skuInfo.realPrice}" id="price"/>
+<input type="hidden" value="$!{gdsDetailInfo.skuInfo.gdsStatus}" id="gdsStatus"/>
+<input type="hidden" value="$!{gdsDetailInfo.skuInfo.discountPrice}" id="discountPrice"/>
+<input type="hidden" value="$!{staffId}" id="staffId"/>

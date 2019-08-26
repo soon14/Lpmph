@@ -1,0 +1,384 @@
+#macro (showSpringFieldError $field)
+	#springBind("$field")
+    #foreach($e in $status.errorMessages)
+        <span>${e}</span>
+	#end
+#end
+
+#macro (showSpringAllError $model)
+	#springBind("$model")
+    #if($status.errors.hasErrors())
+        ## Global error messages
+        #foreach($e in $status.errorMessages)
+            <span>${e}</span><br/>
+        #end
+        ## Field error messages
+        #foreach($f in $status.errors.fieldErrors)
+		    #showSpringFieldError("$model.${f.field}")
+			<br/>
+	    #end
+	#end
+#end
+
+
+##wangbh
+##根据key获取公共参数集合，封装成select
+##required true/false 是否必填 value:默认选中
+#macro(select $key $name $required $value)
+#set($list = ${paramTools.getParamDTOList($key)})
+	<select name="$name" id="$name" #if($required)class="required"#end>
+			#if(!$required)
+				<option value="">
+					请选择
+                </option>
+				#end
+			#foreach($attr in $list)
+			<option value="$!{attr.spCode}" #if($value==$!{attr.spCode}) selected #end>
+			#escapeHtml($!{attr.spValue})
+            </option>
+		#end
+    </select>
+	
+#end
+##wangbh
+##code转字符
+#macro(translate $name $code)
+#set($val = ${paramTools.translate($name,$code)})
+#escapeHtml($val)
+#end
+
+##wangbh
+##code转字符
+#macro(areaName $code)
+#set($val = ${paramTools.getAreaName($code)})
+#escapeHtml($val)
+#end
+
+###将Map数据展示为下拉列表的信息；
+### add by yugn 2014.7.31
+#macro(displayMapParam $list $defaultCode)
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list.entrySet())
+			#if($null.isNull($defaultCode))
+				<option value=${param.key}>#escapeHtml(${param.value})</option>
+			#else
+				#if($defaultCode == ${param.key})
+					<option value=${param.key} selected='selected'>#escapeHtml(${param.value})</option>
+				#else 
+					<option value=${param.key}>#escapeHtml(${param.value})</option>
+				#end
+			#end
+			
+		#end
+	#end
+#end
+
+##用于将参数名称对应的参数列表 展示为 下拉框列表信息；
+### add by yugn 2014.7.31
+#macro(listParam $paramName $defaultCode)
+	#set($list = ${paramTools.list($paramName)})
+	#displayMapParam($list,$defaultCode)
+#end
+
+####金额展示，前面统一带 &yen; 符号；
+#macro(money $input)##
+#if($input)##
+####下面的输出，距离行首的位置，千万不能有空格，否则输出到 text 之类的输入框中，会出现空格字符；
+&yen;${aiNumber.showMoney("$input")}##
+#end
+#end
+
+####金额展示，前面不带 &yen; 符号；
+#macro(moneyNum $input)
+#if($input)##
+####下面的输出，距离行首的位置，千万不能有空格，否则输出到 text 之类的输入框中，会出现空格字符；
+${aiNumber.showMoneyByTwoDecimal("$input")}##
+#end
+#end
+
+####百分号展示，后面带 % 符号；
+#macro(showPercentNum $input)
+#if($input)##
+####下面的输出，距离行首的位置，千万不能有空格，否则输出到 text 之类的输入框中，会出现空格字符；
+${aiNumber.showPercentNum("$input")}%##
+#end
+#end
+
+####百分号展示，后面不带 % 符号；
+#macro(showPercentNumNotPer $input)
+#if($input)##
+####下面的输出，距离行首的位置，千万不能有空格，否则输出到 text 之类的输入框中，会出现空格字符；
+${aiNumber.showPercentNum("$input")}##
+#end
+#end
+##企业列表输出
+#macro(companylist $defaultCode)
+	
+	#set($list = ${constant.getComapnyCache()})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list)
+			#if($null.isNull($defaultCode))
+				<option value=$!{param.id}>#escapeHtml($!{param.companyName})</option>
+			#else
+				#if($defaultCode == $!{param.id})
+					<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.companyName})</option>
+				#else 
+					<option value=$!{param.id}>#escapeHtml($!{param.companyName})</option>
+				#end
+			#end
+			
+		#end
+	#end
+#end
+
+##店铺列表输出
+#macro(shoplist $defaultCode)
+	
+	#set($list = ${constant.getShopCache()})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list)
+			#if($null.isNull($defaultCode))
+				<option value=$!{param.id}>#escapeHtml($!{param.shopName})</option>
+			#else
+				#if($defaultCode == $!{param.id})
+					<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.shopName})</option>
+				#else 
+					<option value=$!{param.id}>#escapeHtml($!{param.shopName})</option>
+				#end
+			#end
+			
+		#end
+	#end
+#end
+
+##店铺列表输出
+#macro(shopStatuslist $defaultCode $status)
+	
+	#set($list = ${constant.getShopCache()})
+	
+	#if($null.isNull($list) || $list.isEmpty())
+		
+	#else
+		#foreach($param in $list)
+			#if(!$status)
+			#if($null.isNull($defaultCode))
+				<option value=$!{param.id}>#escapeHtml($!{param.shopName})</option>
+			#else
+				#if($defaultCode == $!{param.id})
+					<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.shopName})</option>
+				#else 
+					<option value=$!{param.id}>#escapeHtml($!{param.shopName})</option>
+				#end
+			#end
+			#else
+				#if($status==$!{param.shopStatus})
+						#if($null.isNull($defaultCode))
+				<option value=$!{param.id}>#escapeHtml($!{param.shopName})</option>
+			#else
+				#if($defaultCode == $!{param.id})
+					<option value=$!{param.id} selected='selected'>#escapeHtml($!{param.shopName})</option>
+				#else 
+					<option value=$!{param.id}>#escapeHtml($!{param.shopName})</option>
+				#end
+			 #end
+	       #end
+		#end
+			#end
+	#end
+#end
+
+#macro(process $status $statuslist $mystatus)
+	            <!--进度条-->
+		#foreach($item in $!statuslist)
+		#if($!statuslist.indexOf($item)<$!status.get($mystatus))
+			<div class="node ready">
+                <ul>
+                    <li class="tx1">&nbsp;</li>
+                    <li class="tx2">#translate('ORD_ORDER_STATUS',$item)</li>
+                </ul>
+			</div>
+			<div class="proce ready">
+                <ul>
+                    <li class="tx1">&nbsp;</li>
+                </ul>
+			</div>
+			#else
+				#if($!statuslist.indexOf($item)<($!statuslist.size()))
+					#if($!status.get($item)==""||$null.isNull($!status.get($item)))
+					#else
+					<div class="node wait">
+                        <ul>
+                            <li class="tx1">&nbsp;</li>
+                            <li class="tx2">#translate('ORD_ORDER_STATUS',$item)</li>
+                        </ul>
+                    </div>
+                    <div class="proce wait">
+                        <ul>
+                            <li class="tx1">&nbsp;</li>
+                        </ul>
+                    </div>
+					#end
+				#else
+					<div class="node wait">
+                        <ul>
+                            <li class="tx1">&nbsp;</li>
+                            <li class="tx2">#translate('ORD_ORDER_STATUS',$item)</li>
+                        </ul>
+					</div>
+				#end
+			#end
+		#end
+        	<div class="node wait">
+                <ul>
+                    <li class="tx1">&nbsp;</li>
+                    <li class="tx2">完成</li>
+                </ul>
+            </div>
+
+<!--进度条 end-->
+
+#end
+
+
+###根据图片ID，和规格生成图片URL；
+#macro(genImageUrl $id $size)
+${aiTool.genImageUrl($id,$size)}
+#end
+
+###用于对源字符串进行 HTML 转换；
+#macro (escapeHtml $source)
+${aiTool.escapeHtml("$!{source}")}##
+#end
+
+##展示号码
+#macro (mobile $mobile)
+	#if($null.isNull($mobile) || $mobile.length() != 11)
+	$!mobile
+	#else
+		#set($head = $mobile.substring(0,3)) 
+        #set($mid = "****")
+        #set($tail = $mobile.substring(7,11))
+        #set($mobile = $head + $mid + $tail)
+        $mobile
+	#end
+#end
+
+##展示短地址
+#macro (addr $addr $length)
+	#set($smalladdr = $!addr)
+	#set($max = 50)
+	#if(!$null.isNull($length))
+		#set($max = $length)
+	#end
+	#if(!$null.isNull($addr) && $addr.length()>=$max)
+		#set($smalladdr = $addr.substring(0,$max) + "....")
+	#end
+	$!smalladdr
+#end
+
+##快递方式展示
+##class添加"zt"只要包含zt字符即可
+#macro (distribution_way $code,$name)
+    #set($distribution = ${paramTools.getParamDTOList("STAFF_SHOP_DISTRIBUTION_WAY")})
+    
+    #set($codelist = $code.split(","))
+    #foreach($item in $codelist)
+    	
+	    #foreach($attr in $distribution)
+	    	#if($item == $attr.spCode)
+			    #if($!{attr.spCode}=="1")##1是快递
+			    	#set($class="")
+					#set($checked="checked='checked' ")
+			    #else
+			    	
+			    	#set($class="_zt")
+					#set($checked="")
+			    #end
+		    
+			    ##如果有快递默认快递
+			    #if($!{attr.spCode} == 1)
+			    	#set($class = $class + " checked")
+					#set($checked="checked='checked' ")##初始化配送方式规则
+			    #end
+			    ##如果没有快递默认第一个  1是万恶的快递编码
+			    #if($codelist.contains("1"))
+			    	
+			    #else
+			    	#if($velocityCount == 1)
+			    		#set($class = $class + " checked")
+			    	#end
+			    #end
+		    	<a class="$!class" href="javascript:void(0)">
+			        <input class="pay1" type="radio" value="$!{attr.spCode}" name="$name" $checked>
+			        #escapeHtml($!{attr.spValue})
+			        <b></b>
+			    </a>
+			#end
+		#end
+    #end
+    
+#end
+
+##会员等级 by wangbh
+#macro(custLevelCode $level $paramName)
+	#set($list = ${paramTools.list($paramName)})
+	#foreach($attr in $list.entrySet())
+		#if($level==${attr.key})
+		<i class="icon-ranking rank$!{velocityCount}"></i>
+	    #end	
+	#end
+#end
+
+##会员信息获取
+#macro(custInfo)
+	
+	#set($cust = ${constant.getCustInfo()})
+	
+#end
+
+
+##站点URL jiangzh
+#macro(siteInfo $siteId)
+	
+	#set($siteUrl = ${constant.siteCache("$siteId")})
+	#if($null.isnull($siteUrl))
+		#set($siteUrl = "")
+	#end
+	
+#end
+
+##站点URL jiangzh
+#macro(siteInfoURL $siteId)
+	
+	#set($site = ${constant.siteCacheURL("$siteId")})
+	#if($null.isnull($site))
+	#else
+		$!{site.siteUrl}
+	#end
+	
+#end
+
+##站点对象 zhanbh  传参 ‘1’，或者‘’
+#macro(siteObj $siteId)
+#set($siteObj = ${constant.siteName("$!{siteId}")})
+#end
+
+##获取栏目地址  只限官网使用 zhanbh
+#macro (getGwChannelUrl $channelObj $siteId)
+	#if($!{channelObj.id} && $!{channelObj.id} != '')##有数据
+		##外部链接
+	   	#if($!{channelObj.isOutLink} == 1)
+	   		$!{channelObj.channelUrl} 
+	   	#else
+	   		#siteInfoURL($!{siteId})/about?channelId=$!{channelObj.id}
+	   	#end
+	#end
+#end

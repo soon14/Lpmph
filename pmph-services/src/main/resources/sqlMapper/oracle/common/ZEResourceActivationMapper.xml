@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.ecp.pmph.dao.mapper.common.ZEResourceActivationMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.ecp.pmph.dao.model.ZEResourceActivation" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="PASTECARDID" property="pastecardid" jdbcType="INTEGER" />
+    <result column="CARDNO" property="cardno" jdbcType="VARCHAR" />
+    <result column="MEMO" property="memo" jdbcType="VARCHAR" />
+    <result column="PROP1" property="prop1" jdbcType="VARCHAR" />
+    <result column="PROP2" property="prop2" jdbcType="VARCHAR" />
+    <result column="PROP3" property="prop3" jdbcType="VARCHAR" />
+    <result column="PROP4" property="prop4" jdbcType="VARCHAR" />
+    <result column="ADDUSER" property="adduser" jdbcType="VARCHAR" />
+    <result column="ADDTIME" property="addtime" jdbcType="TIMESTAMP" />
+    <result column="MODIFYUSER" property="modifyuser" jdbcType="VARCHAR" />
+    <result column="MODIFYTIME" property="modifytime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, PASTECARDID, CARDNO, MEMO, PROP1, PROP2, PROP3, PROP4, ADDUSER, ADDTIME, MODIFYUSER, 
+    MODIFYTIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ecp.pmph.dao.model.ZEResourceActivationCriteria" >
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       select * from (select t_1.*,rownum as row_num from (
+    </if>
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from v_zeresourceactivation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       <![CDATA[ ) t_1 where rownum<=#{limitClauseCount,jdbcType=INTEGER} + #{limitClauseStart,jdbcType=INTEGER}) t_2 where t_2.row_num>#{limitClauseStart,jdbcType=INTEGER}]]>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from v_zeresourceactivation
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from v_zeresourceactivation
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.ecp.pmph.dao.model.ZEResourceActivationCriteria" >
+    delete from v_zeresourceactivation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.ecp.pmph.dao.model.ZEResourceActivation" >
+    insert into v_zeresourceactivation (ID, PASTECARDID, CARDNO, 
+      MEMO, PROP1, PROP2, 
+      PROP3, PROP4, ADDUSER, 
+      ADDTIME, MODIFYUSER, MODIFYTIME
+      )
+    values (#{id,jdbcType=INTEGER}, #{pastecardid,jdbcType=INTEGER}, #{cardno,jdbcType=VARCHAR}, 
+      #{memo,jdbcType=VARCHAR}, #{prop1,jdbcType=VARCHAR}, #{prop2,jdbcType=VARCHAR}, 
+      #{prop3,jdbcType=VARCHAR}, #{prop4,jdbcType=VARCHAR}, #{adduser,jdbcType=VARCHAR}, 
+      #{addtime,jdbcType=TIMESTAMP}, #{modifyuser,jdbcType=VARCHAR}, #{modifytime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.ecp.pmph.dao.model.ZEResourceActivation" >
+    insert into v_zeresourceactivation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="pastecardid != null" >
+        PASTECARDID,
+      </if>
+      <if test="cardno != null" >
+        CARDNO,
+      </if>
+      <if test="memo != null" >
+        MEMO,
+      </if>
+      <if test="prop1 != null" >
+        PROP1,
+      </if>
+      <if test="prop2 != null" >
+        PROP2,
+      </if>
+      <if test="prop3 != null" >
+        PROP3,
+      </if>
+      <if test="prop4 != null" >
+        PROP4,
+      </if>
+      <if test="adduser != null" >
+        ADDUSER,
+      </if>
+      <if test="addtime != null" >
+        ADDTIME,
+      </if>
+      <if test="modifyuser != null" >
+        MODIFYUSER,
+      </if>
+      <if test="modifytime != null" >
+        MODIFYTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pastecardid != null" >
+        #{pastecardid,jdbcType=INTEGER},
+      </if>
+      <if test="cardno != null" >
+        #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="prop1 != null" >
+        #{prop1,jdbcType=VARCHAR},
+      </if>
+      <if test="prop2 != null" >
+        #{prop2,jdbcType=VARCHAR},
+      </if>
+      <if test="prop3 != null" >
+        #{prop3,jdbcType=VARCHAR},
+      </if>
+      <if test="prop4 != null" >
+        #{prop4,jdbcType=VARCHAR},
+      </if>
+      <if test="adduser != null" >
+        #{adduser,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null" >
+        #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null" >
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.ecp.pmph.dao.model.ZEResourceActivationCriteria" resultType="java.lang.Long" >
+    select count(*) from v_zeresourceactivation
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update v_zeresourceactivation
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.pastecardid != null" >
+        PASTECARDID = #{record.pastecardid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cardno != null" >
+        CARDNO = #{record.cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memo != null" >
+        MEMO = #{record.memo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prop1 != null" >
+        PROP1 = #{record.prop1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prop2 != null" >
+        PROP2 = #{record.prop2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prop3 != null" >
+        PROP3 = #{record.prop3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prop4 != null" >
+        PROP4 = #{record.prop4,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adduser != null" >
+        ADDUSER = #{record.adduser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addtime != null" >
+        ADDTIME = #{record.addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyuser != null" >
+        MODIFYUSER = #{record.modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifytime != null" >
+        MODIFYTIME = #{record.modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update v_zeresourceactivation
+    set ID = #{record.id,jdbcType=INTEGER},
+      PASTECARDID = #{record.pastecardid,jdbcType=INTEGER},
+      CARDNO = #{record.cardno,jdbcType=VARCHAR},
+      MEMO = #{record.memo,jdbcType=VARCHAR},
+      PROP1 = #{record.prop1,jdbcType=VARCHAR},
+      PROP2 = #{record.prop2,jdbcType=VARCHAR},
+      PROP3 = #{record.prop3,jdbcType=VARCHAR},
+      PROP4 = #{record.prop4,jdbcType=VARCHAR},
+      ADDUSER = #{record.adduser,jdbcType=VARCHAR},
+      ADDTIME = #{record.addtime,jdbcType=TIMESTAMP},
+      MODIFYUSER = #{record.modifyuser,jdbcType=VARCHAR},
+      MODIFYTIME = #{record.modifytime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.ecp.pmph.dao.model.ZEResourceActivation" >
+    update v_zeresourceactivation
+    <set >
+      <if test="pastecardid != null" >
+        PASTECARDID = #{pastecardid,jdbcType=INTEGER},
+      </if>
+      <if test="cardno != null" >
+        CARDNO = #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        MEMO = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="prop1 != null" >
+        PROP1 = #{prop1,jdbcType=VARCHAR},
+      </if>
+      <if test="prop2 != null" >
+        PROP2 = #{prop2,jdbcType=VARCHAR},
+      </if>
+      <if test="prop3 != null" >
+        PROP3 = #{prop3,jdbcType=VARCHAR},
+      </if>
+      <if test="prop4 != null" >
+        PROP4 = #{prop4,jdbcType=VARCHAR},
+      </if>
+      <if test="adduser != null" >
+        ADDUSER = #{adduser,jdbcType=VARCHAR},
+      </if>
+      <if test="addtime != null" >
+        ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyuser != null" >
+        MODIFYUSER = #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null" >
+        MODIFYTIME = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.ecp.pmph.dao.model.ZEResourceActivation" >
+    update v_zeresourceactivation
+    set PASTECARDID = #{pastecardid,jdbcType=INTEGER},
+      CARDNO = #{cardno,jdbcType=VARCHAR},
+      MEMO = #{memo,jdbcType=VARCHAR},
+      PROP1 = #{prop1,jdbcType=VARCHAR},
+      PROP2 = #{prop2,jdbcType=VARCHAR},
+      PROP3 = #{prop3,jdbcType=VARCHAR},
+      PROP4 = #{prop4,jdbcType=VARCHAR},
+      ADDUSER = #{adduser,jdbcType=VARCHAR},
+      ADDTIME = #{addtime,jdbcType=TIMESTAMP},
+      MODIFYUSER = #{modifyuser,jdbcType=VARCHAR},
+      MODIFYTIME = #{modifytime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,167 @@
+#parse("/sys/sys_param.vm")
+<div id="main" style="    margin-bottom: 20px;">
+    <!--查询我的征订单-->
+
+    <!-- 我的征订单 begin -->
+    <div class="mbox order-list" style="padding:0;">
+        <ul class="sptj-tit" id="">
+        	<li><a href="#" class="titQh">我的征订单</a></li>
+    	</ul>
+        <div class="mbox-body" style="padding: 10px;box-sizing: border-box;">
+            <div class="mt clearfix">
+            	#parse("/pub/order/date-box.vm")
+                #parse("/pub/order/ord-head.vm")
+            </div>
+            <div id="teamTabc">
+                <div class="mc">
+                #foreach($!pubOrder in $!resp.getResult())
+				<!--内容 区-->
+				<!--征订单 开始 1-->
+					<div class="sign-list-detail">
+						<input type="hidden" name="pubOrderId" value="$!{pubOrder.getId()}">
+						<div class="sign-detail-head">
+	   						<span class="number">征订单号：
+                                 <a href="javascript:void(0)">$!{pubOrder.getId()}</a>
+                            </span>
+                            <span class="dealtime">下单时间：$!date.format('yyyy-MM-dd HH:mm:ss',$pubOrder.getOrderTime())</span>
+                            <span class="dealtime sign-money">总额：
+                                 <a href="javascript:void(0)">#moneyNum($!{pubOrder.getRealMoney()})</a>
+                            </span>
+                            <span class="dealtime sign-money">运费：
+                                 <a href="javascript:void(0)">#moneyNum($!{pubOrder.getRealExpressFee()})</a>
+                            </span>
+                            <span class="dealtime sign-money">优惠：
+                                 <a href="javascript:void(0)">#moneyNum($!{pubOrder.getDiscountMoney()})</a>
+                            </span>
+                            <span class="dealtime">状态：
+                            	 #if($!{pubOrder.status}=="05")
+                            	 	<a href="javascript:void(0)">全部发货</a>
+                            	 #else
+                                 	<a href="javascript:void(0)">#translate('ORD_ORDER_STATUS' $!{pubOrder.status})</a>
+                                 #end
+                            </span>
+                            #if($!{pubOrder.status}=="01")
+	                            <span class="dealtime">
+	                            	<button class="rewrite" id="cancel">取消</button>
+	                            </span>
+                            #end
+						</div>
+						
+						
+						#set($tableClass="order-tb")
+                    	#foreach($!ordItem in $!pubOrder.getOrdItem())
+	                        #set($ordMain = $!ordItem.getsCustomerOrdMain())
+	                        #set($ordComm = $!ordItem.getsOrderDetailsComm())
+	                        #set($mIndex = $velocityCount - 1)
+	                        #if($!velocityCount==1)
+	                        #else
+	                            #set($tableClass = "order-tb mt20")
+	                        #end
+							<!--征订单 子订单-->
+							<div class="signOrder-list-detail">
+								<table class="$tableClass" style="width: 95%;margin: 15px auto;">
+					                <input type="hidden" name="orderId" value="$!{ordMain.getOrderId()}">
+		                            <input type="hidden" name="shopId" value="$!{ordMain.getShopId()}">
+									<input name="refundId" type="hidden" value="$!{ordMain.getRefundId()}">
+									<input name="backGdsId" type="hidden" value="$!{ordMain.getBackGdsId()}">
+					                <tbody>
+					                	<tr class="tr-th">
+					                    	<td colspan="5" style="padding: 0 15px;box-sizing: border-box;">
+					                    		<span>订单号：</span>
+					                    		<span class="signOrder-phoneNum">$!{ordMain.getOrderId()}</span>
+					                        	<span>收货人：</span>
+					                        	<span class="signOrder-address">$!{ordMain.getContactName()}</span>
+					                        	<span class="signOrder-address">$!{ordMain.getChnlAddress()}</span>
+					                        	<span class="signOrder-phoneNum">$!{ordMain.getContactPhone()}</span>
+					                        	         
+					                    	</td>
+					                	</tr>
+					                	#set($evalFlags = "")
+		                                #foreach($!ordSub in $!ordItem.getsOrderDetailsSubs())
+		                                    #set($evalFlags = $evalFlags + $!{ordSub.evalFlag})
+		                                #end
+		                                #foreach($!ordSub in $!ordItem.getsOrderDetailsSubs())
+		                                    #set($amount = $amount + $!ordSub.getDiscountPrice())
+		                                    #set($ordSubSize = $!ordItem.getsOrderDetailsSubs().size())
+						                	<tr class="tr-bd">
+						                  		<td  style="padding:10px 0;">
+						                  			<!--信息列表 -->
+						                     		<div class="signOrder-txt">
+						                     			<div class="goods-item" id="" style="width: 220px;">
+						                                	<div class="p-img">
+						                                    	<a href="$!{CONTEXT_PATH}$!ordSub.getGdsUrl()" target="_blank">
+						                                        	<img class="" src="#genImageUrl($!ordSub.getPicId(),'200x200!')" title="" width="60" height="60">
+						                                    	</a>
+						                                	</div>
+						                                	<div class="p-msg">
+						                                    	<div class="p-name">
+						                                        	<a href="$!{CONTEXT_PATH}$!ordSub.getGdsUrl()" class="a-link" target="_blank" title="">$!ordSub.getGdsName()
+						                                        	</a>
+						                                    	</div>
+						                                	</div>
+						                            	</div>
+						                            	<div class="goods-number" style="width: 50px;"> *$!ordSub.getOrderAmount() </div>
+						                            	<div class="goods-repair" style="width: 50px;">
+						                                	<a href="javascript:void(0)">
+						                                    	#moneyNum($!ordSub.getDiscountPrice())
+															</a>
+						                            	</div>
+						                     		</div>
+						                        </td>
+						                        #if($!velocityCount==1)
+							                        <td rowspan="$ordSubSize" class="txtStyle">
+							                            <div class="amount"   style="width:120px;">
+							                                <strong><em class="rmb">¥</em>#money($!{ordMain.getRealMoney()})</strong> <br>
+							                                <span class="t-gray">（快递#moneyNum($!{ordMain.getRealExpressFee()})元）</span><br>
+							                            </div>
+							                        </td>
+							                        <td rowspan="$ordSubSize" style="text-align: left;padding-left: 10px;box-sizing: border-box;">
+							                            <div class="fapiaoMsg">
+							                                <span class="c-gray-fa">发票信息</span><br>
+							                                <span class="c-gray">抬头：</span>$!{ordComm.getInvoiceTitle()}<br>
+							                                <span class="c-gray">纳税人识别号：</span>$!{ordComm.getTaxpayerNo()}<br>
+							                                 <span class="c-gray">发票金额：</span>#money($!{ordComm.getInvoiceMoney()})<br>
+							                            </div>
+							                        </td>
+							                        <td rowspan="$ordSubSize" class="txtStyle">
+							                        	<div class="operate"   style="width:90px;">
+							                             	<span class="c-gray">#translate('ORD_ORDER_STATUS' $!{ordMain.status})</span>	                                                                                                                     
+							                            </div>
+							                        </td>
+							                        <td rowspan="$ordSubSize" class="txtStyle">
+							                        	<div class="operate"  style="width:90px;">
+							                             	<a href="javascript:void(0)" class="signOrder-delete" id="signOrder-detail">查看详情</a><br>                                                                                                                     
+							                            </div>
+							                        </td>
+						                        #end
+						                   </tr>
+						            #end
+					                </tbody>
+					            </table>
+					             <div style="width: 95%;margin: 15px auto;">
+					            	<label style="display: inline-block;">备注：</label>
+									<div class="textDetail" id="textDetail">
+										$!{pubOrder.getRemark()}
+									</div>
+					            </div>
+							</div>
+						#end
+						<!--征订单 子订单结束-->
+					</div>
+					<!--征订单 结束-->
+				#end
+                </div>
+            </div>
+        </div>
+        <div class="row-fluid">
+            <!--<div id="pageControlbar"></div>-->
+            <div id="pageControlbar" class="ecppage" data-total-page="${resp.pageCount}" data-total-row="${resp.count}" data-page-size="${resp.pageSize}" data-page-number="${resp.pageNo}" data-status="begin"></div>
+        </div>
+    </div>
+    <!-- 我的征订单 end -->
+
+</div>
+<script>
+	
+</script>
+

@@ -1,0 +1,62 @@
+#parse("/sys/sys_param.vm")
+
+#parse("/module/mod-form.vm")
+
+<!--登录页样式-->
+<link href="$CSS_PATH/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="$CSS_PATH/login.css" type="text/css" rel="stylesheet">
+<link href="$CSS_PATH/public.css" type="text/css" rel="stylesheet">
+<body>
+ <div class="lg-content">
+      <div class="w">
+         <div class="lg-logo">
+             <a href="#"><img src="$IMAGE_PATH/logo_im.png" alt=""/> </a>
+          </div>
+         <div class="form-block">
+             <form class="ui-form form-login" id="loginform" id="loginform">
+                 <h2>客服登录</h2>
+                 <div class="control-group item-user">
+                     <div class="controls">
+                     	 <i class="in-bg"></i>
+                         <input placeholder="请输入用户名" name="j_username" class="ui-input" type="text"/>
+                     </div>
+                 </div>
+                 <div class="control-group item-pwd">
+                     <div class="controls">
+                     	 <i class="in-bg"></i>
+                         <input placeholder="请输入密码" class="ui-input" name="j_password" type="password"/>
+                     </div>
+                 </div>
+                 <div class="control-group item-ewm">
+                     <div class="controls">
+                         <input type="text" class="ui-input" id="checkcodediv" name="j_check_code" placeholder="验证码">
+                        <span class=""><img id="captchaCodeImg" src="${CONTEXT_PATH}/captcha/CapthcaImage" alt="" width="70"/></span>
+                        <span class=""><a class="mta" id="refleshCaptchaCode" href="javascript:void(0);">换一张</a></span>
+                     </div>
+                 </div>
+                 <div class="control-group">
+                     <div class="controls">
+                         <input class="ui-btn" type="button" id="loginsubmit" value="登 录"/>
+                     </div>
+                 </div>
+                 <div class="text-center ml50" style="margin-top: 20px; ">
+                    <a href="${CONTEXT_PATH}/im/third/sys/login">统一认证平台</a>
+                </div>
+             </form>
+         </div>
+         <div class="copyRight">
+             <input type="hidden" id="loginResultMsg" value="$!{loginResultMsg}" />
+         </div>
+      </div>
+  </div>
+</body>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/login/login-main.js?version=$!{JS_VERSION}" ></script>
+<script>
+function showMsg(){
+	var loginMsg = document.getElementById("loginResultMsg").value;
+	if (loginMsg != "") {
+		eDialog.alert(loginMsg);
+	}
+}
+showMsg();
+</script>

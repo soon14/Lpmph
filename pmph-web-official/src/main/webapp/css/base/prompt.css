@@ -1,0 +1,17 @@
+/**悬浮框***/
+.hx_kuang{ width:195px; height:28px; background:url(../images/h_x.png) no-repeat;overflow:auto; overflow-x:hidden; }
+.hx_kuang p{ width:175px; float:left; padding:2px 0 0 10px; color:#ff0000; font-size:11px;}
+
+.zx_kuang{ width:188px; height:auto;}
+.zx_kuang_A{background:url(../images/zx_k.png) no-repeat; width:188px; height:7px;float:left;}
+.zx_kuang_B{ width:186px; border:1px solid #c8cacb; background:#eff4f6; height:auto; float:left; border-top:none;}
+.zx_kuang_B p{ width:170px;  padding:2px 0 0 8px; color:#ff0000;font-size:12px;  font-size:11px;}
+
+.zx_xiak{ width:188PX; height:auto;}
+.zx_xiak_A{ width:180px;background:#eff4f6; border:1px solid #c8cacb; height:auto; float:left; border-bottom:none;}
+.zx_xiak_A p{ width:170px;  padding:2px 0 0 8px; color:#ff0000;font-size:12px; font-size:11px;}
+.zx_xiak_B{ width:180px; background:url(../../images/z_h1.png) no-repeat; height:7px;float:left;}
+
+.STYLE1 {color: #FF0000}
+.STYLE4 {font-size: 14px;}
+.STYLE5 {font-size: 14px;}

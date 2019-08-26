@@ -1,0 +1,15 @@
+<!--版权-->
+<div class="wrap100 footerBg">
+    <div class="container footer">
+		<div class="ecp-component friendship-link"
+					data-status="1" data-site-id="4" data-module="ecp-component/friendship-link">
+        </div>
+		#siteObj('4')
+		<p>$!{siteObj.siteAddress}</p>
+		<p>#if($!{siteObj.copyrightCompany} && $!{siteObj.copyrightCompany} != '')©$!{siteObj.copyrightCompany}#end $!{siteObj.caseNo} <img class="bhh" width="20px" height="20px" src="$!{IMAGE_PATH}/ghs.png" alt=""/><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502031110" target="_blank">京公网安备 11010502031110号</a></p>
+		<!--
+        <p>北京市朝阳区潘家园南里19号世界医药图书大厦B座</p>
+        <p>Copyright© 2014-2014 人民卫生出版社主办 京ICP备：05067302号-2 <img class="bhh" width="20px" height="20px" src="$!{IMAGE_PATH}/ghs.png" alt=""/><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502031110" target="_blank">京公网安备 11010502031110号</a></p>
+		-->
+	</div>
+</div>

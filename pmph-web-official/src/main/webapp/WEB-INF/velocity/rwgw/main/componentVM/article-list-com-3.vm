@@ -1,0 +1,45 @@
+<!-- 文章列表   3类型   首页products类型 -->
+#parse("/rwgw/sys/sys_param.vm")
+
+#if(!${siteId} || ${siteId} == '')
+	#set(${siteId} = '3')
+#end
+
+#if(${siteId} == '5')
+	#set($errorMsg = "Sorry, No Data Found.")
+#else
+	#set($errorMsg = "亲，暂无数据！")
+#end
+<div class="box-head">
+	 <i class="box-ticon ticon-book"></i> 
+	 	#if($channel && $channel.id && '' != $!{channel.id})
+		<a class="r-opt" href="#getGwChannelUrl($channel $!{siteId})">
+		more<i class="micon micon-more"></i>
+		</a>
+		#end
+</div>
+<div class="box-body">
+	<div class="tab">
+		<div class="item">
+			#if($articles && ${articles.size()} > 0)
+			<ul class="clearfix book-list">
+				#foreach($article in $articles)
+				<li>
+					<div class="book-img">
+						<a href="#siteInfoURL($!{siteId})/about?articleId=$!{article.id}" target="_blank"> 
+							<img src="$!{article.thumbnailUrl}" alt="$!{article.articleTitle}" />
+						</a>
+					</div>
+					<div class="book-name" title="$!{article.articleTitle}">
+						<a href="#siteInfoURL($!{siteId})/about?articleId=$!{article.id}" target="_blank">$!{article.articleTitle}</a>
+					</div>
+					<div class="book-dec" title="$!{article.articleRemark}">$!{article.articleRemark}</div>
+				</li>
+				#end
+			</ul>
+			#else
+			<div class ='pro-empty'>#if($!{errorMessage})$!{errorMessage}#else $!{errorMsg} #end</div>
+			#end
+		</div>
+	</div>
+</div>

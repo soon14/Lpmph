@@ -1,0 +1,11 @@
+<!--导航-->
+<div class="gwNav ">
+    <div class="w clearfix">
+    	 <a href="#siteInfoURL('3')" class="logo">
+            <img src="$IMAGE_PATH/logo.png" alt="人卫官网"/>
+        </a>
+        <ul class="navbar ecp-component channel-shader" data-status="1" data-place-size="5" data-site-id="3" data-channel-type="01" data-platform-type="01" data-return-url="/rwgw/main/componentVM/rwgw-zh/channel-nav" data-module="ecp-component/channel-shader">
+        </ul>
+    </div>
+</div>
+<!--导航end-->

@@ -1,0 +1,45 @@
+#parse("/rwgw-en/sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/main/main-content.js"></script>
+<!--内容 begin-->
+<div id="content">
+    <!--图片轮播 begin-->
+    <div>
+    #parse("/rwgw-en/main/indexcontent/contentchild/leaflet-slider.vm")
+    </div>
+    <!--图片轮播 end-->
+  <div class="w">
+      <div class="box clearfix">
+      <!-- hot news begin -->
+      #parse("/rwgw-en/main/indexcontent/contentchild/hot-news.vm")
+      <!-- hot news end -->
+      
+      <!-- 人卫公告    begin -->
+      #parse("/rwgw-en/main/indexcontent/contentchild/rw-announcement.vm")
+      <!-- 人卫公告 end -->
+      </div>
+      <!-- 图书楼层 begin -->
+      <div class="box clearfix">
+          <!-- procucts begin -->
+          #parse("/rwgw-en/main/indexcontent/contentchild/products.vm")
+          <!-- procucts end -->
+          <!-- recommendation begin -->
+          #parse("/rwgw-en/main/indexcontent/contentchild/recommendation.vm")
+          <!-- recommendation  end -->
+      </div>
+      <!-- 图书楼层 end -->
+
+      <!-- 智慧服务 begin -->
+      <div >
+      #parse("/rwgw-en/main/indexcontent/contentchild/service-leaflet-slider.vm")
+      </div>
+      <!-- 智慧服务 end -->
+
+      <!-- 人卫网站 begin -->
+      <div>
+      #parse("/rwgw-en/main/indexcontent/contentchild/site-slider.vm")
+      </div>
+      <!-- 人卫网站 end -->
+
+  </div>
+</div>
+<!--内容 end-->

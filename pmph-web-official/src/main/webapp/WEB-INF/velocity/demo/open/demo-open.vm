@@ -1,0 +1,43 @@
+#set($layout="/demo/open/layout.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/demo/demo-open.js?version=$!{JS_VERSION}" ></script>
+
+
+<h3 class="heading">字典内容编辑</h3>
+
+<div class="formBox">
+	<form id="detailInfoForm" class="form-horizontal required-validate" style="margin-bottom: 0px;">
+		<div class="formSep">
+			<div class="control-group">
+				<label class="control-label">数据表名</label>
+				<div class="controls">
+					<input type="text" class="input-large required" name="code.table_name" />
+					<span class="help-inline">数据库表名</span>
+					<input type="hidden" id="code_id" name="code.id" value="${param.code_id}" />
+					<input type="hidden" id="operation" value="1" />
+				</div>
+			</div>
+		</div>
+		<div class="formSep">
+			<div class="control-group">
+				<label class="control-label">关联字段名</label>
+				<div class="controls">
+					<input type="text" class="input-large required" name="code.field_name" />
+					<span class="help-inline">数据库表中的字段名</span>
+				</div>
+			</div>
+		</div>
+		<div class="formSep">
+			<div class="control-group">
+				<label class="control-label">字典值</label>
+				<div class="controls">
+					<input type="text" class="input-large required" name="code.code_value" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<button type="button" class="btn btn-success" id="btnFormSave"><i class="icon-ok"></i> 确认并传递参数</button>
+			<button type="button" class="btn btn-primary" id="btnReturn"><i class="icon-ban-circle"></i> 关闭窗口不传递参数</button>
+		</div>
+	</form>
+</div>

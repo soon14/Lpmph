@@ -1,0 +1,11 @@
+#parse("/rwgw-en/sys/sys_param.vm")
+<div class="w-left">
+    <dl>
+        <dt>#if($!{topSiteInfo.siteInfoName})$!{topSiteInfo.siteInfoName}#else About PMPH #end</dt>
+		#if(${siteInfoList} && $siteInfoList.size() > 0)
+        	#foreach($siteInfo in $!{siteInfoList})
+				<dd><a href="javascript:void(0)" class="siteinfoitem" id="siteinfo-$!{siteInfo.id}" data-id="$!{siteInfo.id}" data-name="$!{siteInfo.siteInfoName}" data-channel-id="$!{siteInfo.channelId}" >$!{siteInfo.siteInfoName}</a></dd>
+			#end
+    	#end
+    </dl>
+</div>

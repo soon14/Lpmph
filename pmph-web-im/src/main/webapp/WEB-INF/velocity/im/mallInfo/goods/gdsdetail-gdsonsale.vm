@@ -1,0 +1,89 @@
+#set($ifPage = '0')
+#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get("1028").values})
+	#if($!{value.id}=='306')
+		#set($ifPage = '1')
+	#end
+#end
+<tr>
+	##该价格如果有促销活动的，则会被促销计算所得价格覆盖，请注意。（业务需求）
+   <th>
+        价&nbsp;&nbsp;格
+     </th>
+	<td>
+       <span class="realPrice">
+            #set($pagePrice = '0')
+			#if($ifPage =='1' && $!{stockStatus}=="00")
+				#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get("1029").values})
+					#set($pagePrice = $!{value.propValue})
+            	#end
+			#end
+			#if($pagePrice =="" || $pagePrice =='0')
+				#moneyDecimal($!{gdsDetailInfo.skuInfo.discountPrice})
+			#else
+				#moneyDecimal($pagePrice)
+			#end
+          </span>
+     </td>
+  </tr>
+  <tr>
+	##该价格如果有促销活动的，则会被促销计算所得价格覆盖，请注意。（业务需求）
+    <th>
+        原&nbsp;&nbsp;价
+    </th>
+   <td>
+        <del class="price">#moneyDecimal($!{gdsDetailInfo.skuInfo.guidePrice})</del>
+  </td>
+
+#if($!{gdsDetailInfo.skuInfo.ifFree}=='1')
+  <tr>
+    <th>邮&nbsp;&nbsp;费</th>
+    <td>
+        免邮
+    </td>
+  </tr>
+#end
+	#set($pCount = 0)
+#foreach($param in $!{gdsDetailInfo.skuInfo.gdsProps})
+	#if($!{param.ifBasic}=='1')
+		#set($show = '0')
+		#foreach($value in $!{param.values})
+    		#if($!{value.propValue} && $!{value.propValue} !="")
+				#set($show = '1')
+			#end
+		#end
+		#if($show=='1')
+			#set($pCount = $pCount + 1)
+          <tr>
+                <th>
+                    $!{param.propName}
+                </th>
+                <td>
+                    #foreach($value in $!{param.values})
+						#if(${param.id}=='1029')
+							#moneyNum($!{value.propValue})
+						#else
+							$!{value.propValue}
+						#end
+        			#end
+                </td>
+            </tr>
+		#end
+	#end
+#end
+<tr>
+    <th>
+        库&nbsp;&nbsp;存
+    </th>
+    <td>
+		#if($!{gdsDetailInfo.gdsTypeRespDTO.ifNeedstock}=="1")
+    		#if($!{gdsDetailInfo.gdsTypeId}=='2')
+    			充足
+    		#else
+    			$!{stockStatusDesc}
+    		#end
+		#else
+			充足
+		#end
+		
+    </td>
+</tr>

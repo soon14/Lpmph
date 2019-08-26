@@ -1,0 +1,170 @@
+#parse("sys/sys_param.vm")
+<link href="$CSS_PATH/seller-reset.css" type="text/css" rel="stylesheet">
+<link href="$CSS_PATH/seller.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/seller-order.js?version=$!{JS_VERSION}"></script>
+
+<div class="seller-mainR">
+	<form id="exportForm" action="$!{CONTEXT_PATH}/seller/order/manage/exportDetail" target="_blank" method="post" style="display:none">
+    	<input type="hidden" name="exportInfo" id="exportInfo" value="0">
+    	<input type="hidden" name="exportType" id="exportType" value="0">
+	</form>
+    <div class="main">
+        <div class="seller-well">
+            <form id="searchForm" action="" class="form-horizontal required-validate">
+                    <div class="row-fluid">
+						<div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">店铺名称：</label>
+                                <div class="controls">
+                                    <select name="shopId" id="" class="input-block-level" >
+    									##<option value="">请选择</option>
+                                        ###shopStatuslist('','1')
+    									#sellerList($!{shopId})
+                                    </select>
+                                </div>
+                            </div>
+						</div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">是否支付：</label>
+                                <div class="controls">
+                                    <select class="input-block-level" name="payFlag">
+                                        <option value="">请选择</option>
+                                        <option value="1">#escapeHtml("是")</option>
+    									<option value="0">#escapeHtml("否")</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+    					<div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">收货人姓名：</label>
+                                <div class="controls">
+                                    <input placeholder="收货人姓名" type="text" class="input-block-level" name="contactName"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row-fluid">
+						<div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">站点：</label>
+                                <div class="controls">
+                                    <select name="siteId" id="" class="input-block-level">
+                                        <option value="">请选择</option>
+										#siteList()
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">订单状态：</label>
+                                <div class="controls">
+                                    <select name="status" class="input-block-level">
+                                        <option value="">请选择</option>
+										#listParam('ORD_ORDER_STATUS', $!{status})
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">订单编号：</label>
+                                <div class="controls">
+                                    <input placeholder="订单编号" type="text" class="input-block-level" name="orderId"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">是否开发票：</label>
+                                <div class="controls">
+                                    <select class="input-block-level" name="invoiceType">
+                                        <option value="">请选择</option>
+                                        <option value="1">#escapeHtml("是")</option>
+										<option value="2">#escapeHtml("否")</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">支付方式：</label>
+                                <div class="controls">
+                                    <select class="input-block-level"  name="payType">
+                                        <option value="">请选择</option>
+										#listParam('ORD_PAY_TYPE')
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <label class="control-label">会员名：</label>
+                                <div class="controls">
+                                    <input placeholder="会员名" type="text" class="input-block-level" name="staffCode"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="row-fluid">
+                    
+					<div class="span8">
+                        <div class="control-group">
+                            <label class="control-label" for="begDate">下单日期：</label>
+                            <div class="controls">
+                                <input type="text" class="input-block-level Wdate"
+                                       onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" name="begDate"
+                                       value="$!date.format('yyyy-MM-dd',$!{begDate})" id="begDate" style="cursor: pointer; width: 135px">
+									   至
+                                <input type="text" class="input-block-level Wdate"
+                                       onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begDate\')}'})" name="endDate"
+                                       value="$!date.format('yyyy-MM-dd',$!{endDate})" id="endDate" style="cursor: pointer;width: 135px">
+
+                            </div>
+                        </div>
+                    </div>
+					<div class="span4">
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="btn-wrap btn-w-left">
+                                    <span class="sbtn sbtn-blue" id="btnFormSearch"><i class="icon-search"></i> 查询</span>
+                                    <span class="sbtn" id="btnFormReset"><i class="icon-asterisk icon-color"></i> 重置</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+		<input type="hidden" name="resetBegDate" id="resetBegDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+    	<input type="hidden" name="resetEndDate" id="resetEndDate" value="$!date.format('yyyy-MM-dd',$!{endDate})">
+        <div class="alert alert-info" >
+            <label class="control-label">累计下单<span id="orderCount" class="numberFont"></span>笔,
+                累计支付订单<span id="payedCount" class="numberFont"></span>笔,
+                成交率<span id="payedRate" class="numberFont"></span>%,
+                累计订单码洋<span id="sumOrderMoney" class="numberFont"></span>元,
+                累计订单实洋<span id="sumRealMoney" class="numberFont"></span>元
+            </label>
+        </div>
+        <div class="seller-tab">
+            <div class="tab-content" >
+                <div class="nItem">
+                    <div class="sbtn-group" style="margin-bottom: 10px;">
+                        <span class="sbtn sbtn-blue" id="btnPrint"><i class="icon-print"></i> 批量打印</span>
+                        <span class="sbtn" id="btnFormExport"><i class="icon-download-alt icon-color"></i> 导出单头</span>
+                        <span class="sbtn" id="barCodeExport"><i class="icon-download-alt icon-color"></i> 导出明细</span>
+                    </div>
+                </div>
+				<div class="nItem" id="order-contentDiv">
+					#parse("/seller/order/orderlist/seller-order-list.vm")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

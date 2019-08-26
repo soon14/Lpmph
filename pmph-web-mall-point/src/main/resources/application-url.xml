@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+	<url>
+		<homePage>/homepage</homePage>
+		<loginPage>/login</loginPage><!--登录  -->
+		<logoutPage>/homepage</logoutPage><!--登出  -->
+		<registerPage>/login</registerPage><!--注册  -->
+		<lostpasswordPage>/login</lostpasswordPage><!--忘记密码  -->
+		<updatepasswordPage>/login</updatepasswordPage><!--修改密码  -->
+		<mall>/login</mall><!--商城链接 -->
+		<notLogin>http://132.37.5.191:14300/woego</notLogin>
+		<notPermit>/permission/noPermission</notPermit>
+		<sessionExpired>http://132.37.5.191:14300/woego</sessionExpired>
+		<contextPage>http://www.woego.cn/woego</contextPage>
+	</url>
+	<site>
+		<key>2</key>
+	</site>
+</application>

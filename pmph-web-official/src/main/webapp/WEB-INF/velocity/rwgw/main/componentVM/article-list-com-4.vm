@@ -1,0 +1,44 @@
+<!-- 文章列表   4类型   首页recommendation类型 -->
+#parse("/rwgw/sys/sys_param.vm")
+
+#if(!${siteId} || ${siteId} == '')
+	#set(${siteId} = '3')
+#end
+
+#if(${siteId} == '5')
+	#set($errorMsg = "Sorry, No Data Found.")
+#else
+	#set($errorMsg = "亲，暂无数据！")
+#end
+
+<div class="box-head">
+	<div class="order-tt">
+		<span>  RECOMMENDATIONS</span>
+	</div>
+</div>
+<div class="box-body">
+	#if($articles && ${articles.size()} > 0)
+	<div class="order-list">
+		<div class="item">
+			#foreach($article in $articles)
+			<div class="bk-item  #if($!{velocityCount} == 1) first-it active#end">
+				<span class="order-num bf">$!{velocityCount}</span>
+				<div class="bk-item-t">
+					<a href="#siteInfoURL($!{siteId})/about?articleId=$!{article.id}" >$!{article.articleTitle}</a>
+				</div>
+				<div class="bk-item-c">
+					<a class="img" href="#siteInfoURL($!{siteId})/about?articleId=$!{article.id}" > 
+						<img src="$!{article.thumbnailUrl}" alt="$!{article.articleTitle}" />
+					</a>
+					<p class="name">
+						<a href="#siteInfoURL($!{siteId})/about?articleId=$!{article.id}"  title="$!{article.articleTitle}">$!{article.articleTitle}</a>
+					</p>
+				</div>
+			</div>
+			#end
+		</div>
+	</div>
+	#else
+	<div class ='pro-empty'>#if($!{errorMessage})$!{errorMessage}#else $!{errorMsg} #end</div>
+	#end
+</div>

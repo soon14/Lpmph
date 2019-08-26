@@ -1,0 +1,43 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+
+<script>
+    $(function(){
+        U.tab('#teamTab','#teamTabc');
+    })
+</script>
+
+<div class="seller-tab" id="tabHost">
+    <ul class="tab-nav" id="teamTab">
+        <li class="active first"><a href="#income" class="item">订单收入</a></li>
+        <li><a href="#expend" class="item">退货退款支出</a></li>
+        <li><a href="#adjust" class="item">调账</a></li>
+        <li><a href="#withdraw" class="item">提现</a></li>
+    </ul>
+ 	<div class="tab-content" id="teamTabc">
+	    <div class="point-con" id="income">
+			#parse("/seller/staff/shopacctdetail/seller-shopacct-income.vm")
+			<div class="nItem">
+	
+	        </div>
+	    </div>
+	    <div class="point-con" id="expend">
+			#parse("/seller/staff/shopacctdetail/seller-shopacct-expend.vm")
+			<div class="nItem">
+	
+	        </div>
+	    </div>
+	    <div class="point-con" id="adjust">
+			#parse("/seller/staff/shopacctdetail/seller-shopacct-adjust.vm")
+			<div class="nItem">
+	
+	        </div>
+	    </div>
+	    <div class="point-con" id="withdraw">
+			#parse("/seller/staff/shopacctdetail/seller-shopacct-withdraw.vm")
+			<div class="nItem">
+	
+	        </div>
+	    </div>
+	 </div>
+</div>

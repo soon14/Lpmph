@@ -1,0 +1,22 @@
+<div id="footer" class="text-center">
+	<!--
+    <div class="">
+		<a href="#">关于我们</a> 
+		<a href="#">联系我们</a> 
+		<a href="#">招贤纳士</a> 
+		<a href="#">网站声明</a>
+	</div>
+	-->
+	#siteObj()
+    <p>$!{siteObj.siteAddress}</p>
+	<p>
+	<a href="http://www.pmphmall.com/info/infodetail?id=22015" target="_blank">出版物经营许可 新出发 京零 字第 朝130036 号</a>
+	 | <a href="http://www.pmphmall.com/info/infodetail?id=24007" target="_blank">人民卫生出版社有限公司图书出版许可证</a>
+	</p>
+	<p>
+	<a href="http://www.pmphmall.com/info/infodetail?id=24008" target="_blank">北京人卫文化传播中心营业执照</a>
+	 | <a href="http://www.pmphmall.com/info/infodetail?id=24009" target="_blank">人民卫生出版社有限公司营业执照</a>
+	 | <a href="http://www.pmphmall.com/info/infodetail?id=24010" target="_blank">人民卫生出版社发行部出版物经营许可证</a>
+	</p>
+    <p><img class="bhh" width="20px" height="20px" src="$!{IMAGE_PATH}/ghs.png" alt=""/><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502031112" target="_blank">京公网安备 11010502031112号</a> $!{siteObj.caseNo} #if($!{siteObj.copyrightCompany} && $!{siteObj.copyrightCompany} != '')©$!{siteObj.copyrightCompany}#end</p>
+</div>

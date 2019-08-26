@@ -1,0 +1,81 @@
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/common/regist/smsUtil.js"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/common/regist/main-regist.js"></script>
+<header class="am-header">
+    <div class="am-header-title">
+        注册
+    </div>
+    <div class="am-header-left am-header-nav top-left regist">
+        <a href="$CONTEXT_PATH/login" class="">
+         <i class="public-arrowleft"></i>
+        </a>
+    </div>
+</header>
+<div class="ui-content" style="padding-top:0">
+    <form class="am-form am-form-horizontal lg-form reg-form required-validate" id="formRegist">
+		        <div class="form-box">
+            <div class="am-form-group reg-mg">
+                <label class="am-u-sm-2 am-form-label">
+                    <i class="icon icon-phone-reg"></i><font style="color:red">*</font>手机号码</label>
+					<div class="am-u-sm-10">
+	                    <div class="rfr clearfix">
+	                    <input type="number" class="yzm-input required mobilePhone" maxlength="20" id="serialNumber" name="serialNumber" maxlength="11" placeholder="请输入您的手机号码">
+	                    
+	                   		 <button type="button" class="yzm" id="sms-win-getcode" style="border:1px #ecebe9 solid;background-color:#ff6b01"">获取验证码</button>
+	                    	
+	                    </div>
+	                </div>
+            </div>
+        
+	            <div class="am-form-group">
+	                <label class="am-u-sm-2 am-form-label ">
+	                    <i class="icon icon-yzm-reg"></i>短信验证</label>
+	
+	                <div class="am-u-sm-10">
+	                    <input type="text" placeholder="请输入验证号码"  maxlength="6"name="phoneCode" id="phoneCode">
+	                </div>
+	            </div>
+	       
+        </div>
+        <div class="form-box">
+           <!-- <div class="am-form-group">
+                <label class="am-u-sm-2 am-form-label">
+                    <i class="icon icon-user-reg"></i>
+                                                                           <font style="color:red">*</font> 账号</label>
+
+                <div class="am-u-sm-10">
+                    <input type="text" class="required" name="staffCode" id="staffCode" maxlength="15" placeholder="字母、数字一些特殊字符组成6~15个字符">
+                </div>
+				</div>-->
+            <div class="am-form-group">
+                <label class="am-u-sm-2 am-form-label">
+                    <i class="icon icon-psd1-reg"></i><font style="color:red">*</font>密码</label>
+
+                <div class="am-u-sm-10">
+                    <input type="password" maxlength="16" class="required checkPassword" placeholder="设置一个密码吧" id="StaffPassword" name="StaffPassword">
+                </div>
+            </div>
+            <div class="am-form-group">
+                <label class="am-u-sm-2 am-form-label">
+                    <i class="icon icon-psd2-reg"></i><font style="color:red">*</font>确认密码</label>
+
+                <div class="am-u-sm-10">
+                    <input type="password" class="required" maxlength="16" placeholder="确认密码" equalTo="#StaffPassword" id="StaffPassword2" name="StaffPassword2">
+                </div>
+            </div>
+        </div>
+		 <div class="reg-b">
+            <button class="wbtn" type="button" id="regist">确认注册</button>
+        </div>
+    </form>
+	 
+	<form id="loginform">
+         <input type="hidden" name="j_username" id="j_username" />
+         <input type="hidden" name="j_password" id="j_password" />
+		 <input type="hidden" name="openId" value='$!{openId}' placeholder="微信的openId"/>
+		 <inptt type="hidden" name="smsFlag" id="smsFlag" value="$!{flag}" />
+    </form>
+ 
+</div>
+</body>
+</html>

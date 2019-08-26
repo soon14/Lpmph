@@ -1,0 +1,271 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+<link href="$CSS_PATH/reset.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="$!{RESOURCE_PATH}/javascript/holder/holder.js" ></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/extend/bus.selector.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/shopacctwithdraw/withdrawCheck.js?version=$!{JS_VERSION}" ></script>
+<script>
+	function tableToggle(obj){
+		$(obj).parents(".wdr-order-toggleBtn").siblings(".wdr-order-hide").toggle(500);
+	}
+</script>
+<div class="seller-well" style="padding: 10px;">
+	<div class="wdr-container" style="box-shadow: 0 0 2px #827e7e;">
+        <div class="wdr-detail-fullNam">申请提现店铺：<span>$!{reqVO.shopFullName}</span></div>
+        <div class="wdr-detail-money">
+            <div class="wdr-money-msg">
+                	申请提现总额：<span class="span-money" style="font-size:20px;">&yen;#moneyNum($!{reqVO.applicationMoney})</span>
+            </div>
+            <div class="wdr-money-msg">
+                	提现前账户总额：<span class="span-money" style="font-size:20px;">&yen;#moneyNum($!{reqVO.prevAcctTotal})</span>
+            </div>
+            <div class="wdr-money-msg">
+                	提现后账户总额：<span class="span-money" style="font-size:20px;">&yen;#moneyNum($!{reqVO.alreadyAcctTotal})</span>
+            </div>
+        </div>
+        <div class="wdr-detail-tableMsg">
+            <!--标题 月份-->
+            <!-- 每个 提现月份模块 start -->
+            #foreach($!dto in $!{list})
+            ##店铺账户订单收入明细表数据集合
+            #set($incomeDetailList = ${dto.incomeDetailList})
+            ##店铺账户退货退款支出明细表
+            #set($backDetailList = ${dto.backDetailList})
+            ##店铺账户调账明细表
+            #set($adjustDetailList = ${dto.adjustDetailList})
+            ##店铺月结入账=订单收入+退货退款支出+调账
+            #set($allMoney=$!{dto.allOrdrInMoney} + $!{dto.allOrderExpendMoney} + $!{dto.allOrderAdjMoney}) 
+            	<!--动态生成 给每一个table唯一id判断-->
+            	<p class="wdr-month-wrap">$!{dto.year}年$!{dto.month}月（<span class="span-money">#moneyNum($!{allMoney})</span>元）</p>
+            	<div class="wdr-tableMsg-wrap">
+            		<p class="wdr-tableMsg-tit">订单收入：<span class="money-canuse">#moneyNum($!{dto.allOrdrInMoney})</span>元</p>
+            		<table cellpadding="0" cellspacing="0" width="100%" id="wdr-tableMsg-order01">
+            			<thead id="showDetailMsg-order01" >
+            				<tr>
+	                            <td width="13%">订单编号</td>
+	                            <td width="13%">商户订单号</td>
+	                            <td width="18%">店铺名称</td>
+	                            <td width="12.25%">支付时间</td>
+	                            <td width="6.25%">支付通道</td>
+	                            <td width="6.25%">下单账号</td>
+	                            <td width="6.25%">书款</td>
+	                            <td width="6.25%">运费</td>
+	                            <td width="6.25%">订单实洋</td>
+	                            <td width="6.25%">手续费</td>
+	                            <td width="6.25%">入账金额</td>
+                        	</tr>
+            			</thead>
+            			<tbody>
+            				#if($!{incomeDetailList.size()}<=2)
+            					#foreach($!incomeResDTO in $!{incomeDetailList})
+	            					<tr class="wdr-order-default">
+			                            <td>$!{incomeResDTO.orderId}</td>
+			                            <td>$!{incomeResDTO.payTranNo}</td>
+			                            <td>$!{reqVO.shopFullName}</td>
+			                            <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{incomeResDTO.payTime})</td>
+			                            <td>#translate('ORD_PAY_WAY',$!{incomeResDTO.payWay})</td>
+			                            <td>$!{incomeResDTO.orderStaffCode}</td>
+			                            <td>#moneyNum($!{incomeResDTO.gdsMoney})</td>
+			                            <td>#moneyNum($!{incomeResDTO.realExpressFee})</td>
+			                            <td>#moneyNum($!{incomeResDTO.realMoney})</td>
+			                            <td>#moneyNum($!{incomeResDTO.fee})</td>
+			                            <td>#moneyNum($!{incomeResDTO.inMoney})</td>
+			                        </tr>
+	            				#end
+	            				<tr>
+		                            <td>总计</td>
+		                            <td></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td>#moneyNum($!{dto.allOrderGdsMoney})</td>
+		                            <td>#moneyNum($!{dto.allOrderRealExpressFee})</td>
+		                            <td>#moneyNum($!{dto.allOrderRealMoney})</td>
+		                            <td>#moneyNum($!{dto.allOrderFee})</td>
+		                            <td>#moneyNum($!{dto.allOrdrInMoney})</td>
+		                        </tr>
+		                    #else
+		                    	#foreach($!incomeResDTO in $!{incomeDetailList})
+		                    		#if($velocityCount<=2)
+		            					<tr class="wdr-order-default">
+				                            <td>$!{incomeResDTO.orderId}</td>
+				                            <td>$!{incomeResDTO.payTranNo}</td>
+				                            <td>$!{reqVO.shopFullName}</td>
+				                            <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{incomeResDTO.payTime})</td>
+				                            <td>#translate('ORD_PAY_WAY',$!{incomeResDTO.payWay})</td>
+				                            <td>$!{incomeResDTO.orderStaffCode}</td>
+				                            <td>#moneyNum($!{incomeResDTO.gdsMoney})</td>
+				                            <td>#moneyNum($!{incomeResDTO.realExpressFee})</td>
+				                            <td>#moneyNum($!{incomeResDTO.realMoney})</td>
+				                            <td>#moneyNum($!{incomeResDTO.fee})</td>
+				                            <td>#moneyNum($!{incomeResDTO.inMoney})</td>
+				                        </tr>
+				                     #else
+				                     	<tr class="wdr-order-hide">
+				                            <td>$!{incomeResDTO.orderId}</td>
+				                            <td>$!{incomeResDTO.payTranNo}</td>
+				                            <td>$!{reqVO.shopFullName}</td>
+				                            <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{incomeResDTO.payTime})</td>
+				                            <td>#translate('ORD_PAY_WAY',$!{incomeResDTO.payWay})</td>
+				                            <td>$!{incomeResDTO.orderStaffCode}</td>
+				                            <td>#moneyNum($!{incomeResDTO.gdsMoney})</td>
+				                            <td>#moneyNum($!{incomeResDTO.realExpressFee})</td>
+				                            <td>#moneyNum($!{incomeResDTO.realMoney})</td>
+				                            <td>#moneyNum($!{incomeResDTO.fee})</td>
+				                            <td>#moneyNum($!{incomeResDTO.inMoney})</td>
+				                        </tr>
+				                     #end
+	            				#end
+	            				<tr class="wdr-order-toggleBtn">
+		                    		<td colspan="11"> 
+		                    			<span id="wdr-order-btn01" class="span-hide" onclick="tableToggle(this)">显示/隐藏详细信息</span> 
+		                    		</td>
+		                    	</tr>
+	            				<tr>
+		                            <td>总计</td>
+		                            <td></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td>#moneyNum($!{dto.allOrderGdsMoney})</td>
+		                            <td>#moneyNum($!{dto.allOrderRealExpressFee})</td>
+		                            <td>#moneyNum($!{dto.allOrderRealMoney})</td>
+		                            <td>#moneyNum($!{dto.allOrderFee})</td>
+		                            <td>#moneyNum($!{dto.allOrdrInMoney})</td>
+		                        </tr>
+            				#end
+            			</tbody>
+            		</table>
+            		<p class="wdr-tableMsg-tit">退货退款支出：<span class="span-money">#moneyNum($!{dto.allOrderExpendMoney})</span>元</p>
+            		<table cellpadding="0" cellspacing="0" width="100%" id="wdr-tableMsg-refund">
+            			<thead>
+	                        <tr>
+	                            <td width="15%">订单编号</td>
+	                            <td width="15%">商户订单号</td>
+	                            <td width="20%">店铺名称</td>
+	                            <td width="10%">退款时间</td>
+	                            <td width="10%">退款方式</td>
+	                            <td width="10%">退款金额</td>
+	                            <td width="10%">手续费</td>
+	                            <td width="10%">支出金额</td>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                    	#foreach($!backResDTO in $!{backDetailList})
+		                    	<tr>
+			                        <td>$!{backResDTO.orderId}</td>
+			                        <td>$!{backResDTO.payTranNo}</td>
+			                        <td>$!{reqVO.shopFullName}</td>
+			                        <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{backResDTO.backTime})</td>
+			                        <td>
+			                        	#if($!{backResDTO.payType} == "1")
+											线上退款
+										#elseif($!{backResDTO.payType} == "0")
+											线下退款
+										#end
+			                        </td>
+			                        <td>#moneyNum($!{backResDTO.backMoney})</td>
+			                        <td>#moneyNum($!{backResDTO.fee})</td>
+			                        <td>#moneyNum($!{backResDTO.expendMoney})</td>
+	                    		</tr>
+	                    	#end
+	                    		<tr>
+		                            <td>总计</td>
+		                            <td></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td></td>
+		                            <td>#moneyNum($!{dto.allOrderBackMoney})</td>
+		                            <td>#moneyNum($!{dto.allOrderBackFee})</td>
+		                            <td>#moneyNum($!{dto.allOrderExpendMoney})</td>
+		                        </tr>
+	                    </tbody>
+            		</table>
+            		<p class="wdr-tableMsg-tit">调账：<span class="span-money">#money($!{dto.allOrderAdjMoney})</span>元</p>
+                	<table cellpadding="0" cellspacing="0" width="100%" id="wdr-tableMsg-account">
+                		<thead>
+	                		<tr>
+		                        <td width="20%">店铺名称</td>
+		                        <td width="15%">调账时间</td>
+		                        <td width="15%">调账金额</td>
+		                        <td width="50%">备注</td>
+		                    </tr>
+	                	</thead>
+	                	<tbody>
+	                		#foreach($!adjustResDTO in $!{adjustDetailList})
+	                			<tr>
+			                        <td>$!{reqVO.shopFullName}</td>
+			                        <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{adjustResDTO.adjTime})</td>
+			                        <td>#moneyNum($!{adjustResDTO.adjMoney})</td>
+			                        <td>$!{adjustResDTO.applyRemark}</td>
+			                    </tr>
+	                		#end
+	                			<tr>
+		                            <td>总计</td>
+		                            <td></td>
+		                            <td>#moneyNum($!{dto.allOrderAdjMoney})</td>
+		                            <td></td>
+		                        </tr>
+	                	</tbody>
+            		</table>
+            	</div>
+            #end
+        </div>
+    </div>
+	<div class="wdr-container" style="box-shadow: 0 0 2px #827e7e;">
+		<div class="ret-box">
+			<div class="head">
+				<h3>操作信息</h3>
+			</div>
+			<div class="body">
+                <table class="table table-bordered ">
+                    <thead>
+                    <tr>
+                        <th class="thclass" width='150px'>操作节点</th>
+                        <th class="thclass" width='150px'>操作人</th>
+                        <th class="thclass" width='150px'>操作时间</th>
+                        <th class="thclass" width='150px'>操作意见</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+						#foreach($withdrawTrackResp in $withdrawTrackResps)
+                        <tr >
+                            <td><div class="border-right">$!{withdrawTrackResp.nodeDesc}</div></td>
+                            <td><div class="border-right">$!{withdrawTrackResp.staffName}</div></td>
+                            <td><div class="border-right">$!date.format('yyyy-MM-dd HH:mm:ss',$!{withdrawTrackResp.createTime})</div></td>
+                            <td><div class="border-right">$!{withdrawTrackResp.remark}</div></td>
+                        </tr>
+						#end
+                    </tbody>
+                </table>
+                </tbody>
+			</div>
+        </div>
+    </div>
+	<div class="wdr-container" style="box-shadow: 0 0 2px #827e7e;">
+		<div class="ret-box">
+			<div class="body" style="background-color: #ffffff;">
+				<form class="form-horizontal">
+					<div class="control-group">
+						<label class="control-label" style="width:60px">审核意见：</label>
+						<div class="controls" style="margin-left:20px">
+							<textarea rows="3" class="c-area" name="checkDesc" id="checkDesc" maxlength="100" style="width:300px;padding:10px;"></textarea>
+						</div>
+					</div>
+					<div class="control-group">
+						<div class="controls" style="margin-left:60px">
+							<a class="btn btn-info" id="allow"><i class=" icon-ok-sign icon-white"></i> 通过</a>
+							<a class="btn" id="unallow"><i class=" icon-remove-sign icon-white"></i> 不通过</a>
+							<a class="btn" id="return"><i class="icon-reply icon-white"></i> 返回</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<input type = "hidden" id="shopId" value="$!{shopId}"/>
+		<input type = "hidden" id="applyId" value="$!{id}"/>
+		<input type = "hidden" id="status" value="$!{status}"/>
+	</div>
+</div>

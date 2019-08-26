@@ -1,0 +1,103 @@
+#parse("/module/mod-grid.vm")
+#parse("/module/mod-form.vm")
+#parse("/order/pic/pic-cover.vm")
+<link rel="stylesheet" href="$!{CSS_PATH}/order/backreview.css" type="text/css">
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/util.js"></script>
+<style type="text/css">
+.modal-dialog {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    position: relative;
+    width: auto;
+    z-index: 1050;
+}
+.msg-style{
+	width:100%;
+    border-bottom: 1px dashed #dcdcdc;
+}
+.msg-style table td{
+	padding: 15px 0 15px 10px;
+    box-sizing: border-box;
+}
+.ret-box-table{
+	width: 98%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+</style>
+	<!--
+    <div class="well-tit mt10">
+		<span>申请单号：$!{rBackApplyId}</span>
+		<span style="margin-left:200px;">申请单状态：$!{rBackApplyStatus}</span>
+	</div>
+    <div class="well-tit mt10">
+		<span>
+			账单结算日：$!{rBackApplyBillDay}
+        </span>
+		<span style="margin-left:200px;margin-top:20px">
+			店铺名称：$!{rBackApplyShopName}
+        </span>
+	</div>
+    <div class="well-tit mt10">调账金额：$!{rBackApplyMoney}</div>
+    <div class="well-tit mt10" style="border:1px solid #e3e3e3;">备注说明：$!{rBackApplyApplyDesc}</div>
+    -->
+    <div class="msg-style">
+    	<table width="100%">
+			<thead>
+				<tr>
+					<td colspan="5" style="background-color: #e3f4fc;padding: 5px; box-sizing: border-box;">
+						<h3>基本信息</h3>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr style="border-bottom: 1px dashed #dcdcdc;">
+					<td>申请单号：$!{rBackApplyId}</td>
+					<td>申请单状态：$!{rBackApplyStatus}</td>
+					<td>账单结算日：$!{rBackApplyBillDay}</td>
+					<td>店铺名称：$!{rBackApplyShopName}</td>
+					<td>调账金额：#moneyNum($!{rBackApplyMoney})</td>
+				</tr>
+				<tr>
+					<td colspan="5"><span style="display: inline-block;width: 6%;">备注说明：</span>
+						<p style="display: inline-block;width: 90%;vertical-align: top;">$!{rBackApplyApplyDesc}</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+    </div>
+    
+    
+	#if(!$rBackTrack || $null.isNull($!rBackTrack))
+	#else
+		<div class="ret-box" style="border-bottom: 1px dashed #dcdcdc;">
+			<div class="" style="width:  100%;background-color: #e3f4fc;margin: 15px 0 10px 0;box-sizing:  border-box;padding: 5px 0 5px 5px;">
+				<h3>操作信息</h3>
+			</div>
+			<div class="ret-box-table">
+                <table class="table table-bordered ">
+                    <thead>
+                    <tr>
+                        <th class="thclass" width='150px'>操作节点</th>
+                        <th class="thclass" width='150px'>操作人</th>
+                        <th class="thclass" width='150px'>操作时间</th>
+                        <th class="thclass" width='150px'>操作意见</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+						#foreach($rBackTrack in $rBackTrack)
+                        <tr >
+                            <td><div class="border-right">$!{rBackTrack.nodeDesc}</div></td>
+                            <td><div class="border-right">$!{rBackTrack.createName}</div></td>
+                            <td><div class="border-right">$!date.format('yyyy-MM-dd HH:mm:ss',$!{rBackTrack.createTime})</div></td>
+                            <td><div class="border-right">$!{rBackTrack.remark}</div></td>
+                        </tr>
+						#end	
+                    </tbody>
+                </table>
+                </tbody>
+			</div>
+        </div>
+	#end
+</div>

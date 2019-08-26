@@ -1,0 +1,129 @@
+
+<div class="well-tit mt10">基本信息</div>
+<div class="well well-searchForm">
+	<div class="row-fluid">
+		<div class="span6">
+	<div class="control-group">
+        <label class="control-label">店铺名称：</label>
+        <div class="controls">
+            <select class="required" id="shopId" name="shopId" disabled>
+				## isScore 从 gdsPointController 中入参
+				#if($!{isScore}=='1')
+					#set($scoreShopId=${paramTools.getSysConfigCode("GDS_SCORE_SHOP_DEFAULT")})
+					#shopStatuslist($scoreShopId,1)
+				#else
+					#set($scoreShopId=${paramTools.getSysConfigCode("GDS_SCORE_SHOP_DEFAULT")})
+					#shopStatuslist($!{shopId},1,$scoreShopId)
+				#end
+            </select>
+        </div>
+    </div>
+		</div>
+		<div class="span6">
+    <div class="control-group">
+        <label class="control-label">产品类型：</label>
+		<input type="hidden" value="" id="combineGds"/>
+        <div class="controls">
+            <select onchange="choseGdsCat(this)" readonly="readonly" class="required" id="gdsTypeId" name="gdsTypeId">
+				<!--
+				#foreach($list in $!{gdsTypeList})
+					#if($!{isVistaul}=='1')##是数字产品，只展示虚拟产品
+						#if($!{list.spCode}=='2')
+							<option value="$!{list.spCode}">$!{list.spValue}</option>
+						#end
+					#else
+					<option value="$!{list.spCode}">$!{list.spValue}</option>
+					#end#
+				#end
+				-->
+				<option value="$!{gdsTypeId}">$!{gdsTypeName}</option>
+            </select>
+        </div>
+    </div>
+        </div>
+	</div>
+	<div class="row-fluid">
+    <div class="control-group">
+        <label class="control-label">产品名称：</label>
+        <div class="controls">
+            <input type="text" style="width: 926px;" class="input-xxlarge required" name="gdsName" id="gdsName" onKeyDown="textCounter('gdsName',128,'remLen')"   onkeyup="textCounter('gdsName',128,'remLen')"/>
+            <span class="help-inline">还能输入<span class="text-red"><b id="remLen">128</b></span>字</span>
+            </div>
+        </div>
+    </div>
+	<div class="row-fluid">
+    <div class="control-group">
+        <label class="control-label">产品副标题：</label>
+
+        <div class="controls">
+            <input type="text"  style="width: 926px;" class="input-xxlarge " id="gdsSubHead" name="gdsSubHead" onkeyDown="textCounter('gdsSubHead',100,'remLenHead')" onkeyup="textCounter('gdsSubHead',100,'remLenHead')">
+            <span class="help-inline">还能输入<span class="text-red"><b id="remLenHead">100</b></span>字</span>
+            </div>
+        </div>
+    </div>
+	<div class="row-fluid">
+    <div class="control-group">
+        <label class="control-label">产品参考价：</label>
+
+        <div class="controls">
+            <input type="text" class="input-large required priceNumber priceLength" name="guidePrice" id="guidePrice"/>
+            </div>
+        </div>
+    </div>
+	#foreach($params in $!{rspDto.basics})
+	
+	 #set($mod = $velocityCount % 2)
+	 #if(1 == $mod)
+	 <div class="row-fluid">
+	 #end
+	 <div class="span6">
+	 <div class="control-group">
+	 <label class="control-label" id="$!{params.id}">#if($!{params.ifHaveto} =='1' && $!{params.propValueType}==$!{PROP_VALUE_TYPE_3})<span style="color:red">*</span>#end$!{params.propName}：</label>
+        <div class="controls">
+            #if($!{params.propValueType}==$!{PROP_VALUE_TYPE_1})
+				#if($!{params.propInputType}=='1')
+					##文本（数字或者字符）
+					<input type="text" name="autoParamInputbase$velocityCount" ifBasic="$!{params.ifBasic}" ifmulti="input" valueId="" propType="$!{params.propType}" class="input-large #if($!{params.ifHaveto} =='1')required #end #if($!{params.id}==1029) priceNumber priceLength#end autoParam" propId="$!{params.id}" propName="$!{params.propName}" #if($!{params.id}==1029) id="paperChange$!{params.id}"#end/>
+				#elseif($!{params.propInputType}=='2')
+					##日期
+					<input style="width:211px;" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="autoParamInputbase$velocityCount" ifBasic="$!{params.ifBasic}" ifmulti="input" valueId="" propType="$!{params.propType}" class="input-large #if($!{params.ifHaveto} =='1')required #end Wdate autoParam" propId="$!{params.id}" propName="$!{params.propName}" value=""/>
+				#else
+					<input type="text" name="autoParamInputbase$velocityCount" ifBasic="$!{params.ifBasic}" ifmulti="input" valueId="" propType="$!{params.propType}" class="input-large #if($!{params.ifHaveto} =='1')required #end autoParam" propId="$!{params.id}" propName="$!{params.propName}"/>
+				#end
+				<!--<input type="text" name="autoParamInputbase$velocityCount" ifBasic="$!{params.ifBasic}" ifmulti="input" valueId="" propType="$!{params.propType}" class="input-large #if($!{params.ifHaveto} =='1')required#end autoParam" propId="$!{params.id}" propName="$!{params.propName}"/>-->
+			 #elseif($!{params.propValueType}==$!{PROP_VALUE_TYPE_2}) 
+				<select name="abase$velocityCount" ifmulti="single" propType="$!{params.propType}" ifBasic="$!{params.ifBasic}" class="#if($!{params.ifHaveto} =='1')required#end autoParam" id="$!{params.id}" propId="$!{params.id}" propName="$!{params.propName}" #if($!{params.id}==1028)onchange="paperChange(this,'base')"#end>
+					<option value="">--请选择--</option>
+                    #foreach($list in $!{params.values})
+						<option value="$!{list.id}">$!{list.propValue}</option>
+					#end
+                </select>
+			 #elseif($!{params.propValueType}==$!{PROP_VALUE_TYPE_3})
+				  <div id="mutisel" class="mutiselect">
+                    <input type="text" name="mutilBase$velocityCount" ifBasic="$!{params.ifBasic}" ifHavaeto="$!{params.ifHaveto}" ifmulti="multi" propType="$!{params.propType}" valueId='' propId="$!{params.id}" propName="$!{params.propName}" class="input-large head #if($!{params.ifHaveto} =='1')required#end autoParam" />
+                    <div class="selarrow">
+                        <i class="sel-drop icon-chevron-down"></i>
+                    </div>
+                    <ul class="body" name="mutisel">
+						#foreach($list in $!{params.values})
+                          <li class="item">
+                              <label>
+                                  <span>
+										$!{list.propValue}
+                                  </span>
+                                  <input class="selcheckbox" id="$!{list.id}" value="$!{list.propValue}" name="type" type="checkbox"/>
+                              </label>
+                          </li> 
+						#end
+                    </ul>
+                </div>
+			 #end
+        </div>
+	 </div>
+	 </div>
+	 #if(0 == $mod || ($velocityCount == $!{rspDto.basics.size()} && 1 == $mod))
+		</div>
+	 #end
+	#end
+</div>
+<!--基本信息 end-->

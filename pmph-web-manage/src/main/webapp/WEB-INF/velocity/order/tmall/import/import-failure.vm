@@ -1,0 +1,40 @@
+#parse("/module/mod-grid.vm")
+#parse("/module/mod-form.vm")
+
+<link rel="stylesheet" href="$!{CSS_PATH}/order/order-detail.css" type="text/css">
+	 
+             
+ <!--天猫订单导入失败清单 -->
+            <div id="orderinfo" style="margin-top: 20px">
+                <div class="mt">
+                    <strong>天猫订单导入失败清单</strong></div>
+                <div class="mc">
+                    <dl class="fore">
+                        <dd class="p-list">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>订单编号</th>
+                                    <th>错误信息</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+								#foreach($!tmdetail in $!importTMFailures)
+                                <tr>
+                                    <td>$!tmdetail.oldOrderId</td>
+									<td>$!tmdetail.exceptionMsg</td>
+                                     
+                                </tr>
+								#end
+                                
+                                </tbody>
+                            </table>
+                        </dd>
+                    </dl>
+                </div>
+
+ 
+
+            </div>
+
+</div>

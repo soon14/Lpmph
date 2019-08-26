@@ -1,0 +1,40 @@
+#parse("/rwgw-en/sys/sys_param.vm")
+<div id="elefix">
+	<div class="elevator">
+		<ul class="elist">
+			<li class="hover-b" id="ewm">
+				<div class="e-quote e-q-color01">
+					<i class="eicon01"></i>
+				</div> 
+				<a class="e-txt"> QR Code </a>
+				<div class="e-kz e-ewm">
+					<img src="$IMAGE_PATH/gw-ewm.png" alt="" />
+				</div>
+			</li>
+			<li>
+				<a class="e-txt" href="#siteInfoURL('1')" target="_blank">
+					<div class="e-quote e-q-color02">
+						<i class="eicon02"></i>
+					</div> PMPH<br/>MALL
+				</a>
+			</li>
+			<li>
+				<a class="e-txt ecpsethome">
+					<div class="e-quote e-q-color03">
+						<i class="eicon03"></i>
+					</div> Set as Homepage
+				</a>
+			</li>
+			<li>
+				<a class="e-txt ecpaddfavorite">
+					<div class="e-quote e-q-color04">
+						<i class="eicon04"></i>
+					</div> Add to Favorites
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="gwfix">
+		<i class="gwfix-l"></i>
+	</div>
+</div>

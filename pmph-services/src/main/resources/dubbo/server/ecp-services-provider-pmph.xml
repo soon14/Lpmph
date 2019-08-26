@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+	http://www.springframework.org/schema/beans/spring-beans.xsd  
+	http://code.alibabatech.com/schema/dubbo  
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+	 <bean id="ordTmMainRSV" class="com.ai.ecp.pmph.dubbo.impl.OrdTmMainRSVImpl"></bean>
+     <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdTmMainRSV" ref="ordTmMainRSV" provider="${default.dubbo.provider.id}"/>   
+     
+     <bean id="ordTmSubRSV" class="com.ai.ecp.pmph.dubbo.impl.OrdTmSubRSVImpl"></bean>
+     <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdTmSubRSV" ref="ordTmSubRSV" provider="${default.dubbo.provider.id}"/>
+     
+     <bean id="ordImportTMMainRSV" class="com.ai.ecp.pmph.dubbo.impl.OrdImportTMMainRSVImpl"></bean>
+     <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdImportTMMainRSV" ref="ordImportTMMainRSV" provider="${default.dubbo.provider.id}"/>   
+     
+     <bean id="ordImportTMSubRSV" class="com.ai.ecp.pmph.dubbo.impl.OrdImportTMSubRSVImpl"></bean>
+     <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdImportTMSubRSV" ref="ordImportTMSubRSV" provider="${default.dubbo.provider.id}"/>     
+
+	 <bean id="ordImportZYMainRSV" class="com.ai.ecp.pmph.dubbo.impl.OrdImportZYMainRSVImpl"></bean>
+     <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdImportZYMainRSV" ref="ordImportZYMainRSV" provider="${default.dubbo.provider.id}"/>   
+     
+     <bean id="ordImportZYSubRSV" class="com.ai.ecp.pmph.dubbo.impl.OrdImportZYSubRSVImpl"></bean>
+     <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdImportZYSubRSV" ref="ordImportZYSubRSV" provider="${default.dubbo.provider.id}"/>   
+
+     <bean id="payQuartzInfoForZYOrdRSV" class="com.ai.ecp.pmph.dubbo.impl.PayQuartzInfoForZYOrdRSVImpl"></bean>
+     <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IPayQuartzInfoForZYOrdRSV" ref="payQuartzInfoForZYOrdRSV" provider="${default.dubbo.provider.id}"/>
+     
+     <bean id="payQuartzInfoForExternalOrdRSV" class="com.ai.ecp.pmph.dubbo.impl.PayQuartzInfoForExternalOrdRSVImpl"></bean>
+     <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IPayQuartzInfoForExternalOrdRSV" ref="payQuartzInfoForExternalOrdRSV" provider="${default.dubbo.provider.id}"/>
+
+    <!-- 积分拓展计算RSV -->
+    <bean id="scoreCalRSV" class="com.ai.ecp.pmph.dubbo.impl.ScoreCalRSVImpl"></bean>
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IScoreCalRSV" ref="scoreCalRSV" provider="${default.dubbo.provider.id}"/>
+
+    <!-- 发卡记录管理 -->
+    <bean id="cardDistributeRSV" class="com.ai.ecp.pmph.dubbo.impl.CustCardDistributeRSVImpl"></bean>
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.ICustCardDistributeRSV" ref="cardDistributeRSV" provider="${default.dubbo.provider.id}"/>
+
+    <!-- 发卡人资料管理 -->
+    <bean id="carderInfoRSV" class="com.ai.ecp.pmph.dubbo.impl.CarderInfoRSVImpl"></bean>
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.ICarderInfoRSV" ref="carderInfoRSV" provider="${default.dubbo.provider.id}"/>
+
+    <!-- 会员卡申请RSV -->
+    <bean id="cardApplicationRSV" class="com.ai.ecp.pmph.dubbo.impl.CardApplicationRSVImpl"></bean>
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.ICardApplicationRSV" ref="cardApplicationRSV" provider="${default.dubbo.provider.id}"/>
+
+    <!-- 会员卡管理RSV -->
+    <bean id="cardMgrRSV" class="com.ai.ecp.pmph.dubbo.impl.CardMgrRSVImpl"></bean>
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.ICardMgrRSV" ref="cardMgrRSV" provider="${default.dubbo.provider.id}"/>
+
+    <!--ERP商品导入服务-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IERPGdsInfoImportRSV"
+                   ref="erpGdsInfoImportRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="erpGdsInfoImportRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.ERPGdsInfoImportRSVImpl" />
+
+    <!--泽云数字教材、电子书商品导入服务-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IZYGdsInfoImportRSV"
+                   ref="zyGdsInfoImportRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="zyGdsInfoImportRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.ZYGdsInfoImportRSVImpl" />
+
+
+    <!--考试网试卷商品导入服务-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IExamPaperGdsInfoImportRSV"
+                   ref="examPaperGdsInfoImportRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="examPaperGdsInfoImportRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.ExamPaperGdsInfoImportRSVImpl" />
+
+    <!--考试网试卷包商品导入服务-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IExamPaperBagGdsInfoImportRSV"
+                   ref="examPaperBagGdsInfoImportRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="examPaperBagGdsInfoImportRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.ExamPaperBagGdsInfoImportRSVImpl" />
+
+    <!--考试辅导班商品导入服务-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IExamTutorialClassGdsInfoImportRSV"
+                   ref="examTutorialClassGdsInfoImportRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="examTutorialClassGdsInfoImportRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.ExamTutorialClassGdsInfoImportRSVImpl" />
+
+
+    <!--人卫ERP分类导入服务-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IERPGdsCategoryImportRSV"
+                   ref="erpGdsCategoryImportRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="erpGdsCategoryImportRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.ERPGdsCategoryImportRSVImpl" />
+
+    <!--泽元分类导入服务-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IZYGdsCategoryImportRSV"
+                   ref="zyGdsCategoryImportRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="zyGdsCategoryImportRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.ZYGdsCategoryImportRSVImpl" />
+    <!--泽元全量分类同步服务-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IZYGdsCategoryBatchImportRSV"
+                   ref="zyGdsCategoryBatchImportRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="zyGdsCategoryBatchImportRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.ZYGdsCategoryBatchImportRSVImpl" />
+    <!-- 泽元考试网分类初始化导入服务。 -->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IZYExamNetCategoryImportRSV"
+                   ref="zyExamNetCategoryImportRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="zyExamNetCategoryImportRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.ZYExamNetCategoryImportRSVImpl" />
+
+
+
+    <!--商品库存数据导入服务-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IERPGdsStockInfoImportRSV"
+                   ref="erpGdsStockInfoImportRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="erpGdsStockInfoImportRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.ERPGdsStockInfoImportRSVImpl" />
+    <!--泽元数字教材电子书图片样章初始更新服务 add by liyong 2015-11-08 11:39-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IEBookImageSampleChapterSyncRSV"
+                   ref="eBookImageSampleChapterSyncRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="eBookImageSampleChapterSyncRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.EBookImageSampleChapterSyncRSVImpl" />
+    <!--纸质书图片样章初始更新服务 add by liyong 2015-11-08 11:39-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IPBookImageSampleChapterSyncRSV"
+                   ref="pBookImageSampleChapterSyncRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="pBookImageSampleChapterSyncRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.PBookImageSampleChapterSyncRSVImpl" />
+    <!--数字教材电子书图片样章增量更新服务 add by liyong 2015-11-17 14:45-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IEBookImageSampleChapterIncreamentalSyncRSV"
+                   ref="eBookImageSampleChapterIncreamentalSyncRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="eBookImageSampleChapterIncreamentalSyncRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.EBookImageSampleChapterIncreamentalSyncRSVImpl" />
+    <!--纸质书图片样章增量更新服务 add by liyong 2015-11-17 14:45-->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IPBookImageSampleChapterIncreamentalSyncRSV"
+                   ref="pBookImageSampleChapterIncreamentalSyncRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="pBookImageSampleChapterIncreamentalSyncRSV" class="com.ai.ecp.pmph.dubbo.impl.dataimport.PBookImageSampleChapterIncreamentalSyncRSVImpl" />
+
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IGdsPmphYsymZhekouRSV"
+                   ref="gdsPmphYsymZhekouRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="gdsPmphYsymZhekouRSV" class="com.ai.ecp.pmph.dubbo.impl.GdsPmphYsymZhekouRSVImpl" />
+    <!-- 人卫商品域扩展服务 -->
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IGdsPmphExRSV"
+                   ref="gdsPmphExRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="gdsPmphExRSV" class="com.ai.ecp.pmph.dubbo.impl.GdsPmphExRSVImpl" />
+
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.dataexport.IERPGdsInfoExportRSV"
+                   ref="erpGdsInfoExportRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="erpGdsInfoExportRSV" class="com.ai.ecp.pmph.dubbo.impl.dataexport.ERPGdsInfoExportRSVImpl" />
+    
+    
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IEBookIDSyncRSV"
+                   ref="eBookIDSyncRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="eBookIDSyncRSV" class="com.ai.ecp.pmph.dubbo.impl.EBookIDSyncRSVImpl" />
+    
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IReturnBackRSV"
+                   ref="returnBackRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="returnBackRSV" class="com.ai.ecp.pmph.dubbo.impl.ReturnBackRSVImpl"></bean>
+    
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdPmphMainRSV"
+                   ref="ordPmphMainRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="ordPmphMainRSV" class="com.ai.ecp.pmph.dubbo.impl.OrdPmphMainRSVImpl"></bean>
+    
+    <dubbo:service interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdImportZDMainRSV"
+                   ref="ordImportZDMainRSV" provider="${default.dubbo.provider.id}" />
+    <bean id="ordImportZDMainRSV" class="com.ai.ecp.pmph.dubbo.impl.OrdImportZDMainRSVImpl"></bean>
+
+</beans>

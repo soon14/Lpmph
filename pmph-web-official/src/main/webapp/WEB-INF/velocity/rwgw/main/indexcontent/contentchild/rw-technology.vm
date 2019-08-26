@@ -1,0 +1,43 @@
+#parse("/rwgw/sys/sys_param.vm")
+<div class="w">
+    <div class="box" style="padding-bottom:0;">
+        <div class="box-head">
+            <i class="box-ticon ticon-science"></i>
+            <ul class="tabnav">
+                ##这里是右边楼层 的页签
+            </ul>
+        </div>
+        <div class="box-body">
+            <div class="scienceBox lineTop clearfix">
+            	##新闻咨询
+                <div class="info-left ecp-component article-list-shader" data-status="1" data-homepage-is-show="1" data-place-size="4" data-place-id="1211" data-place-width="140" data-place-height="80" data-return-url = "/rwgw/main/componentVM/rwgw-zh/article/news-information" data-module="ecp-component/article-list-shader">
+                	<div class='loading-small'></div>
+                </div>
+                ##右边楼层
+                <div class="info-right ecp-component floor-vm-shader"
+					data-status="1" data-tab-size="4" data-place-id="1212" data-floor-img-size="100" data-floor-img-width="500" data-floor-img-height="206"
+					data-return-url="/rwgw/main/componentVM/rwgw-zh/floor/rw-techology-floor" data-module="ecp-component/floor-vm-shader">
+                	<div class='loading-small'></div>
+                </div>
+            </div>
+            <div class="scienceBox clearfix">
+            	##系统软件
+                <div class="science-panel panel-system ecp-component article-list-shader" data-status="1" data-homepage-is-show="1" data-place-size="11" data-place-id="1213" data-return-url = "/rwgw/main/componentVM/rwgw-zh/article/sys-software" data-module="ecp-component/article-list-shader">
+                	<div class='loading-small'></div>
+                </div>
+                ##模型教具
+                <div class="science-panel panel-realia ecp-component floor-vm-shader"
+					data-status="1" data-floor-img-size="4" data-place-id="1214" data-floor-img-width="240" data-floor-img-height="153"
+					data-return-url="/rwgw/main/componentVM/rwgw-zh/floor/model-floor" data-module="ecp-component/floor-vm-shader">
+                	<div class='loading-small'></div>
+                </div>
+                ##虚拟教学
+                <div class="science-panel panel-teaching ecp-component floor-vm-shader"
+					data-status="1" data-floor-img-size="3" data-place-id="1215" data-floor-img-width="400" data-floor-img-height="331"
+					data-return-url="/rwgw/main/componentVM/rwgw-zh/floor/simulation-teach-floor" data-module="ecp-component/floor-vm-shader">
+                	<div class='loading-small'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

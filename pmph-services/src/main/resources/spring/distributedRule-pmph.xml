@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean class="com.ai.ecp.frame.utils.RuleMap">
+		<constructor-arg>
+			<map>
+				<!-- 会员卡start -->
+				<entry key="t_cust_card_info" value-ref="custCardInfo" />
+				<entry key="t_cust_card_application" value-ref="custCardApplication" />
+				<entry key="t_cust_card_bind" value-ref="custCardBind" />
+				<entry key="t_card_import_temp" value-ref="cardImportTemp" />
+				<entry key="t_card_distribute" value-ref="cardDistribute" />
+				<entry key="t_card_information" value-ref="cardInformation" />
+				<!-- 会员卡end -->
+				<entry key="t_inf_ord_main_his" value-ref="ordInfMainHis" />
+			</map>
+		</constructor-arg>
+	</bean>
+	<!-- 会员卡start -->
+	<bean id="custCardInfo" class="com.db.distribute.DistributedTableRule">
+		<property name="distributeKey" value="cust_card_id" />
+		<property name="logicDBPattern" value="logic_transaction_db_{00}" />
+		<property name="tableNamePattern" value="t_cust_card_info_{00}" />
+		<property name="tableNameRule">
+			<value>{keyValue:{keyColumn:'cust_card_id', tranferType:'com.db.util.StringHash', operator:'%',operatorValue:1}, operator:'+',operatorValue:1} </value>
+		</property>
+		<property name="logicDBRule">
+			<value>{keyValue:{keyValue:{keyColumn:'cust_card_id', tranferType:'com.db.util.StringHash', operator:'%',operatorValue:1},operator:'/', operatorValue:2},operator:'+', operatorValue:1} </value>
+		</property>
+		<property name="allowFullTableScan" value="true" />
+		<property name="subTableCount" value="1" />
+	</bean>
+	<bean id="custCardApplication" class="com.db.distribute.DistributedTableRule">
+		<property name="distributeKey" value="staff_id" />
+		<property name="logicDBPattern" value="logic_transaction_db_{00}" />
+		<property name="tableNamePattern" value="t_cust_card_application_{00}" />
+		<property name="tableNameRule">
+			<value>{keyValue:{keyColumn:'staff_id', tranferType:'java.lang.Long', operator:'%',operatorValue:4}, operator:'+',operatorValue:1} </value>
+		</property>
+		<property name="logicDBRule">
+			<value>{keyValue:{keyValue:{keyColumn:'staff_id', tranferType:'java.lang.Long', operator:'%',operatorValue:4},operator:'/', operatorValue:2},operator:'+', operatorValue:1} </value>
+		</property>
+		<property name="allowFullTableScan" value="true" />
+		<property name="subTableCount" value="4" />
+	</bean>
+	<bean id="custCardBind" class="com.db.distribute.DistributedTableRule">
+		<property name="distributeKey" value="staff_id" />
+		<property name="logicDBPattern" value="logic_transaction_db_{00}" />
+		<property name="tableNamePattern" value="t_cust_card_bind_{00}" />
+		<property name="tableNameRule">
+			<value>{keyValue:{keyColumn:'staff_id', tranferType:'java.lang.Long', operator:'%',operatorValue:4}, operator:'+',operatorValue:1} </value>
+		</property>
+		<property name="logicDBRule">
+			<value>{keyValue:{keyValue:{keyColumn:'staff_id', tranferType:'java.lang.Long', operator:'%',operatorValue:4},operator:'/', operatorValue:2},operator:'+', operatorValue:1} </value>
+		</property>
+		<property name="allowFullTableScan" value="true" />
+		<property name="subTableCount" value="4" />
+	</bean>	
+	<bean id="cardImportTemp" class="com.db.distribute.DistributedTableRule">
+		<property name="distributeKey" value="import_id" />
+		<property name="logicDBPattern" value="logic_transaction_db_{00}" />
+		<property name="tableNamePattern" value="t_card_import_temp_{00}" />
+		<property name="tableNameRule">
+			<value>{keyValue:{keyColumn:'import_id', tranferType:'java.lang.Long', operator:'%',operatorValue:1}, operator:'+',operatorValue:1} </value>
+		</property>
+		<property name="logicDBRule">
+			<value>{keyValue:{keyValue:{keyColumn:'import_id', tranferType:'java.lang.Long', operator:'%',operatorValue:1},operator:'/', operatorValue:2},operator:'+', operatorValue:1} </value>
+		</property>
+		<property name="allowFullTableScan" value="true" />
+		<property name="subTableCount" value="1" />
+	</bean>
+	<bean id="cardDistribute" class="com.db.distribute.DistributedTableRule">
+		<property name="distributeKey" value="dis_id" />
+		<property name="logicDBPattern" value="logic_transaction_db_{00}" />
+		<property name="tableNamePattern" value="t_card_distribute_{00}" />
+		<property name="tableNameRule">
+			<value>{keyValue:{keyColumn:'dis_id', tranferType:'java.lang.Long', operator:'%',operatorValue:1}, operator:'+',operatorValue:1} </value>
+		</property>
+		<property name="logicDBRule">
+			<value>{keyValue:{keyValue:{keyColumn:'dis_id', tranferType:'java.lang.Long', operator:'%',operatorValue:1},operator:'/', operatorValue:2},operator:'+', operatorValue:1} </value>
+		</property>
+		<property name="allowFullTableScan" value="true" />
+		<property name="subTableCount" value="1" />
+	</bean>
+	<bean id="cardInformation" class="com.db.distribute.DistributedTableRule">
+		<property name="distributeKey" value="id" />
+		<property name="logicDBPattern" value="logic_transaction_db_{00}" />
+		<property name="tableNamePattern" value="t_card_information_{00}" />
+		<property name="tableNameRule">
+			<value>{keyValue:{keyColumn:'id', tranferType:'java.lang.Long', operator:'%',operatorValue:1}, operator:'+',operatorValue:1} </value>
+		</property>
+		<property name="logicDBRule">
+			<value>{keyValue:{keyValue:{keyColumn:'id', tranferType:'java.lang.Long', operator:'%',operatorValue:1},operator:'/', operatorValue:2},operator:'+', operatorValue:1} </value>
+		</property>
+		<property name="allowFullTableScan" value="true" />
+		<property name="subTableCount" value="1" />
+	</bean>
+	<!-- 会员卡end -->
+	<bean id="ordInfMainHis" class="com.db.distribute.DistributedTableRule">
+		<property name="distributeKey" value="id" />
+		<property name="logicDBPattern" value="logic_transaction_db_{00}" />
+		<property name="tableNamePattern" value="t_inf_ord_main_his_{00}" />
+		<property name="tableNameRule">
+			<value>{keyValue:{keyColumn:'id', tranferType:'com.db.util.StringHash', operator:'%',operatorValue:4}, operator:'+',operatorValue:1} </value>
+		</property>
+		<property name="logicDBRule">
+			<value>{keyValue:{keyValue:{keyColumn:'id', tranferType:'com.db.util.StringHash', operator:'%',operatorValue:4},operator:'/', operatorValue:2},operator:'+', operatorValue:1} </value>
+		</property>
+		<property name="allowFullTableScan" value="true" />
+		<property name="subTableCount" value="4" />
+	</bean>
+</beans>

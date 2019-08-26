@@ -1,0 +1,83 @@
+<script type="text/javascript">
+//javascript中使用全局URL基础路径
+var $webroot = '${CONTEXT_PATH}/';
+</script>
+<link href="$!{RESOURCE_PATH}/jquery/zebra_dialog/css/flat/zebra_dialog.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="$!{RESOURCE_PATH}/jquery/zebra_dialog/zebra_dialog_extend.css" rel="stylesheet" type="text/css" media="screen"/>
+
+
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/javascript/json2/json2.js"></script>
+
+<!-- 系统常量 -->
+<script type="text/javascript" src="$!{BUSIJS_PATH}/common/system-constant.js"></script>
+
+<!-- 辅助jQuery版本升级过渡插件 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery.metadata.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/e.core.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.utils.js"></script>
+
+<!-- 消息提示框 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/zebra_dialog/zebra_dialog.src.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/core/e.dialog.js"></script>
+
+
+
+
+<!-- Bootstrap framework -->
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/core/2.3.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/extend/css/bootstrap_panel.css" />
+
+<!-- 前店全局公用样式 -->
+<link rel="stylesheet" href="$!{CSS_PATH}/reset.css" />
+
+<!-- Font-Awesome -->
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/plugin/font-awesome-3.2.1/css/font-awesome.min.css" />
+<!--[if IE 7]>
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/plugin/font-awesome-3.2.1/css/font-awesome-ie7.min.css">
+<![endif]-->
+
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="favicon.ico" />
+
+<!-- 使IE8兼容HTML5 -->
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/css/ie.css" />
+<script src="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/js/ie/html5.js"></script>
+<script src="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/js/ie/respond.min.js"></script>
+<![endif]-->
+
+
+<!-- Bootstrap兼容IE6浏览器 -->
+<!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="$!{RESOURCE_PATH}/jsLib/bootstrap/iehack/css/bootstrap-ie6.css">
+<link rel="stylesheet" type="text/css" href="$!{RESOURCE_PATH}/jsLib/bootstrap/iehack/css/ie.css">
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jsLib/bootstrap/iehack/bootstrap-ie.js"></script>
+<![endif]-->
+
+
+<!-- hidden elements width/height -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/js/jquery_cookie.min.js"></script>
+<!-- bootstrap core -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/core/2.3.2/js/bootstrap.min.js"></script>
+<!-- bootstrap plugins -->
+
+<!-- 回到页面顶部插件 -->
+<link rel="stylesheet" media="screen,projection" href="$!{RESOURCE_PATH}/jquery/UItoTop/css/ui.totop.css" />
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/UItoTop/easing.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/UItoTop/jquery.ui.totop.js"></script>
+
+
+<!-- 基于Bootstrap的 -->
+<!-- 基于Bootstrap的弹出窗口 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/extend/js/b.dialog.js"></script>
+<!-- 基于Bootstrap的统一表单初始化 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/bootstrap/extend/js/b.ui.js"></script>
+
+<!-- 模块化脚本基础库 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/javascript/requirejs/require.js"></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/extend/requirejs.common.js"></script>
+<!-- 前店基础功能脚本 -->
+<script type="text/javascript" src="$!{BUSIJS_PATH}/public/util.js"></script>

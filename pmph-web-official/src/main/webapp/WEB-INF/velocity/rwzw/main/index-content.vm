@@ -1,0 +1,39 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-scroll.vm")
+<!--图片轮播 begin-->
+<div id='mySwipe' class='swipe index-swipe ecp-component zw-ad-slider' data-status="1" data-place-size="5" data-place-id="23" data-place-width="1920" data-place-height="606" data-module="ecp-component/leaflet/zw-leaflet-slider">
+    <div class='swipe-wrap main-ad-slider-img'> 
+    </div>
+    <ul id="swipePage" class="carousel-indicators main-ad-slider-num">
+    </ul>
+        <span class="prev" onclick='mySwipe.prev()'></span>
+        <span class="next" onclick='mySwipe.next()'></span>
+</div>
+<!--图片轮播 end-->
+
+<!--产品推荐-->
+<div class="wrap100 pro-show">
+    <div class="container">
+        <ul class="p-show-list clearfix" style="opacity: 0.1;filter:alpha(opacity=10)">
+            <li><a href="http://zengzhi.ipmph.com/" class="pro01" target="_blank"><img src="$IMAGE_PATH/pro01.jpg" alt="融合教材"></a></li>
+            <li><a href="http://www.pmphmall.com/" class="pro02" target="_blank"><img src="$IMAGE_PATH/pro02.jpg" alt="人卫智慧服务商城"></a></li>
+            <li><a href="http://exam.ipmph.com/" class="pro03" target="_blank"><img src="$IMAGE_PATH/pro03.jpg" alt="医考护考"></a></li>
+            <li><a href="http://www.pmphmooc.com/" class="pro04" target="_blank"><img src="$IMAGE_PATH/pro04.jpg" alt="人卫幕课"></a></li>
+        	<li><a href="http://ccdas.ipmph.com/" class="pro05" target="_blank"><img src="$IMAGE_PATH/pro05.jpg" alt="人卫临床助手"></a></li>
+            <li><a href="http://www.ehealthship.com/" class="pro06" target="_blank"><img src="$IMAGE_PATH/pro06.jpg" alt="约健康"></a></li>
+			<li><a href="http://pharmacy.ipmph.com/" class="pro07" target="_blank"><img src="$IMAGE_PATH/pro07.jpg" alt="人卫用药助手"></a></li>
+			<li><a href="http://medu.ipmph.com" class="pro12" target="_blank"><img src="$IMAGE_PATH/pro12.jpg" alt="人卫e教"></a></li>
+            <li><a href="http://tk.ipmph.com/" class="pro09" target="_blank"><img src="$IMAGE_PATH/pro09.jpg" alt="人民卫生出版社中国医学教育题库"></a></li>
+            <li><a href="http://medbooks.ipmph.com/medical/medbooks/index.zhtml" class="pro10" target="_blank"><img src="$IMAGE_PATH/pro10.jpg" alt="人卫临床知识库"></a></li>
+            <li><a href="http://3d.ipmph.com/" class="pro11" target="_blank"><img src="$IMAGE_PATH/pro11.jpg" alt="人卫3D解剖学"></a></li>
+            <li><a href="http://www.pmphou.com/" class="pro08" target="_blank"><img src="$IMAGE_PATH/pro08.jpg" alt="人卫开放大学"></a></li>
+        </ul>
+    </div>
+</div>
+<script>
+    $('.pro-show').scrollLoading({
+        callback:function(obj){
+            $(obj).find('.p-show-list').animate({'opacity':1},1500);
+        }
+    });
+</script>

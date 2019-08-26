@@ -1,0 +1,196 @@
+#parse("/sys/sys_param.vm")
+<!--<header class="am-header am-header-fixed">
+    <div class="am-header-title">
+        促销活动
+    </div>
+    <div class="am-header-left am-header-nav top-left">
+        <a href="" class="">
+            <i class="public-arrowleft"></i>
+        </a>
+    </div>
+</header>-->
+<div class="ui-content" style="padding-top:0px;">
+    <div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{"directionNav":false}'>
+        <ul class="am-slides">
+            <li>
+                <img src="$IMAGE_PATH/activity/activity-banner01.jpg"/>
+            </li>
+        
+        </ul>
+    </div>
+    <div class="act-yhq">
+        <div class="yhq-box">
+            <ul class="clearfix">
+                <li>
+                    <div class="price-box clearfix">
+                        <div class="price">
+                            <span class="price-sign">¥</span>
+                            <span class="price-m">10</span>
+                        </div>
+                        <div class="while">
+                            <p class="while-q">优惠券</p>
+
+                            <p>无领取限制</p>
+                        </div>
+                    </div>
+                    <div class="receive"><a href="javascrip:void(0);">立即领取</a></div>
+                    <p class="user-tj">满100元以上使用</p>
+                </li>
+                <li class="yhqbg02">
+                    <div class="price-box clearfix">
+                        <div class="price">
+                            <span class="price-sign">¥</span>
+                            <span class="price-m">20</span>
+                        </div>
+                        <div class="while">
+                            <p class="while-q">优惠券</p>
+
+                            <p>无领取限制</p>
+                        </div>
+                    </div>
+                    <div class="receive"><a href="javascrip:void(0);">立即领取</a></div>
+                    <p class="user-tj">满200元以上使用</p>
+                </li>
+                <li class="yhqbg03">
+                    <div class="price-box clearfix">
+                        <div class="price">
+                            <span class="price-sign">¥</span>
+                            <span class="price-m">50</span>
+                        </div>
+                        <div class="while">
+                            <p class="while-q">优惠券</p>
+
+                            <p>无领取限制</p>
+                        </div>
+                    </div>
+                    <div class="receive"><a href="javascrip:void(0);">立即领取</a></div>
+                    <p class="user-tj">满300元以上使用</p>
+                </li>
+            </ul>
+        </div>
+        <div class="yhq-btn">
+            <a href="javascript:void (0)"><img src="$IMAGE_PATH/activity/yhq-btn.png" alt=""/></a>
+        </div>
+    </div>
+    <section class="act-pannel">
+        <header class="act-pannel-header">
+            <div class="header-position">
+                <h3>特价促销单品</h3>
+            </div>
+        </header>
+        <article class="act-pannel-body ">
+            <div class="list-item">
+                <ul class="clearfix">
+                    <li class="item">
+                        <div class="img-pos">
+                            <img src="$IMAGE_PATH/activity/act-pro01.png" alt=""/></div>
+                        <a href="#" class="see">
+                            查看 <span class="see-more more01"></span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <div class="img-pos">
+                            <img src="$IMAGE_PATH/activity/act-pro02.png" alt=""/></div>
+                        <a href="#" class="see see-c02">
+                            查看 <span class="see-more more01"></span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <div class="img-pos">
+                            <img src="$IMAGE_PATH/activity/act-pro03.png" alt=""/></div>
+                        <a href="#" class="see see-c03">
+                            查看 <span class="see-more more01"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-item list-item-2">
+                <ul class="clearfix">
+                    <li class="item">
+                        <div class="img-pos">
+                            <img src="$IMAGE_PATH/activity/act-pro04.png" alt=""/></div>
+                        <a href="#" class="see see-c04">
+                            查看 <span class="see-more more01"></span>
+                        </a>
+                    </li>
+                    <li class="item">
+                        <div class="img-pos">
+                            <img src="$IMAGE_PATH/activity/act-pro05.png" alt=""/></div>
+                        <a href="#" class="see see-c05">
+                            查看 <span class="see-more more01"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </article>
+    </section>
+    <section class="act-pannel">
+        <header class="act-pannel-header">
+            <div class="header-position">
+                <h3>超值商品促销</h3>
+            </div>
+        </header>
+        <article class="act-pannel-body ">
+            <div class="clearfix"><span class="pull-right list-more">更多 <i class="see-more more03"></i></span></div>
+            <div class="list-item list-item-2">
+                <ul class="clearfix">
+                    <li class="item item-con">
+                        <div class="img-pos">
+                            <img src="$IMAGE_PATH/activity/list-pro01.jpg" alt=""/></div>
+                        <h3>复治疗记录撰写</h3>
+
+                        <p class="price">
+                            <span><em class="yuan">¥</em>26.25</span> <span class="prc-del"><em
+                                class="yuan">¥</em>35</span>
+                        </p>
+                        <a href="#" class="conbtn">
+                            加入购物车 <span class="see-more more02"></span>
+                        </a>
+                    </li>
+                    <li class="item item-con">
+                        <div class="img-pos">
+                            <img src="$IMAGE_PATH/activity/list-pro02.jpg" alt=""/></div>
+                        <h3>关爱生命-急救与自救技能</h3>
+
+                        <p class="price">
+                            <span><em class="yuan">¥</em>14.25</span> <span class="prc-del"><em
+                                class="yuan">¥</em>19.00</span>
+                        </p>
+                        <a href="#" class="conbtn">
+                            加入购物车 <span class="see-more more02"></span>
+                        </a>
+                    </li>
+                    <li class="item item-con">
+                        <div class="img-pos">
+                            <img src="$IMAGE_PATH/activity/list-pro03.jpg" alt=""/></div>
+                        <h3>临床肿瘤内科手册</h3>
+
+                        <p class="price">
+                            <span><em class="yuan">¥</em>97.50 </span> <span class="prc-del"><em
+                                class="yuan">¥</em>130.00</span>
+                        </p>
+                        <a href="#" class="conbtn">
+                            加入购物车 <span class="see-more more02"></span>
+                        </a>
+                    </li>
+                    <li class="item item-con">
+                        <div class="img-pos">
+                            <img src="$IMAGE_PATH/activity/list-pro04.jpg" alt=""/></div>
+                        <h3>精神科护理学</h3>
+
+                        <p class="price">
+                            <span><em class="yuan">¥</em>40.80</span> <span class="prc-del"><em
+                                class="yuan">¥</em>48.00</span>
+                        </p>
+                        <a href="#" class="conbtn">
+                            加入购物车 <span class="see-more more02"></span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </article>
+    </section>
+
+
+</div>

@@ -1,0 +1,19 @@
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/order/customer/updateSellerMsg.js"></script>
+<!-- Font-Awesome -->
+<form id="detailfrom" class="form-horizontal required-validate">
+	<input type='hidden' id='orderId' name='orderId' value='$!{resp.orderId}'/>
+    <div class="control-group">
+        <label class="control-label" for="p-code">卖家备注：</label>
+        <div class="controls">
+           <textarea id="sellerMsg" name="sellerMsg" rows="6"  class="tarea" style="width:80%" placeholder="卖家留言" maxlength="128">$!{resp.sellerMsg}</textarea>
+           <br><span style="color:red">注：最多输入128个字</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <input type="button" class="btn" id="savemsg" value="保存卖家备注"/>
+            <input type="button" class="btn" id="btnCancel1" value="取消"/>
+         </div>
+    </div>
+</form>

@@ -1,0 +1,132 @@
+#parse("sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/seller-backgds.js?version=$!{JS_VERSION}"></script>
+
+<div class="seller-mainR">
+    <div class="main">
+        <div class="seller-well">
+            <form id="searchForm" action="" class="form-horizontal required-validate">
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">店铺名称：</label>
+                            <div class="controls">
+                                <select name="shopId" id="" class="input-block-level" >
+									##<option value="">请选择</option>
+                                    ###shopStatuslist('','1')
+									#sellerList($!{shopId})
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+					<div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">站点：</label>
+                            <div class="controls">
+                                <select name="siteId" id="" class="input-block-level">
+                                    <option value="">请选择</option>
+									#siteList()
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">申请单状态：</label>
+                            <div class="controls">
+                                <select id="" name="status" class="input-block-level">
+                    				<option value="">请选择</option>
+                    				#listParam('ORD_BACK_GDS_STATUS')
+                    			</select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">订单编号：</label>
+                            <div class="controls">
+                                <input placeholder="" type="text" class="input-block-level" name="orderId"/>
+                            </div>
+                        </div>
+                    </div>
+                    
+					<div class="span6">
+                        <div class="control-group">
+                            <label class="control-label" for="begDate">申请时间：</label>
+                            <div class="controls">
+                                <input type="text" class="input-block-level Wdate"
+                                       onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" name="begDate"
+                                       value="$!date.format('yyyy-MM-dd',$!{begDate})" id="begDate" style="cursor: pointer; width: 135px">
+									   至
+                                <input type="text" class="input-block-level Wdate"
+                                       onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begDate\')}'})" name="endDate"
+                                       value="$!date.format('yyyy-MM-dd',$!{endDate})" id="endDate" style="cursor: pointer;width: 135px">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                	<div class="span4">
+		            	<div class="control-group">
+			                <label class="control-label">商户订单号：</label>
+				                <div class="controls">
+			                    	<input type="text" id="payTranNo" name="payTranNo" class="input-medium" value="" placeholder="">
+			            		</div>
+		            	</div>
+		        	</div>
+					<div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">支付通道：</label>
+                            <div class="controls">
+                                <select style="width:160px"  id="payWay" name="payWay">
+                                    <option value="">请选择</option>
+                                    #listParam('ORD_PAY_WAY')
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+						<div class="pull-left"> 
+							<span class="btn" id="btnPrint" style="display:none;"><i class="icon-print"></i> 批量打印</span>
+						</div>
+                    </div>
+                    <div class="span4">
+
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="btn-wrap btn-w-left">
+                                    <span class="sbtn sbtn-blue" id="btnFormSearch"><i class="icon-search"></i> 查询</span>
+                                    <span class="sbtn" id="btnFormReset"><i class="icon-asterisk icon-color"></i> 重置</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+		<input type="hidden" name="resetBegDate" id="resetBegDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+    	<input type="hidden" name="resetEndDate" id="resetEndDate" value="$!date.format('yyyy-MM-dd',$!{endDate})">
+        <div class="seller-tab">
+			<ul class="tab-nav" id="refundTab">
+                <li class="active first" id="backgdsTodo"><span class="item">待处理</span></li>
+                <li id="backgdsRefundConfirm"><span class="item">确认退款</span></li>
+                <li id="backgdsHandled"><span class="item">已处理</span></li>
+            </ul>
+            <div class="tab-content" >
+				<div class="nItem" id="order-contentDiv">
+					#parse("/seller/order/backgdslist/seller-backgds-todo.vm")
+                </div>
+            </div>
+        </div>
+		<form action="" accept-charset="" id="backreviewForm" method="" onsubmit=""> </form>
+    	<input type = "hidden" id="site1" value="#siteInfo('1')"/>
+    	<input type = "hidden" id="site2" value="#siteInfo('2')"/>
+    </div>
+</div>

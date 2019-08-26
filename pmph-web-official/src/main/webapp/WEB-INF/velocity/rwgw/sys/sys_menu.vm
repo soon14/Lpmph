@@ -1,0 +1,502 @@
+
+#parse("/rwgw/sys/sys_param.vm")
+
+<script type="text/javascript" src="${BUSIJS_PATH}/sys/sys_menu.js?v=${JS_VERSION}"></script>
+
+<!--中间区域-->
+
+<aside class="main-side">
+    <div class="nav_menu" id="menuBody">
+		<div id="myweg"> <h2><span>我的沃易购</span></h2></div>
+		##获取session
+		#set($reqSession = ${request.session})
+		##获取菜单列表
+		#set($menuDisplayVOList = ${aiTool.qrySysMenu($reqSession)})
+		
+		#foreach ( $topMenuVO in $menuDisplayVOList )
+			#set($menuItemId="item"+${topMenuVO.menuId})
+			<dl>
+                <dt onclick="showHide(this,'${menuItemId}');">
+			        <a href="javascript:void(0);" class="minus"><span></span>${topMenuVO.menuTitle}</a>
+        		</dt>
+        		<dd id="${menuItemId}">
+					###处理目录；
+					#set($catList = ${topMenuVO.catList})
+        			#if ($null.isNull($catList) || $catList.isEmpty())
+						###空的，不处理；
+			        #else
+				      #displayCat($catList)
+					#end
+					###处理子菜单；
+					#set($menuList = ${topMenuVO.menuList})
+			        #if ($null.isNull($menuList) || $menuList.isEmpty())
+				
+			        #else
+				       #displaySubMenu($menuList)
+			        #end
+        		</dd>
+        	</dl>
+	    #end
+		
+    </div>
+</aside>
+
+####展示目录信息；目录中可能存在递归
+#macro(displayCat $catList)
+	#foreach ( $catVO in $catList )
+		<div><h4>${catVO.menuTitle}</h4>
+			#set($catList = ${catVO.catList})
+			#set($menuList = ${catVO.menuList})
+			#if ($null.isNull($catList) || $catList.isEmpty())
+				
+			#else
+				#displayCat($catList)
+			#end
+			
+			#if ($null.isNull($menuList) || $menuList.size()==0)
+				
+			#else
+				#displaySubMenu($menuList)
+			#end
+			###需要将之前的变量初始化为 空值，否则，将会导致递归之后出现递归中的变量重复赋值的问题；
+			#set($catList = "")
+			#set($menuList = "")
+	    </div>
+	#end
+#end
+
+####展示节点信息；
+#macro(displaySubMenu $subMenuList)
+	<ul>
+		#foreach ( $subMenu in $subMenuList )
+			#set($menuUrl = $CONTEXT_PATH+${subMenu.menuUrl})
+			<li><a href="javascript:void(0)" onClick="javascript:SysMenu.menuLink('$menuUrl',${subMenu.menuId});return false;">${subMenu.menuTitle}</a></li>
+		#end
+	</ul>
+#end
+
+
+##	    <aside class="main-side">
+##	        <div class="nav_menu">
+##	            <div id="myweg">
+##	                <h2><span>我的沃易购</span></h2>
+##	            </div>
+##                <dl>
+##	                <dt onclick="showHide(this,'items1');">
+##	                    <a href="javascript:void(0);" class="minus"><span></span>交易中心</a>
+##	                </dt>
+##	                <dd id="items1">
+##	                    <ul>
+##                        	<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/order/toMyOrder')">我的订单</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/agreement/pageInit')">电子签约管理</a>
+##	                        </li>
+##	                    </ul>
+##	                </dd>
+##	            </dl>
+##                <dl>
+##                    <dt onclick="showHide(this,'items3');">
+##                        <a href="javascript:void(0);" class="minus"><span></span>系统维护</a>
+##                    </dt>
+##                    <dd id="items3">
+##                        <ul>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/pagement/pageInit')">平台管理人员配置</a>
+##                            </li>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/messagecenter/pageInit')">消息中心</a>
+##                            </li>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/hotsearch/pageInit')">热门搜索配置</a>
+##                            </li>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/admanager/pageInit')">广告维护</a>
+##                            </li>
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/fairmanage/pageInit')">交易会配置</a>
+##                            </li>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/pagemodule/pageInit')">楼层维护</a>
+##                            </li>
+##							 <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/admanager/noticePreserve')">信息维护</a>
+##                            </li>
+##							 <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/shoplist/shoplist')">店铺管理</a>
+##                            </li>
+##							 <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/custSer/custSerList')">店铺客服管理</a>
+##                            </li>
+##							 <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/paywaymanage/pageInit')">支付通道管理</a>
+##                            </li>
+##							 <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/paywaymanage/shopPayWayPageInit')">店铺支付通道配置</a>
+##                            </li>
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/paylogmonitor/pageInit')">支付日志监控</a>
+##                            </li>
+##							 <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/systemmanage/systemFileUploadInit')">系统文件上传</a>
+##                            </li>
+##							  <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/systemmanage/systemImgUpload')">系统图片上传</a>
+##                            </li>
+##
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/staffmanage/pageInit')">帐号维护</a>
+##                            </li>
+##
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/staffmanage/pageInit')">帐号维护</a>
+##                            </li>
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/systemtest/pageInit')">系统测试</a>
+##                            </li>
+##
+##
+##                        </ul>
+##                    </dd>
+##                </dl>
+##                 <dl>
+##	                <dt onclick="showHide(this,'items4');">
+##	                    <a href="javascript:void(0);" class="minus"><span></span>活动配置</a>
+##	                </dt>
+##	                <dd id="items4">
+##	                    <ul>
+##	                        <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/actconfig/toActMaintain')">店铺活动维护</a>
+##	                        </li>
+##	                        <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/actconfig/totuanGouActivity')">团购活动维护</a>
+##	                        </li>
+##	                        <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/actconfig/toMarketActivity')">营销活动维护</a>
+##	                        </li>
+##	                        <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/actconfig/toActicityFloorMaintain')">活动楼层维护</a>
+##	                        </li>
+##	                        <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/actconfig/toacttypemaintain')">活动类型维护</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/actconfig/toactperminfo')">活动类型权限配置</a>
+##	                        </li>
+##	                    </ul>
+##	                </dd>
+##	            </dl>
+##
+##                <dl>
+##                    <dt onclick="showHide(this,'items00');">
+##                        <a href="javascript:void(0);" class="minus"><span></span>报表中心</a>
+##                    </dt>
+##                    <dd id="items00">
+##                        <ul>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=商品销售报表&reportParams=TerminalSales,TerminalSalesDetail,CardSales,CardSalesDetail,ProTypeSales,ProTypeSalesDetail,GiftSales,GiftSalesDetail')">商品销售报表</a>
+##                            </li>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=两率通报表&reportParams=TwoRateArea,TwoRateCommon,TwoRateChnl,TwoRateSupplier,TwoRateBrand,TwoRateFollowup')">两率通报表</a>
+##                            </li>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=终端超时未发货查询&reportParams=TerminalTimeoutNotSend')">终端超时未发货查询</a>
+##                            </li>
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/trade/pageInit?reportTitle=渠道统计报表&reportParams=ChnlStatisticsInfo,GoodsSaleRpt,ManagerLoginRpt')">渠道产品综合报表</a>
+##                            </li>
+##                             <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=全员渠道拓展汇总&reportParams=ChnlExtRpt,ChnlExtDetail,ChnlExtAwardUserInfo')">渠道攻坚报表</a>
+##                            </li>
+##                             <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=终端进销存汇总&reportParams=ZdBuySale,HkBuySale,ZdBuySaleDetail,HkBuySaleDetail')">我的进销存</a>
+##                            </li>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/trade/commPreInit?reportTitle=佣金汇总一览&reportParams=CommIncomePre,MonCommDetail,PhoneCommDetail,UserStateWarn')">佣金收益</a>
+##                            </li>
+##                             <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=终端渠道渗透报表&reportParams=GoodsPremeate,Goods3GPremeate,Goods2GPremeate')">产品渗透报表</a>
+##                            </li>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=交易会龙虎榜&reportParams=FairReport')">交易会龙虎榜</a>
+##                            </li>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=二次充值报表&reportParams=RptSecondRecharge,RptSecondRechargeMon')">二次充值报表</a>
+##                            </li>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=佣金管理报表&reportParams=CommissionManagementReport')">佣金管理报表</a>
+##                            </li>
+##                             <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=佣金查询&reportParams=Commission,CommissionInquiry,CommissionDevelopment,CommissionDivided,CommissionReward,CommissionIncrement,CommissionAdjustment')">佣金查询</a>
+##	                        </li>
+##	                        <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=二次充值&reportParams=SecondaryRechargeCollect,SecondaryRechargeCase,SecondaryRechargeCommission,SecondaryRechargeInquiry')">二次充值</a>
+##                            </li>
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=沃金融（银行模式）报表&reportParams=WoFinancialReport,WoFinancialBankReport')">沃金融（银行模式）报表</a>
+##                            </li>
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=沃金融资金结算报表&reportParams=WoFinancialLiquidation')">沃金融资金结算报表</a>
+##                            </li>
+##                       		<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=沃金融（账期模式）报表&reportParams=EasyTreasureColligate,EasyTreasureRepayment,EasyTreasureWarning,EasyTreasureNormalDetail,EasyTreasureOverdueDetail,EasyTreasureBreachDetail,EasyTreasureBreach5Detail')">沃金融（账期模式）报表</a>
+##                            </li>
+##
+##                            <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=两率通报表&reportParams=TwoRateArea,TwoRate,TwoRateChnl')">两率通报表</a>
+##                            </li>
+##
+##                             <li>
+##                               <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=商品管理报表&reportParams=TerminalDataManage,TerminalManageDetail,TerminalUsed,TerminalContract,TerminalContractDetail')">商品管理报表</a>
+##                            </li>
+##                            <li>
+##                               <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=积分兑换查询&reportParams=RedeemPoints')">积分兑换查询</a>
+##                            </li>
+##                            <li>
+##                               <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=渠道补贴报表&reportParams=ChannelSubsidies,ChannelSubsidiesDetail,ChannelSubsidiesAmount,CardSubsidies,CardSubsidiesDetail')">渠道补贴报表</a>
+##                            </li>
+##                             <li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=渠道发展报表&reportParams=ChannelDDev,ChannelCancellation,ChnlClassificationRegistration,RealNameReturn,WegWt')">渠道发展报表</a>
+##                            </li>
+##					<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/report/pageInit?reportTitle=积分管理报表&reportParams=ScoreManage')">积分管理报表</a>
+##                            </li>
+##
+##
+##                        </ul>
+##                    </dd>
+##                </dl>
+##
+##				 <dl>
+##	                <dt onclick="showHide(this,'items1');">
+##	                    <a href="javascript:void(0);" class="minus"><span></span>商品管理</a>
+##	                </dt>
+##	                <dd id="items1">
+##	                    <ul>
+##					      	<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/product/pageInit')">产品录入</a>
+##	                        </li>
+##                        	<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/productManage/pageInit')">产品管理</a>
+##	                        </li>
+##                        	<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/gdsEdit/pageInit')">商品录入</a>
+##	                        </li>
+##                        	<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/goodsManage/pageInit')">商品管理</a>
+##	                        </li>
+##                        	<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/brandModelManage/pageInit')">品牌型号管理</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/adaptchnl/pageInit')">渠道适用</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/combination/pageInit')">组合搭配管理</a>
+##	                        </li>
+##                        	<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/gift/toGiftList')">赠品管理</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/presell/pageInit')">预售管理</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/package/pageInit')">套餐管理</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/integraldeploy/index')">积分规则配置</a>
+##	                        </li>
+##							<li>
+##								<a href="javascript:void(0)" onClick="attr_src(basePath+'/gdsSkuPrice/gdsSkuPriceManage')">商品结算价维护</a>
+##							</li>
+##							<li>
+##								<a href="javascript:void(0)" onClick="attr_src(basePath+'/cardManage/pageInit')">卡包管理</a>
+##							</li>
+##							<li>
+##								<a href="javascript:void(0)" onClick="attr_src(basePath+'/arriveNotice/pageInit')">到货通知</a>
+##							</li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/myCollection/pageInit')">我的收藏</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/ordImeiCheck/pageInit')">串号变更规则维护</a>
+##	                        </li>
+##	                    </ul>
+##	                </dd>
+##	            </dl>
+##				<dl>
+##	                <dt onclick="showHide(this,'items1');">
+##	                    <a href="javascript:void(0);" class="minus"><span></span>库存管理</a>
+##	                </dt>
+##	                <dd id="items1">
+##	                    <ul>
+##					      	<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/stock/toStockInput')">库存录入</a>
+##	                        </li>
+##                        	<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/stock/toStockCheck')">库存盘点</a>
+##	                        </li>
+##
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/integraladjust/index')">积分人工调整</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/stockMinute/StockMinuteGoods')">库存分库</a>
+##	                        </li>
+##	                    </ul>
+##	                </dd>
+##	            </dl>
+##				<dl>
+##	                <dt onclick="showHide(this,'items1');">
+##	                    <a href="javascript:void(0);" class="minus"><span></span>系统管理</a>
+##	                </dt>
+##	                <dd id="items1">
+##	                    <ul>
+##					      	<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/terminalCommission/terminalCommission')">供货商终端佣金维护</a>
+##	                        </li>
+##							<li>
+##								<a href="javascript:void(0)" onClick="attr_src(basePath+'/terminalCommission/manageTerminalCommission')">管理员终端佣金维护</a>
+##							</li>
+##							<li>
+##								<a href="javascript:void(0)" onClick="attr_src(basePath+'/terminalCommission/allManageTerminalCommission')">全国版管理员终端佣金维护</a>
+##							</li>
+##							<li>
+##								<a href="javascript:void(0)" onClick="attr_src(basePath+'/channel/chnlQQgroup')">地市QQ群号配置</a>
+##							</li>
+##							<li>
+##								<a href="javascript:void(0)" onClick="attr_src(basePath+'/rolemanage/pageInit')">角色管理</a>
+##							</li>
+##	                    </ul>
+##	                </dd>
+##	            </dl>
+##                <dl>
+##	                <dt onclick="showHide(this,'items2');">
+##	                    <a href="javascript:void(0);" class="minus"><span></span>订单管理</a>
+##	                </dt>
+##	                <dd id="items2">
+##	                    <ul>
+##	                        <li>
+##								<a href="javascript:void(0)" onClick="attr_src(basePath+'/ordermodify/toModifyOrder')">订单价格修改及解锁</a> </li>
+##                            <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/orderShip/Init')">订单发货</a>
+##	                        </li>
+##						    <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/consignment/consignInit')">卡包、上网卡、手机套包发货</a>
+##	                        </li>
+##                            <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/orderquery/orderquery')">订单综合查询</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/shipInstead/shipInit')">订单代发货</a>
+##	                        </li>
+##	                        <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/orderSendQuery/toSendQuery')">订单发货查询</a>
+##	                        </li>
+##
+##							  <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/ordermodify/toQueryModifyprice')">价格修改查询</a>
+##	                        </li>
+##                            <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/imeiCode/pageInit')">串号变更</a>
+##	                        </li>
+##                            <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/orderAudit/pageInit')">线下支付审核</a>
+##	                        </li>
+##
+##                            <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/payTransQuery/topaytransQuery')">支付交易查询</a>
+##	                        </li>
+##                            <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/OrdDetailSearch/orderDetailSearchPager')">订单明细查询</a>
+##	                        </li>
+##							<li>
+##                            <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/depositOrder/orderEntering')">定金订单录入</a>
+##                            </li>
+##                            <li>
+##							 <a href="javascript:void(0)" onClick="attr_src(basePath+'/moneyAcount/moneyAcountpage')">我的资金账户</a>
+##                            </li>
+##                            <li>
+##                            <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/memberCenter/orderMyPoints')">我的积分</a>
+##                            </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/couponsManage/jumpToAccountMyCouponsBuyer')">我的优惠劵</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/couponsType/couponsTypeManage')">优惠劵类型维护</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/couponsManage/jumpToCouponsManagerSeller')">优惠劵管理</a>
+##	                        </li>
+##	                    </ul>
+##	                </dd>
+##	            </dl>
+##	            <dl>
+##	                <dt onclick="showHide(this,'items3');">
+##	                    <a href="javascript:void(0);" class="minus"><span></span>客户服务</a>
+##	                </dt>
+##	                <dd id="items3">
+##	                    <ul>
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/channel/chnlSignNew')">新建体验渠道</a>
+##                            </li>
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/channel/chnlUserSave')">个人信息</a>
+##                            </li>
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/channel/chnlSignUpQuery')">体验渠道管理</a>
+##                            </li>
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/moneyAcount/toQuerychnlAcount')">渠道账户查询</a>
+##                            </li>
+##							<li>
+##                                <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/channel/chnlAddress')">收货地址</a>
+##                            </li>
+##	                        <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src('${CONTEXT_PATH}/message/pageInit')">我的留言</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/comment/pageInit')">评价管理</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/comment/pageInit')">我的评价</a>
+##	                        </li>
+##
+##                            <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src('my_woego/buyers/Account_information.html')">帐号信息</a>
+##	                        </li>
+##							 <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/moneyAcount/toModifyPwd')">修改资金密码</a>
+##	                        </li>
+##                            <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src('my_woego/buyers/Role_management.html')">角色管理</a>
+##	                        </li>
+##	                         <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src('basePath+'/payTransQuery/topaytransQuery')"> 支付交易查</a>
+##	                        </li>
+##                            <li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/complaint/complaint')">投诉专区</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/complainthand/complainthand')">投诉处理</a>
+##	                        </li>
+##							<li>
+##	                            <a href="javascript:void(0)" onClick="attr_src(basePath+'/complaintunicom/complaintunicom')">投诉管理</a>
+##	                        </li>
+##                            <li>
+##	                            <a href="#">用户指南</a>
+##	                        </li>
+##                            <li>
+##	                            <a href="#" onClick="javascript:$('#ifa').attr({'src':'my_woego/buyers/Mobile_phone_repair.html'});">手机维护查询</a>
+##	                        </li>
+##	                    </ul>
+##	                </dd>
+##	            </dl>
+##
+##	        </div>
+##	    </aside>
+##
+##--上面为静态页面，以下为数据库获取--
+##<p>
+##--数据库整理好，再删除上面静态页面--

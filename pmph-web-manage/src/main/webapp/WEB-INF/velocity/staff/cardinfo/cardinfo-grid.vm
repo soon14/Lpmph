@@ -1,0 +1,84 @@
+#parse("/module/mod-form.vm")
+#parse("/module/mod-grid.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.date.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/cardinfo/cardinfo-grid.js?version=$!{JS_VERSION}" ></script>
+
+<div class="alert alert-error">
+    <span>1.导出数据根据，查询条件导出。</span></br>
+    <span>2.导出数据如果稍慢，请使用查询条件分别导出。</span></br>
+    <span>3.如有问题，请联系管理员。</span></br>
+</div>
+<div class="well well-searchForm">
+    <form id="searchForm" class="form-horizontal" style="margin-bottom: 0px;">
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">会员卡等级：</label>
+                    <div class="controls">
+                        #select('STAFF_CUST_LEVEL','custLevelCode',false)
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">会员卡状态：</label>
+                    <div class="controls">
+                        <select style="width:160px" name="cardStatus" id="cardStatus">
+                            <option value="">
+                                --请选择--
+                            </option>
+                            #listParam('STAFF_CARD_STATUS')
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">会员卡号：</label>
+                    <div class="controls">
+                        <input type="text" name="custCardId" id="custCardId" class="input-medium" value="" placeholder="" maxlength="15">
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">所属群组：</label>
+                    <div class="controls">
+                        <input type="text" name="cardGroup" id="cardGroup" class="input-medium" value="" maxlength="20">
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </form>
+</div>
+<div class="row-fluid" style="margin-bottom: 10px;">
+    <div class="span8">
+        <a class="btn" id="btn_code_add" href="javascript:void(0);"><i class="icon-plus"></i>生成会员卡</a>
+        <a class="btn" id="btn_excel_export" href="javascript:void(0);"><i class="icon-download-alt"></i>导出数据</a>
+        <a class="btn" id="btn_excel_update" href="javascript:void(0);"><i class="icon-edit"></i>Excel批量修改数据</a>
+        <a class="btn" id="btn_no" href="javascript:void(0);">未发卡</a>
+        <a class="btn" id="btn_real" href="javascript:void(0);">已发卡</a>
+    </div>
+    <div class="pull-right">
+        <a class="btn btn-info" id="btnFormSearch" href="javascript:void(0);"><i class="icon-search icon-white"></i> 查询</a>
+        <a class="btn" id="btnFormReset" href="javascript:void(0);"><i class="icon-refresh"></i> 重置</a>
+    </div>
+</div>
+<div class="row-fluid">
+    <table id="dataGridTable"></table>
+</div>
+<form id="excelfrom" action="${CONTEXT_PATH}/card/exportExcel" method="POST">
+    <input type="hidden" name="custLevelCode" id="custLevelCode1" value="" />
+    <input type="hidden" name="cardStatus" id="cardStatus1" value="" />
+    <input type="hidden" name="custCardId" id="custCardId1" value="" />
+    <input type="hidden" name="cardGroup" id="cardGroup1" value="" />
+</form>
+
+		
+		
+		
+		

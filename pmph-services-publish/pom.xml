@@ -1,0 +1,167 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>ecp-pmph</artifactId>
+		<groupId>com.ai.ecp.pmph</groupId>
+		<version>1.30-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<groupId>com.ai.ecp.pmph</groupId>
+	<artifactId>pmph-server-publish</artifactId>
+	<version>1.30-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	
+	<dependencies>
+		<!--引入的是所有的服务包-->
+		<dependency>
+			<groupId>com.ai.ecp.pmph</groupId>
+			<artifactId>pmph-services-server</artifactId>
+			<version>1.30-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-services-demo-server</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-services-cms-server</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-services-goods-server</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-services-staff-server</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-services-prom-server</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-services-search-server</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-services-coupon-server</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-services-order-server</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ai.ecpcore</groupId>
+			<artifactId>ecp-services-sys-server</artifactId>
+			<version>${ecp-busi-core.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.ai.ecp.pmph</groupId>
+			<artifactId>pmph-aip-services-server</artifactId>
+			<version>1.30-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+	
+	<profiles>
+        <profile>
+            <id>dev-qa</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.ai.ecp.pmph</groupId>
+                    <artifactId>pmph-aip-services-server</artifactId>
+                    <version>1.30-SNAPSHOT</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+	
+	<build>
+		<finalName>ecp-server-publish</finalName>
+		<sourceDirectory>src/main/resources</sourceDirectory>
+			
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!-- 处理资源文件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<encoding>UTF-8</encoding>
+							<outputDirectory>${project.build.directory}/config</outputDirectory><!-- 
+								把配置文件拷到/etc路径下 -->
+							<resources>
+								<resource>
+									<directory>src/main/resources/</directory>
+									<includes>
+										<include>paasContext.xml</include>
+										<include>*.properties</include>
+										<include>log4j.xml</include>
+									</includes>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,57 @@
+<div data-am-widget="navbar" class="am-navbar am-navbar-mall  am-navbar-pro" id="">
+    <ul class="am-navbar-nav am-avg-sm-4">
+        #*
+		
+		
+        <li>
+            <a href="$!{CONTEXT_PATH}/shopmain/$!{gdsDetailInfo.shopId}">
+                <span class="iconfont icon-shop"></span>
+                <span class="am-navbar-label">店铺</span>
+            </a>
+        </li>
+        *#
+        
+        <li id="cstmrBtn">
+            <a href="#">
+            	<input type="hidden" id="issueType" value="2"/>
+                <span class="iconfont icon-kf"></span>
+                <span class="am-navbar-label">客服</span>
+            </a>
+        </li>
+       
+		<li class="active" id="addCollect">
+            <a href="#">
+                <span class="iconfont icon-col"></span>
+                <span class="am-navbar-label">收藏</span>
+            </a>
+        </li>
+        <li>
+            <a href="$!{CONTEXT_PATH}/order/cart/list">
+                <span class="iconfont icon-cart2"></span>
+                <span class="am-navbar-label" id="carGus">购物车</span>
+            </a>
+            <span class="num-tip"></span>
+        </li>
+    </ul>
+	<span name="addToCart" #if(($!{stockStatus}=='00' && $!{gdsType.ifNeedstock}=='1' )||$!{gdsDetailInfo.skuInfo.gdsStatus}!="11")class="wbtn wbtn-fd wbtn-disable"  disabled  #else class="wbtn wbtn-fd" #end id="addToCart">
+       $!{addToCartPromp}##加入购物车
+	</span>
+    ##<a href="#" class="wbtn wbtn-fd">加入购物车</a>
+</div>
+ <script >
+$(function(){
+	//咨询客服
+	$('#cstmrBtn').click(function() {
+		var shopId=$("#shopId").val();
+		var issueType=$("#issueType").val();
+		var gsdandOrdId=$("#gdsId").val();
+		if(!shopId || shopId == "" || shopId == undefined){
+			return false;
+		}
+		
+		//window.location.href = GLOBAL.WEBROOT + "/customerservice/index?shopId="+shopId+"&issueType="+issueType+"&gdsId="+gdsId;
+		window.location.href = GLOBAL.WEBROOT + "/customerservice/index/"+shopId+"-"+issueType+"-"+gsdandOrdId;
+	});
+   
+})
+</script>   

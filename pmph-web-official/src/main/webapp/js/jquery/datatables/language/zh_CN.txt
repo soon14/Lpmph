@@ -1,0 +1,18 @@
+{
+	"sLoadingRecords": "努力抓取数据中...",
+	"sProcessing": "数据处理中...",
+	"sLengthMenu": "每页 _MENU_ 条",
+	"sZeroRecords": "没有任何数据返回",
+	"sInfo": "共 <strong>_TOTAL_</strong> 条记录",
+	"sInfoEmpty": "0 到 0 共 0 条记录",
+	"sInfoFiltered": "(已从 _MAX_ 条记录中过滤)",
+	"sInfoPostFix": "",
+	"sSearch": "快速搜索",
+	"sUrl": "",
+	"oPaginate": {
+		"sFirst":    "首页",
+		"sPrevious": "",
+		"sNext":     "",
+		"sLast":     "尾页"
+	}
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+	http://www.springframework.org/schema/beans/spring-beans.xsd  
+	http://code.alibabatech.com/schema/dubbo  
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+	">
+
+	<dubbo:reference id="aipLMNetValueAddedRSV" interface="com.ai.ecp.pmph.aip.dubbo.interfaces.IAipLMNetValueAddedRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${aip.dubbo.group}"/>
+	<dubbo:reference id="aipZYAuthRSV" interface="com.ai.ecp.pmph.aip.dubbo.interfaces.IAipZYAuthRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${aip.dubbo.group}"/>
+	<dubbo:reference id="aipEEduNoticeRSV" interface="com.ai.ecp.pmph.aip.dubbo.interfaces.IAipEEduNoticeRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${aip.dubbo.group}"/>
+	<dubbo:reference id="aipExternalAuthRSV" interface="com.ai.ecp.pmph.aip.dubbo.interfaces.IAipExternalAuthRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${aip.dubbo.group}"/>
+
+
+</beans>  

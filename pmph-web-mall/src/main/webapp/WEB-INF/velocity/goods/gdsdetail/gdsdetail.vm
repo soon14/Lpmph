@@ -1,0 +1,83 @@
+    <meta charset="UTF-8">
+    <title>购买商品</title>
+		#parse("sys/sys_param.vm")
+    <link rel="Stylesheet" type="text/css" href="${CONTEXT_PATH}/css/product-detail.css">
+	<script type="text/javascript" src="$BUSIJS_PATH/goods/gdsdetail/timeCountDown.js?version=$!{JS_VERSION}"></script>
+	<script type="text/javascript" src="$BUSIJS_PATH/goods/gdsdetail/gdsdetail.js?version=$!{JS_VERSION}"></script>
+	<script type="text/javascript" src="$BUSIJS_PATH/goods/gdsdetail/pmph-gdsdetail.js?version=$!{JS_VERSION}"></script>
+<div class="wrap1200">
+	 #if($!{gdsDetailInfo.skuInfo.gdsStatus} == "99")
+		##已删除的商品提示、或者不存在的商品
+		#parse("/goods/gdsdetail/gdsdetail-gdsdelete.vm")
+	#else
+        <div id="root-nav">
+			##异步获取路径
+        </div>
+        <div id="content-c" style="padding-left:0px;">
+            <div id="main">
+                <!--商品简介 begin-->
+                 #parse("/goods/gdsdetail/gdsdetail-productIntroduction.vm")
+                <!--商品简介 end-->
+    
+                <!--自由搭配 begin-->
+                #parse("/goods/gdsdetail/gdsdetail-autoCombine.vm")
+                <!--自由搭配 end-->
+    			
+    			<!--浏览记录 begin-->
+			   		<div style="width: 190px;float: left;">
+			            #parse("/goods/gdsdetail/gdsdetail-recentlyProduct.vm")
+		   			</div>
+			     <!--浏览记录 end-->
+    			
+                <!--商品详情 begin-->
+    			<input type="hidden" value="$!{gdsDetailInfo.gdsDesc}" id="gdsDesc"/>
+    			<!--<input type="hidden" value="$!{gdsDetailInfo.gdsPartlist}" id="gdsPartlist"/>-->
+                <div class="ui-tab pro-info mt20" style="padding-left: 200px;">
+                    <ul class="tabn">
+                        <li>
+                            <a href="#">商品详情</a>
+                        </li>
+						#set($ifNetWork = '0')
+						#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get("1027").values})
+            				#if($!{value.id}=='308')
+								#set($ifNetWork = '1')
+                				<li>
+    								<a href="#">网络增值服务</a>
+    							</li>
+							#end
+            			#end
+                        
+                        <li>
+                            <a href="#">商品评价</a>
+                        </li>
+                        <!--<li>
+                            <a href="#">商品评价答复</a>
+                        </li>-->
+                    </ul>
+					<input type="hidden" value="$ifNetWork" id="ifNetWork"/>
+                    <div class="tabc ">
+                        <!--商品详情 begin-->
+                         #parse("/goods/gdsdetail/gdsdetail-gdsDetailInfo.vm")
+                        <!--商品详情 end-->
+						#if($ifNetWork == '1')
+                            <!--网络增值服务 begin-->
+                            #parse("/goods/gdsdetail/gdsdetail-netWorkService.vm")
+                            <!--网络增值服务 end-->
+						#end
+                        <!--商品评价 begin-->
+                        #parse("/goods/gdsdetail/gdsdetail-evaluation.vm")
+                        <!--商品评价 end-->
+    
+                    </div>
+               </div>
+                <!--商品详情 end-->
+    
+                <!--重点推荐 begin-->
+                #parse("/goods/gdsdetail/gdsdetail-gdsRecommend.vm")
+                <!--重点推荐 end-->
+    
+            </div>
+        </div>
+	#end
+</div>
+

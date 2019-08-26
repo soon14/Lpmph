@@ -1,0 +1,99 @@
+
+#parse("/module/mod-scroll.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.date.js" ></script>
+<!--全部产品-->
+<div class="voteBody">
+<div class="wrap100">
+    <div class="container">
+        <div class="vote-head">
+             <h3>$!{channelresp.channelName}</h3>
+            <div class="line"></div>
+            <p>$!{channelresp.remark}</p>
+        </div>
+            <script id="voteBlocktpl" type="text/html">
+               {{each values}}
+                <div class="vote-block dataLoad">
+                    <div class="cont">
+                        <div class="bmain" data-article-url="{{$value.staticId}}">
+    						{{if $value.thumbnail=='' || $value.thumbnail== null }}
+                                <div class="vcenter"> <a href="$!{CONTEXT_PATH}/vote/article?channelId=$!{channelresp.id}&id={{$value.id}}"  target="_blank"><img alt="Loading..." src="${aiTool.genImageUrl('','')}"> </a></div>
+    						{{else}}
+    							<div class="vcenter"> <a href="$!{CONTEXT_PATH}/vote/article?channelId=$!{channelresp.id}&id={{$value.id}}"  target="_blank"><img alt="Loading..." src="${aiTool.genImageUrl('{{$value.thumbnail}}','')}"> </a></div>
+    						{{/if}}
+                        </div>
+						{{if $value.articleRemark && $value.articleRemark != ''}}
+                        <p class="desp" title="{{$value.articleRemark}}"><a href="$!{CONTEXT_PATH}/vote/article?channelId=$!{channelresp.id}&id={{$value.id}}"  target="_blank">{{$value.articleRemark}}</a></p>
+                        {{/if}}
+					</div>
+                    <div class="hail">
+                        <div class="ew">
+                            <div class="img-wrap">
+                                <img src="{{$value.qrCode}}" alt=""/>
+                                <div class="big-img">
+                                    <img src="{{$value.bigQrCode}}" alt=""/>
+                                </div>
+                            </div>
+                            <p>扫码投票</p>
+                        </div>
+                        <div class="info">
+                            <div class="hd">
+                            <a href="$!{CONTEXT_PATH}/vote/article?channelId=$!{channelresp.id}&id={{$value.id}}" target="_blank" title="{{$value.articleTitle}}">{{$value.articleTitle}}</a>
+                            </div>
+                            <div class="explain">
+                                <p><label>作者：</label><span title="{{$value.authorName}}">{{$value.authorName}}</span></p>
+
+                                <p><label>创建时间：</label><span>{{$value.createTime}}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           {{/each}}
+            </script>
+        <div class="vote-body">
+            <div class="ecp-component vote-box clearfix" id="voteBox" data-module="ecp-component/rwzw/masonryVote">
+              #foreach($item in $respData)
+                <div class="vote-block dataLoad">
+                    <div class="cont">
+                        <div class="bmain" data-article-url="$!{item.staticId}">
+                           <div class="vcenter"><a href = "$!{CONTEXT_PATH}/vote/article?channelId=$!{channelresp.id}&id=$!{item.id}" target="_blank"><img alt="Loading..." src="${aiTool.genImageUrl($!{item.thumbnail},'')}"></a></div>
+                        </div>
+					   #if($!{item.articleRemark} && $!{item.articleRemark} != '') 
+                       <p class="desp" title ="$!{item.articleRemark}"><a href = "$!{CONTEXT_PATH}/vote/article?channelId=$!{channelresp.id}&id=$!{item.id}" target="_blank">$!{item.articleRemark}</a></p>
+                       #end
+					</div>
+                    <div class="hail">
+                       <div class="ew">
+                           <div class="img-wrap">
+                               <img src="$!{item.qrCode}" alt=""/>
+                               <div class="big-img">
+                                   <img src="$!{item.bigQrCode}" alt=""/>
+                               </div>
+                           </div>
+                           <p>扫码投票</p>
+                       </div>
+                        <div class="info">
+                            <div class="hd">
+                             <a href="$!{CONTEXT_PATH}/vote/article?channelId=$!{channelresp.id}&id=$!{item.id}" target="_blank" title="$!{item.articleTitle}">$!{item.articleTitle}</a>
+                            </div>
+                            <div class="explain">
+                                <p> <label>作者：</label><span title="$!{item.authorName}">$!{item.authorName}</span></p>
+                                <p><label>创建时间：</label><span> $!{item.createTime}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             #end
+            </div>
+            <div class="load-wrap">
+                <div class="nodata">
+                </div>
+                <input type="hidden" id="channelId" name="channelId" value="$!{channelId}">
+                <div id="navigation" ><a href="$!{CONTEXT_PATH}/vote/voteList?page=1" style="display:none"></a>下拉加载更多</div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</div>
+

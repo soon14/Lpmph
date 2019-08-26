@@ -1,0 +1,116 @@
+
+#parse("/module/mod-scroll.vm")
+
+  <div class="wrap100 u-bg">
+        <div class="container">
+            <img src="$IMAGE_PATH/u-banner.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="wrap100">
+        <div class="container">
+            <div class="u-w ">
+                <ul class="u-w-list">
+                    <li>
+                        <div class="u-con01">
+                            <div class="u-con01-tit clearfix"> <h3>组织建设</h3></div>
+                            <p>在中宣部、教育部、国家卫生和计划生育委员会和国家新闻出版广电总局的领导下，在全国高等医药教材建设研究会、人卫社专家咨询委员会的领导下，在中国医学数字教育项目示范基地、中国医学教育慕课联盟、中国医学教育慕课平台的丰富经验和坚实基础上，建立人卫开放大学章程，组建人卫开放大学组织管理体系。</p>
+                        </div>
+                        <div class="u-img">
+                            <img src="$IMAGE_PATH/u-img01.jpg" alt=""/>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="u-con01">
+                            <div class="u-con01-tit clearfix"> <h3>在线课程建设</h3></div>
+                            <p>建设全方位课程服务体系，包括医学教育慕课、医学学术慕课、大众健康慕课等；探索规范的课程建设渠道，打造自上而下的规划课程建设和自下而上的优秀课程申报体制；做好在线课程制作培训工作。</p>
+                        </div>
+                        <div class="u-img">
+                            <img src="$IMAGE_PATH/u-img02.jpg" alt=""/>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="u-con01">
+                            <div class="u-con01-tit clearfix"> <h3>平台建设</h3></div>
+                            <p>人卫开放大学以“人卫慕课”平台作为官方平台，立足MOOC（Massive Open Online Courses）向SPOC（Small Private Online Courses）拓展延伸，将互联网教学优势与学校的线下教学优势相融合，形成完整教育模式。</p>
+                        </div>
+                        <div class="u-img">
+                            <img src="$IMAGE_PATH/u-img03.jpg" alt=""/>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="u-con01">
+                            <div class="u-con01-tit clearfix"> <h3>学分建设</h3></div>
+                            <p>人卫开放大学将致力于推动中国医学教育慕课联盟成员单位间实施学分互认，推动医学教育数字化发展和教学改革，制定人卫开放大学学分互认办法，经理事会确认通过，在理事会成员单位中实施应用。</p>
+                        </div>
+                        <div class="u-img">
+                            <img src="$IMAGE_PATH/u-img04.jpg" alt=""/>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="wrap100 u-bg2">
+        <div class="container u-bg-img">
+            <div class="u-w u-bg-font01">人卫开放大学是以“人卫慕课”平台建设为技术支撑，以大规模在线开放课程建设为内容依托，以促进在线课程广泛应用和推进在线开放课程学分认定为目标，以建设适合中国国情的在线医学教育平台为载体的医学教育机构。</div>
+        </div>
+
+    </div>
+    <div class="wrap100 u-bg3">
+        <div class="container u-bg-img">
+            <img src="$IMAGE_PATH/u-bg3-img.jpg" alt=""/>
+        </div>
+    </div>
+    <div class="wrap100 u-bg4">
+        <div class="container u-w">
+            <ul class="u-w-q">
+                <li>
+                    <h4>（一）理事会</h4>
+                    <p><span>总顾问：</span>韩启德  陈  竺  桑国卫  李  斌</p>
+                    <p><span>顾  问：</span>崔  丽  林蕙青  孙寿山  郭义强</p>
+                    <p><span>理事长：</span>刘德培</p>
+                    <p><span>常务副理事长：</span>郝阳  杜贤</p>
+                    <p><span>副理事长（按姓氏拼音排序）：</span></p>
+                    <p>毕开顺  步  宏  陈国强  冯友梅  郭  姣  胡  刚  柯  杨  匡海学  来茂德  雷  寒</p>
+                    <p>黎孟枫  李  凡  李立明  李玉林  吕兆丰  田勇泉  汪建平  王省良  王卫平  吴春福</p>
+                    <p>武继彪  徐安龙  徐建光  颜  虹  杨宝峰  余艳红  张伯礼  赵  群</p>
+                    <p><span>秘书长：</span>杨  晋  朱双龙</p>
+                    <p><span>副秘书长：</span>王启明  陈昕煜  宋秀全</p>
+                    <p><span>理    事：</span>全国高等医药教材建设研究会、人民卫生出版社专家咨询委员会全体成员</p>
+                </li>
+                <li>
+                    <h4>（二）学校管理委员会</h4>
+                    <p><span>名誉校长：</span>韩启德   陈  竺   桑国卫</p>
+                    <p><span>校    长：</span>刘德培</p>
+                    <p><span>常务副校长：</span>柯  杨  杨宝峰  张伯礼  曾益新  曹雪涛  步  宏  王卫平  郝  阳 杜  贤</p>
+                    <p><span>副校长（按姓氏拼音排序）：</span></p>
+                    <p>毕开顺  陈国强  冯友梅  郭  姣  胡  刚  匡海学  来茂德  雷  寒  黎孟枫  李  凡</p>
+                    <p>李立明  李玉林  吕兆丰  田勇泉  汪建平  王省良  吴春福  武继彪  徐安龙  徐建光</p>
+                    <p>颜  虹  余艳红  赵  群</p>
+                </li>
+                <li>
+                    <h4>课程建设专家委员会</h4>
+                    <p><span>主任委员：</span>刘德培  柯  杨	杨宝峰</p>
+                    <p><span>副主任委员：</span></p>
+                    <p>桂永浩  步  宏  汪建平  黄  钢  闻德亮  沈洪兵  雷  寒  王  华  王卫平  王  滨  崔慧先  刘志跃</p>
+                    <p>颜  虹  刘  斌  杜  贤  杨  祥</p>
+                    <p><span>委  员：</span>理事会成员单位推荐专家、慕课建设专家</p>
+                </li>
+                <li>
+                    <h4>教务处（秘书处）</h4>
+                    <p><span>教务长：</span>王维民  王庭槐  万学红  高兴亚等中西医院校知名教学管理者  陈昕煜  高  斌  杨晋  朱双龙</p>
+                    <p><span>秘书处主任：</span>窦天舒  石  雄  皮雪花</p>
+                    <p><span>秘书：</span>曲春晓  刘红霞  李  丽  惠天灵  曹锦花  邬  洁  李学菊</p>
+                </li>
+                <li>
+                    <h4>学分认定委员会</h4>
+                    <p>各分会按一级专业划分，另外增加临床实践分委员会，各分会各自负责三阶段教育。</p>
+                    <p>各分委会专家由全国高等医药教材建设研究会下属相关专业教材评审委员会专家组成。</p>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+	<script >
+			$('#zwlogo').attr('src',$webroot+'images/logo-dx.png');
+    </script>

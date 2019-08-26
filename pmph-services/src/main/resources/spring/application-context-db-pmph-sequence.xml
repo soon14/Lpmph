@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	<!-- 发卡人资料表 T_CARD_INFORMATION-->
+    <bean id="seq_staff_card_information_id" class="com.ai.ecp.frame.sequence.PaasSequence">
+         <property name="sequenceService" ref="paasSequenceService"/>
+	     <property name="sequenceName" value="SEQ_STAFF_CARD_INFORMATION_ID"/>
+    </bean>  
+     <!-- 发卡信息记录表 T_CARD_DISTNIBUTE-->
+    <bean id="seq_staff_card_dist_id" class="com.ai.ecp.frame.sequence.PaasSequence">
+         <property name="sequenceService" ref="paasSequenceService"/>
+	     <property name="sequenceName" value="SEQ_STAFF_CARD_DIST_ID"/>
+    </bean>    
+      <!-- 会员卡号8位序列ID-->
+    <bean id="seq_staff_card_id" class="com.ai.ecp.frame.sequence.PaasSequence">
+         <property name="sequenceService" ref="paasSequenceService"/>
+	     <property name="sequenceName" value="SEQ_CUST_CARD_ID"/>
+    </bean>   
+    <!-- 会员卡号8位序列ID-->
+    <bean id="seq_cust_card_bind_id" class="com.ai.ecp.frame.sequence.PaasSequence">
+         <property name="sequenceService" ref="paasSequenceService"/>
+	     <property name="sequenceName" value="SEQ_CUST_CARD_BIND_ID"/>
+    </bean>  
+    <!-- 会员申请记录信息表-->
+    <bean id="seq_cust_card_apply_id" class="com.ai.ecp.frame.sequence.PaasSequence">
+         <property name="sequenceService" ref="paasSequenceService"/>
+	     <property name="sequenceName" value="SEQ_CUST_CARD_APPLY_ID"/>
+    </bean>   
+    <!-- 会员卡临时导入表-->
+    <bean id="seq_card_import_temp_id" class="com.ai.ecp.frame.sequence.PaasSequence">
+         <property name="sequenceService" ref="paasSequenceService"/>
+	     <property name="sequenceName" value="SEQ_CARD_IMPORT_TEMP_ID"/>
+    </bean> 
+
+</beans>

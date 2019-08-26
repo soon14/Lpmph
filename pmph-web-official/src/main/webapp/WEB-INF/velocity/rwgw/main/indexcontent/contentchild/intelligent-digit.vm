@@ -1,0 +1,16 @@
+#parse("/rwgw/sys/sys_param.vm")
+<div class="w">
+    <div class="box">
+        <div class="box-head">
+            <i class="box-ticon ticon-wisdom"></i>
+        </div>
+        ##栏目
+        <div class="box-body ecp-component channel-shader" data-status="1" data-site-id="3" data-channel-type="07" data-platform-type="01" data-return-url="/rwgw/main/componentVM/rwgw-zh/intelligent-digit-channel" data-module="ecp-component/channel-shader">
+            
+        </div>
+        ##轮播广告
+        <div class="box-body ecp-component leaflet-vm-shader" data-status="1" data-place-size="3" data-place-id="1209" data-place-width="1200" data-place-height="400" data-return-url = "/rwgw/main/componentVM/rwgw-zh/leaflet/intelligent-digit-img" data-module="ecp-component/leaflet/leaflet-vm-shader">
+            
+        </div>
+    </div>
+</div>

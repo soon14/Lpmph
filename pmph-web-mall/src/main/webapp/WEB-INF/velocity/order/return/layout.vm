@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+#parse("sys/sys_head.vm")
+#parse("/order/pic/pic-cover.vm")
+	<link href="$!{CSS_PATH}/reset.css" type="text/css" rel="stylesheet"/>
+	<link href="$!{CSS_PATH}/return.css" type="text/css" rel="stylesheet"/>
+	<link rel="stylesheet" href="$!{RESOURCE_PATH}/bootstrap/theme/gebo_admin/css/style_extend.css"/>
+	<script type="text/javascript" src="$!{RESOURCE_PATH}/js-old/frameajax/ajaxfileupload.js"></script>
+	<script type="text/javascript" src="$!{BUSIJS_PATH}/order/return/return-list.js?version=$!{JS_VERSION}"></script>
+	<script type="text/javascript" src="$!{BUSIJS_PATH}/public/jquery.validate.html.js?version=$!{JS_VERSION}"></script>
+	<script>
+        $(function(){
+            U.tab('#teamTab','#teamTabc');
+        })
+    </script>
+#parse("/module/mod-form.vm")
+</head>
+
+<body>
+<!--顶部 begin-->
+<div id="header" class="clearfix">
+	#parse("/main/main-site-nav.vm")
+</div>
+
+$screen_content
+
+#parse("/main/main-content-bottom.vm")
+
+<!--底部 begin-->
+<div id="footer" class="text-center">
+	#parse("/main/main-bottom.vm")
+</div>
+<!--底部 end-->
+</body>
+</html>

@@ -1,0 +1,10 @@
+#parse("/rwgw/sys/sys_param.vm")
+<ul class="mnlist clearfix">
+	#if($!{siteId})
+     	#foreach($channel in ${channelsList})
+                <li class="item" channelId = "$!{channel.id}">
+                    <a href="#getGwChannelUrl($channel $!{siteId})" target='_blank'>$!{channel.channelName}</a>
+                </li>
+    	#end
+    #end
+</ul>

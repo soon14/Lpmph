@@ -1,0 +1,201 @@
+ <div class="seller-box" id="gds-attributes" #if($!{rspDto.params.size()}>0)#else style="display:none"#end>
+    <div class="head">
+        <h3>参数属性</h3>
+    </div>
+    <div class="body form-horizontal">
+			##规则属性START
+			#foreach($params in $!{rspDto.params})
+        ###foreach($props in $!{gdsInfo.props})
+          ###if($!{props.propType}==$!{PROP_VALUE_TYPE_2})
+            ###if($!{params.id} == $!{props.id})
+            	#set($style="display:block")
+            	#if($!{params.id} =='4000' || $!{params.id} =='4001')
+            		#set($style="display:none")
+            	#end
+    			     #set($mod = $velocityCount % 2)
+    				      #if(1 == $mod)
+    						<div class="row-fluid" style="$style">
+    					  #end
+        					<div class="span6">
+                               <div class="control-group">
+                                   <label class="control-label" id="$!{params.id}">
+    								    #if($!{params.ifHaveto} =='1' && $!{params.propValueType}==$!{PROP_VALUE_TYPE_3})
+    										<span style="color:red">*</span>
+    									#end
+    									$!{params.propName}：
+    							   </label>
+
+                                   <div class="controls">
+                                       #if($!{params.propValueType}==$!{PROP_VALUE_TYPE_1})
+    									    #set($vals = '')
+    										#set($ids = '')
+    										#foreach($props in $!{gdsInfo.props})
+            									#if($!{props.propType}==$!{PROP_VALUE_TYPE_2})
+        											#if($!{params.id} == $!{props.id})
+    													#foreach($value in $!{props.values})
+    														#set($vals = $!{value.propValue})
+    														#set($ids = $!{value.id})
+    													#end
+    												#end
+    											#end
+    										#end
+
+
+    										#if($!{params.propInputType}=='1')
+    											##文本（数字或者字符）
+    											<input type="text"
+    												   name="autoParamInput1$velocityCount"
+    												   ifBasic="$!{params.ifBasic}"
+    												   ifmulti="input"
+    												   value='#if($!{params.id}==1029)#moneyNum($!{vals})#else$!{vals}#end'
+    												   valueId=''
+    												   propType="$!{params.propType}"
+    												   class="input-large #if($!{params.ifHaveto} =='1' || ( $isDataPaper==1 && $!{params.id}==1029))required#end #if($!{params.id}==1029)priceNumber priceLength#end autoParam"
+    												   propId="$!{params.id}"
+    												   propName="$!{params.propName}" #if($!{params.id}==1029) id="paperChange$!{params.id}"#end/>
+    										#elseif($!{params.propInputType}=='2')
+    											##日期
+    											<input style="width:211px;"
+    												   type="text"
+    												   name="autoParamInput1$velocityCount"
+    												   ifBasic="$!{params.ifBasic}"
+    												   ifmulti="input"
+    												   value='$!{vals}'
+    												   valueId=''
+    												   propType="$!{params.propType}"
+    												   class="input-large #if($!{params.ifHaveto} =='1')required #end Wdate autoParam"
+    												   propId="$!{params.id}"
+    												   propName="$!{params.propName}"
+    												   onClick="WdatePicker({dateFmt:'yyyy-MM-dd'})"/>
+    										#else
+    											<input type="text"
+    												   name="autoParamInput1$velocityCount" ifBasic="$!{params.ifBasic}"
+    												   ifmulti="input"
+    												   valueId=""
+    												   propType="$!{params.propType}"
+    												   class="input-large #if($!{params.ifHaveto} =='1')required #end autoParam"
+    												   propId="$!{params.id}"
+    												   propName="$!{params.propName}"/>
+    										#end
+    								   #elseif($!{params.propValueType}==$!{PROP_VALUE_TYPE_2})
+    									    <select name="a1$velocityCount" ifmulti="single" ifBasic="$!{params.ifBasic}" propType="$!{params.propType}" class="#if($!{params.ifHaveto} =='1')required#end autoParam" id="$!{params.id}" propId="$!{params.id}" propName="$!{params.propName}" #if($!{params.id}==1028)onchange="paperChange(this,'attr')"#end>
+    												#set($vals = '')
+    												#set($ids = '')
+    												#foreach($props in $!{gdsInfo.props})
+                    									#if($!{props.propType}==$!{PROP_VALUE_TYPE_2})
+                											#if($!{params.id} == $!{props.id})
+    															#foreach($value in $!{props.values})
+    																#set($vals = $!{value.propValue})
+    																#set($ids = $!{value.id})
+    															#end
+    														#end
+    													#end
+    												#end
+    												<option value="">请选择</option>
+                                                    #foreach($list in $!{params.values})
+    													#if($!{list.id})
+        												   <option value="$!{list.id}" #if($!{list.id}==$ids) selected#end>$!{list.propValue}</option>
+    													#end
+        											#end
+    										</select>
+    								   #elseif($!{params.propValueType}==$!{PROP_VALUE_TYPE_3})
+    									  <div id="mutisel" class="mutiselect">
+        								        <input type="text" name="mutil1$velocityCount" ifBasic="$!{params.ifBasic}" ifHavaeto="$!{params.ifHaveto}" ifmulti="multi" propType="$!{params.propType}" valueId='' propId="$!{params.id}" propName="$!{params.propName}" class="input-large head #if($!{params.ifHaveto} =='1')required#end autoParam" />
+                                                <div class="selarrow">
+                                                    <i class="sel-drop icon-chevron-down"></i>
+                                                </div>
+                                                <ul class="body" name="mutisel">
+        											 #foreach($list in $!{params.values})
+                                                       <li class="item">
+                                                          <label>
+                                                               <span>
+        														   $!{list.propValue}
+                                                                </span>
+        														#set($val = '')
+        														#foreach($props in $!{gdsInfo.props})
+                                									#if($!{props.propType}==$!{PROP_VALUE_TYPE_2})
+                            											#if($!{params.id} == $!{props.id})
+        																	#foreach($value in $!{props.values})
+                																#if($!{list.id}==$!{value.id})
+        																			#set($val = 'checked')
+        																		#end
+                															#end
+                														#end
+                													#end
+        														#end
+        														<input class="selcheckbox" id="$!{list.id}" value="$!{list.propValue}" name="type" $val type="checkbox"/>
+                                                           </label>
+                                                       </li>
+        									         #end
+                                                </ul>
+                                          </div>
+    								  #end
+                                   </div>
+                               </div>
+        					 </div>
+                          #if(0 == $mod)
+    						</div>
+    					  #end
+              ###end
+            ###end
+          ###end
+		    #end
+			##规则属性END
+    </div>
+</div>
+
+##附件START
+#if($!{rspDto.fileParam.size()}>0)
+<div class="seller-box" id="gds-attachment">
+    <div class="head">
+        <h3>附件</h3>
+    </div>
+    <div class="body form-horizontal">
+        <div class="row-fluid">
+			#foreach($params in $!{rspDto.fileParam})
+				 #if($!{params.propInputType}=='4')
+					#set($vals = '')
+        			#set($ids = '')
+					#foreach($props in $!{gdsInfo.props})
+						#if($!{params.id} == $!{props.id})
+							##文件
+            				#foreach($value in $!{props.values})
+            					#set($vals = $!{value.propValue})
+            					#set($ids = $!{value.id})
+							#end
+						#end
+					#end
+    				<div class="span6">
+                        <div class="control-group">
+    						<label class="control-label" id="$!{params.id}">$!{params.propName}：</label>
+    						<div>
+        							##文件
+        							<input type="text"
+        								   id="file$!{params.id}"
+        								   class="input-medium #if($!{params.ifHaveto} =='1')required #end autoParamFile"
+        								   value="$vals"
+        								   name="autoParamFile$velocityCount"
+        								   ifBasic="$!{params.ifBasic}"
+        								   ifmulti="input"
+        								   valueId=""
+        								   propType="$!{params.propType}"
+        								   propId="$!{params.id}"
+        								   propName="$!{params.propName}"
+        								   disabled/>
+        						    <span class="sbtn a-upload">
+            							  上传文件
+            						     <input class="upFileTyle" type="file" name="uploadFileObj" id="uploadFileObj" ifBasic="$!{params.ifBasic}" ifmulti="input" valueId="" propType="$!{params.propType}" propId="$!{params.id}" propName="$!{params.propName}" value=""/>
+            						</span>
+            						<span class="sbtn" style="display:none;" onclick="cancelFile(this)" isCancel="true">
+            						                取消
+            						</span>
+                             </div>
+                        </div>
+    				</div>
+				#end
+			#end
+        </div>
+    </div>
+</div>
+#end
+##附件END

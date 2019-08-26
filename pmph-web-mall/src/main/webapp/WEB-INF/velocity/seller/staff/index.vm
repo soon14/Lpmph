@@ -1,0 +1,100 @@
+#parse("/module/mod-form.vm")
+#parse("/module/mod-tree.vm")
+<link rel="stylesheet" href="$CSS_PATH/staff/product-mgr.css"  type="text/css" media="screen"/>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/javascript/holder/holder.js" ></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/extend/bus.selector.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/staff/index.js?version=$!{JS_VERSION}" ></script>
+
+<div class="seller-well">
+    <form id="searchForm" class="form-horizontal" style="margin-bottom: 0px;">
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">所属店铺：</label>
+                    <div class="controls">
+                        <select name="shopId" id="shopId">
+							#sellerList()
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </form>
+</div>
+<div class="row-fluid" style="margin-bottom: 10px;">
+    <div class="span6">
+        <a class="btn" id="btn_dir_add" href="javascript:void(0);"><i class="icon-plus"></i> 新增分组</a>
+        <a class="btn" id="btn_add" href="javascript:void(0);"><i class="icon-plus"></i> 新增常用语</a>
+        <a class="btn btn-danger" id="btn_del" href="javascript:void(0);"><i class="icon-trash"></i> 删除</a>
+    </div>
+</div>
+<div class="pmr_rkc clearfix borderb">
+    <div class="rknav pull-left rknav-height" id="das">
+        <div class="tree-w" style="displayx: none; position: absolute;">
+            <ul id="treeBase" class="ztree" style="height:350px;width: 259px;overflow:auto;"></ul>
+        </div>
+    </div>
+    <div class="rk-editc pull-left">
+		<!--分组-->
+        <form id="groupdetail" class="form-horizontal required-validate">
+            <div class="row-fluid">
+                <div class="span8" style="margin-top:20px;">
+					<h3 align="center" style="margin-bottom:20px;">公共常用语分组</h3>
+					<input type="hidden" name="id" id="id"/>
+                    <div class="control-group">
+                        <label for="" class="control-label">分组名：</label>
+                        <div class="controls">
+                            <input class="htmlcheck required" type="text" name="groupName" id="groupName" maxlength="60"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="" class="control-label">所属店铺：</label>
+                        <div class="controls">
+                            <input disabled style="margin-bottom:5px;" type="text" id="shopName" name="shopName" />
+                            <input class="htmlcheck" style="margin-bottom:5px;" type="hidden" id="shopId" name="shopId" />
+                        </div>
+                    </div>
+                    <div class="control-group" id="sortOrderDiv">
+                        <label for="" class="control-label">排序：</label>
+                        <div class="controls">
+                            <input type="text" id="sortNo" name="sortNo" class="htmlcheck positiveInteger" maxlength="15"/>
+                        </div>
+                    </div>
+					
+					<div class="text-center" style="margin-top:20px">
+						<span class="sbtn sbtn-blue" id="btn_group_save" >保　存</span>
+        			</div>
+                </div>
+            </div>
+        </form>
+        <!--常用语-->
+        <form id="itemdetail" class="form-horizontal required-validate" style="display:none">
+            <div class="row-fluid">
+                <div class="span8" style="margin-top:20px;">
+					<h3 align="center" style="margin-bottom:20px;">公共常用语</h3>
+					<input type="hidden" name="id" id="id"/>
+                    <div class="control-group">
+                        <label for="" class="control-label">常用语：</label>
+                        <div class="controls">
+                            <textarea class="htmlcheck required" type="text" name="itemText" id="itemText" maxlength="500" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="" class="control-label">排序：</label>
+                        <div class="controls">
+                            <input type="text" id="sortNo" name="sortNo" class="htmlcheck positiveInteger" maxlength="15"/>
+                        </div>
+                    </div>
+					
+					<div class="text-center" style="margin-top:20px">
+						<span class="sbtn sbtn-blue" id="btn_item_save">保　存</span>
+        			</div>
+                </div>
+            </div>
+			
+        </form>
+    </div>
+</div>
+     
+

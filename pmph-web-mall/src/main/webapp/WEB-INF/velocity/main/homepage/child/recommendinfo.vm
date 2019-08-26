@@ -1,0 +1,77 @@
+#parse("sys/sys_param.vm")
+
+#if($cmsRecommendRespDTO && $cmsRecommendRespDTO.id)
+<div class="box-con-left">
+    <img src="$!{cmsRecommendRespDTO.authorImageUrl}" class="border-box">
+    <div class="">
+        <p class="text-center name-zhang" title="$!{cmsRecommendRespDTO.authorName}">$!{cmsRecommendRespDTO.authorName}</p>
+        <p class="tj-txt" tyle ="height:210px" title="$!{cmsRecommendRespDTO.authorIntroduction}">
+			$!{cmsRecommendRespDTO.authorIntroduction}
+		</p>
+    </div>
+</div>
+<div class="box-con-right">
+    <div class="img-app">
+        <a target='_blank' href="${CONTEXT_PATH}$!{gdsInfoDetailRespDTO.url}"><img src="$!{gdsInfoDetailRespDTO.mainPic.URL}"></a>
+        <h3><a target='_blank' href="${CONTEXT_PATH}$!{gdsInfoDetailRespDTO.url}" title="$!{gdsInfoDetailRespDTO.gdsName}">$!{gdsInfoDetailRespDTO.gdsName}</a></h3>
+		<div style="height: 25px;">
+			<span class="grade-star">
+                <a href="javascript:void(0)" class="star5 active"></a>##因无提供此字段 暂时默认五颗星
+            </span>
+		</div>
+        <p class="price" style="padding-left: 0">
+            <span class="rob">#money($!{gdsInfoDetailRespDTO.skuInfo.discountPrice})</span>
+		</p>
+        <!-- <p class="box-jieshao" 
+			##$!{gdsInfoDetailRespDTO.gdsSubHead}
+			#if($!{cmsRecommendRespDTO.recommendType} == '01')##专家推荐
+				title = "$!{gdsInfoDetailRespDTO.skuInfo.allPropMaps.get("1024").values[0].propValue}">$!{gdsInfoDetailRespDTO.skuInfo.allPropMaps.get("1024").values[0].propValue}
+			#else##编辑推荐
+				title = "$!{gdsInfoDetailRespDTO.skuInfo.allPropMaps.get("1023").values[0].propValue}">$!{gdsInfoDetailRespDTO.skuInfo.allPropMaps.get("1023").values[0].propValue}
+			#end
+		</p> -->
+		
+		##设置内容简介    如果没有  取商品详情
+		#set($introduction = $!{gdsInfoDetailRespDTO.skuInfo.allPropMaps.get("1020").values[0].propValue})
+		#if($introduction && $introduction != '')
+			#set(${gdsInfoDetailRespDTO.gdsDesc} = $introduction)
+		#end
+        <script>
+		$(function(){
+    		   $('.box-jieshao').popover({
+			    placement: 'bottom'
+                , trigger: 'hover'
+			   });
+		})
+		</script>
+		<style>
+			.rw-book .popover{
+			max-width:450px;
+			}
+		</style>
+		
+		<p class="box-jieshao" data-content="$!{gdsInfoDetailRespDTO.gdsDesc}">
+			$!{gdsInfoDetailRespDTO.gdsDesc}
+		</p>
+    </div>
+    <div class="border-top ">
+        <p title="#foreach($gds in $!{otherProductionList})$!{gds.gdsName},#end">该作者的其他作品：
+            #foreach($gds in $!{otherProductionList})
+				<a target='_blank' href="${CONTEXT_PATH}$!{gds.url}">$!{gds.gdsName}</a>
+			#end
+		</p>
+        <p title="#foreach($gds in $!{recommendProductionList})$!{gds.gdsName},#end">该作者推荐的作品：
+            #foreach($gds in $!{recommendProductionList})
+				<a target='_blank' href="${CONTEXT_PATH}$!{gds.url}">$!{gds.gdsName}</a>
+			#end
+		</p>
+        <p title="#foreach($gds in $!{otherLikeList})$!{gds.gdsName},#end">喜欢该作者还喜欢：
+			#foreach($gds in $!{otherLikeList})
+				<a target='_blank' href="${CONTEXT_PATH}$!{gds.url}">$!{gds.gdsName}</a>
+			#end
+		</p>
+    </div>
+</div>
+#else
+<div class='pro-empty'>亲，这家伙太懒，暂未配置数据！</div>
+#end

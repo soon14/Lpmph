@@ -1,0 +1,103 @@
+#parse("/module/mod-form.vm")
+#parse("/module/mod-upload.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/javascript/holder/holder.js" ></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/extend/bus.selector.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/staff/custservice/custservice-edit.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/public/jquery.area.js?version=$!{JS_VERSION}" ></script>
+
+<h3 class="heading">编辑客服</h3> 
+<div class="formBox row-fluid">
+	<form id="detailInfoForm" class="form-horizontal required-validate " style="margin-bottom: 0px;">
+		<div class="span12">
+			<div class="row-fluid formSep">
+        		<div class="span6">
+        			<div class="control-group">
+        				<label class="control-label">会员名：</label>
+                        <div class="controls">
+							<input class="input-medium" disabled name="staffCode" value="$!{info.staffCode}" type="text"/>
+                        </div>
+        			</div>
+        		</div>
+        	</div>
+    		<div class="row-fluid formSep">
+    			<div class="span6">
+    				<div class="control-group">
+    					<label class="control-label">客服类型：</label> 
+						<div class="controls">
+							<select name="moduleType" class="input-medium" style="width:164px" disabled>
+                            	#if($!{info.moduleType} == '0')
+                            		<option value=$!{info.moduleType}>综合客服</option>
+                            	#elseif($!{info.moduleType} == '1')
+                            		<option value=$!{info.moduleType}>绩效客服</option>
+                            	#end
+                            </select>
+                        </div>
+    				</div>
+    			</div>
+    		</div>
+			<div class="row-fluid formSep">
+    			<div class="span6">
+    				<div class="control-group">
+    					<label class="control-label">订单修改：</label> 
+						<div class="controls">
+							<select name="orderEdit" class="input-medium" style="width:164px">
+								<option value="0" #if($!{info.orderEdit} == '0')selected#end>关</option>
+								<option value="1" #if($!{info.orderEdit} == '1')selected#end>开</option>
+                            </select>
+                        </div>
+    				</div>
+    			</div>
+    		</div>
+			#if($!{info.moduleType} == '1')
+    			<div class="row-fluid formSep"> 
+            		<div class="span6">
+            			<div class="control-group">
+            				<label class="control-label">所属店铺：</label>
+            				<div class="controls">  
+    							<select id="shopId" name="shopId" class="input-medium" style="width:164px" disabled>
+        							#shopStatuslist($!{info.shopId},'1')
+            					</select>
+                            </div>
+            			</div>
+            		</div>
+            	</div>
+			#end
+    		<div class="row-fluid formSep">
+    			<div class="span6">
+    				<div class="control-group">
+    					 <label class="control-label">客服姓名：</label>
+                        <div class="controls">
+                            <input type="text" name="hotlinePerson" class="input-medium required" value="$!{info.hotlinePerson}" /> 
+                        </div>
+    				</div>
+    			</div>
+    		</div>
+			<div class="row-fluid formSep">
+				<div class="span6">
+    				<div class="control-group">
+    					<label class="control-label">客服电话：</label>
+                        <div class="controls">
+    						<input type="text" class="input-medium mobilePhone htmlcheck" name="hotlinePhone" value="$!{info.hotlinePhone}" maxlength="11" />
+    					</div>
+    				</div>
+    			</div> 
+    		</div>
+			<div class="row-fluid formSep">
+				<div class="span6">
+    				<div class="control-group">
+    					<label class="control-label">上限接待人数：</label>
+                        <div class="controls">
+    						<input type="text" class="input-medium digits required" name="receptionCount" value="$!{info.receptionCount}" />
+    					</div>
+    				</div>
+    			</div> 
+            </div>
+			<div class="btn-wrap btn-w-right">
+				<span class="sbtn sbtn-blue" id="btnFormUpdate"><i class="icon-search"></i> 保　存</span>
+				<span class="sbtn" id="btnReturn"><i class="icon-asterisk icon-color"></i> 返　回</span>
+			</div>
+			
+		</div>
+		<input type="hidden" name="id" value="$!{info.id}" />
+    </form>
+</div>  

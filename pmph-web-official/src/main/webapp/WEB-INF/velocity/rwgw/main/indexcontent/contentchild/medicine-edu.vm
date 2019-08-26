@@ -1,0 +1,6 @@
+#parse("/rwgw/sys/sys_param.vm")
+<div class="w ecp-component floor-vm-shader"
+					data-status="1" data-floor-img-size="3" data-place-id="1210" data-floor-img-width="392" data-floor-img-height="223"
+					data-return-url="/rwgw/main/componentVM/rwgw-zh/floor/medicine-edu-floor" data-module="ecp-component/floor-vm-shader">
+    
+</div>

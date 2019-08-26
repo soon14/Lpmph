@@ -1,0 +1,27 @@
+#parse("sys/sys_param.vm")
+
+<!-- head-->
+	<p class="network-head">资源列表 <span class="network-more"><a href="$!{link}" target="_blank">更多>></a></span></p>
+	<!-- 内容容器 start-->
+	<div class="network-container">
+		#if(!$!{netWorkList} || $!{netWorkList.size()}==0)
+	          <span style="text-align:center;height:101px;line-height:101px;overflow: hidden;">「暂无相关数据」</span>
+		#else
+			#foreach($list in $!{netWorkList})
+	            <!-- 每一个 start-->
+				<div class="network-slider">
+					<div class="network-slider-img">
+						<img src="$!{list.imgPath}" alt="">
+					</div>
+					<div class="network-slider-msg">
+						<p><span>资源名称：</span><span class="network-slider-resouceName">$!{list.resName}</span></p>
+						<p><span>格式：</span>$!{list.resFormat}</p>
+						<p><span>资源类型：</span>$!{list.resType}</p>
+					</div>
+				</div>
+				<!-- 每一个 end-->
+			#end
+		#end
+		
+	</div>
+	<!-- 内容容器 end-->

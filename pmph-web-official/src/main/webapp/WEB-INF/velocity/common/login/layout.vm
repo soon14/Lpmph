@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>商城登录</title>
+<link href="$CSS_PATH/default/reset.css" type="text/css" rel="stylesheet">
+<link href="$CSS_PATH/default/login.css" type="text/css" rel="stylesheet">
+#parse("/sys/sys_head.vm")
+
+</head>
+
+<body>
+
+
+<div id="maincontainer" class="clearfix">
+	<!-- main content -->
+	<div id="contentwrapper">
+		<div class="open_content">
+	    $screen_content
+		</div>
+	</div>
+	<!-- main content -->
+</div>
+
+</body>
+</html>

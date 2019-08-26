@@ -1,0 +1,16 @@
+#*人卫官网第二版 智慧数据 栏目 2017.9.5*#
+#parse("/rwgw/sys/sys_param.vm")
+#if(${channelsList} && 0 < ${channelsList.size()} )
+<div class="wisdomBg clearfix">
+	#foreach($channel in ${channelsList})
+    <dl class="wisdom-panel">
+        <dt><a href="#getGwChannelUrl($channel $!{siteId})">$!{channel.channelName}</a></dt>
+        #set($childList = '')
+		#set($childList = $channel.childList)
+        #foreach($childChannel in ${childList})
+        <dd><a href="#getGwChannelUrl($childChannel $!{siteId})">$!{childChannel.channelName}</a></dd>
+        #end
+    </dl>
+    #end
+</div>
+#end

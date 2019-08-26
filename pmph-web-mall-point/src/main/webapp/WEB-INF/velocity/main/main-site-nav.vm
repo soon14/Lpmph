@@ -1,0 +1,75 @@
+<!--头部 begin-->
+<script type="text/javascript">
+
+
+//判断是否从第三方跳转过来，如果是，看下用户信息是否带过来了，如果没有，则需要重新获取一遍
+var checkFromSSO = function(){
+	var ref = $("#skpiReferer").val();
+	//说明是跳转过来的
+	if (ref.indexOf('Referer') > 0) {
+		if (ref.indexOf('Logout') > 0) {
+			return;
+		}
+		//查看是否有用户名信息
+		var skipStaffCode = $("#skipStaffCode").val();
+		//如何用户信息为空，则与sso同步一次
+		if (skipStaffCode == '') {
+			pls_login();
+		}
+	}
+}
+$(function(){
+	//每次加载页面时，重新获取一次。
+	checkFromSSO();
+})
+
+//登录拼上当前链接
+function pls_login(){
+	var currUrl = window.location.pathname;
+	tempUrl = currUrl.replace("/pmph-web-mall-point","").replace("/pmph-web-mall","").replace("/ecp-web-point","").replace("/ecp-web-mall","");
+	currUrl = tempUrl + window.location.search;
+	var url = GLOBAL.WEBROOT + '/login/page' + '?Referer=' + currUrl;
+	window.location.href = encodeURI(encodeURI(url));
+}
+
+
+</script>
+<div id="pt-header">
+    <div class="wrap1000 top">
+        <div class="pull-left">
+            <a 
+				#if($null.isnull($CONTEXT_PATH) || $CONTEXT_PATH =="")
+                    href="/"
+                #else
+                    href="$CONTEXT_PATH"
+                #end
+				class="welcome">您好，欢迎光临#siteName('2')！</a>
+        </div>
+        <ul class="toplist pull-right">
+			#custInfo()
+			#if(${cust.staffCode})
+				<li class="item">
+                $!{cust.staffCode} <a href="$!{CONTEXT_PATH}/login/logout">退出</a>
+				</li>
+			#else
+				<li class="item">
+				<a href="javascript:void(0);" onClick="pls_login();" class="c-orange">您好，请登录</a>
+                <a href="$!{CONTEXT_PATH}/login/register">免费注册</a>
+				</li>
+			#end
+				
+            <li class="item">|</li>
+            <li class="item" id="carGus"><a href="$!{CONTEXT_PATH}/order/cart/list"><i class="shop-cart"></i>
+                购物车 <span class="red ecp-component cartCount" data-status="1"  data-module="ecp-component/homepage-cart-count"></span></a></li>
+            <li class="item">|</li>
+            <li class="item"><a href="#siteInfo(1)order/point/pay">积分订单</a></li>
+            <li class="item">|</li>
+            <li class="item">
+                <a href="#siteInfo('1')">#siteName('1')</a>
+            </li>
+        </ul>
+    </div>
+    <input type="hidden" id="skpiReferer" value="$!{request.getHeader('Referer')}" />
+    <input type="hidden" id="skipStaffCode" value="$!{cust.staffCode}" />
+</div>
+<!--头部 end-->

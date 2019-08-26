@@ -1,0 +1,109 @@
+#parse("sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/seller/staff/shopacctoptlog/seller-shopacct-opt-log.js?version=$!{JS_VERSION}"></script>
+
+<div class="seller-mainR">
+    <div class="main">
+        <div class="seller-well">
+            <form id="searchForm" action="${CONTEXT_PATH}/seller/shopmgr/shopAcctOptLog/exportOptLogExcel" method="POST" class="form-horizontal required-validate">
+                    <div class="row-fluid">
+					<div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">店铺名称：</label>
+                            <div class="controls">
+                                <select name="shopId" id="shopId" class="input-block-level" >
+									##<option value="">请选择</option>
+                                    ###shopStatuslist('','1')
+									#sellerList($!{shopId})
+                                </select>
+                            </div>
+                        </div>
+					</div>
+					<div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">操作类型：</label>
+                            <div class="controls">
+                                <select name="optType" class="input-block-level" id="optType">
+                                    <option value="">--请选择--</option>
+									#listParam('SHOPACCT_OPT_TYPE')
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+    					<div class="control-group">
+        					<label class="control-label">支付通道：</label>
+        					<div class="controls">
+        						<select name="payWay" class="input-block-level"  id="payWay"  >
+									<option value="">--请选择--</option>
+        							#listParam('ORD_PAY_WAY')
+        						</select>
+    						</div>
+    					</div>
+        			 </div>
+                </div>
+                <div class="row-fluid">
+                	<div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">订单编号：</label>
+                            <div class="controls">
+                                <input placeholder="" type="text" class="input-block-level" name="orderId" id="orderId"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+		            	<div class="control-group">
+			                <label class="control-label">商户订单号：</label>
+				                <div class="controls">
+			                    	<input type="text" id="payTranNo" name="payTranNo" class="input-block-level" value="" placeholder="">
+			            		</div>
+		            	</div>
+		        	</div>
+                </div>
+            	<div class="row-fluid">
+					<div class="span8">
+	                    <div class="control-group">
+	                        <label class="control-label" for="begDate">操作日期：</label>
+	                        <div class="controls">
+	                            <input type="text" class="input-block-level Wdate"
+	                                   onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" name="begDate"
+	                                   value="$!date.format('yyyy-MM-dd',$!{begDate})" id="begDate" style="cursor: pointer; width: 135px">
+									   至
+	                            <input type="text" class="input-block-level Wdate"
+	                                   onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begDate\')}'})" name="endDate"
+	                                   value="$!date.format('yyyy-MM-dd',$!{endDate})" id="endDate" style="cursor: pointer;width: 135px">
+	
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </form>
+	    </div>
+	            <div class="row-fluid" style="margin-bottom: 10px;">
+	            	<div class="span6">
+		                <a class="sbtn" id="btnFormExport" href="javascript:void(0);"><i class="icon-search icon-download-alt"></i> 导出数据</a>
+		            </div>
+		            <div class="span2">
+		
+		            </div>
+					<div class="span4">
+	                    <div class="control-group">
+	                        <div class="controls">
+	                            <div class="btn-wrap btn-w-right">
+	                                <span class="sbtn sbtn-blue" id="btnFormSearch"><i class="icon-search"></i> 查询</span>
+	                                <span class="sbtn" id="btnFormReset"><i class="icon-asterisk icon-color"></i> 重置</span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+            	</div>
+    	<input type="hidden" name="resetBegDate" id="resetBegDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+		<input type="hidden" name="resetEndDate" id="resetEndDate" value="$!date.format('yyyy-MM-dd',$!{endDate})">
+        <div class="seller-tab">
+            <div class="tab-content" >
+				<div class="nItem" id="log-contentDiv">
+					#parse("/seller/staff/shopacctoptlog/loglist/seller-shopacct-opt-log-list.vm")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

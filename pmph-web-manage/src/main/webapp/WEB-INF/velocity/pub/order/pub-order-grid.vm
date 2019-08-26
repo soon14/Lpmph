@@ -1,0 +1,116 @@
+#parse("/module/mod-grid.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.date.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/pub/order/pub-order-grid.js?version=$!{JS_VERSION}" ></script>
+<style type="text/css">
+.numberFont{
+	color:#F00;
+	font-size:150%;
+}
+</style>
+<div class="well well-searchForm" id="pubOrder">
+	<form id="searchForm" class="form-horizontal required-validate" style="margin-bottom: 0px;">
+		<div class="row-fluid">
+			<div class="span4">
+				<label class="control-label">征订单号：</label>
+				<div class="controls">
+					<input type="text" name="pubOrderId" class="input-medium" value="" placeholder="">
+				</div>
+			</div>
+			<div class="span4">
+	            <div class="control-group">
+	                <label class="control-label">开始日期：</label>
+					<div class="controls">
+	                    <input type="text" style="cursor: pointer" class="input-medium required Wdate" id="begDate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" name="begDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+					</div>
+	                
+	            </div>
+	        </div>
+	        <div class="span4">
+	            <div class="control-group">
+	                <label class="control-label">截止日期：</label>
+	                <div class="controls">
+	                    <input type="text" style="cursor: pointer" class="input-medium required Wdate" id="endDate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begDate\')}'})" name="endDate"  value="$!date.format('yyyy-MM-dd',$!{endDate})">
+					</div>
+	            </div>
+	        </div>
+	        <div class="clear"></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span4">
+				<label class="control-label">公众号名：</label>
+				<div class="controls">
+					<input type="text" name="pubCode" class="input-medium" value="" placeholder="">
+				</div>
+			</div>
+			<div class="span4">
+				<label class="control-label">负责人：</label>
+				<div class="controls">
+					<input type="text" name="resName" class="input-medium" value="" placeholder="">
+				</div>
+			</div>
+			<div class="span4">
+				<label class="control-label">联系人：</label>
+				<div class="controls">
+					<input type="text" name="staffName" class="input-medium" value="" placeholder="">
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span4">
+				<label class="control-label">会员名：</label>
+				<div class="controls">
+					<input type="text" name="staffCode" class="input-medium" value="" placeholder="">
+				</div>
+			</div>
+			<div class="span4">
+			<label class="control-label">征订单状态：</label>
+				<div class="controls">
+				<select class="input-medium"  id="" name="pubStatus">
+					<option value="">--请选择--</option>
+					#listParam('PUB_ORDER_STATUS')
+				</select>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</form>
+</div>
+<div class="row-fluid" style="margin-bottom: 10px;">
+	<div class="pull-right">
+
+		<a class="btn btn-info" id="btnFormSearch" href="#"><i class="icon-search icon-white"></i> 查询</a>
+
+		<a class="btn" id="btnFormReset" href="#"><i class="icon-refresh"></i> 重置</a>
+	</div>
+</div>
+<div class="alert alert-info" style="margin-bottom:10px;">
+	<label class="control-label">累计下单<span id="pubOrderCount" class="numberFont"></span>笔,
+				累计支付订单<span id="payedCount" class="numberFont"></span>笔,
+				成交率<span id="payedRate" class="numberFont"></span>%,
+				累计订单码洋<span id="sumPubOrderMoney" class="numberFont"></span>元,
+				累计订单实洋<span id="sumRealMoney" class="numberFont"></span>元
+	</label>
+</div>
+
+<div class="row-fluid">
+	<table id="dataGridTable"></table>
+</div>
+<!--征订单审核弹出框-->
+<div id="reviewFormDiv" style="display:none;padding:10px">
+    <form class="form-horizontal required-validate" id="reviewForm" novalidate="novalidate">
+        <input type="hidden" name="pubOrderId" value="" id="reivewForm_pubOrderId">
+        <div class="control-group">
+            <div class="controls" style="margin-left:0">
+				<textarea rows="6" class="input-block-level required" name="checkCont" id="checkCont" maxlength="80"></textarea>
+			</div>
+        </div>
+    </form>
+	<div class="control-group">
+		<input type="button" class="btn" id="submit" value="确认"/>
+		<div class="controls pull-right">
+			<input type="button" class="btn" id="btnCancel1" value="取消"/>
+		</div>
+	</div>
+</div>

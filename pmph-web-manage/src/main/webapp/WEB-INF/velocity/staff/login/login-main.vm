@@ -1,0 +1,105 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!-- Bootstrap framework -->
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/core/2.3.2/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/theme/gebo_admin/css/style.css"/>
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/core/2.3.2/css/bootstrap-responsive.css"/>
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/extend/css/bootstrap_panel.css"/>
+<!-- Font-Awesome -->
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/plugin/font-awesome-3.2.1/css/font-awesome.min.css"/>
+<!--[if IE 7]>
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/plugin/font-awesome-3.2.1/css/font-awesome-ie7.min.css">
+<![endif]-->
+<!-- gebo color theme-->
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/theme/gebo_admin/css/blue.css" id="link_theme"/>
+<!-- main styles -->
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/theme/gebo_admin/css/font.css"/>
+<!-- Favicon -->
+<link rel="shortcut icon" href="favicon.ico"/>
+<!--[if lte IE 8]>
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/theme/gebo_admin/css/ie.css"/>
+<script src="$RESOURCE_PATH/bootstrap/theme/gebo_admin/js/ie/html5.js"></script>
+<script src="$RESOURCE_PATH/bootstrap/theme/gebo_admin/js/ie/respond.min.js"></script>
+<![endif]-->
+<!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="$RESOURCE_PATH/jsLib/bootstrap/iehack/css/bootstrap-ie6.css">
+<link rel="stylesheet" type="text/css" href="$RESOURCE_PATH/jsLib/bootstrap/iehack/css/ie.css">
+<script type="text/javascript" src="$RESOURCE_PATH/jsLib/bootstrap/iehack/bootstrap-ie.js"></script>
+<![endif]-->
+<!--登录页样式-->
+<link href="$CSS_PATH/staff/login.css" type="text/css" rel="stylesheet">
+
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/login/login-main.js?version=$!{JS_VERSION}" ></script>
+
+
+<!-- html body-->
+<div class="wrap100 hbg">
+    <div class="w clearfix">
+        <div class="login-logo">
+            <a href="">人卫商城</a>
+        </div>
+        <h2><img src="$!{IMAGE_PATH}/staff/login/ds-f.png" alt=""/></h2>
+    </div>
+</div>
+<div class="wrap100 logbox">
+    <div class="w ">
+        <div class="pull-left"><img src="$!{IMAGE_PATH}/staff/login/llimg.png" alt=""/></div>
+	<div class="logbg">
+        <div class="loginbody">
+            <div class="lbox">
+                <div class="ltit">登录</div>
+                <div class="lform">
+                    <form class="form-horizontal form-login" id="loginform">
+                        <div class="control-group">
+                            <label class="control-label" for="usernamediv">用户名：</label>
+                            <div class="controls">
+                                <input type="text" id="usernamediv" name="j_username" class="input-block-level " placeholder="用户名">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="passworddiv">密&nbsp;&nbsp;&nbsp;码：</label>
+
+                            <div class="controls">
+                                <input type="password" id="passworddiv" name="j_password" class="input-block-level " placeholder="密码">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="checkcodediv">验证码：</label>
+
+                            <div class="controls">
+                                <input type="text" class="input-mini" id="checkcodediv" name="j_check_code" placeholder="验证码">
+                                <span class=""><img id="captchaCodeImg" src="captcha/CapthcaImage" alt="" width="70"/></span>
+                                <span class=""><a class="mta" id="refleshCaptchaCode" href="javascript:void(0);">换一张</a></span>
+                            </div>
+                        </div>
+                        <div class="mt40">
+                            <button type="button" class="lbtn ml50" id="loginsubmit">登录</button>
+                            <span class="pull-right"><button type="button" class="lbtn lbtn-default" id="btnReset">重置</button></span>
+                        </div>
+                        <div class="text-center ml50" style="margin-top: 20px; ">
+                            <a href="${CONTEXT_PATH}/third/sys/login">统一认证平台</a>
+                        </div>
+                    </form>
+		</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="login-footer">
+    <div class="w footer">
+        <p>北京市朝阳区潘家园南里19号人卫大厦</p>
+
+        <p>备案号：京ICP备05067302号-5 ©2007-2018 All Rights Reserved 版权所有 人民卫生出版社有限公司</p>
+
+    </div>
+</div>
+

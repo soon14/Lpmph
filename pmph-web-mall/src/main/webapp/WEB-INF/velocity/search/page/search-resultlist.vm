@@ -1,0 +1,443 @@
+#parse("/sys/sys_param.vm")
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script type="text/javascript" src="$!{BUSIJS_PATH}/search/search-page.js?version=$!{JS_VERSION}"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/search/search-render.js?version=$!{JS_VERSION}"></script>
+<input type="hidden" value="$!{shopShowLock}" id="shopShowLock"/>
+<input type="hidden" value="$!{SELF_OPERATE_SIGN}" id="SELF_OPERATE_SIGN"/>
+#set($shopShowLock=$!{shopShowLock})
+#set($SELF_OPERATE_SIGN=$!{SELF_OPERATE_SIGN})
+<input  type="hidden" value="$!{category}" id="changeOnceCategory"/>
+<div class="sl-page" style="margin-top:-84px;">
+	#if($gridResult.pageNumber==1)
+		<span class="pagew disable" id="prepagebtn"><i class="micon micon-bpage"></i></span>
+	#else
+		<span class="pagew" id="prepagebtn"><i class="micon micon-bpage"></i></span>
+	#end
+    <span class="page">
+		#set($realPageNumber=$gridResult.pageNumber)
+        <b id="curpage">
+			
+			#if($gridResult.totalPage==0)
+        		#set($realPageNumber=0)
+			#end
+			
+			${realPageNumber}
+		
+		</b>/<i id="pagenum">$gridResult.totalPage</i>
+    </span>
+	#if($gridResult.totalPage==${realPageNumber})
+		<span class="pagew disable" id="nextpagebtn"><i class="micon micon-npage"></i></span>
+	#else
+		<span class="pagew" id="nextpagebtn"><i class="micon micon-npage"></i></span>
+	#end
+	<input type="hidden"  id="pageUpdate" value=""/>
+</div>
+
+#if($showType=="1")
+	<ul class="glist sl-grid clearfix" id="glist">
+#elseif($showType=="2")
+	<div class="sl-result sl-glist clearfix" id="glist">
+#end
+
+#if($gridResult.list)
+
+    #foreach($good in $gridResult.list)
+		#if($adid)
+		   #set($detailURL=$!{CONTEXT_PATH}+"/gdsdetail/"+${good.id}+"-"+${good.firstSkuId}+"?adid="+$adid+"&linktype=1")
+		#else
+		   #set($detailURL=$!{CONTEXT_PATH}+"/gdsdetail/"+${good.id}+"-"+${good.firstSkuId})
+		#end
+		#if($showType=="1")
+        	<li class="resultItem" style="width:245px;height:411px">
+				#foreach($path in $good.categories)
+				   #if($path == "1200")
+					  <div class="rw-icon rw-icon-ele"></div>
+					  #break;
+				   #elseif($path == "1201")
+					  <div class="rw-icon rw-icon-tea"></div>
+					  #break;
+				   #end
+				#end
+				#foreach($code in $good.propertycodes)
+				   #if($code == "1027_308")
+					  <div class="onLine_services"></div>
+					  #break;
+				   #end
+				#end
+                <div class="pro-wrap">             	
+                <input name="pGdsId" value="${good.id}" type="hidden"/>
+                <input name="pSkuId" value="${good.firstSkuId}" type="hidden"/>
+                <input name="pShopId" value="${good.shopId}" type="hidden"/>
+				<input name="pDiscountPrice" value="$!{good.discountPrice}" type="hidden"/>
+				<input name="pIfFree" value="$!{good.ifFree}" type="hidden"/>
+				<input name="pRealPrice" value="$!{good.defaultPrice}" type="hidden"/>
+				<input name="pMainCatgs" value="$!{good.mainCategoryCode}" type="hidden"/>
+                    <div class="p-img">
+                        <a href="$detailURL" target="_blank" title="$!{good.gdsNameSrc}">
+                            <img width="150" height="150" src="$good.imageUrl" alt="">
+                        </a>
+                    </div>
+                    <p class="p-pri">
+						##如果该商品有参加了促销活动。则价格最终会被促销接口提供的价格覆盖。（业务需求。请注意）
+                        <b class="c-red" name="discountPrice">
+                        #money($!{good.discountPrice})
+                        </b>
+						##如果该商品有参加了促销活动。则价格最终会被促销接口提供的价格覆盖。（业务需求。请注意）
+                        <b class="c-gray t-mline" name="guidePrice">
+                        #money($!{good.guidePrice})
+                        </b>
+                    </p>
+                    <p id="p-name" class="p-name">
+                        <a href="$detailURL" target="_blank" title="$!{good.gdsNameSrc}">
+                            $!{good.gdsName}<span id="gdsName-extends-desc"></span>
+                        </a>
+                    </p>
+                  #if($shopShowLock=='1') 
+                    <p style="display:inline-block;color:grey;margin-bottom:4px;max-width:200px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">
+   						 $!{good.shopName}
+   					</p>
+   					<i class="fa fa-shopping-bag" style="position:absolute;margin-left:5px;margin-top:5px;color:orange" aria-hidden="true"></i>
+                  #end  
+	                    <p class="p-pjnum">
+	                    #if($shopShowLock=='1') 
+	                     #if($!{good.ifSelfOperate}=='1')
+    						<span style="color:red;border:1px solid red;border-radius:2px;text-align: center;margin-right: 3px;height:14px;line-height: 14px;padding: 0 3px;display:inline-block">$SELF_OPERATE_SIGN</span>
+                     	 #end
+                     	#end
+                     	</p>
+                    
+	               
+                  
+                    #if($isLogin==true)
+                    	<div class="p-coll hascoll">
+                    #else
+                    	<div class="p-coll hascoll">
+                    #end
+                        <span class="micon-box gdsCollect">
+							<input type="hidden" name="skuId" value="$!{good.firstSkuId}"/>
+							##<input type="hidden" name="gdsId" value="$!{good.id}"/>
+							##<input type="hidden" name="shopId" value="$!{good.shopId}"/>
+							##<input type="hidden" name="gdsName" value="$!{good.gdsName}"/>
+							##<input type="hidden" name="gdsPrice" value="$!{good.discountPrice}"/>														
+                            <input type="hidden" name="isLogin" value="$isLogin">
+                              <a href="#">
+
+                                	<i class="micon micon-fav"></i>
+                              
+							  </a>
+                        </span>
+                        #if($!{good.ifNeedStockAmount})
+							
+							#if($!{supportFacStock})
+									#if($!{good.addToCartEnable})
+										<span class="mbtn mbtn-orange addToCart" img="$good.imageUrl" title="">
+                							<input type="hidden" name="shopId" value="$!{good.shopId}"/>
+                							<input type="hidden" name="shopName" value="$!{good.shopName}"/>
+                							<input type="hidden" name="gdsId" value="$!{good.id}"/>
+            								<input type="hidden" name="gdsTypeId" value="$!{good.gdsTypeId}"/>
+                							<input type="hidden" name="ifNeedStockAmount" value="$!{good.ifNeedStockAmount}"/>
+            								<input type="hidden" name="ifGdsTypeBuyonce" value="$!{good.ifGdsTypeBuyonce}"/>
+                							<input type="hidden" name="gdsName" value="$!{good.gdsName}"/>
+                							<input type="hidden" name="skuId" value="$!{good.firstSkuId}"/>
+                							<input type="hidden" name="skuProps" value="$!{good.skuProps}"/>
+                							<input type="hidden" name="mainCatgs" value="$!{good.mainCategoryCode}"/>
+                							
+                            				<i class="micon car"></i>   		
+                                            <b class="spit"></b>
+            									$!{good.addToCartPromp}
+                                        </span>
+									#else
+										<span class="mbtn mbtn-grad mbtn-disable" title="">
+                                            <i class="micon car"></i>
+                                            <b class="spit"></b>
+            									$!{good.addToCartPromp}
+            								</span>
+									#end
+							 #else	
+            						#if($!{good.storageDesc})
+                							#if($!{good.storageStatus}=='00')
+                								#*<span class="mbtn mbtn-grad mbtn-disable" title="此价格为普通会员折扣价，会员级别越高，享受越多优惠！具体折扣价，请登录后查看产品详情页">*#
+                                                <span class="mbtn mbtn-grad mbtn-disable" title="">
+                                                <i class="micon car"></i>
+                                                <b class="spit"></b>
+                									加入购物车
+                								</span>
+                							#else		
+                                            #*<span class="mbtn mbtn-orange addToCart" img="$good.imageUrl" title="此价格为普通会员折扣价，会员级别越高，享受越多优惠！具体折扣价，请登录后查看产品详情页">*#
+                							<span class="mbtn mbtn-orange addToCart" img="$good.imageUrl" title="">
+                    							<input type="hidden" name="shopId" value="$!{good.shopId}"/>
+                    							<input type="hidden" name="shopName" value="$!{good.shopName}"/>
+                    							<input type="hidden" name="gdsId" value="$!{good.id}"/>
+                								<input type="hidden" name="gdsTypeId" value="$!{good.gdsTypeId}"/>
+                    							<input type="hidden" name="ifNeedStockAmount" value="$!{good.ifNeedStockAmount}"/>
+                								<input type="hidden" name="ifGdsTypeBuyonce" value="$!{good.ifGdsTypeBuyonce}"/>
+                    							<input type="hidden" name="gdsName" value="$!{good.gdsName}"/>
+                    							<input type="hidden" name="skuId" value="$!{good.firstSkuId}"/>
+                    							<input type="hidden" name="skuProps" value="$!{good.skuProps}"/>
+                    							<input type="hidden" name="mainCatgs" value="$!{good.mainCategoryCode}"/>
+                    							
+                                				<i class="micon car"></i>   		
+                                                <b class="spit"></b>
+                									加入购物车
+                                            </span>
+                							#end
+            						#else
+            							<span class="mbtn mbtn-grad mbtn-disable">
+                                            <i class="micon car"></i>
+                                            <b class="spit"></b>
+            									加入购物车
+            								</span>
+    								#end
+							 #end
+						#else
+						
+						#*<span class="mbtn mbtn-orange addToCart" img="$good.imageUrl" title="此价格为普通会员折扣价，会员级别越高，享受越多优惠！具体折扣价，请登录后查看产品详情页">*#
+						<span class="mbtn mbtn-orange addToCart" img="$good.imageUrl" title="">
+    							<input type="hidden" name="shopId" value="$!{good.shopId}"/>
+    							<input type="hidden" name="shopName" value="$!{good.shopName}"/>
+    							<input type="hidden" name="gdsId" value="$!{good.id}"/>
+							    <input type="hidden" name="gdsTypeId" value="$!{good.gdsTypeId}"/>
+    							<input type="hidden" name="ifNeedStockAmount" value="$!{good.ifNeedStockAmount}"/>
+								<input type="hidden" name="ifGdsTypeBuyonce" value="$!{good.ifGdsTypeBuyonce}"/>
+    							<input type="hidden" name="gdsName" value="$!{good.gdsName}"/>
+    							<input type="hidden" name="skuId" value="$!{good.firstSkuId}"/>
+    							<input type="hidden" name="skuProps" value="$!{good.skuProps}"/>
+    							<input type="hidden" name="mainCatgs" value="$!{good.mainCategoryCode}"/>
+    						
+                				<i class="micon ep"></i>
+                                <b class="spit"></b>
+									加入购物车
+                            </span>
+						
+						
+						#end
+                    </div>
+                </div>
+                <div class="p-autor">
+					
+					##默认只有显示1个作者信息
+                    #if($!{good.author})
+                    #if($good.author.size() > 0)
+						#set($i=1)
+						#foreach($value in $good.author)
+							#if($i<=1)
+								#set($author=$value.trim())
+									<span title="$author">$author</span>
+							#else
+								#break
+							#end
+							#set($i=$i+1)
+						#end
+
+					#else
+					<span></span>
+					#end
+					#else
+					<span></span>
+					#end
+					 <i class="spit"></i>
+					#if($!{good.publisher})
+					#set($publish=$good.publisher.trim())
+					<span class="cbs" title="$publish">$publish</span>
+					#else
+					<span class="cbs"> </span>
+					#end
+                </div>
+                <div style="clear: both;margin-bottom:25px"> </div>
+            </li>
+        #elseif($showType=="2")
+        	<div class="item">
+        	    <input name="pGdsId" value="${good.id}" type="hidden"/>
+                <input name="pSkuId" value="${good.firstSkuId}" type="hidden"/>
+                <input name="pShopId" value="${good.shopId}" type="hidden"/>
+				<input name="pDiscountPrice" value="$!{good.discountPrice}" type="hidden"/>
+				<input name="pIfFree" value="$!{good.ifFree}" type="hidden"/>
+				<input name="pRealPrice" value="$!{good.defaultPrice}" type="hidden"/>
+				<input name="pMainCatgs" value="$!{good.mainCategoryCode}" type="hidden"/>
+                <div class="p-img">
+					#foreach($path in $good.categories)
+    				   #if($path == "1200")
+    					  <div class="rw-icon rw-icon-ele"></div>
+    					  #break;
+    				   #elseif($path == "1201")
+    					  <div class="rw-icon rw-icon-tea"></div>
+    					  #break;
+    				   #end
+				   #end
+				   #foreach($code in $good.propertycodes)
+				       #if($code == "1027_308")
+					       <div class="onLine_services"></div>
+					       #break;
+				       #end
+				   #end
+                    <a href='$detailURL' target="_blank" title="$!{good.gdsNameSrc}"><img width="200" height="200" src="$good.imageUrl" alt=""/></a>
+                </div>
+                <div class="p-info" style="width:100%">
+                    <p class="tt" style="display:inline-block">
+                        <a href='$detailURL' target="_blank" title="$!{good.gdsNameSrc}">$!{good.gdsName}<span id="gdsName-extends-desc"></span></a>
+                    </p>
+                  #if($shopShowLock=='1')
+                   #if($!{good.ifSelfOperate}=='1')  
+                    <p class="p-pjnum" style="color:red;border:1px solid red;
+                    							border-radius:2px;text-align: center;
+                    							margin-right: 3px;height:14px;
+                    							line-height: 14px;padding: 0 3px;
+                    							display:table;float:right;margin-top:4px">
+                    	$SELF_OPERATE_SIGN
+                    </p>
+                   #end 
+                  #end
+                    <p class="bz" title="$!{good.gdsSubHeadSrc}">
+                        $!{good.gdsSubHead}
+                    </p>
+                    <p class="autor" style="display:inline-block">
+						#set($before=0)
+                        #if($!{good.author}&&$good.author.size()>0)
+							#foreach($value in $good.author)
+    							$!{value}
+							#end
+							#set($before=1)
+    					#end
+						#if($!{good.publishDate}&&$!{good.publishDate}!="")
+							#if($before==1)
+                                |
+							#end
+							$!{good.publishDate}
+							#set($before=1)
+    					#end
+						#if($!{good.publisher}&&$!{good.publisher}!="")
+							#if($before==1)
+                                |
+							#end
+							$!{good.publisher}
+    					#end
+                    </p>
+                  #if($shopShowLock=='1')
+                    <p style="float:right;color:grey">
+                    	$!{good.shopName}
+                    </p>
+                  #end  
+                    <div class="dec">
+                        $!{good.gdsDescContent}
+					</div>
+                    <div class="pric">
+                        <span class="state">
+                        #if($!{good.ifNeedStockAmount})
+                           #if($!{good.storageDesc})
+                           	$!{good.storageDesc}
+                           	#else
+                           	无货
+                           #end
+                           #else
+                           充足
+                           #end
+                        </span>
+						##如果该商品有参加了促销活动。则价格最终会被促销接口提供的价格覆盖。（业务需求。请注意）
+                        <span class="dj">
+                                                                定价：<b>#money($!{good.guidePrice})</b>
+                        </span>
+						##如果该商品有参加了促销活动。则价格最终会被促销接口提供的价格覆盖。（业务需求。请注意）
+                        <span class="rpric">
+                          	 #money($!{good.discountPrice})
+                        </span>
+                        <!--
+                        <span class="dic">
+                       	    #if($!{good.discount})
+                       	    	
+                
+                       	    
+                             ($good.discount折)
+                        	#end
+                        </span>-->
+					
+                    </div>
+					#if($isLogin==true)
+                    	<div class="p-coll hascoll">
+                    #else
+                    	<div class="p-coll hascoll">
+					#end
+					#if($!{good.ifNeedStockAmount})
+					#if($!{good.storageDesc})
+						#if($!{good.storageStatus}=='00')
+							#*<span class="mbtn mbtn-grad mbtn-disable" title="此价格为普通会员折扣价，会员级别越高，享受越多优惠！具体折扣价，请登录后查看产品详情页">*#
+                            <span class="mbtn mbtn-grad mbtn-disable" title="">
+                                <i class="micon car"></i>
+                                <b class="spit"></b>
+									加入购物车
+								</span>
+						#else
+                            #*<span class="mbtn mbtn-orange addToCart" img="$good.imageUrl" title="此价格为普通会员折扣价，会员级别越高，享受越多优惠！具体折扣价，请登录后查看产品详情页">*#
+                            <span class="mbtn mbtn-orange addToCart" img="$good.imageUrl" title="">
+    							<input type="hidden" name="shopId" value="$!{good.shopId}"/>
+    							<input type="hidden" name="shopName" value="$!{good.shopName}"/>
+    							<input type="hidden" name="gdsId" value="$!{good.id}"/>
+								<input type="hidden" name="gdsTypeId" value="$!{good.gdsTypeId}"/>
+    							<input type="hidden" name="ifNeedStockAmount" value="$!{good.ifNeedStockAmount}"/>
+								<input type="hidden" name="ifGdsTypeBuyonce" value="$!{good.ifGdsTypeBuyonce}"/>
+    							<input type="hidden" name="gdsName" value="$!{good.gdsName}"/>
+    							<input type="hidden" name="skuId" value="$!{good.firstSkuId}"/>
+    							<input type="hidden" name="skuProps" value="$!{good.skuProps}"/>
+    							<input type="hidden" name="mainCatgs" value="$!{good.mainCategoryCode}"/>
+    							<i class="micon car"></i>
+                                <b class="spit"></b>
+                                                                              加入购物车
+                            </span>
+						#end
+					#else
+							#*<span class="mbtn mbtn-grad mbtn-disable" title="此价格为普通会员折扣价，会员级别越高，享受越多优惠！具体折扣价，请登录后查看产品详情页">*#
+                        	<span class="mbtn mbtn-grad mbtn-disable" title="">
+                                <i class="micon car"></i>
+                                <b class="spit"></b>
+									加入购物车
+								</span>
+					#end
+					
+					#else
+						
+						#*<span class="mbtn mbtn-orange addToCart" img="$good.imageUrl" title="此价格为普通会员折扣价，会员级别越高，享受越多优惠！具体折扣价，请登录后查看产品详情页">*#
+                        <span class="mbtn mbtn-orange addToCart" img="$good.imageUrl" title="">
+    							<input type="hidden" name="shopId" value="$!{good.shopId}"/>
+    							<input type="hidden" name="shopName" value="$!{good.shopName}"/>
+    							<input type="hidden" name="gdsId" value="$!{good.id}"/>
+							    <input type="hidden" name="gdsTypeId" value="$!{good.gdsTypeId}"/>
+    							<input type="hidden" name="ifNeedStockAmount" value="$!{good.ifNeedStockAmount}"/>
+								<input type="hidden" name="ifGdsTypeBuyonce" value="$!{good.ifGdsTypeBuyonce}"/>
+    							<input type="hidden" name="gdsName" value="$!{good.gdsName}"/>
+    							<input type="hidden" name="skuId" value="$!{good.firstSkuId}"/>
+    							<input type="hidden" name="skuProps" value="$!{good.skuProps}"/>
+    							<input type="hidden" name="mainCatgs" value="$!{good.mainCategoryCode}"/>
+    						
+                				<i class="micon ep"></i>
+                                <b class="spit"></b>
+									加入购物车
+                            </span>
+						
+						
+						#end
+                          <span class="micon-box gdsCollect">
+							<input type="hidden" name="skuId" value="$!{good.firstSkuId}"/>
+					    ##		<input type="hidden" name="gdsId" value="$!{good.id}"/>
+						##			<input type="hidden" name="shopId" value="$!{good.shopId}"/>
+						##			<input type="hidden" name="gdsName" value="$!{good.gdsName}"/>
+						##			<input type="hidden" name="gdsPrice" value="$!{good.discountPrice}"/>														
+                            <input type="hidden" name="isLogin" value="$isLogin">
+                              <a href="#">	
+                                	<i class="micon micon-fav"></i>                              
+							  </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        #end
+		
+    #end
+
+#end
+	
+#if($showType=="1")
+	</ul> 
+#elseif($showType=="2")
+	</div>
+#end
+<input type="hidden" id="searchTotal" value="$!{gridResult.totalRow}"/>
+<div id="pageControlbar" class="ecppage" data-total-page="${gridResult.totalPage}" data-total-row="${gridResult.totalRow}"  data-page-size="${gridResult.pageSize}" data-page-number="${gridResult.pageNumber}" data-status="begin"></div>

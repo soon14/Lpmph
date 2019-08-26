@@ -1,0 +1,51 @@
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/bill/bill-review.js?version=$!{JS_VERSION}" ></script>
+
+ <div class="row-fluid">
+			<form class="form-horizontal required-validate" id="reviewForm" >
+                <input type="hidden" id="orderId" name="orderId" value="$!{orderId}" />
+				<div>  
+    			 
+    			<div class="row-fluid">
+    				<div class="span10">
+    					<div>
+    						<label class="control-label" style="padding-top: 0">寄票方式：</label>
+    						<div class="controls">
+								 <input type="radio" name="sendInvoiceType" checked value="0"/> 附书寄出  
+                                    &nbsp; &nbsp;<input type="radio" name="sendInvoiceType" value="1"/>快递寄出
+							</div>
+    					</div>
+    				</div>
+    			</div>
+    			<div id="expressNoDiv" style="display:none;" class="row-fluid formSep">
+    				<div class="span11">
+    					<div>
+    						<label class="control-label">寄票快递单号：</label>
+    						<div class="controls">
+    							<input type="text" class="required" id="invoiceExpressNo" maxlength="30" style="width:60%" name="invoiceExpressNo"/>
+    						</div>
+							
+    					</div>
+    				</div>
+    			</div> 
+				<div id="expressNoDiv" style="display:block;" class="row-fluid formSep">
+    				<div class="span11">
+    					<div>
+    						<label class="control-label">发票号码：</label>
+    						<div class="controls">
+    							<input type="text" id="invoiceCode" maxlength="30" style="width:60%" name="invoiceCode"/>
+    						</div>
+							
+    					</div>
+    				</div>
+    			</div>
+    			<div class="row-fluid formSep">
+    				<div class="text-center">
+    					<button type="button" class="btn btn-info" id="btnSave"><i class="icon-ok-sign icon-white"></i> 保存</button>
+    					<button type="button" class="btn" id="btnReturn"><i class="icon-remove-sign icon-white"></i> 取消</button>
+    				</div>
+    			</div>
+    		</div>
+				
+	        </form> 
+            </div>

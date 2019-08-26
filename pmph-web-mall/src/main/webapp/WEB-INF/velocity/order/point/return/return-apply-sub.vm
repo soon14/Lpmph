@@ -1,0 +1,135 @@
+#parse("sys/sys_param.vm")
+#parse("/order/pic/pic-cover.vm")
+<title>退货申请-积分商城</title>
+<!--content-->
+<div id="content" class="pay">
+    <div class="wrap1200">
+        <form class="pay-form form-horizontal required-validate" id="applySubForm" action=""  method="post" >
+		<div class="ret-container">
+            <div class="ret-box">
+                <div class="head">
+                    <h3>订单信息</h3>
+                </div>
+                <div class="body">
+                    <table class="ret-detail">
+                        <thead>
+                        <tr>
+                            <td style="width:100px">书号</td>
+                            <td style="width:100px">商品图片</td>
+                            <td style="width:350px">商品名称</td>
+                            <td style="width:150px">价格</td>
+                            <td style="width:100px">商品数量</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+						#foreach($!backOrderSub in $!backApplyOrdSubResps)
+						#set($backIndex = $velocityCount - 1)
+    					<tr class="bg-fff"> 
+                            <td><div class="border-right">$!{backOrderSub.zsCode} </div></td>
+                            <td><div class="border-right"><a href="#siteInfo(2)$!backOrderSub.gdsUrl" target="_blank"><img src="#genImageUrl($!backOrderSub.getPicId(),'200x200!')" width="48"></img></a></div></td>
+                            <td><div class="border-right"><a href="#siteInfo(2)$!backOrderSub.gdsUrl" target="_blank">$!backOrderSub.gdsName</a></div></td>
+                            <td>
+								<div class="border-right">
+									#if($!{backOrderSub.score})
+    									$!{backOrderSub.score}积分
+    								#end
+    								#if($!{backOrderSub.score} && $!{backOrderSub.discountPrice})
+    									+
+    								#end
+									#money($!backOrderSub.discountPrice)
+								</div>
+							</td>
+                            <td><div class="border-right">x $!backOrderSub.orderAmount</div></td>
+							<input type="hidden" name="rBackOrdSubReqs[$!{backIndex}].orderId" id="orderId" value="$!{orderId}">
+    						<input type="hidden" name="rBackOrdSubReqs[$!{backIndex}].orderSubId" id="orderSubId" value="$!{backOrderSub.orderSubId}">
+    						<input type="hidden" name="rBackOrdSubReqs[$!{backIndex}].num" id="orderAmount" value="$!{backOrderSub.orderAmount}">
+                        </tr>
+    					#end 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ret-box">
+                <div class="head">
+                    <h3>退货须知</h3>
+                </div>
+                <div class="body">
+                    <div class="know">
+                        <p>1、数字产品不允许退货</p>
+                        <p>2、已使用的优惠券不退</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ret-box">
+                <div class="head">
+                    <h3>退货原因</h3>
+                </div>
+                <div class="body">
+                        <input type="hidden" name="orderId" id="orderId" value="$!{orderId}">
+						<input type="hidden" name="backTypeName" id="backTypeName" value="">	
+						<div class="control-group">
+                            <label class="control-label" >退货原因：</label>
+                            <div class="controls">
+                                <select style="width:160px"  id="" name="backType">
+            						#listParam('ORD_BACK_GDS_TYPE')
+            					</select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >问题描述：</label>
+                            <div class="controls">
+                                <textarea rows="3" id="backDesc" name="backDesc" maxlength="100" class="c-area required htmlcheck"></textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" >图片信息：</label>
+                            <div class="controls">
+								<input type="hidden" id="pic1" name="backPicList[0]"/>
+        						<input type="hidden" id="pic2" name="backPicList[1]"/>
+        						<input type="hidden" id="pic3" name="backPicList[2]"/>
+        						<input type="hidden" id="pic4" name="backPicList[3]"/> 
+        						<input type="hidden" id="pic5" name="backPicList[4]"/>
+                                <a href="javascript:;" class="a-upload">
+                                    <input type="file" class="com_input" name="pictrue" id="pictrue">选择上传图片
+                                </a>
+                                <p>为了帮助我们更好的解决问题，请您上传图片</p>
+                                <p>最多可以上传5张图片，每张图片的大小不能超过5M，支持jpg,png,jpeg,gif</p>
+								 <ul class="express">
+                                    <li id="li1" style="display:none;">
+                                        <img id="image1" src="" alt="" />
+        								<i id="closeimage1" style="display:none;">x</i>
+                                    </li>
+                                    <li id="li2" style="display:none;">
+                                        <img id="image2" src="" alt="" />
+        								<i id="closeimage2" style="display:none;">x</i>
+                                    </li>
+                                    <li id="li3" style="display:none;">
+                                        <img id="image3" src="" alt="" />
+        								<i id="closeimage3" style="display:none;">x</i>
+                                    </li>
+        							<li id="li4" style="display:none;">
+                                        <img id="image4" src="" alt="" />
+        								<i id="closeimage4" style="display:none;">x</i>
+                                    </li>
+        							<li id="li5" style="display:none;">
+                                        <img id="image5" src="" alt="" />
+        								<i id="closeimage5" style="display:none;">x</i>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+								<button type="button" class="btn btn-success" id="btn_apply_sub"><i class="icon-ok"></i> 提交</button>
+								<button type="button" class="btn btn-primary" id="btnReturn"><i class="icon-ban-circle"></i> 关闭</button>
+                            </div>
+                        </div>
+                   
+                </div>
+            </div>
+
+        </div>
+        </form>
+    </div>
+</div>

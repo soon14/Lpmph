@@ -1,0 +1,35 @@
+#parse("/rwgw-en/sys/sys_param.vm")
+#custInfo()
+    <!--头部 begin-->
+<div id="header">
+    <div class="w">
+        <div class="topBg-left">
+            <span> Welcome to pmph!</span>
+            <a href="#siteInfoURL('3')"><span style="margin-left: 15px"><i class="top-dot">·</i>简体中文</span></a>
+            <span class="c-orange"><i class="top-dot">·</i>English</span>
+        </div>
+        <div class="topBG-right nav-col">
+            <ul>
+                <li>
+                	#if(${cust.staffCode})
+						<a href="#">$!{cust.staffCode}</a> <a href="$CONTEXT_PATH/login/logout" class="c-red"> [退出]</a>	
+					#else
+						<a href="$CONTEXT_PATH/login/gwpage"> Login</a> <a href="$CONTEXT_PATH/login/register" class="c-red"> [Register]</a>
+					#end
+                </li>
+                <li>
+                      <a href="#siteInfoURL('1')" target="_blank"><i class="i-icon i-icon-book"></i>PMPHMALL</a>
+                </li>
+                <li class="spit"></li>
+                <li>
+                    <a href="http://zhuanjia.pmph.com" target="_blank"><i class="i-icon i-icon-expert"></i>EXPERT.SERVICE</a>
+                </li>
+                <li class="spit"></li>
+                <li>
+                    <a href="#siteInfoURL('4')" class="c-orange"><i class="i-icon i-icon-in"></i>IPMPH</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!--logo begin-->

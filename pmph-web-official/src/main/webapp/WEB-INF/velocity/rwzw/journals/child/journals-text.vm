@@ -1,0 +1,29 @@
+#parse("/sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/rwzw/journals-text.js"></script>
+	<div class="container">
+        <ul class="breadcrumb clearfix ">
+            <li class="p1"><a href="#siteInfoURL('4')/journal"><i class="qk-icon qk-icon-tit"></i>期刊</a> <span class="divider">&gt;</span></li>
+			#if($!{placeId}=='26')
+            <li class="p1"><a href="javascript:void(0);" id="news">期刊新闻列表</a> <span class="divider">&gt;</span></li>
+			#elseif($!{placeId}=='28') 
+			<li class="p1"><a href="javascript:void(0);" id="ad">广告征集列表 </a> <span class="divider">&gt;</span></li>
+			#end
+            <li class="active">$!{article.articleTitle}</li>
+        </ul>
+    </div>
+	<input type="hidden" id="staticHtml" name="staticHtml" value="$!{staticHtml}"/>
+    <div class="container">
+        <hr/>
+        <div class="text">
+        </div>
+    </div>
+    <form id="moreForm" action="${CONTEXT_PATH}/journalslist" method="POST">
+			<input type="hidden"  name="pageNumber" id="pageNumber" value="1"/>
+			<input type="hidden"  name="pageSize" id="pageSize" value="6"/>
+			<input type="hidden"  name="placeId" id="placeId" value="26"/>
+    </form>
+    <form id="adForm" action="${CONTEXT_PATH}/adlist" method="POST">
+			<input type="hidden"  name="pageNumber" id="pageNumber" value="1"/>
+			<input type="hidden"  name="pageSize" id="pageSize" value="6"/>
+			<input type="hidden"  name="placeId" id="placeId" value="28"/>
+     </form>

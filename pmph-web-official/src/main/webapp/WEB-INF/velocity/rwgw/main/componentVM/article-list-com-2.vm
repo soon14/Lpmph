@@ -1,0 +1,39 @@
+<!-- 文章列表   2类型   智网期刊   -->
+#parse("/rwgw/sys/sys_param.vm")
+#if($!{channel} && $!{channel.isOutLink} == 0)##有栏目且链接类型为内部链接
+                        <ul class="newList">
+							           <div class="qk-com">
+						#if($articles && ${articles.size()} > 0)
+							  #foreach($attr in $articles)
+							#if(${velocityCount}==1)
+                        <div class="pk-img"><img src="$!{attr.thumbnailUrl}" alt="$!{attr.articleTitle}"/></div>
+                            <p>
+                               <a href="#siteInfoURL('4')/$!{channel.channelUrl}&staticId=$!{attr.staticId}&articleId=$!{attr.id}&placeId=26">$!{attr.articleTitle} </a></p>
+                            
+                            <a href="#siteInfoURL('4')/$!{channel.channelUrl}&staticId=$!{attr.staticId}&articleId=$!{attr.id}&placeId=26">
+								<p class="mt20">  
+									#set($str=$!{attr.articleRemark})   
+                                      #if($str.length()>150)  
+                                         #set($str=$str.substring(0,150))  
+                                           $!str ...  
+                                         #else  
+                                           $!str
+                                         #end   
+								</p>
+							</a> 
+                        </div>
+							#end
+							#if(${velocityCount}!=1)
+                            <li #if(${velocityCount}==2) style=" margin-top: 20px;" #end>
+                                <div class="newlist-date">$!date.format('yyyy-MM-dd',$!{attr.pubTime})</div>
+                                <div class=" newlist-con"><a href="#siteInfoURL('4')/about?staticId=$!{attr.staticId}&articleId=$!{attr.id}&placeId=26"><i class="qk-icon qk-icon-new"></i>
+                                $!{attr.articleTitle} </a></div>
+                            </li>
+							          #end
+								    #end
+								  #end
+                        </ul>
+						
+#else  ##无栏目或者链接类型为外部链接
+	<div class ='pro-empty'>#if($!{errorMessage})$!{errorMessage}#else 亲，暂无数据！#end</div>
+#end

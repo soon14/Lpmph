@@ -1,0 +1,98 @@
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/demo/demo-form.js?version=$!{JS_VERSION}" ></script>
+
+
+			<h3 class="heading">字典内容编辑</h3>
+		
+			<div class="formBox">
+				<form id="detailInfoForm" class="form-horizontal required-validate" style="margin-bottom: 0px;">
+					<div class="formSep">
+						<div class="control-group">
+							<label class="control-label">数据表名</label>
+							<div class="controls">
+								<input type="text" class="input-large required" name="code.table_name" />
+								<span class="help-inline">数据库表名</span>
+								<input type="hidden" id="code_id" name="code.id" value="${param.code_id}" />
+								<input type="hidden" id="operation" value="1" />
+							</div>
+						</div>
+					</div>
+					<div class="formSep">
+						<div class="control-group">
+							<label class="control-label">关联字段名</label>
+							<div class="controls">
+								<input type="text" class="input-large required" name="code.field_name" />
+								<span class="help-inline">数据库表中的字段名</span>
+							</div>
+						</div>
+					</div>
+					<div class="formSep">
+						<div class="control-group">
+							<label class="control-label">字典值</label>
+							<div class="controls">
+								<input type="text" class="input-large required" name="code.code_value" />
+							</div>
+						</div>
+					</div>
+					<div class="formSep">
+						<div class="control-group">
+							<label class="control-label">字典描述内容</label>
+							<div class="controls">
+								<input type="text" class="input-large required" name="code.code_desc" />
+							</div>
+						</div>
+					</div>
+					<div class="formSep">
+						<div class="control-group">
+							<label class="control-label">其他属性1</label>
+							<div class="controls">
+								<input type="text" class="input-large" name="code.prop1" />
+							</div>
+						</div>
+					</div>
+					<div class="formSep">
+						<div class="control-group">
+							<label class="control-label">其他属性2</label>
+							<div class="controls">
+								<input type="text" class="input-large" name="code.prop2" />
+							</div>
+						</div>
+					</div>
+					<div class="formSep">
+						<div class="control-group">
+							<label class="control-label">其他属性3</label>
+							<div class="controls">
+								<input type="text" class="input-large" name="code.prop3" />
+							</div>
+						</div>
+					</div>
+					<div class="formSep">
+						<div class="control-group">
+							<label class="control-label">排列顺序</label>
+							<div class="controls">
+								<input type="text" class="input-large number" name="code.sortno" />
+								<span class="help-inline">倒序排列，数字小的排列在靠前</span>
+							</div>
+						</div>
+					</div>
+					<div class="formSep">
+						<div class="control-group">
+							<label class="control-label">状态</label>
+							<div class="controls">
+								<select>
+									<option>启用</option>
+									<option>禁用</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="">
+						<div class="control-group">
+							<div class="controls">
+								<button type="button" class="btn btn-success" id="btnFormSave"><i class="icon-ok"></i> 保　存</button>
+								<button type="button" class="btn btn-primary" id="btnReturn"><i class="icon-reply"></i> 返　回</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>

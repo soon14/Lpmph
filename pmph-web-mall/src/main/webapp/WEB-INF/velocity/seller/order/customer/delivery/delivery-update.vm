@@ -1,0 +1,78 @@
+#parse("sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/customer/delivery-update.js"></script>
+<div class="seller-mainR">
+	<div class="main">
+		<div class="seller-well">
+			<form action="" class="form-horizontal required-validate" id="deliveryInfoForm">
+			<input type="hidden" value="$!{ordDeliveryBatchResp.id}" name="id"></input>
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="control-group">
+							<label class="control-label">物流方式：</label>
+							<input type="hidden" id="sendType" name="" value="$!{ordDeliveryBatchResp.deliveryType}"/>
+							<div class="controls" id="sendTypeDiv">
+								#set($distribution = ${paramTools.getParamDTOList("STAFF_SHOP_DISTRIBUTION_WAY")})
+								#set($size = $distribution.size())
+								#set($span = 6 / $size)
+								#foreach($attr in $distribution)
+									#if($!{attr.spCode}==$!{ordDeliveryBatchResp.deliveryType})##1是快递
+										#set($checked='checked="checked"')
+									#else
+										#set($checked="")
+									#end
+			
+									#if($!{attr.spCode} == "1")
+										#set($class='class="_kd"')
+									#elseif($!{attr.spCode} == "0")
+										#set($class='class="_py"')
+									#else
+										#set($class='class="_zt"')
+									#end
+			
+									<div class="span$span">
+										<label class="radio inline">
+											<input type="radio" name="deliveryType" id="$!{attr.spCode}" value="$!{attr.spCode}" $checked $class>
+											#escapeHtml($!{attr.spValue})
+										</label>
+									</div>
+								#end
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span5">
+						<div class="control-group">
+							<label class="control-label">物流公司：</label>
+							<input type="hidden" value="$!ordDeliveryBatchResp.expressId" id="expressCompanyFlag"></input>
+							
+							<div class="controls">
+								<select id="expressCompanyId" name="expressId" class="input-block-level">
+									<option value="">请选择</option>
+									#foreach($!key in $!logistics.keySet())
+										<option value=$!key>$!logistics.get($!key)</option>
+									#end
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="span5">
+						<label class="control-label">快递单号：</label>
+						<input type="hidden" value="$!ordDeliveryBatchResp.expressNo" id="expressNoFlag"></input>
+						<div class="controls">
+							<input id="expressNo" name="expressNo" type="text" class="input-block-level required" onkeyup="checkExpressNo(this)">
+							<span class="errorSpan"></span>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+				     <div class="controls" style="margin:0;text-align:center">
+				        <input type="button" class="btn" id="saveDeliveryInfo" value="确认修改"/>
+				        <input type="button" class="btn" id="btnCancel1" value="取消"/>
+				     </div>
+				</div>
+			</form>
+		</div>
+    </div>
+</div>

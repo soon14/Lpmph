@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+.bPage {
+	height: 30px;
+	max-height: 30px;
+}
+.bPage .bPageList a{
+	height: 20px;
+}
+.bPage select {
+	display: inline;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 0;
+    padding: 0;
+    vertical-align: middle;
+    width: auto;
+}
+.bPage ul li a {
+	line-height: 20px;
+	padding: 4px 12px;
+}
+.bPage .bPageInfo{
+	padding: 0px;
+	width: auto;
+	padding-top: 1px;
+	height: 26px;
+	line-height: 26px;
+}
+.bPage .bPageInfo a {
+	color: #3399f3 !important;
+}

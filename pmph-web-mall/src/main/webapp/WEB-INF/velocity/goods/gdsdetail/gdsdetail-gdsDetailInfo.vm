@@ -1,0 +1,110 @@
+<div class="citem pro-detail">
+    <div class="box">
+			#set($count = 0)
+			#set($values = '')
+			#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get('1020').values})
+				#set($values = $!{value.propValue})
+				#if($values && $values !="")
+					#set($count = $count + 1)
+    				<div class="head">
+    				内容简介
+                    </div>
+                    <div class="body">
+            			
+                        <div class="pro-dec moreEditorParse" value="$values">
+                        </div>
+                    </div>
+				#end
+			#end
+			#set($values = '')
+			#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get("1021").values})
+				#set($values = $!{value.propValue})
+				#if($values && $values !="")
+					#set($count = $count + 1)
+    				<div class="head">
+    				目录
+                    </div>
+                    <div class="body">
+            			
+                        <div class="pro-dec moreEditorParse" value="$values">
+                        </div>
+                    </div>
+				#end
+			#end
+			#set($values = '')
+			#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get("1022").values})
+				#set($values = $!{value.propValue})
+				#if($values && $values !="")
+					#set($count = $count + 1)
+    				<div class="head">
+    				作者介绍
+                    </div>
+                    <div class="body">
+            			
+                        <div class="pro-dec moreEditorParse" value="$values">
+                        </div>
+                    </div>
+				#end
+			#end
+			
+			#set($values = '')
+			#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get("1023").values})
+				#set($values = $!{value.propValue})
+				#if($values && $values !="")
+					#set($count = $count + 1)
+    				<div class="head">
+    				编辑推荐
+                    </div>
+                    <div class="body">
+            			
+                        <div class="pro-dec moreEditorParse" value="$values">
+                        </div>
+                    </div>	
+				#end
+			#end
+			
+			#set($values = '')
+			#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get("1024").values})
+				#set($values = $!{value.propValue})
+				#if($values && $values !="")
+					#set($count = $count + 1)
+    				<div class="head">
+    				专家推荐
+                    </div>
+                    <div class="body">
+            			
+                        <div class="pro-dec moreEditorParse" value="$values">
+                        </div>
+                    </div>	
+				#end
+			#end
+			
+			#set($values = '')
+			#foreach($value in $!{gdsDetailInfo.skuInfo.allPropMaps.get("1025").values})
+				#set($values = $!{value.propValue})
+				#if($values && $values !="")
+					#set($count = $count + 1)
+    				<div class="head">
+    				章节节选
+                    </div>
+                    <div class="body">
+            			
+                        <div class="pro-dec moreEditorParse" value="$values">
+            				
+                        </div>
+                    </div>	
+				#end
+			#end
+			#if($count ==0)
+				<div class="head" id="gdsDetailDescHead">
+                </div>
+                <div class="body">
+                    <div class="pro-dec" id="gdsDetailDesc">
+						<div class="pro-empty">
+        				「暂无详情信息」
+                        </div>
+                    </div>
+                </div>	
+			#end
+    </div>
+</div>

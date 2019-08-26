@@ -1,0 +1,132 @@
+#parse("/rwgw-en/sys/sys_param.vm")
+<script type="text/javascript" src="$RESOURCE_PATH/jquery/jcarousel-master/jquery.jcarousel.min.js"></script>
+ <!-- 人卫网站 begin -->
+      <div class="box" id="webList">
+          <div class="box-head">
+              <i class="box-ticon ticon-web"></i>
+          </div>
+          <div class="box-body">
+              <div class="jcarousel-wrapper ecp-component main-web-site" data-status="1" data-place-size="16" data-place-id="1407"  data-module="ecp-component/leaflet/main-web-site">
+                  <a id="page2-prev" class="swipe-page prev"><i></i></a>
+                  <a id="page2-next" class="swipe-page next"><i></i></a>
+                  <div class="web-list jcarousel">
+                      <ul class="webs web-site-list">
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </div>
+<!-- 人卫网站 end -->
+<!-- 
+	<div class="box"  id="webList">
+      <div class="box-head">
+          <i class="box-ticon ticon-web"></i>
+      </div>
+      <div class="box-body">
+          <div id='mySwipe2' class='swipe web-list'>
+              <div class='swipe-wrap'>
+                  <div class="item">
+                      <ul class="webs clearfix">
+						  <li>
+                              <div class="web-logo-wrap">
+								<a href="#siteInfoURL('4')" target="_blank">
+                                  <img src="$IMAGE_PATH/web-logo-zc.png" alt=""/>
+								</a>
+                              </div>
+							  <a href="#siteInfoURL('4')" target="_blank">
+								<p class="web-name">人卫智网</p>
+							  </a>
+                          </li>
+                          <li>
+                              <div class="web-logo-wrap">
+								<a href="#siteInfoURL('1')" target="_blank">
+                                  <img src="$IMAGE_PATH/web-logo-zc.png" alt=""/>
+								</a>
+                              </div>
+							  <a href="#siteInfoURL('1')" target="_blank">
+								<p class="web-name">人卫智城</p>
+							  </a>
+                          </li>
+                          <li>
+                              <div class="web-logo-wrap">
+								<a href="http://baike.ipmph.com/" target="_blank">
+                                  <img src="$IMAGE_PATH/web-logo-ks.png" alt=""/>
+								</a>
+                              </div>
+							  <a href="http://baike.ipmph.com/" target="_blank">
+								<p class="web-name">医学百科</p>
+							  </a>
+                          </li>
+                          <li>
+                              <div class="web-logo-wrap">
+								<a href="http://www.lakesviewhotel.com/" target="_blank">
+                                  <img src="$IMAGE_PATH/web-logo-jd.png" alt=""/>
+                                </a>
+                              </div>
+							  <a href="http://www.lakesviewhotel.com/" target="_blank">
+								<p class="web-name">人卫酒店</p>
+							  </a>
+                          </li>
+                          <li>
+                              <div class="web-logo-wrap">
+								<a href="http://health.ipmph.com/" target="_blank">
+                                  <img src="$IMAGE_PATH/web-logo-jk.png" alt=""/>
+                                </a>
+                              </div>
+							  <a href="http://health.ipmph.com/" target="_blank">
+								<p class="web-name">人卫智网健康</p>
+							  </a>
+                          </li>
+                          <li>
+                              <div class="web-logo-wrap">
+								<a href="http://zglcyszz.pmph.com/" target="_blank">
+                                  <img src="$IMAGE_PATH/web-logo-yx.png" alt=""/>
+                                </a>
+                              </div>
+							  <a href="http://zglcyszz.pmph.com/" target="_blank">
+								<p class="web-name">中国临床杂志</p>
+							  </a>
+                          </li>
+                          <li>
+                              <div class="web-logo-wrap">
+								<a href="http://www.pmph-usa.com/" target="_blank">
+                                  <img src="$IMAGE_PATH/web-logo-mfgs.png" alt=""/>
+                                </a>
+                              </div>
+							  <a href="http://www.pmph-usa.com/" target="_blank">
+								<p class="web-name">人卫社美国分公司</p>
+							  </a>
+                          </li>
+                          <li>
+                              <div class="web-logo-wrap">
+								<a href="http://www.pmphmooc.com/" target="_blank">
+                                  <img src="$IMAGE_PATH/web-logo-mk.png" alt=""/>
+                                </a>
+                              </div>
+							  <a href="http://www.pmphmooc.com/" target="_blank">
+								<p class="web-name">人卫幕课</p>
+							  </a>
+                          </li>
+                      </ul>
+                  </div>
+				  <div class="item">
+                      <ul class="webs clearfix">
+						  <li>
+                              <div class="web-logo-wrap">
+								<a href="http://zgyk.pmph.com/" target="_blank">
+                                  <img src="$IMAGE_PATH/web-logo-mk.png" alt=""/>
+                                </a>
+                              </div>
+							  <a href="http://zgyk.pmph.com/" target="_blank">
+								<p class="web-name">中国医刊</p>
+							  </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              <div id="page2-prev" class="swipe-page prev"></div>
+              <div id="page2-next" class="swipe-page next"></div>
+          </div>
+      </div>
+</div> 
+-->

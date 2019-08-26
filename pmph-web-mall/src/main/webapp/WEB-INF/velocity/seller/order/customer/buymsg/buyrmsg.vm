@@ -1,0 +1,20 @@
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/order/customer/updateBuyMsg.js"></script>
+
+<!-- Font-Awesome -->
+<form id="detailfrom" class="form-horizontal required-validate">
+	<input type='hidden' id='orderId' name='orderId' value='$!{orderId}'/>
+    <div class="control-group">
+        <label class="control-label" for="p-code">买家备注：</label>
+        <div class="controls">
+           <textarea name="buyMsg" rows="3"  class="tarea" style="width:80%" placeholder="给卖家留言" maxlength="120"></textarea>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <input type="button" class="btn" id="savemsg" value="保存买家备注"/>
+             <input type="button" class="btn" id="btnCancel1" value="取消"/>
+         </div>
+    </div>
+
+</form>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="ordImportSV" class="com.ai.ecp.pmph.service.busi.impl.OrdImportSVImpl"></bean>
+	<bean id="ordImportLogSV" class="com.ai.ecp.pmph.service.busi.impl.OrdImportLogSVImpl"></bean>
+	<bean id="ordTmMainSV" class="com.ai.ecp.pmph.service.busi.impl.OrdTmMainSVImpl"></bean>
+	<bean id="ordTmSubSV" class="com.ai.ecp.pmph.service.busi.impl.OrdTmSubSVImpl"></bean>
+	<bean id="payZYDigitalSV" class="com.ai.ecp.pmph.facade.impl.eventual.PayZYDigitalSVImpl"></bean>
+	<!-- 外网系统子事务授权处理 -->
+	<bean id="payExternalMedicareSV" class="com.ai.ecp.pmph.facade.impl.eventual.PayExternalMedicareSVImpl"></bean>
+	<bean id="payISBNCountSV" class="com.ai.ecp.pmph.facade.impl.eventual.PayISBNCountSVImpl"></bean>
+	<bean id="payReChargeSV" class="com.ai.ecp.pmph.facade.impl.eventual.PayReChargeSVImpl"></bean>
+	<bean id="payZYExaminationSV" class="com.ai.ecp.pmph.facade.impl.eventual.PayZYExaminationSVImpl"></bean>
+	<bean id="eEduVNNoticeSV" class="com.ai.ecp.pmph.facade.impl.eventual.EEduVNNoticeSVImpl"></bean>
+	<bean id="eEduVNNoticeMainSV" class="com.ai.ecp.pmph.facade.impl.eventual.EEduVNNoticeMainSVImpl"></bean>
+	<bean id="ordExportFileSV" class="com.ai.ecp.pmph.service.busi.impl.OrdExportFilePmphSVImpl"></bean>
+	<bean id="ordInfSubSV" class="com.ai.ecp.pmph.service.busi.impl.OrdInfSubSVImpl"></bean>
+	<bean id="ordInfMainSV" class="com.ai.ecp.pmph.service.busi.impl.OrdInfMainSVImpl"></bean>
+	<bean id="payQuartzInfoPmphSV" class="com.ai.ecp.pmph.service.busi.impl.PayQuartzInfoPmphSVImpl"></bean>
+	<bean id="payWayPmphSV" class="com.ai.ecp.pmph.service.busi.impl.PayWayPmphSVImpl"></bean>
+	<bean id="ordBackApplyPmphSV" class="com.ai.ecp.pmph.service.busi.impl.OrdBackApplyPmphSVImpl"></bean>
+	<bean id="ordBackShopIdxPmphSV" class="com.ai.ecp.pmph.service.busi.impl.OrdBackShopIdxPmphSVImpl"></bean>
+
+	<!-- 积分计算实现类 START -->
+    <bean id="caclScoreByISBNActive" class="com.ai.ecp.pmph.service.busi.impl.caclScoreByISBNActive"></bean>
+    <bean id="caclScoreByTMallOrderMoney" class="com.ai.ecp.pmph.service.busi.impl.caclScoreByTMallOrderMoney"></bean>
+    <!-- 积分计算实现类 END -->
+
+    <!-- 会员卡申请服务 -->
+    <bean id="cardApplicationSV" class="com.ai.ecp.pmph.service.busi.impl.CardApplicationSVImpl"></bean>
+    <!-- 会员卡管理服务 -->
+    <bean id="cardMgrSV" class="com.ai.ecp.pmph.service.busi.impl.CardMgrSVImpl"></bean>
+
+	<!--ERP商品导入服务 -->
+	<bean id="erpGdsInfoImportSV"
+		  class="com.ai.ecp.pmph.service.busi.impl.dataimport.ERPGdsInfoImportSVImpl" />
+
+	<!--泽云数字教材、电子书商品导入服务 -->
+	<bean id="zyGdsInfoImportSV"
+		  class="com.ai.ecp.pmph.service.busi.impl.dataimport.ZYGdsInfoImportSVImpl" />
+
+	<!--考试网试卷商品导入服务 -->
+	<bean id="examPaperGdsInfoImportSV"
+		  class="com.ai.ecp.pmph.service.busi.impl.dataimport.ExamPaperGdsInfoImportSVImpl" />
+
+	<!--考试网试卷包商品导入服务 -->
+	<bean id="examPaperBagGdsInfoImportSV"
+		  class="com.ai.ecp.pmph.service.busi.impl.dataimport.ExamPaperBagGdsInfoImportSVImpl" />
+
+	<!--考试网辅导班商品导入服务 -->
+	<bean id="examTutorialClassGdsInfoImportSV"
+		  class="com.ai.ecp.pmph.service.busi.impl.dataimport.ExamTutorialClassGdsInfoImportSVImpl" />
+
+	<!--ERP分类信息导入服务 -->
+	<bean id="erpGdsCategoryImportSV"
+		  class="com.ai.ecp.pmph.service.common.impl.dataimport.ERPGdsCategorySyncImportSVImpl" />
+
+	<!-- 泽元数字教材,电子书分类导入服务 -->
+	<bean id="zyGdsCategoryImportSV"
+		  class="com.ai.ecp.pmph.service.common.impl.dataimport.ZYEBookCategorySyncImportSVImpl" />
+
+	<!-- 泽元考试网分类导入服务。 -->
+	<bean id="zyExamNetCategoryImportSV"
+		  class="com.ai.ecp.pmph.service.common.impl.dataimport.ZYExamNetCategorySyncImportSVImpl" />
+	<!-- 图片样章同步服务 -->
+	<bean id="imageSampleChapterSVImpl"
+		  class="com.ai.ecp.pmph.service.busi.impl.dataimport.ImageSampleChapterSVImpl" />
+
+	<!-- ERP库存导入服务 -->
+	<bean id="erpGdsStockInfoImportSV"
+		  class="com.ai.ecp.pmph.service.busi.impl.dataimport.ERPGdsStockInfoImportSVImpl" />
+
+	<bean id="gdsInfoManageSV" class="com.ai.ecp.pmph.service.busi.impl.GdsInfoManagePmphSVImpl"></bean>
+
+	<bean id="gdsExcelImpSV" class="com.ai.ecp.pmph.service.busi.impl.GdsExcelImpPmphSVImpl"></bean>
+
+	<bean id="gdsPmphYsymZhekouSV" class="com.ai.ecp.pmph.service.busi.impl.GdsPmphYsymZhekouSVImpl"></bean>
+
+	<bean id="gdsPriceSV" class="com.ai.ecp.pmph.service.busi.impl.GdsPricePmphSVImpl"></bean>
+
+	<bean id="erpGdsInfoExportSV" class="com.ai.ecp.pmph.service.busi.impl.dataexport.ERPGdsInfoExportSVImpl"></bean>
+	
+	<bean id="eBookIDSyncSV" class="com.ai.ecp.pmph.service.busi.impl.EBookIDSyncSVImpl"></bean>
+
+	<!-- 运费模板 -->
+	<bean id="gdsShiptempSV" class="com.ai.ecp.goods.service.busi.impl.GdsShipTempSVImpl" />
+	
+	<bean id="returnBackSV" class="com.ai.ecp.pmph.service.busi.impl.ReturnBackSVImpl"></bean>
+	
+	<bean id="ordPmphMainSV" class="com.ai.ecp.pmph.service.busi.impl.OrdPmphMainSVImpl"></bean>
+	
+	<bean id="scoreToOrderRWSV" class="com.ai.ecp.pmph.service.busi.impl.ScoreToOrderRWSVImpl"></bean>
+	
+	<bean id="staffUnionRWSV" class="com.ai.ecp.pmph.service.busi.impl.StaffUnionRWSVImpl"></bean>
+
+	<bean id="backPayStaffSV" class="com.ai.ecp.pmph.facade.impl.eventual.BackPayStaffPmphSVImpl"></bean>
+	
+	<bean id="backPayCouponSV" class="com.ai.ecp.pmph.facade.impl.eventual.BackPayCouponPmphSVImpl"></bean>
+	
+	<bean id="refundCallbackSV" class="com.ai.ecp.pmph.service.busi.impl.pay.RefundPmphCallbackSVImpl"></bean>
+	
+	<bean id="gds001ActionExtSV" class="com.ai.ecp.pmph.service.busi.impl.app.Gds001ActionPmphExtSVImpl"></bean>
+	
+	<bean id="unpfTmOrdMainSV" class="com.ai.ecp.pmph.service.busi.impl.PmphUnpfTmOrdMainSVImpl"></bean>
+	
+	<bean id="unpfErpOrderSV" class="com.ai.ecp.pmph.service.busi.impl.PmphUnpfErpOrderSVImpl"></bean>
+
+	<bean id="ordInfMainHisSV" class="com.ai.ecp.pmph.service.busi.impl.OrdInfMainHisSVImpl"></bean>
+	
+	<bean id="imOrdBelongService" class="com.ai.ecp.pmph.service.busi.impl.PmphImOrdBelongServiceImpl"></bean>
+    
+    <bean id="skuInfoSwitchExSV" class="com.ai.ecp.pmph.service.busi.impl.dataimport.PmphSkuInfoSwitchSVImpl" ></bean>
+
+</beans>

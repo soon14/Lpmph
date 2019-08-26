@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <title>#siteName('1')管理平台</title>
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	#parse("/sys/sys_param.vm")
+	#parse("/sys/sys_head.vm")
+	<link rel="stylesheet" href="$!{CSS_PATH}/siderbar-icon.css"/>
+</head>
+<body>
+<div id="maincontainer" class="clearfix body">
+	$screen_content
+</div>
+</body>
+</html>

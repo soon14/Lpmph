@@ -1,0 +1,26 @@
+<!-- 收货地址 -->
+#set($var_custaddr = "")
+#if($addrs && $!addrs.size() > 0)
+    #foreach($item in $!addrs)
+    	#if($item.usingFlag == 1)
+			#set($var_custaddr = $item)
+			#break
+		#end	
+	#end
+	#if($var_custaddr && $!addrs.size() > 0)
+		#set($var_custaddr = $!addrs.get(0))
+	#end
+#end
+<div id="build_custaddr" class="odr-box odr-pad mt0" style="border-bottom:3px solid #e7e6e6;">
+    <div class="r-address">
+        <i class="icon icon-name"></i>
+        <div>$!{var_custaddr.contactName}<span class="c-orange mlr">|</span> #mobile($!{var_custaddr.contactPhone})</div>
+    </div>
+    <div class="r-address">
+        <i class="icon icon-adr"></i>
+        <div class="adre">
+            <span class="adre-w">#areaName($!{var_custaddr.province}) #areaName($!{var_custaddr.cityCode}) #areaName($!{var_custaddr.countyCode}) #addr($!{var_custaddr.chnlAddress}, 30)</span>
+            <span class="ui-arrow ui-arrow-right"></span>
+        </div>
+    </div>
+</div>

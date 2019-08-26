@@ -1,0 +1,87 @@
+#parse("/module/mod-scroll.vm")
+#siteInfo('1')
+<div class="body">
+    <!--导航begin-->
+    <div class="wrap100" >
+        <div class="health-f health-f1">
+            <div class="img-wrap">
+              <a href="$siteUrl/homepage?page=sciencebook" target="_blank"><img class="bg" src="$IMAGE_PATH/health-f1-bg.png" alt=""/></a>
+            </div>
+            <div class="link link-f1">
+              <div class="link-logo"></div>
+              <span class="link-c">
+                   <a href="$siteUrl/homepage?page=sciencebook" target="_blank">科普图书</a>
+                  <span class="arrow-left"></span>
+              </span>
+            </div>
+        </div>
+        <div class="health-f health-f4">
+            <div class="img-wrap">
+                <a href="http://www.ehealthship.com/" target="_blank"><img src="$IMAGE_PATH/health-f4bg.jpg" alt="约健康"/></a>
+            </div>
+            <div class="htxt">
+                <a href="http://www.ehealthship.com/" target="_blank"><img src="$IMAGE_PATH/health-f4txt.png" alt="约健康"/></a>
+            </div>
+            <div class="link link-f4">
+                <div class="link-logo"></div>
+              <span class="link-c">
+                  <a href="http://www.ehealthship.com/" target="_blank"> 约健康</a>
+                  <span class="arrow-left"></span>
+              </span>
+            </div>
+        </div>
+        <div class="health-f health-f2">
+            <div class="img-wrap">
+               <a href="http://baike.ipmph.com" target="_blank"><img class="bg" src="$IMAGE_PATH/health-f2-bg.png" alt=""/></a>
+            </div>
+            <div class="health-hand" style="top: -30%;">
+                <a href="http://baike.ipmph.com" target="_blank"><img src="$IMAGE_PATH/health-f2-img1.png" alt=""/></a>
+            </div>
+            <div class="link link-f2">
+                <div class="link-logo"></div>
+              <span class="link-c">
+                  <a href="http://baike.ipmph.com" target="_blank">医学百科</a>
+                  <span class="arrow-left"></span>
+              </span>
+            </div>
+        </div>
+       <div class="health-f health-f3">
+            <div class="img-wrap">
+                <a href="http://health.ipmph.com/" target="_blank"><img class="bg" src="$IMAGE_PATH/health-f3-bg.jpg" alt=""/></a>
+            </div>
+            <div class="health-f3-txt">
+                <a href="http://health.ipmph.com/" target="_blank"><img src="$IMAGE_PATH/health-f3-txt.png" alt=""/></a>
+            </div>
+            <div class="link link-f3">
+                <div class="link-logo"></div>
+              <span class="link-c">
+                 <a href="http://health.ipmph.com/" target="_blank">健康知识</a>
+                  <span class="arrow-left"></span>
+              </span>
+            </div>
+        </div>
+    </div>
+    <!--导航end-->
+</div>
+<script>
+  
+    $('.health-f').scrollLoading({
+        callback:function(obj){
+            if($(obj).hasClass('health-f1')){
+                $(obj).animate({'opacity':1},2000);
+            }
+            else if($(obj).hasClass('health-f2')){
+                window.setTimeout( function(){
+                    $(obj).find('.health-hand').animate({'top':0,'opacity':1},1000);
+                },1000);
+            }
+            else if($(obj).hasClass('health-f3')){
+                $(obj).find('.health-f3-txt').animate({'opacity':1,'top':'13.38%'},2000);
+            }
+            else if($(obj).hasClass('health-f4')){
+                $(obj).find('.htxt').animate({'opacity':1,'top':'23%'},2000);
+            }
+        }
+    });
+		$('#zwlogo').attr('src',$webroot+'images/logo-jk.png');
+</script>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>供应链电商管理平台</title>
+
+#parse("/sys/sys_head.vm")
+
+</head>
+
+<body>
+
+
+<div id="maincontainer" class="clearfix">
+	<!-- main content -->
+	<div id="contentwrapper">
+		<div class="open_content">
+	    $screen_content
+		</div>
+	</div>
+	<!-- main content -->
+</div>
+
+</body>
+</html>

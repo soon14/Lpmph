@@ -1,0 +1,96 @@
+#set($pCount = 0)
+#foreach($param in $!{gdsInfo.skus[0].gdsProps})
+	#if($!{param.ifBasic}=='1')
+		#set($show = '0')
+		#foreach($value in $!{param.values})
+    		#if($!{value.propValue} && $!{value.propValue} !="")
+				#set($show = '1')
+			#end
+		#end
+		#if($show=='1')
+			#set($pCount = $pCount + 1)
+            <div class="item">
+                <label>
+                    $!{param.propName}
+                </label>
+                <span>
+                    #foreach($value in $!{param.values})
+						#if(${param.id}=='1029')
+							#moneyNum($!{value.propValue})
+						#else
+							$!{value.propValue}
+						#end
+        			#end
+                </span>
+            </div>
+		#end
+	#end
+#end
+#if($pCount>0)
+<div class="line-dash"></div>
+#end
+<div class="item">
+    <label>
+        分类路径
+    </label>
+	<div id="cate-root-list" class="item-right">
+		
+    				<ul class="breadcrumb" style="padding: 0px 0px;background-color: #fff;color:#0043c5">
+    				#foreach($gdsCategory in $!{gdsCategoryList})
+    					<li style="display: inline;"> 
+    							<span>$!{gdsCategory.catgName}</span> 
+    					</li>
+    					<li style="display: inline;">
+	    					#if($velocityCount != $gdsCategoryList.size())
+	    						 <span class="divider" style="color:#0043c5">></span>
+	    					#end
+						</li>
+    				#end
+    				</ul>
+	</div>
+</div>
+<div class="item">
+    <label>
+        库&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存
+    </label>
+    <span class="c-green" id="showStockStatus">
+		#if($!{gdsInfo.ifNeedStock})
+    		#if($!{gdsInfo.gdsTypeId}=='2')
+    			充足
+    		#else
+    			$!{stockStatusDesc}
+    		#end
+		#else
+			充足
+		#end
+    </span>
+</div>
+<div class="line-dash"></div>
+#foreach($param in $!{gdsInfo.params})
+    <div class="item mb20">
+        <label>
+            选择$!{param.propName}
+        </label>
+        <div class="check-switch">
+            #foreach($value in $!{param.values})
+                #set($selected = '')
+                #foreach($skuprop in $!{gdsInfo.skus[0].props})
+                    #foreach($skuValue in $!{skuprop.values})
+                        #if($!{skuValue.id}==$!{value.id})
+                            #set($selected = 'selected')
+                        #end
+                    #end
+                #end
+                <label class=$selected>
+                    <input type="checkbox" name="skuprop" valueId="$!{value.id}" propId="$!{param.id}" propName="$!{param.propName}" value="$!{value.propValue}"/>
+                    $!{value.propValue}
+                </label>
+            #end
+        </div>
+    </div>
+#end
+<div class="item mb20" id="buyWayForAlone">
+	
+</div>
+
+

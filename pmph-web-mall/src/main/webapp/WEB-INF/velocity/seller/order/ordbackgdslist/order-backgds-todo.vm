@@ -1,0 +1,65 @@
+#parse("sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/ordbackgdslist/order-backgds-todo.js?version=$!{JS_VERSION}"></script>
+
+    <div style="overflow-x: auto;">
+       <table class="seller-table table-striped">
+         <thead>
+           <tr>
+               <td>退货申请编号</td>
+               <td>订单编号</td>
+               <td>支付方式</td>
+               <td>支付通道</td>
+               <td>申请日期</td>
+               <td>申请单状态</td>
+               <td>数量</td>
+               <td>交易金额</td>
+               <td>退款金额</td>
+               <td>操作</td>
+           </tr>
+         </thead>
+        <tbody>
+			
+    		#if($null.isNull($resp) || $resp.count == 0)
+    	       <tr class="odd">
+                    <td class="kong" colspan="10">很遗憾，暂无数据</td>
+                </tr>
+    		#else
+				#foreach($!ordItem in $!resp.getResult())
+        		   <tr>
+					   <input type="hidden" name="siteId" value="$!{ordItem.rBackApplyResp.siteId}">
+					   <input type="hidden" name="shopId" value="$!{ordItem.rBackApplyResp.shopId}">
+					   <input type="hidden" name="payType" value="$!{ordItem.rBackApplyResp.payType}">
+					   <input type="hidden" name="applyType" value="$!{ordItem.rBackApplyResp.applyType}"/>
+                       <td><a href="javascript:void(0);" class="backId">$!{ordItem.rBackApplyResp.backId}</a></td>
+					   <td><a href="javascript:void(0);" class="orderId">$!{ordItem.rBackApplyResp.orderId}</a></td>
+					   
+					   <td>
+					   		#translate('ORD_PAY_TYPE',$!{ordItem.payType})
+					   </td>
+					   
+					   <td>#translate('ORD_PAY_WAY',$!{ordItem.payWay})</td>
+					   
+					   <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{ordItem.rBackApplyResp.applyTime})</td>
+					   <td>
+							#translate('ORD_BACK_GDS_STATUS',$!{ordItem.rBackApplyResp.status})
+					   </td>
+					   
+					   <td>$!{ordItem.rBackApplyResp.num}</td>
+					   
+					   <td>#moneyNum($!{ordItem.rBackApplyResp.realMoney})</td>
+					   <td>#moneyNum($!{ordItem.rBackApplyResp.backMoney})</td>
+					   <td>
+							#if($!{ordItem.rBackApplyResp.status} == "00"||$!{ordItem.rBackApplyResp.status} == "06"||$!{ordItem.rBackApplyResp.status} == "07")
+								<a href="javascript:void(0);" class="backgdsReview">审核</a>
+							#end
+							|<a href="javascript:void(0);" class="seebackId">查看详情</a>
+					   </td>
+    			   </tr>
+			   #end
+    		#end
+         </tbody>
+       </table>
+    </div>
+    <div class="pagination bPage pagination-right">
+        <div id="pageControlbar" class="ecppage" data-total-page="$!{resp.pageCount}" data-total-row="$!{resp.count}" data-page-size="$!{resp.pageSize}" data-page-number="$!{resp.pageNo}" data-status="begin"></div>
+    </div>

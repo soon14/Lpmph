@@ -1,0 +1,21 @@
+<!--menu-->
+<div class="wrap100 navBg">
+    <div class="wrap1200 clearfix">
+        <div class="sidebar">
+				全部商品分类
+            <i class="chevron-down"></i>
+        </div>
+        
+        <input type="hidden" id="page" value="$!{page}"></input>
+        <!-- 导航栏目 start -->
+        <div class="nav-bar ecp-component channel-main-nav" data-path="main-nav" data-page="$!{page}"
+             data-module="ecp-component/channel/main-nav-shader">
+            
+        </div>
+        <!-- 导航栏目 end -->
+		
+		<!-- 额外栏目 start -->
+		#parse("/main/child/other-site-column.vm")
+		<!-- 额外栏目 end -->
+    </div>
+</div>

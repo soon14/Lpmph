@@ -1,0 +1,14 @@
+/**
+  配合js/frameajax.js使用的css
+  @date 2011.7.2 余根宁
+**/
+.loadLevel {
+    border: 1px solid rgb(170, 170, 170);
+    cursor: wait;
+	padding: 10px 10px 10px 40px;
+	background: #fff url(../images/icon/loading.gif) no-repeat;
+	background-position: 8px 8px;
+    color: #aaa;
+    vertical-align: middle;
+    font-size: 14px;
+}

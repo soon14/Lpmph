@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>人卫官网</title>
+	<link rel="shortcut icon" href="$IMAGE_PATH/favicon.ico" type="image/x-icon" />
+	#parse("/rwgw/sys/sys_param.vm")
+	#parse("/rwgw/sys/sys_head.vm")
+</head>
+<body>
+	<!--头部-->
+	#parse("/rwgw/main/index-head.vm")
+	<!--头部-->
+	
+	<!--顶部 begin-->
+	#parse("/rwgw/main/index-nav.vm")
+	<!--顶部 end-->
+	<div class="bgcolor">
+		<!-- 顶部广告  start-->
+		#parse("/rwgw/main/ad-top.vm")
+		<!-- 顶部广告  end -->
+		
+	    <!--内容 start-->
+	    <div id="content">
+	    	$screen_content
+	    </div>
+	    <!--内容 end-->
+	</div>
+	<!--右侧工具栏 begin-->
+    #parse("/rwgw/main/index-toolbar.vm")
+    <!--右侧工具栏 end-->
+
+    <!--底部 begin-->
+    #parse("/rwgw/main/index-footer.vm")
+    <!--底部 end-->
+</body>
+</html>

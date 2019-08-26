@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	#parse("/sys/sys_param.vm")
+    <meta charset="UTF-8">
+    <title>活动促销页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="$!{CSS_PATH}/activity/amazeui.min.css">
+    <link rel="stylesheet" href="$!{CSS_PATH}/activity/public.css?version=${JS_VERSION}">
+    <link rel="stylesheet" href="$!{CSS_PATH}/activity/mall.css?version=${JS_VERSION}">
+    <link rel="stylesheet" href="$!{CSS_PATH}/activity/activity.css?version=${JS_VERSION}"/>
+    <script src="$BUSIJS_PATH/activity/flexible.js"></script>
+    <script src="$BUSIJS_PATH/activity/jquery.min.js"></script>
+    <script src="$BUSIJS_PATH/activity/amazeui.min.js"></script>
+</head>
+<body>
+
+
+        $screen_content
+
+
+
+</body>
+</html>

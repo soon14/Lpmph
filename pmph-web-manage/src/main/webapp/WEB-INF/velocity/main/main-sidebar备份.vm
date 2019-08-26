@@ -1,0 +1,252 @@
+		
+		#menu
+		<div class="antiScroll">
+			<div class="antiscroll-inner">
+				<div class="antiscroll-content">
+
+					<div class="sidebar_inner">
+						<div id="side_accordion" class="accordion">
+
+							#foreach($menu in $list)
+								
+							<div class="accordion-group">
+							
+								<div class="accordion-heading sdb_h_active">
+									<a href="#$!{menu.id}" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle"> <i class="icon-th icon-large"></i>$!{menu.menuTitle}</a>
+								</div>
+							
+								<div class="accordion-body collapse in" id="$!{menu.id}">
+									<div class="accordion-inner">
+										<ul class="nav nav-list">
+									#foreach($att in $!{menu.sonList})
+										<li class=""><a href="${CONTEXT_PATH}$!{att.menuUrl}"> <i class="icon-list"></i>$!{att.menuTitle}</a></li>
+									#end
+										</ul>
+									</div>
+								</div>
+
+							</div>
+							#end
+							<div class="accordion-group">
+								<div class="accordion-heading sdb_h_active">
+									<a href="#demo" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle"> <i class="icon-th icon-large"></i> demo管理</a>
+								</div>
+								<div class="accordion-body collapse in" id="demo">
+									<div class="accordion-inner">
+										<ul class="nav nav-list">
+											<!-- 遍历第二层菜单 -->
+											<!-- 没有子节点，自己本身就是可访问模块的情况 -->
+											<li class=""><a href="javascript:void(0);"> <i class='icon-list-alt'></i> 二级菜单无子节点 </a></li>
+
+
+											<!-- 有子节点的模块情况 -->
+											<li class="nav-header"><i class="icon-list-alt icon-2x"></i> 二级菜单有子节点</li>
+
+
+											<!-- 遍历第三层菜单 -->
+											<li class=""><a href="${CONTEXT_PATH}/demo/grid"> <i class="icon-list"></i> 列表主界面 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/demo/edit"> <i class="icon-edit"></i> 编辑界面 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/demo/form-more"> <i class="icon-table"></i> 编辑界面(大表单) </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/demo/plugin"> <i class="icon-wrench"></i> 其他功能 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/demo/plugin1"> <i class="icon-wrench"></i> 其他功能1 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/demo/icons"> <i class="icon-info-sign"></i> 图标库 </a></li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+						    <div class="accordion-group">
+								<div class="accordion-heading sdb_h_active">
+									<a href="#order" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle"> <i class="icon-th icon-large"></i> 订单管理</a>
+								</div>
+								<div class="accordion-body collapse in" id="order">
+									<div class="accordion-inner">
+										<ul class="nav nav-list">
+											<!-- 遍历第三层菜单 -->
+											<li class=""><a href="${CONTEXT_PATH}/order/managegrid"> <i class='icon-list-alt'></i> 订单查询 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/order"> <i class='icon-list-alt'></i> 发货管理 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/order/pay/offlinegrid"> <i class='icon-list-alt'></i> 线下支付审核 </a></li>
+										</ul>
+									</div>
+								</div>
+
+							</div>
+
+							<!-- 遍历第一层菜单 -->
+							<div class="accordion-group">
+								<div class="accordion-heading sdb_h_active">
+									<a href="#staff" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle"> <i class="icon-th icon-large"></i> 客户管理</a>
+								</div>
+
+								<!-- <li class="divider"></li> -->
+
+								<div class="accordion-body collapse in" id="staff">
+
+									<div class="accordion-inner">
+										<ul class="nav nav-list">
+											<!-- 遍历第二层菜单 -->
+                                            <li class="nav-header"><i class="icon-list-alt icon-2x"></i> 客户管理</a></li>
+											<!-- 遍历第三层菜单 -->
+											<li class=""><a href="${CONTEXT_PATH}/cust/grid"> <i class="icon-list"></i> 会员管理 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/shop/grid"> <i class="icon-edit"></i>店铺管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/company/grid"> <i class="icon-table"></i>企业管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/custcheck/grid"> <i class="icon-wrench"></i>企业会员审核</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/companycheck/grid"> <i class="icon-wrench"></i>入驻企业审核</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/scoremgr/grid"> <i class="icon-list"></i>会员积分管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/acct/grid"> <i class="icon-list"></i>资金账户管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/acct/type/grid"> <i class="icon-list"></i>资金账户类型管理</a></li>
+										</ul>
+									</div>
+								</div>
+								
+							</div>
+
+
+
+
+							<!-- 遍历第一层菜单 -->
+							<div class="accordion-group">
+								<div class="accordion-heading sdb_h_active">
+									<a href="#goods" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle"> <i class="icon-th icon-large"></i> 商品管理</a>
+								</div>
+
+								<!-- <li class="divider"></li> -->
+
+								<div class="accordion-body collapse" id="goods">
+
+									  <div class="accordion-inner">
+										<ul class="nav nav-list">
+											<li class="nav-header"><i class="icon-list-alt icon-2x"></i> 商品中心</li>
+											<li class=""><a href="${CONTEXT_PATH}/gdsinfoentry"> <i class="icon-edit"></i>商品录入 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/gdsmanage"> <i class="icon-table"></i>商品管理 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/gift"> <i class="icon-table"></i>赠品管理 </a></li>
+											
+											<li class=""><a href="${CONTEXT_PATH}/goods/stockrep/pageInit"> <i class="icon-table"></i>仓库管理 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/goods/stockinfo/pageStockInit"> <i class="icon-table"></i>库存管理 </a></li>
+											
+											<li class=""><a href="${CONTEXT_PATH}/gdsmedia"> <i class="icon-table"></i>图片管理</a></li>
+											
+											<li class=""><a href="${CONTEXT_PATH}/gdscatalog"> <i class="icon-table"></i>目录管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/goods/category/platmain"> <i class="icon-table"></i>商品平台分类管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/goods/category/shopmain"> <i class="icon-table"></i>商品店铺分类管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/goods/mediacatg/main"> <i class="icon-table"></i>图片分类管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/goods/gdsprop"> <i class="icon-table"></i>属性管理 </a></li>	
+											<li class=""><a href="${CONTEXT_PATH}/gdspropgroup"> <i class="icon-table"></i>属性组管理 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/gdsshiptemp"> <i class="icon-table"></i>运费模板管理</a></li>
+
+											<li class=""><a href="${CONTEXT_PATH}/gdsguess"> <i class="icon-table"></i>猜你喜欢管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/gdsplat"> <i class="icon-table"></i>平台推荐管理</a></li>
+											
+											<!--  <li class=""><a href="${CONTEXT_PATH}/gdscollstaff"> <i class="icon-table"></i>买家我的收藏管理</a></li>-->
+											<li class=""><a href="${CONTEXT_PATH}/gdscollshop"> <i class="icon-table"></i>收藏情况管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/gdslabel"> <i class="icon-table"></i>标签管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/gdsarrmsg"> <i class="icon-table"></i>到货通知管理</a></li>
+											
+											<li class=""><a href="${CONTEXT_PATH}/gdsevalshop"> <i class="icon-table"></i>卖家评价管理</a></li>
+											
+											
+										</ul>
+									</div>
+								</div>
+							</div>
+
+	                 <!-- 遍历第一层菜单 -->
+							<div class="accordion-group">
+								<div class="accordion-heading sdb_h_active">
+									<a href="#prom" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle"> <i class="icon-th icon-large"></i> 促销管理</a>
+								</div>
+
+								<!-- <li class="divider"></li> -->
+
+								<div class="accordion-body collapse" id="prom">
+									<div class="accordion-inner">
+										<ul class="nav nav-list">
+											<!-- 遍历第二层菜单 -->
+											<!-- 没有子节点，自己本身就是可访问模块的情况 -->
+											<li class=""><a href="${CONTEXT_PATH}/promauth"> <i class='icon-list-alt'></i> 促销类型授权 </a></li>
+
+                                            <li class=""><a href="${CONTEXT_PATH}/promgroup"> <i class='icon-list-alt'></i> 主题促销 </a></li>
+                                            
+                                            <li class=""><a href="${CONTEXT_PATH}/promgroupchk"> <i class='icon-list-alt'></i> 主题促销审核</a></li>
+                                            
+                                             <li class=""><a href="${CONTEXT_PATH}/createprom"> <i class='icon-list-alt'></i>我要促销</a></li>
+                                             
+                                             <li class=""><a href="${CONTEXT_PATH}/myprom"> <i class='icon-list-alt'></i>我的促销</a></li>
+                                              
+                                              <li class=""><a href="${CONTEXT_PATH}/shopchk"> <i class='icon-list-alt'></i>促销审核</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+	                 <!-- 遍历第一层菜单 -->
+							<div class="accordion-group">
+								<div class="accordion-heading sdb_h_active">
+									<a href="#coupon" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle"> <i class="icon-th icon-large"></i> 优惠券管理</a>
+								</div>
+
+								<!-- <li class="divider"></li> -->
+
+								<div class="accordion-body collapse" id="coupon">
+									<div class="accordion-inner">
+										<ul class="nav nav-list">
+											<!-- 遍历第二层菜单 -->
+											<!-- 没有子节点，自己本身就是可访问模块的情况 -->
+											<li class=""><a href="${CONTEXT_PATH}/coupontype"> <i class='icon-list-alt'></i> 优惠券类型管理 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/coupinfo"> <i class='icon-list-alt'></i> 优惠券管理 </a></li>
+
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="accordion-group">
+								<div class="accordion-heading sdb_h_active">
+									<a href="#cms" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle"> <i class="icon-th icon-large"></i> CMS管理</a>
+								</div>
+								<div class="accordion-body collapse in" id="cms">
+									<div class="accordion-inner">
+										<ul class="nav nav-list">
+											<!-- 遍历第二层菜单 -->
+                                            <li class="nav-header"><a href="javascript:void(0);"> <i class='icon-list-alt'></i> CMS模块 </a></li>
+											<!-- 遍历第三层菜单 -->
+											<li class=""><a href="${CONTEXT_PATH}/site/grid"> <i class="icon-list"></i>站点管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/template/grid"> <i class="icon-list"></i>模板管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/place/grid"> <i class="icon-list"></i>内容位置管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/advertise/grid"> <i class="icon-list"></i>广告管理 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/info/infogrid"> <i class="icon-list"></i>信息管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/floor/grid"> <i class="icon-list"></i>楼层管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/component/grid"> <i class="icon-list"></i>组件管理 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/list/grid"> <i class="icon-list"></i>排行榜管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/recommend/grid"> <i class="icon-list"></i>专家推荐管理 </a></li>
+											<li class=""><a href="${CONTEXT_PATH}/hotSearch/grid"> <i class="icon-list"></i>搜索词管理 </a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+									<div class="accordion-group">
+								<div class="accordion-heading sdb_h_active">
+									<a href="#cms" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle"> <i class="icon-th icon-large"></i>系统管理</a>
+								</div>
+								<div class="accordion-body collapse in" id="cms">
+									<div class="accordion-inner">
+										<ul class="nav nav-list">
+											<!-- 遍历第二层菜单 -->
+                                            <li class="nav-header"><a href="javascript:void(0);"> <i class='icon-list-alt'></i>系统管理 </a></li>
+											<!-- 遍历第三层菜单 -->
+											<li class=""><a href="${CONTEXT_PATH}/staffadmin/grid"> <i class="icon-list"></i>管理平台用户管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/staffgroup/grid"> <i class="icon-list"></i>用户分组管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/authrole/grid"> <i class="icon-list"></i>角色管理</a></li>
+											<li class=""><a href="${CONTEXT_PATH}/menu/grid"> <i class="icon-list"></i>菜单管理 </a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="push"></div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+

@@ -1,0 +1,161 @@
+<script >
+$(function(){
+$('.navlist').each(function(){
+     var a = $(this);
+     var f = a.find('.nav-down');
+     f.on('click',function(){
+       a.find('.nav-bd').toggle('fast');
+     });
+
+    });
+    
+    $.eAjax({
+		url: GLOBAL.WEBROOT + '/pubord/all/checkpubuser',
+		async:true,
+		method:'post',
+		success:function(data){
+			if(data.resultFlag=='ok'){
+				$("#myPubOrd").css('display','block');
+			}
+		}
+	});
+    
+   })
+</script>
+ <div id="nav" >
+            <div class="nav-wrap">
+                <div class="navlist">
+                    <div class="nav-hd">
+                        <h3>我的账户 <i class="nav-down "></i></h3>
+                    </div>
+                    <ul class="nav-bd">
+                       <li>
+                                <a href="$CONTEXT_PATH/information/index">个人资料</a>
+                            </li>
+                            <li>
+                                <a href="$CONTEXT_PATH/buyerscore/index">我的积分</a>
+                            </li>
+                           <!-- <li>
+                                <a href="">我的优惠</a>
+                            </li>-->
+                            
+                            <li>
+                                <a href="$CONTEXT_PATH/mycoup/index">我的优惠券</a>
+                            </li>
+                            
+                            <li>
+                                <a href="$CONTEXT_PATH/buyeracct/index">我的账户</a>
+                            </li>
+                       <!--     <li>
+                                <a href="#">虚拟币</a>
+                            </li>
+						    <li>
+                                <a href="$CONTEXT_PATH/buyer/shopvip/index">我的店铺会员</a>
+                            </li>-->
+					        <li>
+								<a href="$CONTEXT_PATH/login/updatepassword">修改密码</a>
+                            </li>
+                            <li>
+								<a href="http://sso.ipmph.com/socialAccount"  target="_blank">绑定/解除微信绑定</a>
+                            </li>
+                            <li>
+								<a href="http://sso.ipmph.com/socialAccount"  target="_blank">绑定/解除QQ绑定</a>
+                            </li>
+                    </ul>
+                </div>
+                <div class="navlist">
+                    <div class="nav-hd">
+                        <h3>我的交易 <i class="nav-down "></i></h3>
+                    </div>
+                    <ul class="nav-bd">
+							<li>
+                                <a href="$CONTEXT_PATH/custaddr/index">收货地址</a>
+                            </li>
+							<li>
+                                <a href="${CONTEXT_PATH}/order/all">我的订单</a>
+                            </li>
+							<li>
+                                <a href="${CONTEXT_PATH}/order/point/pay">我的积分订单</a>
+                            </li>
+                             #set($ifbackgds=${paramTools.getSysConfigCode("BACK_GDS")})
+                             #if($ifbackgds==1)
+                                <li>
+                                    <a href="${CONTEXT_PATH}/order/return/moneyList">我的退款/退货</a>
+                                </li>
+                             #end
+                            <li>
+								<a href="http://exam.ipmph.com/learncenter/MemberFront/MySchool.zhtml">我的学堂</a>
+                            </li>
+                            <li>
+								<a href="${CONTEXT_PATH}/comment/a">我的评价</a>
+                            </li>
+                            <li>
+								<a href="$CONTEXT_PATH/custcard/index">我的会员卡</a>
+                            </li>
+							<li>
+								<a href="$CONTEXT_PATH/taobao/index">天猫订单</a>
+                            </li>
+							
+                    </ul>
+                </div>
+				  <div class="navlist">
+                          <div class="nav-hd">
+                            <h3>
+                                                                                     我的收藏<i class="nav-down "></i>
+                            </h3>
+                            <i class="mbicon icon-dropup">
+                            </i>
+                        </div>
+						 <ul class="nav-bd">
+                          
+							 <li>
+                                <a href="${CONTEXT_PATH}/favgoods">商品收藏</a>
+                            </li>
+                            <!--
+                            <li>
+                                <a href="${CONTEXT_PATH}/favshops/index">店铺收藏</a>
+						  </li>
+						  -->
+                            <!--<li>
+                                <a href="member-receivingadd.html">游览历史</a>
+							</li>-->
+                        </ul>
+                    </div>
+						<!--<div class="navlist">
+                          <div class="nav-hd">
+                            <h3>
+                                                                                               客服中心<i class="nav-down "></i>
+                            </h3>
+                            <i class="mbicon icon-dropup">
+                            </i>
+                        </div>
+						 <ul class="nav-bd">
+                        <!--    <li>
+                                <a href="member-receivingadd.html">系统消息</a>
+                            </li>
+							 <li>
+                                <a href="member-receivingadd.html">我要投诉</a>
+							 </li>
+                            <li>
+                                <a href="member-receivingadd.html">联系客服</a>
+                            </li>
+                        </ul>
+ </div>-->
+ 
+ 			 <div class="navlist" id="myPubOrd" style="display:none;">
+                    <div class="nav-hd">
+                        <h3>我的征订单 <i class="nav-down "></i></h3>
+                    </div>
+                    <ul class="nav-bd">
+							<li>
+                                <a href="${CONTEXT_PATH}/puborder/build">自主征订</a>
+                            </li>
+							<li>
+                                <a href="${CONTEXT_PATH}/pubord/all">我的征订单</a>
+                            </li>
+                    </ul>
+                </div>
+ 
+ 
+            </div>
+        </div>

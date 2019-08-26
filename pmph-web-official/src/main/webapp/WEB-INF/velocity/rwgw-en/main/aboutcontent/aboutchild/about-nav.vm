@@ -1,0 +1,8 @@
+#parse("/rwgw-en/sys/sys_param.vm")
+<div class="w ">
+    <ul class="breadcrumb clearfix">
+        <li class="p1" id="breadcrumb-0" style="display:none;"><span class="home-icon"></span><span class="bread-name"></span></li>
+        <li class="p1" id="breadcrumb-1" style="display:none;"><span class="divider">&gt;</span><a href="javascript:void(0);" class="bread-name"></a></li>
+	    <li class="p1" id="breadcrumb-2" style="display:none;"><span class="divider">&gt;</span><a href="javascript:void(0);" class="bread-name"></a></li>
+    </ul>
+</div>

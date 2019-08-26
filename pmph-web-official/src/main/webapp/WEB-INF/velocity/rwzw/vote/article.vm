@@ -1,0 +1,32 @@
+#parse("/module/mod-scroll.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/rwzw/rwzw-get-html.js?version=$!{JS_VERSION}"></script>
+ <div class="container">
+           <div class="vote-detail">
+               <div class="vHead">
+                   <div>
+                       <span class="time">$!date.format('yyyy-MM-dd HH:mm:ss',$!{articleResp.createTime})</span>
+                       <span>作者：$!{articleResp.authorName}</span>
+                   </div>
+               </div>
+               <div class="vBody">
+				   <input type="hidden" id="articleStaticUrl" name="staticId" value="$!{articleResp.staticId}">
+                   <h3 class="vTitle">
+					$!{articleResp.articleTitle}
+                   </h3>
+				   <div class="vCont" id="htmlCont">
+                      <div class="text-center">
+						內容加載中。。。。
+                      </div>
+                   </div>
+                   <div class="ewm">
+                       <div class="img-wrap">
+                           <img src="$!{articleResp.bigQrCode}" alt="二维码"/>
+						   #*<div class="big-img">
+                               <img src="$!{articleResp.bigQrCode}" alt="">
+                           </div>*#
+                       </div>
+                       <p><span class="sm">微信扫码投票</span></p>
+                   </div>
+               </div>
+           </div>
+        </div>

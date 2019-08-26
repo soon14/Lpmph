@@ -1,0 +1,104 @@
+#parse("sys/sys_param.vm")
+
+<title>退货发货 -#siteName('')</title>
+<!--content-->
+<div id="content" class="pay">
+    <div class="wrap1200">
+        <div class="ret-container">
+            <form class="form-horizontal required-validate" style="margin-top: 20px;" id="gdsSendForm" action=""  method="post" >
+                <input type="hidden" id="backId" name="backId" value="$!{rBackApplyResp.backId}"/>
+				<input type="hidden" id="orderId" name="orderId" value="$!{rBackApplyResp.orderId}"/>
+				<div class="row-fluid">
+					<div class="span4">
+	                    <label class="control-label w-label"><span style="color:red;">*</span>&nbsp;物流公司名称：</label>
+	                    <div class="controls w-controls">
+	                        <input type="text"  maxlength="20" minlength="1" id="express" name="express" class="input-medium" value="">
+	                    </div>
+	                 </div>   
+	                 <div class="span4">   
+	                    <label class="control-label w-label"><span><span style="color:red;"></span>&nbsp;快递单号：</span></label>
+						<div class="controls w-controls">
+	                        <input type="text"  maxlength="32" minlength="6" id="expressNo" name="expressNo" class="input-medium required" value="">
+	                    </div>
+                     </div>
+                </div>
+                <div class="control-group" style="margin-top:30px">
+                <div class="span4">
+                    <label class="control-label w-label">快递信息上传：</label>
+	                    <div class="controls w-controls">
+							<input type="hidden" id="pic1" name="backPicList[0]"/>
+							<input type="hidden" id="pic2" name="backPicList[1]"/>
+							<input type="hidden" id="pic3" name="backPicList[2]"/>
+							<input type="hidden" id="pic4" name="backPicList[3]"/> 
+							<input type="hidden" id="pic5" name="backPicList[4]"/>
+							<a href="javascript:;" class="a-upload">
+	                            <input type="file" class="com_input" name="pictrue" id="pictrue">选择上传图片
+	                        </a>
+	                        <p>为了帮助我们更好的解决问题，请您上传图片</p>
+	                        <p>最多可以上传5张图片，每张图片的大小不能超过5M，支持jpg,png,jpeg,gif</p>
+	                        <ul class="express">
+	                            <li id="li1" style="display:none;">
+	                                <img id="image1" src="" alt="" />
+									<i id="closeimage1" style="display:none;">x</i>
+	                            </li>
+	                            <li id="li2" style="display:none;">
+	                                <img id="image2" src="" alt="" />
+									<i id="closeimage2" style="display:none;">x</i>
+	                            </li>
+	                            <li id="li3" style="display:none;">
+	                                <img id="image3" src="" alt="" />
+									<i id="closeimage3" style="display:none;">x</i>
+	                            </li>
+								<li id="li4" style="display:none;">
+	                                <img id="image4" src="" alt="" />
+									<i id="closeimage4" style="display:none;">x</i>
+	                            </li>
+								<li id="li5" style="display:none;">
+	                                <img id="image5" src="" alt="" />
+									<i id="closeimage5" style="display:none;">x</i>
+	                            </li>
+	                        </ul>
+	
+	                    </div>
+	                </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls w-controls"> 
+						<span  class="mbtn mbtn-red" id="btn_send">
+							确认发货
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+        <div class="ret-container">
+            <table  class="ret-detail">
+                <thead>
+                <tr style="background-color: #f5f5f5;height:35px;">
+                    <th>书号</th>
+                    <th>商品图片</th>
+                    <th>商品名称</th>
+                    <th>退货数量</th>
+                    <th>退款金额</th>
+                </tr>
+                </thead>
+                <tbody>
+                #foreach($!backGds in $!rBackGdsResps)
+					<tr class="bg-fff"> 
+                        <td><div class="border-right">$!{backGds.zsCode} </div></td>
+                        <td><div class="border-right"><a href="$!{CONTEXT_PATH}$!backGds.gdsUrl" target="_blank"><img src="#genImageUrl($!backGds.getPicId(),'200x200!')" width="48"></img></a></div></td>
+                        <td><div class="border-right"><a href="$!{CONTEXT_PATH}$!backGds.gdsUrl" target="_blank">$!backGds.gdsName</a></div></td>
+                        <td><div class="border-right">x $!backGds.num</div></td>
+                        #if($velocityCount == 1)
+						<td rowspan="$!rBackGdsResps.size()"><div class="border-right">#money($!{rBackApplyResp.backMoney})</div></td> 
+						#end 
+                    </tr>
+				#end 
+                </tbody>
+            </table>
+			
+        </div>
+
+    </div>
+ </div>

@@ -1,0 +1,34 @@
+<!-- 首页模拟教学-->
+#parse("/rwgw/sys/sys_param.vm")
+<div class="box-head">
+    <span class="tit">$!{floorRespDTO.floorName}</span>
+    <ul class="tabTit">
+    	#foreach($floorAd in ${floorAdRespList})
+        <li class="#if(1 == $velocityCount)active#end">$!{floorAd.advertiseTitle}</li>
+        #end
+    </ul>
+    #if(${floorRespDTO} && ${floorRespDTO.linkUrl} && '' != ${floorRespDTO.linkUrl})
+    <a class="r-opt" href="$!{floorRespDTO.linkUrl}">
+        more
+    	<i class="micon micon-more"></i>
+    </a>
+    #end
+</div>
+<div class="box-body">
+	#if($floorAdRespList && 0 < ${floorAdRespList.size()})
+    <div class="tabCon">
+    	#foreach($floorAd in ${floorAdRespList})
+        <div class="item" #if(1 < $velocityCount)style="display:none;" #end>
+            <a href="$!{floorAd.linkUrl}"><img src="$!{floorAd.vfsUrl}"  alt="$!{floorAd.advertiseTitle}"/></a>
+        </div>
+        #end
+    </div>
+    #else
+    <div class ='pro-empty'>#if($!{errorMessage})$!{errorMessage}#else 亲，暂无数据 #end</div>
+	#end
+</div>
+<script type="text/javascript">
+	$(function(){
+		U.tab('.tabTit', '.tabCon');
+	});
+</script>

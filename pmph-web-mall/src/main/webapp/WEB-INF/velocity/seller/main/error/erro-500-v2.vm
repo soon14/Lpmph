@@ -1,0 +1,6 @@
+#parse("/sys/sys_param.vm")
+
+<div class="error5v2">
+    <div class="error-font" >对不起客官，您没有权限使用当前模块，请咨询平台管理员</div>
+    <button class="error-btn"></button>
+</div>

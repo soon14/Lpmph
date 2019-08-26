@@ -1,0 +1,98 @@
+#parse("sys/sys_param.vm")
+#set($ifPage = '0')
+#foreach($value in $!{gdsInfo.skus[0].allPropMaps.get("1028").values})
+	#if($!{value.id}=='306')
+		#set($ifPage = '1')
+	#end
+#end
+<div class="item">
+	##该价格如果有促销活动的，则会被促销计算所得价格覆盖，请注意。（业务需求）
+    <label>
+        价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格
+    </label>
+    <span class="c-red">
+        <b id="realPrice">
+			#set($pagePrice = '0')
+			#if($ifPage =='1' && $!{stockStatus}=="00")
+				#foreach($value in $!{gdsInfo.skus[0].allPropMaps.get("1029").values})
+					#set($pagePrice = $!{value.propValue})
+            	#end
+			#end
+			#if($pagePrice =="" || $pagePrice =='0')
+				#money($!{gdsInfo.skus[0].discountPrice})
+			#else
+				#money($pagePrice)
+			#end
+			
+        </b>
+    </span>
+</div>
+
+#if(${gdsInfo.skus[0].appSpecPrice} && $!{gdsInfo.skus[0].appSpecPrice}!=0)
+<div class="item phone-buy">
+    <label>
+        促&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销
+    </label>
+	<span class="promotion">手机专享</span>
+    <span id="appSpecPrice">
+		<b>
+        #money($!{gdsInfo.skus[0].appSpecPrice})
+		</b>
+    </span>
+	<div class="qrcode-wrap">
+        <span class="c-link">去手机购买</span>
+        <span class="icon"><b></b></span>
+    </div>
+</div>
+#end
+
+<div class="item">
+	##该价格如果有促销活动的，则会被促销计算所得价格覆盖，请注意。（业务需求）
+    <label>
+        原&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价
+    </label>
+    <span class="c-gray t-mline" id="guidePrice">
+        #money($!{gdsInfo.skus[0].guidePrice})
+    </span>
+</div>
+
+#if($!{gdsInfo.skus[0].ifFree}=='1')
+<div class="item">
+    <label>
+        邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费
+    </label>
+    <span class="promotion" id="ifFree">
+        免邮
+    </span>
+</div>
+#end
+
+<div class="item item-w" id="saleList"></div>
+<div class="line-dash"></div>
+	#parse("/goods/gdsinfoentry/preview/preview-commonprice.vm")
+
+###if($!{gdsInfo.ifLadderPrice}==1)
+##    #parse("/goods/gdsdetail/gdsdetail-ladderprice.vm")
+###else
+   ## 
+###end
+<div class="item mt20 addcbtns">
+    <label>
+        &nbsp;
+    </label>
+    
+	#if($ifPage == '1' && ($pagePrice !="" && $pagePrice !='0'))
+		<span name="addPageToCart" #if($!{stockStatus}=='00' || $!{gdsInfo.gdsTypeId}=='2')class="mbtn mbtn-orange"  #else class="mbtn mbtn-disable"  disabled   #end id="addPageToCart" >
+        <i class="micon micon-bcar"></i>
+			购买数字印刷版
+		</span>
+	#end
+    #set($val = ${paramTools.getSysConfigCode("ORD_CART_EASYBUY")})
+    #if($val=="1")
+        <span name="buyBtn" #if($!{stockStatus}=='00' && $!{gdsType.ifNeedstock}=='1')class="mbtn mbtn-disable"  disabled  #else class="mbtn mbtn-orange" #end id="buyBtn">
+##        <i class="micon micon-bcar"></i>
+        立即购买
+    </span>
+    #end
+</div>
+<input type="hidden" id="ifPage" value="$ifPage"/>

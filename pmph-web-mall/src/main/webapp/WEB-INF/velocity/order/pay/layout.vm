@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+#parse("sys/sys_head.vm")
+<link rel="stylesheet" href="$!{CSS_PATH}/card.css" />
+</head>
+
+<body>
+	<form action="" accept-charset="" id="netPayForm" method="" onsubmit=""> </form>
+<!--顶部 begin-->
+<div id="header" class="clearfix">
+	#parse("/main/main-site-nav.vm")
+</div>
+
+$screen_content
+
+#parse("/main/main-content-bottom.vm")
+
+<!--底部 begin-->
+<div id="footer" class="text-center">
+	#parse("/main/main-bottom.vm")
+</div>
+<!--底部 end-->
+</body>
+</html>

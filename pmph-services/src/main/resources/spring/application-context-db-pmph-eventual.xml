@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        ">
+
+	<bean id="payZYDigital" class="com.distribute.tx.eventual.TransactionListenerManager"
+		init-method="init">
+		<property name="cc" ref="cc" />
+		<property name="listener" ref="payZYDigitalSV" />
+		<property name="publisher" ref="transactionPublisher" />
+		<property name="confPath" value="/com/ai/paas/tx/transactionListenerManager" />
+		<property name="participant" value="sample_group_pay_payZYDigital" />
+		<property name="transactionList">
+			<list>
+				<value>business-topic-pay</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="payISBNCount" class="com.distribute.tx.eventual.TransactionListenerManager"
+		init-method="init">
+		<property name="cc" ref="cc" />
+		<property name="listener" ref="payISBNCountSV" />
+		<property name="publisher" ref="transactionPublisher" />
+		<property name="confPath" value="/com/ai/paas/tx/transactionListenerManager" />
+		<property name="participant" value="sample_group_pay_payISBNCount" />
+		<property name="transactionList">
+			<list>
+				<value>business-topic-pay</value>
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="payReCharge" class="com.distribute.tx.eventual.TransactionListenerManager"
+		init-method="init">
+		<property name="cc" ref="cc" />
+		<property name="listener" ref="payReChargeSV" />
+		<property name="publisher" ref="transactionPublisher" />
+		<property name="confPath" value="/com/ai/paas/tx/transactionListenerManager" />
+		<property name="participant" value="sample_group_pay_payReCharge" />
+		<property name="transactionList">
+			<list>
+				<value>business-topic-pay</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="payZYExamination" class="com.distribute.tx.eventual.TransactionListenerManager"
+		init-method="init">
+		<property name="cc" ref="cc" />
+		<property name="listener" ref="payZYExaminationSV" />
+		<property name="publisher" ref="transactionPublisher" />
+		<property name="confPath" value="/com/ai/paas/tx/transactionListenerManager" />
+		<property name="participant" value="sample_group_pay_payZYExamination" />
+		<property name="transactionList">
+			<list>
+				<value>business-topic-pay</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="payExternalMedicare" class="com.distribute.tx.eventual.TransactionListenerManager"
+		init-method="init">
+		<property name="cc" ref="cc" />
+		<property name="listener" ref="payExternalMedicareSV" />
+		<property name="publisher" ref="transactionPublisher" />
+		<property name="confPath" value="/com/ai/paas/tx/transactionListenerManager" />
+		<property name="participant" value="sample_group_pay_payExternalMedicare" />
+		<property name="transactionList">
+			<list>
+				<value>business-topic-pay</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 人卫e教 通过versionNumber通知其获取商品详情接口 -->
+	<bean id="eEduVNNoticeTM" class="com.distribute.tx.eventual.TransactionManager"
+		  init-method="init">
+		<property name="cc" ref="cc" />
+		<property name="confPath" value="/com/ai/paas/tx/transactionManager" />
+		<property name="sequence" ref="sequence" />
+		<property name="publisher" ref="transactionPublisher" />
+		<property name="participant" value="sample_group_gds_eEduVNNoticeMain" />
+		<property name="transactionList">
+			<list>
+				<value>business-topic-gds-eedu-vn</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="eEduVNNoticeTL" class="com.distribute.tx.eventual.TransactionListenerManager"
+		init-method="init">
+		<property name="cc" ref="cc" />
+		<property name="listener" ref="eEduVNNoticeSV" />
+		<property name="publisher" ref="transactionPublisher" />
+		<property name="confPath" value="/com/ai/paas/tx/transactionListenerManager" />
+		<property name="participant" value="sample_group_gds_eEduVNNoticeSub" />
+		<property name="transactionList">
+			<list>
+				<value>business-topic-gds-eedu-vn</value>
+			</list>
+		</property>
+	</bean>
+</beans>

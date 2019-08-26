@@ -1,0 +1,63 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/staff/shopacctdetail/seller-shopacct-expend-list.js?version=$!{JS_VERSION}"></script>
+
+	<table class="seller-table table-striped">
+       <thead>
+	       <tr>
+	           <td>支出流水</td>
+	       	   <td>支出类型</td>
+	           <td>退款编号</td>
+	           <td>订单编号</td>
+	           <td>商户订单号</td>
+	           <td>退款时间</td>
+	           <td>退款通道</td>
+	           <td>退款方式</td>
+	           <td>退款金额</td>
+	           <td>手续费</td>
+	           <td>支出金额</td>
+	           <td>退款人</td>
+	       </tr>
+       </thead>
+       <tbody>
+       #if(!$expendResp.getResult())
+			<tr><td class="kong" colspan='12'>很遗憾，暂无数据</td></tr>
+		#end
+		#foreach( $lst in $expendResp.getResult())
+       	<tr>
+           <td>$!{lst.id}</td>
+           <td>
+	           #if($!{lst.optType}=='21')退款支出
+	           #else 退货支出
+	           #end
+           </td>
+           <td>$!{lst.backId}</td>
+           <td>$!{lst.orderId}</td>
+           <td>$!{lst.payTranNo}</td>
+           <td>
+            	$!date.format('yyyy-MM-dd HH:mm:ss',$!{lst.backTime})
+           </td>
+           <td>
+           		#if($!{lst.payWay}=='2000')线下退款
+	            #else 
+          			 #translate('ORD_PAY_WAY',$!{lst.payWay})
+	            #end
+	       </td>
+           <td>
+           	   #if($!{lst.payType}=='0')线下退款
+	           #else 线上退款
+	           #end
+	       </td>
+           <td>#money($!{lst.backMoney})</td>
+           <td>#money($!{lst.fee})</td>
+           <td>#money($!{lst.expendMoney})</td>
+           <td>$!{lst.applyStaffCode}</td>
+       	</tr>
+        #end
+       </tbody>
+   </table>
+	<div class="fav-opt clearfix" style="margin-top: 20px;">
+        <div class="row-fluid">
+			<div id="pageControlbarExpend" class="ecppage" data-total-page="$!{expendResp.pageCount}" data-total-row="$!{expendResp.count}" data-page-size="$!{expendResp.pageSize}" data-page-number="$!{expendResp.pageNo}" data-status="begin"></div>
+		</div>
+    </div>

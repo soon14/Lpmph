@@ -1,0 +1,32 @@
+<div class="point-con">
+    <ul class="ruleList">
+        <li>
+            <div class="p-data"><span>01</span></div>
+            <div class="p-rule">
+                <p><strong>购买纸质书送积分</strong></p>
+                <p>购买纸质书送积分，1元=1分，不足1元向上取整。</p>
+            </div>
+        </li>
+        <li>
+            <div class="p-data"><span>02</span></div>
+            <div class="p-rule">
+                <p><strong>购买指定商品送积分</strong></p>
+                <p>购买指定分类的商品赠送积分。</p>
+            </div>
+        </li>
+        <li>
+            <div class="p-data"><span>03</span></div>
+            <div class="p-rule">
+                <p><strong>评价送积分</strong></p>
+                <p>评价商品赠送积分。</p>
+            </div>
+        </li>
+        <li>
+            <div class="p-data"><span>04</span></div>
+            <div class="p-rule">
+                <p><strong>天猫订单送积分</strong></p>
+                <p>天猫订单，根据订单实付金额赠送积分，1元=1分，不足一元向上取整。</p>
+            </div>
+        </li>
+    </ul>
+</div>

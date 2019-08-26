@@ -1,0 +1,54 @@
+#parse("sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+<title>自主征订</title>
+
+<link rel="stylesheet" href="$!{CSS_PATH}/pub.css" />
+<script type="text/javascript" src="$!{RESOURCE_PATH}/js-old/frameajax/ajaxfileupload.js"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/pub/build.js?version=$!{JS_VERSION}" ></script>
+
+
+<div id="main">
+    <ul class="sptj-tit" id="myTab">
+        <li><a href="#" class="titQh">自主征订</a></li>
+    </ul>
+    <div class="sptj-box addr-form clearfix">
+        <!--导入列表-->
+        <div class="show">
+        <form id="attributeForm" class="form-horizontal required-validate" style="margin-bottom: 0px;" method="post">
+        	<input type="hidden" id="fileId" name="fileId" />
+			<input type="hidden" id="moduleName" name="moduleName" />
+			<input type="hidden" id="staffId" name="staffId" value="$!{staffId}" />
+        	<div class="fileInput-wrap">
+        		<div class="input-wrap" title="点击选择文件">
+        			<input type="text" id="file1" class="input-choosefile" ifbasic="0" ifmulti="input" valueid="" proptype="2" propid="1" propname="文件" disabled="disabled">
+        			<input class="uoloadFile" type="file" name="uploadFileObj" id="uploadFileTXT" ifbasic="0" ifmulti="input" valueid="" proptype="2" propid="1" propname="文件" value="">
+        		</div>
+                <a style="margin-top:-2px;" href="javascript:void(0);" id="excelFileInput" name="excelFile" onclick="importFile(this)" class="btn-file-wrap">导入   
+                </a>
+        		<a class="btn btn-link" id="" href="$!{BUSIJS_PATH}/pub/download/pubordtemplate.xlsx" style="text-decoration: underline;">
+        			<i class="icon-download-alt"></i>征订单导入模板下载
+        		</a>
+        	</div></form>
+            
+        </div>
+    </div>
+    <!--征订单列表-->
+    <div  class="signOrder-main">
+    	<input type="hidden" id="zDRedisHash"/>
+    	<div class="signOrder-list">
+    		
+    	</div>
+    	<div class="signOrder-money-detail">
+    		<div><span id="totalOrderAmount" class="money-detail-number">0</span>件商品，总商品金额：<span id="totalOrderMoney" class="money-detail-rmb" style="font-weight: normal;">￥0.00</span></div>
+    		<div>运费：<span id="totalExpressFee" class="money-detail-rmb" style="font-weight: normal;">￥0.00</span></div>
+    		<div>优惠：<span id="totalDiscountMoney" class="money-detail-rmb" style="font-weight: normal;">-￥0.00</span></div>
+    	</div>
+    	<div class="signOrder-money-total">
+    		征订单总额：<span id="totalRealMoney" class="money-detail-rmb">￥0.00</span>
+    	</div>
+    	<div class="signOrder-button">
+    		<button id="signOrderSub">提交征订单</button>
+    	</div>
+    </div>
+</div>
+

@@ -1,0 +1,43 @@
+#parse("/module/mod-form.vm")
+#parse("/module/mod-grid.vm")
+<style>
+.selectColumn{
+	width : 55px;
+}
+</style>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.date.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/cardapplication/cardapp-pass-bind.js?version=$!{JS_VERSION}" ></script>
+
+<div class="well well-searchForm">
+    <form id="searchForm" class="form-horizontal" style="margin-bottom: 0px;">
+        <div class="row-fluid">
+            <div class="span4">
+                <div class="control-group">
+                    <label class="control-label">会员等级：</label>
+                    <div class="pull-left">
+                        <select style="width:160px" name="custLevelCode" disabled="disabled">
+                            <option value="">
+                                --请选择--
+                            </option>
+                            #listParam("STAFF_CUST_LEVEL",$!{custLevelCode})
+                        </select>
+                        <input type='hidden' id="cardAppId" name="cardAppId" value="$!{cardAppId}" />
+                        <input type='hidden' id="staffId" name="staffId" value="$!{staffId}" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row-fluid" style="margin-bottom: 10px;">
+    <div class="pull-right">
+        <a class="btn" id="btnFormBind" href="#"><i class="icon-ok-sign"></i> 绑定</a>
+    </div>
+</div>
+<div class="row-fluid">
+    <table id="dataGridTable"></table>
+</div>
+		
+			
+		
+		

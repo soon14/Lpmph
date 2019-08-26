@@ -1,0 +1,10 @@
+#parse("/rwgw-en/sys/sys_param.vm")
+<!--菜单 begin-->
+<div id="menu">
+    <div class="w">
+        <div class="mnlist-wrap ecp-component channel-shader" data-status="1" data-place-size="5" data-site-id="5"  data-channel-type="01" data-platform-type="01" data-return-url="/rwgw/main/componentVM/channel-nav" data-module="ecp-component/channel-shader">
+            
+        </div>
+    </div>
+</div>
+<!--菜单 end-->

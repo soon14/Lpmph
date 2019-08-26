@@ -1,0 +1,142 @@
+<title>商品录入</title>
+#parse("/module/mod-form.vm")
+#parse("/module/mod-page.vm")
+#parse("sys/sys_param.vm")
+#parse("/module/mod-editor.vm")
+#parse("/module/mod-upload.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/js-old/frameajax/ajaxfileupload.js"></script>
+<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+<meta http-equiv="description" content="this is my page">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link href="${CONTEXT_PATH}/css/goods/product-mgr.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="${CSS_PATH}/index.css" rel="stylesheet" type="text/css" media="screen"/>
+<link href="${CSS_PATH}/child-reset.css" rel="stylesheet" type="text/css" media="screen"/>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/goods/gdsinfoentry/gdsInfoEdit/gdsInfoEdit.js?version=$!{JS_VERSION}" ></script>
+<body data-spy="scroll" data-target=".quick-menu" id="loadBody">
+		<input type="hidden" value="$!{copyFlag}" id="copyFlag"/>
+		<input type="hidden" value="$!{basics}" id="basics"/>
+		<input type="hidden" value="$!{params}" id="params"/>
+		<input type="hidden" value="$!{others}" id="others"/>
+		<input type="hidden" value="$!{PROP_VALUE_TYPE_1}" id="PROP_VALUE_TYPE_1"/>
+		<input type="hidden" value="$!{PROP_VALUE_TYPE_2}" id="PROP_VALUE_TYPE_2"/>
+		<input type="hidden" value="$!{PROP_VALUE_TYPE_3}" id="PROP_VALUE_TYPE_3"/>
+		<input type="hidden" value="$!{PROP_VALUE_TYPE_4}" id="PROP_VALUE_TYPE_4"/>
+		<input type="hidden" value="$!{stock-switch}" id="stock-switch"/>
+		<input type="hidden" value="$!{price-switch}" id="price-switch"/>
+		<input type="hidden" value="$!{multi-switch}" id="multi-switch"/>
+		<input type="hidden" value="#escapeHtml($!skuList)" id="skuList"/>
+		<input type="hidden" value="$!{gdsId}" id="gdsId"/>
+		<input type="hidden" value="$!{gdsInfo.gdsDesc}" id="GDS_DESC"/>
+		<input type="hidden" value="$!{gdsInfo.gdsPartlist}" id="GDS_PARTLIST"/>
+		<input type="hidden" value="$!{GDS_CATEGORY_MAX_COUNT}" id="GDS_CATEGORY_MAX_COUNT"/>
+		<input type="hidden" value="$!{gdsInfo.mainCategory.catgCode}" id="mainCategory"/>
+		<input type="hidden" value="$!{gdsInfo.gdsStatus}" id="GDS_STATUS"/>
+		<input type="hidden" value="$!{ext1}" name="ext1" id="EXT1"  />
+		<input type="hidden" value="$!{GDS_VERIFY_SWITCH}" id="GDS_VERIFY_SWITCH"  />
+		<div class="alert alert-error hide formValidateMessages" >
+        </div>
+		<div class="container-fluid" style="position: relative">
+			<!--保存，返回按钮-->
+			<div class="text-right" style="padding-bottom: 10px">
+				#if($!{gdsDetailFlag}=='0')
+    				<a class="btn btn-info" id="topSave" href="javascript:void(0);"><i class="icon-ok-sign icon-white"></i> 保存</a>
+				#end
+				<a class="btn" href="javascript:void(0);" id="topback"><i class="icon-reply icon-white"></i> 返回</a>
+			</div>
+            <div class="quick-menu" id="floorNav">
+                <ul class="nav">
+                    <li class="active">
+                        <a href="#bas-info">基本信息</a>
+                    </li>
+                    <li>
+                        <a href="#gds-pictrue">参数属性</a>
+                    </li>
+                    <li>
+                        <a href="#gg-attr">高级设置</a>
+                    </li>
+                    <li>
+                        <a href="#dec-info" >描述信息</a>
+                    </li>
+					<li>
+						<a href="#down-info">下拉底部</a>
+					</li>
+                </ul>
+            </div>
+			##是否是纸质书
+			#set($isDataPaper = 0)
+			#foreach($value in $!{gdsInfo.allPropMaps.get('1028').values})
+				#if($!{value.id}=='306')
+					#set($isDataPaper = 1)
+				#end
+			#end
+			<!--内容-->
+            <div class="tab-content pmgr-in">
+                    <div class="active" id="bas-info"style="margin-bottom: 0px;">
+						<form id="baseInfoForm" class="form-horizontal required-validate" style="margin-bottom: 0px;" method="post">
+							<input type="hidden" value="$!{catgCode}" id="catgCode"/>
+						<!--基本信息tab页-->
+    						<!--分类信息-->
+    						#parse("goods/gdsinfoentry/gdsinfoedit/gds-category-edit.vm")
+    						<!--基本信息-->
+    						#parse("goods/gdsinfoentry/gdsinfoedit/gds-baseInfo-edit.vm")
+                        </form>
+						<form id="gdsSkuForm" class="form-horizontal" style="margin-bottom: 0px;" method="post">
+        					<!--单品规格属性-->
+        					#parse("goods/gdsinfoentry/gdsinfoedit/gds-skuParam-edit.vm")
+                        </form>
+						<form id="priceSettingForm" class="form-horizontal required-validate" style="margin-bottom: 0px;" method="post">
+        					<!--价格设置-->
+        					#parse("goods/gdsinfoentry/gdsinfoedit/gds-priceSetting-edit.vm")
+						</form>
+							<!--商品图片、视频-->
+							#parse("goods/gdsinfoentry/gdsinfoedit/gds-pictrues-edit.vm")
+                    </div>
+					<form id="attributeForm" class="form-horizontal required-validate" style="margin-bottom: 0px;" method="post">
+    					<div class="form-horizontal" id="gg-attr">
+    						<!--规格属性tab页-->
+    							#parse("goods/gdsinfoentry/gdsinfoedit/gds-attributes-edit.vm")
+                        </div>
+					</form>
+				<form id="settingForm" class="form-horizontal required-validate" method="post">
+					<div class="form-horizontal" id="gj-set">
+						<!--高级设置tab页-->
+							#parse("goods/gdsinfoentry/gdsinfoedit/gds-setting-edit.vm")
+					</div>
+                    <div class="tab-pane" id="dec-info" style="margin-top: 30px">
+						<!--描述信息tab页-->
+							#parse("goods/gdsinfoentry/gdsinfoedit/gds-decription-edit.vm")
+					</div>
+                </form>
+				#if($!{gdsVerifyFlag}=='1')
+					<input type="hidden" value="$!{gdsVerifyFlag}" id="gdsVerifyFlag"/>
+					<form id="gdsVerify" class="form-horizontal required-validate" style="margin-top: 20px;">
+                        <div class="control-group">
+                            <label class="control-label">
+    						审核意见：</label>
+                            <div class="controls">
+                                <textarea rows="3" class="span7 required" id="verifyOption"></textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <button class="btn gdsVerify" value="01"><i class="icon-ok"></i>审核通过</button>
+                                <button class="btn gdsVerify" value="02"><i class="icon-remove"></i>审核拒绝</button>
+                            </div>
+                        </div>
+					</form>
+				#end
+            </div>
+            <div class="btn-wrap" id="down-info">
+				#if($!{gdsDetailFlag}=='0'&& ($!{gdsStatus}=='11'||$!{gdsStatus}=='33')&& $!{GDS_VERIFY_SWITCH}=='1')
+
+					<button class="btn  btn-info" data-loading-text="保存中..." id="saveGdsInfoShelved"><i class=" icon-ok-sign icon-white"></i> 保存</button>
+					<button class="btn  btn-info" data-loading-text="保存中..." id="submitUpdateReview"><i class=" icon-ok-sign icon-white"></i> 提交更新审核</button>
+				#elseif($!{gdsDetailFlag}=='0'&& ($!{gdsStatus}=='11'||$!{gdsStatus}=='33')&& $!{GDS_VERIFY_SWITCH}!='1')
+					<button class="btn  btn-info" data-loading-text="保存中..." id="saveGdsInfoShelvedWithoutVerify"><i class=" icon-ok-sign icon-white"></i> 保存</button>
+				#elseif($!{gdsDetailFlag}=='0'&& $!{gdsStatus}!='11'&& $!{gdsStatus}!='33')
+					<button class="btn  btn-info" data-loading-text="保存中..." id="saveGdsInfo"><i class=" icon-ok-sign icon-white"></i> 保存</button>
+				#end
+				<a class="btn" href="javascript:void(0)" id="backGdsManage"><i class="icon-reply icon-white"></i> 返回</a>
+            </div>
+        </div>
+</body>

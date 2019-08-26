@@ -1,0 +1,52 @@
+#parse("sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/seller/staff/shopacctoptlog/seller-shopacct-opt-log-list.js?version=$!{JS_VERSION}"></script>
+    <div style="overflow-x: auto;">
+       <table class="seller-table table-striped">
+         <thead>
+           <tr>
+               <td>交易流水号</td>
+               <td>收支流水号</td>
+               <td>订单编号</td>
+               <td>商户订单号</td>
+               <td>发生时间</td>
+               <td>店铺名称</td>
+	           <td>收入金额</td>
+	           <td>支出金额</td>
+               <td>店铺账户余额</td>
+               <td>支付通道</td>
+               <td>操作类型</td>
+           </tr>
+         </thead>
+        <tbody>
+			
+    		#if($null.isNull($resp) || $resp.count == 0)
+    	       <tr class="odd">
+                    <td class="kong" colspan="11">很遗憾，暂无数据</td>
+                </tr>
+    		#else
+				#foreach($!optLog in $!resp.getResult())
+        		   <tr>
+                       <td>$!{optLog.id}</td>
+                       <td>$!{optLog.detailId}</td>
+                       <td>$!{optLog.orderId}</td>
+                       <td>$!{optLog.payTranNo}</td>
+                       <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{optLog.createTime})</td>
+                       <td>$!{optLog.shopName}</td>
+                       #if(!$null.isNull($!optLog.inMoney))
+                       		<td>#moneyNum($!optLog.inMoney)</td>
+                       #end
+                       #if(!$null.isNull($!optLog.outMoney))
+                      		<td>#moneyNum($!optLog.outMoney)</td>
+                       #end
+                       <td>#moneyNum($!optLog.acctBalance)</td>
+                       <td>#translate('ORD_PAY_WAY',$!{optLog.payWay})</td>
+                       <td>#translate('SHOPACCT_OPT_TYPE',$!{optLog.optType})</td>
+    			   </tr>
+			   #end
+    		#end
+         </tbody>
+       </table>
+    </div>
+    <div class="pagination bPage pagination-right">
+        <div id="pageControlbar" class="ecppage" data-total-page="$!{resp.pageCount}" data-total-row="$!{resp.count}" data-page-size="$!{resp.pageSize}" data-page-number="$!{resp.pageNo}" data-status="begin"></div>
+    </div>

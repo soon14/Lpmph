@@ -1,0 +1,6 @@
+#parse("/sys/sys_param.vm")
+<link href="$!{RESOURCE_PATH}/jquery/uploadify/uploadify.css" rel="stylesheet" type="text/css" media="screen" />
+<link href="$!{RESOURCE_PATH}/jquery/uploadify/uploadify-extend.css" rel="stylesheet" type="text/css" media="screen" />
+
+<script src="$!{RESOURCE_PATH}/jquery/uploadify/jquery.uploadify-3.2.1.js?f=$date.medium_time" type="text/javascript"></script>
+<script src="$!{RESOURCE_PATH}/framework/website/core/e.upload.js" type="text/javascript"></script>

@@ -1,0 +1,23 @@
+#parse("/sys/sys_param.vm")
+<script type="text/javascript" src="$RESOURCE_PATH/jquery/autocomplete/autocomplete.js?version=$!{JS_VERSION}"></script>
+<script type="text/javascript" src="$BUSIJS_PATH/search/search-box.js?version=$!{JS_VERSION}"></script>
+
+<!--logo-->
+<div class="wrap1200 logoBg clearfix">
+    ##更改logo图片取站点    2016.6.21 zhanbh
+	#parse("/main/main-site-logo.vm")
+    <div class="search">
+		<input type="hidden" id="searchBoxWidth" value="$!{searchBoxWidth}"/>
+		<input type="hidden" id="searchingTxt" value="$!{extra.keyword}"/>
+		<input type="hidden" id="ifShopSearch" value="${paramTools.getSysConfigCode("SHOP_SHOW_LOCK")}"/>
+		<div class="school-logo">
+            <img src="$!{IMAGE_PATH}/schoolOpen/schoolopen-logo.png" alt="">
+        </div>
+        <div id="site-search"></div>
+        <div class="seniorBtn">
+        	<a href="$!{CONTEXT_PATH}/search?senior=true" target="_blank" >高级搜索</a>
+        </div>
+        <ul class="searchConten" id="searchConten">
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.ai.ecp.pmph</groupId>
+        <artifactId>ecp-pmph</artifactId>
+        <version>1.18-RELEASE</version>
+        <relativePath>pom.xml</relativePath>
+    </parent>
+    <groupId>com.ai.ecp.pmph</groupId>
+    <artifactId>pmph-jar-deploy</artifactId>
+    <version>1.18-RELEASE</version>
+    <packaging>pom</packaging>
+    <name>pmph-jar-deploy</name>
+    <description>pmph-jar-deploy</description>
+
+    <modules>
+        <module>pmph-quartz-services</module>
+        <module>pmph-aip-services/build-client</module>
+        <module>pmph-aip-services</module>
+        <module>pmph-services/build-client</module>
+        <module>pmph-services</module>
+        <module>pmph-aip-web</module>
+        <module>pmph-services-publish</module>
+    </modules>
+</project>

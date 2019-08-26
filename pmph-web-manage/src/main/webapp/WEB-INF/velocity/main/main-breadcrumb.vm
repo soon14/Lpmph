@@ -1,0 +1,10 @@
+#parse("/sys/sys_param.vm")
+<div class="breadcrumbNavigateBar" id="breadcrumbNavigateBar" style="display: none;">
+	<ul class="breadcrumb">
+		<li><a href="$!{CONTEXT_PATH}/login/workbench">首页</a> </li>
+		<li class="active breadcrumbModule"><span class="divider">></span><span></span> </li>
+		<!-- <li class="breadcrumbModule"><span class="divider">></span><a href="javascript:void(0);" class=""></a> </li> -->
+		<li class="active breadcrumbFunction"><span class="divider">></span><span></span></li>
+		<li class="active breadcrumbOperation" style="display: none;"><span class="divider">></span><span></span></li>
+	</ul>
+</div>

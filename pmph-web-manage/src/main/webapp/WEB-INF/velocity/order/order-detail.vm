@@ -1,0 +1,474 @@
+#parse("/module/mod-grid.vm")
+<style>
+    .order-info {
+        font-family: arial;
+    }
+    .order-info-table td {
+        text-align: center;
+        vertical-align: middle;
+        line-height: normal !important
+    }
+    body{word-break: break-all;}
+    .order-trace {
+        font-family: arial;
+    }
+    .unitBasePrice {
+        text-decoration: line-through;
+        color: #999;
+    }
+    /*.more {*/
+     	/*width:80%;*/
+	    /*bottom: 10px;*/
+	    /*color: #ff6a00;*/
+	    /*cursor: pointer;*/
+	    /*right: 10px;*/
+	/*}*/
+
+
+
+    .cont {
+        position: relative;
+        width: 700px;
+    }
+    .cont .more {
+        position: absolute;
+        right: 10px;
+        bottom: 2px;
+        cursor: pointer;
+        color: #ff6a00;
+    }
+	.infos {
+        background:#FFF3E8;
+        padding:10px 18px;
+	}
+	.infos li {
+		line-height: 18px;
+	    border-left: 3px solid #ddd;
+	    float: inherit;
+	    margin-bottom: 8px;
+	    padding-left: 160px;
+	    position: relative;
+        list-style-type:none;
+	}
+	.infos li::before {
+	    background: #ddd none repeat scroll 0 0;
+	    border-radius: 100%;
+	    bottom: -6px;
+	    content: "";
+	    height: 5px;
+	    left: -4px;
+	    position: absolute;
+	    width: 5px;
+	}
+	.infos .last::before {
+	    display: none;
+	}
+	.infos .time {
+	    float: left;
+	    margin-left: -140px;
+        line-height: 18px;
+	}
+</style>
+<script type="text/javascript">
+   $(function(){
+ 	/* 物流信息 */
+	    $('.more').click(function () {
+//	        var infos=$(this).parent().find('li');
+	        var moreInfos=$(this).parent().find('.infos li:gt(0)');
+//	        infos.eq(1).toggleClass('last');
+	        moreInfos.slideToggle();
+	        var title = $(this).html();
+	        if(title=='查看全部'){
+	        	$(this).html('查看部分');
+	        }else{
+	        	$(this).html('查看全部');
+	        }
+	    });
+    });
+</script>
+<link rel="stylesheet" href="$!{CSS_PATH}/order/order-detail.css" type="text/css">
+<input type='hidden' id='orderId' value='$!{orderId}'/>
+	       	        #set($mystatus = $!{sOrderDetailsMain.status})
+            <div class="alert">
+                订单号： $!{orderId}
+                &nbsp;
+                状态：#translate("ORD_ORDER_STATUS",$!{sOrderDetailsMain.status})
+            </div>
+            
+			<div id="process" class="section4">
+					#foreach($item in $!statuslist)
+		#if($!statuslist.indexOf($item)<$!status.get($mystatus))
+			<div class="node ready">
+                <ul>
+                    <li class="tx1">&nbsp;</li>
+                    <li class="tx2">#translate('ORD_ORDER_STATUS',$item)</li>
+                </ul>
+			</div>
+			<div class="proce ready">
+                <ul>
+                    <li class="tx1">&nbsp;</li>
+                </ul>
+			</div>
+			#else
+				#if($!statuslist.indexOf($item)<($!statuslist.size()))
+					#if($!status.get($item)==""||$null.isNull($!status.get($item)))
+					#else
+					<div class="node wait">
+                        <ul>
+                            <li class="tx1">&nbsp;</li>
+                            <li class="tx2">#translate('ORD_ORDER_STATUS',$item)</li>
+                        </ul>
+                    </div>
+                    <div class="proce wait">
+                        <ul>
+                            <li class="tx1">&nbsp;</li>
+                        </ul>
+                    </div>
+					#end
+				#else
+					<div class="node wait">
+                        <ul>
+                            <li class="tx1">&nbsp;</li>
+                            <li class="tx2">#translate('ORD_ORDER_STATUS',$item)</li>
+                        </ul>
+					</div>
+				#end
+			#end
+		#end
+        	<div class="node wait">
+                <ul>
+                    <li class="tx1">&nbsp;</li>
+                    <li class="tx2">完成</li>
+                </ul>
+            </div>
+			
+			</div>
+            <!--进度条 end-->
+            <!--订单跟踪 付款详情-->
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#order_track" data-toggle="tab">订单跟踪</a>
+                </li>
+                <li><a href="#payment_detail" data-toggle="tab">付款详情</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="order_track">
+                    <table class="table table-bordered ">
+                        <thead>
+                        <tr>
+                            <th>处理时间</th>
+                            <th>处理信息</th>
+                            <th>操作人</th>
+                        </tr>
+                        <tbody>
+                            #foreach($!track in $!sOrderDetailsTracks)
+                            <tr>
+                                <td>$!date.format('yyyy-MM-dd HH:mm:ss ',$!track.createTime)</td>
+                                <td>$!track.nodeDesc</td>
+                                <td>$!track.createStaffName</td>
+                            </tr>
+                            #end
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane" id="payment_detail">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>付款方式：</th>
+                            <th>#translate("ORD_PAY_TYPE",$!{sOrderDetailsMain.payType})</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>#set($orderDetailMoney = $!{sOrderDetailsMain.orderMoney})
+                            <td>商品金额：#money($!orderDetailMoney)</td>
+                            <td>运费金额：#money($!sOrderDetailsMain.realExpressFee)</td>
+                        </tr>
+                        <tr>
+                            #set($discountAllMoney = $!{sOrderDetailsDiscount.discountOrderSum} + $!{sOrderDetailsDiscount.discountGdsSum}+$!{sOrderDetailsDiscount.discountCoupSum}+$!{sOrderDetailsDiscount.discountCoupCodeSum})
+                            <td>优惠总金额：#money($discountAllMoney)</td>
+                            <td>实际运费：#money($!sOrderDetailsMain.realExpressFee)</td>
+                        </tr>
+                        <tr>
+                            <td>应支付金额：#money($!sOrderDetailsMain.realMoney)</td>
+                            <td>付款时间：$!date.format('yyyy-MM-dd HH:mm:ss ',$!sOrderDetailsMain.payTime)</td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+            </div>
+            <!--订单信息 -->
+            <div id="orderinfo" style="margin-top: 20px;padding: 0;background: none;">
+                <div class="mt" style="background-color: #e3f4fc;">
+                    <strong>订单信息</strong></div>
+                <div class="mc">
+                    <dl class="fore clearfix">
+                        <dt>物流信息</dt>
+                        #if($!ordExpressDetailsResps && $!ordExpressDetailsResps.size()>0)
+
+                            #foreach($!delivery in $!ordExpressDetailsResps)
+                                <dd>
+                                    <ul>
+                                        <li>物流单号：<strong>$!delivery.expressNo </strong></li>
+                                        <li>送货方式：#translate('STAFF_SHOP_DISTRIBUTION_WAY' $!delivery.deliveryType)</li>
+                                        <li>发货时间：$!date.format('yyyy-MM-dd HH:mm:ss ',$!delivery.sendDate)</li>
+                                        <li>物流公司：$!delivery.expressName</li>
+                                    </ul>
+                                     #if($!delivery.deliveryType==1)
+	                                   	#set($expNum = 0)
+		                            	#if($!delivery.ordExpressDetailResps && $!delivery.ordExpressDetailResps.size()>0)
+	                                    <div class="cont">
+		                                	<ul class="infos">
+		                                		#foreach($!express in $!delivery.ordExpressDetailResps)
+		                               		    #if($expNum < 1)
+			                                   		<li>
+			                                    #else
+			                                    	<li style="display: none">
+			                                    #end
+				                                        <span class="time">
+				                                            $!date.format('yyyy-MM-dd HH:mm:ss ',$!express.expressTime)
+				                                        </span>
+				                                        <div class="txt">
+				                                             $!{express.context}
+				                                        </div>
+				                                    </li>
+			                                    #set($expNum = $expNum +1)
+				                                #end
+		                                    </ul>
+		                                    #if($expNum > 1)
+		                                	<div class="more" id="showdetail_" align="right">查看全部</div>
+		                                	#end
+		                                </div>
+		                                #else
+		                                <div class="cont">
+			                               <ul class="infos">
+			                                   <li>
+			                              	       	 暂时没有该运单号码的物流信息
+			                              	   </li>
+			                               </ul>
+			                            </div>
+		                                #end
+	                            	#end
+                                    <br/>
+                                </dd>
+                            #end
+
+                        #else
+                            <dd>暂未发货</dd>
+                        #end
+
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>收货人信息</dt>
+                        <dd>
+                            <ul>
+                                <li>收&nbsp;货&nbsp;人：$!sOrderDetailsMain.contactName</li>
+                                <li>地&nbsp;&nbsp;&nbsp;&nbsp;址：#areaName($!{sOrderDetailsMain.province})&nbsp;#areaName($!{sOrderDetailsMain.cityCode})&nbsp;$!sOrderDetailsMain.chnlAddress</li>
+                                #if($!{sOrderDetailsMain.contactPhone})
+                                <li>手机号码：$!sOrderDetailsMain.contactPhone</li>
+                                #end
+                                #if($!{sOrderDetailsMain.contactNumber})
+                                <li>固定电话：$!sOrderDetailsMain.contactNumber</li>
+                                #end
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>支付及配送方式</dt>
+                        <dd>
+                            <ul>
+                                <li>支付方式：#translate("ORD_PAY_TYPE",$!{sOrderDetailsMain.payType})</li>
+                                <li>支付通道：#if($!{sOrderDetailsMain.payWay}=='9999')线下支付 #else #translate("ORD_PAY_WAY",$!{sOrderDetailsMain.payWay}) #end</li>
+                                <li>配送方式：#translate("STAFF_SHOP_DISTRIBUTION_WAY",$!{sOrderDetailsMain.dispatchType})</li>
+                                <li>运&nbsp;&nbsp;&nbsp;&nbsp;费：#money($!sOrderDetailsMain.realExpressFee)</li>
+
+                            </ul><br>
+
+                        </dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>发票信息</dt>
+                        <dd>
+                            <ul>
+                                #if($!{sOrderDetailsComm.invoiceType} == "0")
+                                    <li>发票类型：#translate('ORD_INVOICE_TYPE',$!{sOrderDetailsComm.invoiceType})</li>
+                                    <li>发票抬头：$!{sOrderDetailsComm.invoiceTitle}</li>
+                                    #if($!{sOrderDetailsComm.taxpayerNo})
+                                     <li>纳税人识别号：$!{sOrderDetailsComm.taxpayerNo}</li>
+                                     #end
+                                    <li>发票内容：$!{sOrderDetailsComm.invoiceContent}</li>
+                                    <li>&nbsp;#if($!{sOrderDetailsComm.detailFlag} == 1)&nbsp;&nbsp;&nbsp;附加明细
+                                    #end
+                                    <li>发票状态：#if($!{sOrderDetailsMain.billingFlag} == "0") 未开票 #else 已开票 #end</li>
+                                    </li>
+                                #elseif(($!{sOrderDetailsTax.invoiceType} == "1"))
+                                ##<li>发票类型：#translate('ORD_INVOICE_TYPE',$!{sOrderDetailsTax.invoiceType})</li>##
+                                    <li>发票类型：#translate('ORD_INVOICE_TYPE',"1")</li>
+                                    <li>发票抬头：$!{sOrderDetailsTax.invoiceTitle}</li>
+                                    <li>税务登记号：$!{sOrderDetailsTax.taxpayerNo}</li>
+                                    <li>开户银行：$!{sOrderDetailsTax.bankName}</li>
+                                    <li>注册地址：$!{sOrderDetailsTax.takerAddress}</li>
+                                #else
+                                    <li>发票类型：不开发票</li>
+                                #end
+                                #if($!{sOrderDetailsMain.sendInvoiceType} == "0")
+                                    <li>寄票方式：附书寄出</li>
+                                #elseif($!{sOrderDetailsMain.sendInvoiceType} == "1")
+                                    <li>寄票方式：快递寄出</li>
+                                    <li>快递单号：$!{sOrderDetailsMain.invoiceExpressNo}</li>
+                                #end
+
+
+                            </ul>
+                        </dd>
+                    </dl>
+                    <dl class="clearfix">
+                        <dt>买家备注</dt>
+                        <dd>
+                        	<ul>
+                        	<li>
+                            	$!{sOrderDetailsMain.buyerMsg}
+                            </li>
+                            </ul>
+                        </dd>                       
+                    </dl>
+                     <dl class="clearfix">
+                        <dt>卖家备注</dt>
+                        <dd>
+                        	<ul>
+                        	<li>
+                        	      $!{sOrderDetailsMain.sellerMsg}  
+                            </li>
+                            </ul>
+                        </dd>                       
+                    </dl>
+                </div>
+            </div>
+
+            <!--订单信息 end-->
+
+            <!--商品清单 -->
+            <div id="orderinfo" style="margin-top: 20px;padding: 0;background: none;">
+                <div class="mt" style="background-color: #e3f4fc;">
+                    <strong>商品清单</strong></div>
+                #if($!{sOrderDetailsMain.siteId} == 1)
+                <div class="mc">
+                    <dl class="fore">
+                        <dd class="p-list">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>书号</th>
+                                    <th>商品图片</th>
+                                    <th width="300px">商品名称</th>
+                                    <th>商品分类</th>
+                                    <th>价格</th>
+                                    <th>折扣</th>
+                                    <th>商品数量</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    #foreach($!ordersub in $!sOrderDetailsSubs)
+                                    <tr class="bg-fff">
+                                        <td><div class="border-right">$!ordersub.zsCode</div></td>
+                                        <td><div class="border-right"><a href="#siteInfo('1')$!ordersub.gdsUrl" target="_blank"><img src="#genImageUrl($!ordersub.getPicId(),'200x200!')" width="48"></img></a></div></td>
+                                        <td><div class="border-right"><a href="#siteInfo('1')$!ordersub.gdsUrl" target="_blank">#addr($!ordersub.gdsName,"100")</a></div></td>
+                                        <td><div class="border-right">$!ordersub.gdsCateName</div></td>
+                                        <td>
+                                            <div class="border-right">
+                                                #if($!{ordersub.discountPrice}!=$!{ordersub.standardPrice})
+                                                    <span class="unitBasePrice" title="商品原价">#money($!ordersub.standardPrice)</span> <br>
+                                                #end
+                                                <span class="unitPrice">#money($!ordersub.discountPrice)</span>
+                                            </div>
+
+                                        </td>
+                                        #set($discount = $!{ordersub.discountPrice}*10000/$!{ordersub.standardPrice})
+                                        <td><div class="border-right">#moneyNum($!discount)</div></td>
+                                        <td><div class="border-right">x $!ordersub.orderAmount</div></td>
+                                    ##<td><div class=""><a href="$!{CONTEXT_PATH}#if($!{ordersub.evalFlag} == 1)/comment/evaled#else/comment/uneval#end" target="_blank">#if($!{ordersub.evalFlag} == 1)查看评价#elseif($!{ordersub.evalFlag} == 0)待评价#end</a></div></td>
+                                    </tr>
+                                    #end
+                                
+                                </tbody>
+                            </table>
+                        </dd>
+                    </dl>
+                </div>
+
+
+
+                    <div class="total clearfix">
+                        <ul>
+                            #set($orderMoney = $!{sOrderDetailsMain.orderMoney})
+                            <li><span>总商品金额：</span>#money($!orderMoney)</li>
+                            #set($allMoney = $sOrderDetailsMain.realMoney - $!sOrderDetailsMain.realExpressFee)
+                            #if($!{sOrderDetailsDiscount.discountOrderSum} > 0)
+                            #set($allMoney = $allMoney + $!sOrderDetailsDiscount.discountOrderSum)
+                                <li><span>- 订单优惠：</span>#money($!{sOrderDetailsDiscount.discountOrderSum})</li>
+                            #end
+                            #if($!{sOrderDetailsDiscount.discountGdsSum} > 0)
+                             #set($allMoney = $allMoney + $!sOrderDetailsDiscount.discountGdsSum)
+                                <li><span>- 商品优惠：</span>#money($!{sOrderDetailsDiscount.discountGdsSum})</li>
+                            #end
+                            #if($!{sOrderDetailsDiscount.discountCoupSum} > 0)
+	                            #set($coupValue =($orderMoney - $allMoney) / 100.00)
+		                        <li><span>- 优惠劵：</span>$coupValue</li>
+                                <!-- <li><span>- 优惠劵：</span>#money($!{sOrderDetailsDiscount.discountCoupSum})</li> -->
+                            #end
+                            #if($!{sOrderDetailsDiscount.discountCoupCodeSum} > 0)
+		                        <li><span>- 优惠码：</span>#money($!{sOrderDetailsDiscount.discountCoupCodeSum})</li>
+		                    #end
+                            <li><span>+ 运费：</span>#money($!sOrderDetailsMain.realExpressFee)</li>
+                            <li><span>应付总额：</span><b class="ftx04">#money($!sOrderDetailsMain.realMoney)</b></li>
+                        </ul>
+                    </div>
+                #else
+                    <div class="mc">
+                        <dl class="fore">
+                            <dd class="p-list">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>商品编号</th>
+                                        <th>商品图片</th>
+                                        <th>商品名称</th>
+                                        <th>兑换积分</th>
+                                        <th>商品数量</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        #foreach($!ordersub in $!sOrderDetailsSubs)
+                                        <tr class="bg-fff">
+                                            <td><div class="border-right">$!ordersub.skuId </div></td>
+                                            <td><div class="border-right"><a href="#siteInfo(2)$!ordersub.gdsUrl" target="_blank"><img src="#genImageUrl($!ordersub.getPicId(),'200x200!')" width="48"></img></a></div></td>
+                                            <td><div class="border-right"><a href="#siteInfo(2)$!ordersub.gdsUrl" target="_blank">$!ordersub.gdsName</a></div></td>
+                                            <td><div class="border-right">$!{ordersub.score}积分+#money($!ordersub.buyPrice)元</div></td>
+                                            <td><div class="border-right">x $!ordersub.orderAmount</div></td>
+                                        </tr>
+                                        #end
+
+                                    </tbody>
+                                </table>
+                            </dd>
+                        </dl>
+                    </div>
+
+
+                    <div class="total clearfix">
+                        <ul>
+                            #set($orderMoney = $!sOrderDetailsMain.realMoney - $!sOrderDetailsMain.realExpressFee)
+                            <li><span>总商品金额：</span>$!{sOrderDetailsMain.orderScore}积分+#money($!orderMoney)元</li>
+                            <li><span>+ 运费：</span>#money(0)元</li>
+                            <li><span>应付总额：</span><b class="ftx04">$!{sOrderDetailsMain.orderScore}积分+#money($!orderMoney)元</b></li>
+                        </ul>
+                    </div>
+                #end
+
+
+            </div>
+
+</div>

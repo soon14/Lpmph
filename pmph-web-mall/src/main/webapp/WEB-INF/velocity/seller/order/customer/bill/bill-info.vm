@@ -1,0 +1,121 @@
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/public/jquery.area.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/js-old/frameajax/ajaxfileupload.js"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/order/customer/bill-info.js"></script>
+<style>
+input[type="radio"], input[type="checkbox"] {
+    float: none;
+    margin-top: 0;
+}
+</style>
+<style type="text/css">
+	.error {
+    	color: #C62626;
+	}
+</style>
+<body class="">
+    <div class="control-group" style="margin-left: 10px">
+        <div class="order-switch _bill">
+            <a class="pane0 checked" href="javascript:void(0)">
+                <input class="pay1" type="radio">
+                不开发票
+                <b></b>
+            </a>
+            <a class="pane1" href="javascript:void(0)">
+                <input class="pay1" type="radio">
+                普通发票 
+                <b></b>
+            </a>
+        </div>
+    </div>
+    <hr>
+    <form class="pay-form form-horizontal required-validate" id="billForm0">
+        <div id="pane0">
+        <input type='hidden' name='orderId' value='${orderId}'/>
+        <input type='hidden' name='type' id="type" value='${billinfo.invoiceType}'/>
+        <input type='hidden' name='invoiceType' value='2'/>
+            <div class="control-group" style="margin-top: 10px;">
+                <div class="controls">
+                    <input type="button" class="btn" id="btnSaveBillInfo0" value="保存发票信息"/>
+                    <input type="button" class="btn" id="btnCancel0" value="取消"/>
+                </div>
+
+            </div>
+        </div>
+    </form>
+	<form class="pay-form form-horizontal required-validate" id="billForm1">
+		<input type='hidden' name='orderId' value='${orderId}'/>
+        <input type='hidden' name='invoiceType' value='0'/>
+        <input type='hidden' name='ordInvoiceCommRequest.invoiceType' value='0'/>
+        <div id="pane1" style="display:none">
+	         <div class="control-group" style="margin-top: 10px;">
+		         <!--  <label class="control-label"  style="text-align:left;width:80px;"><input type="radio" style="margin-left: 0px;" class="" name="organization" checked value="1" >&nbsp;公司</label>
+				  <label class="control-label"  style="text-align:left;width:80px;"><input type="radio" style="margin-left: 0px;" class="limitTimesType" name="organization" value="0" >&nbsp;个人</label> -->
+			       <input class="radio1" type="radio" name="organization" checked value="1" style="width:13px;height:13px;margin-left: 49px;"> <span style="margin-right:20px;">单位</span>
+			       <input class="radio2" type="radio" name="organization" value="0" style="width:13px;height:13px;"> 个人
+	       	 </div>
+         <hr>
+         	<div class="control-group" style="margin-top: 10px;">
+				<span class="itxt-tip" style="border: 0px">1000元以内（含1000元）随书快递，1000元以上会单独发快递，请注意查收！ </span>
+			</div>
+    		<div class="control-group" style="margin-top: 10px;">
+                <label class="control-label">发票抬头：</label>
+                <div class="controls">
+                    <input type="text" class="input required" maxlength="25" id="billTitle" name="ordInvoiceCommRequest.invoiceTitle" value="$!{billinfo.invoiceTitle}" onkeyup="changeTitleColor(this)"/>
+                    <span class="itxt-tip"  id="titleTip">
+                        请输入单位名称
+                    </span>
+                </div>
+            </div> 
+            <div class="control-group pane4" style="margin-top: 10px;">
+                <label class="control-label">纳税人识别号：</label>
+                <div class="controls">
+                    <input type="text" class="required input numberLetterOnly" name="ordInvoiceCommRequest.taxpayerNo" id="taxpayerNo"  value="$!{billinfo.taxpayerNo}" placeholder="请输入正确的纳税人识别号" onkeyup="changeTaxpayerNoColor(this)"/>
+                	<span class="itxt-tip">
+                        	或统一社会信用代码
+                    </span>
+                </div>
+            </div> 
+            
+            <div class="control-group">
+                <label class="control-label">发票内容：</label>
+                 #set($list = ${paramTools.getParamDTOList("ORD_INVOICE_CONTENT")})
+                <div class="controls">
+                    <div class="billc-swtich order-switch">
+                        #foreach($attr in $list)
+								<a index="$!{attr.spCode}" #if($!{attr.spValue}==$!{billinfo.invoiceContent})class="checked"#elseif(!$!{billinfo.invoiceContent}&&$velocityCount==1)class="checked" #end href="javascript:void(0)">
+	                                <input class="pay1" type="radio" name="ordInvoiceCommRequest.invoiceContent" value="$!{attr.spValue}" #if($!{attr.spValue}==$!{billinfo.invoiceContent}) checked="checked" #elseif(!$!{billinfo.invoiceContent}&&$velocityCount==1)checked="checked" #end></input>
+	                                #escapeHtml($!{attr.spValue})
+	                                <b></b>
+                                </a>
+							#end
+                    </div>
+                </div>
+                <div class="control-group" style="margin-top: 10px;">
+                    <label class="control-label">附加明细：</label>
+                    <div class="controls">
+                        <div class="billc-swtich order-switch">
+                            <a href="javascript:void(0)" #if($!{billinfo.detailFlag}==1)class="checked"#elseif($!{billinfo.detailFlag}!=0)class="checked"  #end>
+                                <input type="radio" value="1" name="ordInvoiceCommRequest.detailFlag" class="pay1" #if($!{billinfo.detailFlag}==1)checked="checked"#elseif($!{billinfo.detailFlag}!=0)checked="checked"  #end>
+                                是
+                                <b></b>
+                            </a>
+                            <a href="javascript:void(0)" #if($!{billinfo.detailFlag}==0)class="checked" #end >
+                                <input type="radio" value="0" name="ordInvoiceCommRequest.detailFlag" class="pay1"  #if($!{billinfo.detailFlag}==0)checked="checked" #end>
+                                否
+                                <b></b>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <input type="button" class="btn" id="btnSaveBillInfo" value="保存发票信息"/>
+                    <input type="button" class="btn" id="btnCancel1" value="取消"/>
+                 </div>
+        
+            </div>
+    	</div>
+     </form>
+</body>

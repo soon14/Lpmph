@@ -1,0 +1,137 @@
+<style>
+<!--
+
+-->
+.zoomThumbActiveNew{border:2px solid #ff0000;display:block;}
+.zoomThumbNew{border:2px solid #ffffff;display:block;}
+</style>
+
+<div class="pro-intro clearfix">
+	#if($!{gdsInfo.skus[0].platCatgs.indexOf("<1200>")} != -1)
+       <div class="rw-icon rw-icon-lele"></div>
+    #elseif($!{gdsInfo.skus[0].platCatgs.indexOf("<1201>")} != -1)
+	   <div class="rw-icon rw-icon-ltea"></div>
+	#end
+    <div style="width: 320px;float: left;margin-left: -320px;">
+        <div id="gdsPictrueZujian">
+             <!--引用图片滑动组件begin-->
+            <div class="gdsPictrueSlide" data-pictrue-num="4" data-gds-id="$!{gdsInfo.id}" data-sku-id="$!{gdsInfo.skus[0].id}" data-pictrue-height="60" data-pictrue-width="60" data-pictrue-more-height="700" data-pictrue-more-width="700"  data-module="ecp-component/gds-pictrue-slider">
+                <div id="gdsPictrueSlide">
+                	<img id="imagePreview" src="" width="300" height="300" class="img-polaroid">
+                	<!-- src="#genImageUrl($!{gdsInfo.medias[0].mediaUuid},'300x300!')" -->
+                	<div class="pre-list">
+                		<div class="slide jcarousel">
+                			<div id="zoomimgn" class="slide-trigger">
+                				<a href="javascript:" class="slide-prev disabled" data-rel="zimg1" disabled="disabled"></a>
+                				<a href="javascript:" class="slide-next disabled" data-rel="zimg1" disabled="disabled"></a>
+                			</div>
+                			<div class="">
+                				<ul id="zoomimgc" class="">
+                				#foreach($media in $!{gdsInfo.medias})
+									#if($!{media.mediaUuid} && $!{media.mediaUuid} !="")
+										
+                					<li class="zimg1  " style="float:left">
+                							<a href="javascript:;" class="it zoomThumbNew" style= "width:60px;height:60px;">
+                								<img data-detail-src="#genImageUrl($!{media.mediaUuid},'300x300!')" src="#genImageUrl($!{media.mediaUuid},'60x60!')" width="60" height="60" alt="Image 1">
+                							</a>
+                					</li>
+									#end
+								#end
+                					
+                					
+                				</ul>
+                			</div>
+                		</div>
+                	</div>
+                </div>
+            </div>
+            <!--引用图片滑动组件end-->
+        </div>
+		
+    </div>
+		
+    <div class="detail">
+        <h3>
+            $!{gdsInfo.gdsName}<span id="gdsName-extends-desc"></span>
+        </h3>
+        <div class="dec">
+            $!{gdsInfo.gdsSubHead}
+        </div>
+		
+		#if($!{gdsInfo.skus[0].gdsStatus} == '11')
+		<div class="seckill-active clearfix" id="seckill-countDown" style="display:none;">
+                <span id="promTitle"></span>
+                <div class="seckill-time">
+					<span id="prompt"></span>：
+                    <div class="time-box" id="time-box">
+						<span class="day">00</span>天
+						<span class="hour">00</span>时
+						<span class="minute">00</span>分
+						<span class="second">00</span>秒
+                    </div>
+                </div>
+         </div>
+		#end
+		
+		
+		##if($!{gdsInfo.skus[0].gdsStatus} == '11')
+			<div class="cont" id="gds_sale_down">
+				#parse("/goods/gdsinfoentry/preview/preview-gdsonsale.vm")
+			</div>
+		##else
+			##<div class="cont" id="gds_sale_down">
+				##parse("/goods/gdsinfoentry/preview/preview-gdsonsale.vm")
+			##</div>
+		##end
+	</div>
+</div>
+#set($values = '')
+#foreach($value in $!{gdsInfo.skus[0].allPropMaps.get('1001').values})
+	#set($values = $!{value.propValue})
+#end
+#set($isbn = '')
+#foreach($value in $!{gdsInfo.skus[0].allPropMaps.get('1002').values})
+	#set($isbn = $!{value.propValue})
+#end
+#set($biaozhunisbn = '')
+#foreach($value in $!{gdsInfo.skus[0].allPropMaps.get('1032').values})
+	#set($biaozhunisbn = $!{value.propValue})
+#end
+<input type="hidden" value="$ifReadOnline" id="offerReadOnline"/>
+<input type="hidden" value="$values" id="authorValue"/>
+<input type="hidden" value="1001" id="authorPropId"/>
+<input type="hidden" value="$isbn" id="ISBN"/>##包含ISBN开头 和/R的
+<input type="hidden" value="$biaozhunisbn" id="BIAOZHUNISBN"/>##标准的ISBN号
+<input type="hidden" value="$!{gdsInfo.id}" id="gdsId"/>
+<input type="hidden" value="$!{gdsInfo.ifLadderPrice}" id="ifLadderPrice"/>
+<input type="hidden" value="$!{gdsInfo.gdsName}" id="gdsName"/>
+<input type="hidden" value="$!{gdsInfo.shopId}" id="shopId"/>
+<input type="hidden" value="$!{gdsInfo.skus[0].id}" id="skuId"/>
+<input type="hidden" value="$!{gdsInfo.mainCatgs}" id="mainCatgs"/>
+<input type="hidden" value="$!{gdsInfo.gdsTypeId}" id="gdsTypeId"/>
+<input type="hidden" value="$!{gdsType.ifFree}" id="ifFree"/>
+<input type="hidden" value="$!{gdsType.ifBuyonce}" id="ifBuyonce"/>
+<input type="hidden" value="$!{gdsType.ifNeedstock}" id="ifNeedstock"/>
+<input type="hidden" value="$!{gdsInfo.skus[0].skuProps}" id="skuProps"/>
+<input type="hidden" value="$!{shopName}" id="shopName"/>
+<input type="hidden" value="$!{gdsInfo.gdsTypeId}" id="gdsTypeId"/>
+<input type="hidden" value="$!{STOCK_LACK_THRESHOLD}" id="STOCK_LACK_THRESHOLD"/>
+<input type="hidden" value="$!{STOCK_HARDTOGET_THRESHOLD}" id="STOCK_HARDTOGET_THRESHOLD"/>
+<input type="hidden" value="$!{gdsInfo.skus[0].realPrice}" id="price"/>
+<input type="hidden" value="$!{gdsInfo.skus[0].gdsStatus}" id="gdsStatus"/>
+<input type="hidden" value="$!{gdsInfo.skus[0].discountPrice}" id="discountPrice"/>
+<input type="hidden" value="$!{staffId}" id="staffId"/>
+<script type="text/javascript">
+$("#zoomimgc a").live('click',function(){
+	$(this).addClass("zoomThumbActiveNew");
+	$(this).removeClass("zoomThumbNew");
+	$(this).parent().siblings().each(function(){
+		$(this).find("a").removeClass("zoomThumbActiveNew");
+		$(this).find("a").addClass("zoomThumbNew");
+	});
+	var src1 = $(this).find("img").data('detailSrc');
+	$("#imagePreview").attr('src',src1);
+});
+$("#zoomimgc a").eq(0).trigger('click');
+</script>
+ 

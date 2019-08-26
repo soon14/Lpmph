@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+	<url>
+		<homePage>/homepage</homePage>
+		<loginPage>/login</loginPage><!--登录  -->
+		<logoutPage>/homepage</logoutPage><!--登出  -->
+		<registerPage>/login</registerPage><!--注册  -->
+		<lostpasswordPage>/login</lostpasswordPage><!--忘记密码  -->
+		<updatepasswordPage>/login</updatepasswordPage><!--修改密码  -->
+		<point>http://192.168.1.104:8080/ecp-web-mall-point/homepage</point><!--积分商城链接  -->
+		<notLogin>http://132.37.5.191:14300/woego</notLogin>
+		<notPermit>/permission/noPermission</notPermit>
+		<sessionExpired>http://132.37.5.191:14300/woego</sessionExpired>
+		<contextPage>http://www.woego.cn/woego</contextPage>
+		<ssoUrl>http://books123456789.ipmph.com/newsso</ssoUrl>
+		<ssoAdmin>admin</ssoAdmin>
+		<ssoPassword>admin</ssoPassword>
+	</url>
+	<!-- 行为分析相关参数 -->
+	<xwrankmallcode>100</xwrankmallcode><!-- 行为分析排行榜远程服务请求商城编码 -->
+	<xwrankurl>/service/getGoodsRank</xwrankurl><!-- 行为分析排行榜远程服务请求相对地址 -->
+	<xwrecommendurl>/service/recommendGoods</xwrecommendurl><!-- 行为分析猜你喜欢远程服务请求相对地址 -->
+	<site>
+		<key>1</key>
+	</site>
+	<homePageTitle>人卫智慧服务商城</homePageTitle>
+    <testbook>考试书-人卫智慧服务商城</testbook>
+	<sciencebook>科普书-人卫智慧服务商城</sciencebook>
+	<referencebook>参考书-人卫智慧服务商城</referencebook>
+	<paperbook>纸质教材-人卫智慧服务商城</paperbook>
+	<audiobook>音像制品-人卫智慧服务商城</audiobook>
+	<digitalproduct>数字产品-人卫智慧服务商城</digitalproduct>
+	<digitalbook>数字教材-人卫智慧服务商城</digitalbook>
+	<onlinetest>在线考试培训-人卫智慧服务商城</onlinetest>
+	<electronicbook>电子书-人卫智慧服务商城</electronicbook>
+</application>

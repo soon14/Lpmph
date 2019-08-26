@@ -1,0 +1,36 @@
+#parse("/rwgw/sys/sys_param.vm")
+
+#if(!${siteId} || !${siteId} == '' )
+	#set(${siteId} = '3')
+#end
+
+##如果是官网英文版 则引入英文版的分页栏
+#if(${siteId} == '5')
+	#parse("/module/mod-page-en.vm")
+	#set($errorMsg = "Sorry, No Data Found.")
+#else
+	#parse("/module/mod-page.vm")
+	#set($errorMsg = "亲，暂无数据！")
+#end
+
+<div class="w-right-p">
+	<ul class="list-nav" style="min-height: 350px;">
+		#if($respVO.list && $respVO.list.size() > 0 )
+			#foreach($article in $respVO.list)
+			#set($count = (${respVO.pageNumber} - 1 ) * ${respVO.pageSize} + ${velocityCount})
+				<li title ="#escapeHtml($!{article.articleTitle})"><a class="t-title article-item" href="javascript:void(0);" data-id="$!{article.id}" data-title="#escapeHtml($!{article.articleTitle})">$!{count}、 #escapeHtml($!{article.articleTitle})</a><span class="l-time">$!date.format('yyyy-MM-dd HH:mm:ss',$!{article.pubTime})</span></li>
+			#end
+		#else
+		<div class ='pro-empty'>$!{errorMsg}</div>
+		#end
+	</ul>
+	##搜索条件   供分页栏使用
+	<div id="serch-params" data-channel-id="$!{channelId}" data-site-info-id="$!{siteInfoId}" data-keyword="#escapeHtml($!{keyword})" data-menu-type="list" style="display:none;"></div>
+	<!--分页-->
+	#if($respVO.list && $respVO.list.size() > 0 )
+	<div class="row-fluid page-f">
+		<div id="pageControlbar" class="ecppage" data-total-page="$!{respVO.totalPage}" data-total-row="$!{respVO.totalRow}"  data-page-size="$!{respVO.pageSize}" data-page-number="$!{respVO.pageNumber}" data-status="begin"></div>
+	</div>
+	#end
+</div>	
+<script type="text/javascript" src="$!{BUSIJS_PATH}/main/about-list.js"></script>

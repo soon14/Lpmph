@@ -1,0 +1,55 @@
+#custInfo()
+#siteInfo('3')
+    <!--头部 begin-->
+    <div class="wrap100 topBg">
+        <div class="container">
+            <div class="topBg-left">您好，欢迎光临人卫智网</div>
+            <div class="topBG-right nav-col">
+                <ul>
+                    <li>
+						#if(${cust.staffCode})
+							<a href="http://sso.ipmph.com/Page/Index.jsp">$!{cust.staffCode}</a> <a href="$CONTEXT_PATH/login/logout" class="red"> [退出]</a>	
+                      
+						#else
+						  <a href="$CONTEXT_PATH/login/page"> 请登录</a> <a href="$CONTEXT_PATH/login/register" class="red"> [免费注册]</a>
+						#end
+                    </li>
+                    <li class="spit"></li>
+                    <li>
+                        <a href="http://zengzhi.ipmph.com/" target="_blank"><i class="i-icon i-icon-book"></i>图书增值激活</a>
+                    </li>
+                    <li class="spit"></li>
+                    <li>
+                        <a href="http://medu.ipmph.com" target="_blank"><i class="i-icon i-icon-ebook"></i>人卫 e 教</a>
+                    </li>
+                    <li class="spit"></li>
+                    <!--li>
+                        <a href="http://zhuanjia.pmph.com" target="_blank"><i class="i-icon i-icon-expert"></i>专家服务平台</a>
+                    </li-->
+                    <li class="spit"></li>
+                    <li>
+                        <a href="$siteUrl" class="oranger"><i class="i-icon i-icon-in"></i>人卫官网</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--logo begin-->
+    <div class="wrap100 logo">
+        <div class="container logo-zw-fix">
+            <div class="logo-zw">
+                <a href="$CONTEXT_PATH/homepage">
+                    <img class="logoimg" src="$IMAGE_PATH/logo-zw.png" title="人卫智网" id="zwlogo">
+                </a>
+            </div>
+			
+            <div class="btn btn-navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+			
+				<ul class="nav-bar-phone ecp-component channel-shader" data-status="1" data-place-size="5" data-site-id="4" data-type="2" data-module="ecp-component/rwzw/channel-shader">
+				</ul>
+            </div>
+        </div>
+    </div>

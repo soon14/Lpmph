@@ -1,0 +1,61 @@
+#parse("/sys/sys_param.vm")
+#menu
+
+<script type="text/javascript" src="$!{BUSIJS_PATH}/common/main-sidebar.js"></script>
+    <!-- sidebar -->
+    <a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="隐藏侧边栏"><i class="icon-caret-left"></i>隐藏侧边栏</a>
+
+    <div class="sidebar">
+        <div class="sidetit"><i class="iicon iicon-def"></i><a style="text-decoration:none;color:#fff !important;" href="${CONTEXT_PATH}/login/workbench ">首页</a>
+                            <span class="pull-right home-r">
+                                <i class="iicon iicon-minuscril"></i>
+                                <i class="iicon iicon-addcril"></i>
+                            </span>
+        </div>
+        <div class="antiScroll">
+            <div class="antiscroll-inner">
+                <div class="antiscroll-content">
+                    <div class="sidebar_inner">
+
+
+                        <div id="side_accordion" class="accordion">
+							
+					#foreach($menu in $list)
+                            <!-- 遍历第一层菜单 -->
+                            <div class="accordion-group">
+                                <div class="accordion-heading">##sdb_h_active
+                                    <a href="#sidebar_menu_$!{menu.id}" data-parent="#side_accordion" data-toggle="collapse"
+                                       class="accordion-toggle"> <i class="#if($!{menu.menuPic})$!{menu.menuPic}#else iicon iicon-ind06 #end"></i>#*<i class="$!{menu.menuPic}"></i>*# $!{menu.menuTitle} <i
+                                            class="pull-right icon-angle-right arrow-font icon-large"></i></a>
+                                </div>
+                                <!-- <li class="divider"></li> -->
+                                <div class="accordion-body collapse" id="sidebar_menu_$!{menu.id}">
+                                    <div class="accordion-inner">
+                                        <ul class="nav nav-list">
+											#foreach($att in $!{menu.sonList})
+                                            <li class=""><a href="javascript:void(0);" menuUrl="${CONTEXT_PATH}$!{att.menuUrl}" id="node$!{att.menuCode}" menuCode="$!{att.menuCode}" menuId="$!{att.id}">
+                                                $!{att.menuTitle} </a></li>
+                                           #end
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                          #end
+
+                        <div class="push"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- sidebar -->
+
+
+
+</div>
+
+
+</body>
+</html>

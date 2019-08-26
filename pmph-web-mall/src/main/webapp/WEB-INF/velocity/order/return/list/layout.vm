@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+#parse("sys/sys_head.vm")
+	<link href="$!{CSS_PATH}/reset.css" type="text/css" rel="stylesheet"/>
+	<link href="$!{CSS_PATH}/member.css" type="text/css" rel="stylesheet"/>
+	<link href="$!{CSS_PATH}/return.css" type="text/css" rel="stylesheet"/>
+	<script type="text/javascript" src="$!{BUSIJS_PATH}/order/return/return-list.js?version=$!{JS_VERSION}"></script>
+	<script>
+        $(function(){
+            U.tab('#teamTab','#teamTabc');
+        })
+    </script>
+</head>
+
+<body>
+	<input type="hidden" id="status" value="$!{status}"></input>
+<!--顶部 begin-->
+<div id="header" class="clearfix">
+	#parse("/main/main-site-nav.vm")
+</div>
+
+<!--content-->
+<div class="wrap1200">
+    <div id="content" class="clearfix">
+        #parse("/main/main-buyer-menu.vm")
+		$screen_content 
+	</div> 
+</div> 
+
+#parse("/main/main-content-bottom.vm")
+
+<!--底部 begin-->
+<div id="footer" class="text-center">
+	#parse("/main/main-bottom.vm")
+</div>
+<!--底部 end-->
+</body>
+</html>

@@ -1,0 +1,114 @@
+#parse("/sys/sys_param.vm")
+#parse("/sys/sys_head.vm")
+#parse("/module/mod-form.vm")
+#parse("/module/mod-editor.vm")
+#parse("/module/mod-tree.vm")
+<link href="$!{RESOURCE_PATH}/bootstrap/core/2.3.2/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="$!{CSS_PATH}/seller-reset.css" type="text/css" rel="stylesheet">
+<link href="$!{CSS_PATH}/seller.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="$!{RESOURCE_PATH}/js-old/frameajax/ajaxfileupload.js"></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/goods/mediacatg/plugins/gds.mcdropdown.js?version=$!{JS_VERSION}"></script>
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/ordback/confirmrefund.js?version=$!{JS_VERSION}" ></script>
+<style type="text/css">
+    .accessory li {
+        float: left!important;
+        margin-right: 20px;
+        text-align: center;
+        list-style: none;
+    }
+    .accessory .imgbox {
+        border: 1px solid #ddd;
+        width: 120px;
+        height: 120px;
+        line-height: 120px;
+        color: #037dff;
+    }
+    .accessory p {
+        text-align: center;
+        line-height: 26px;
+        font-size: 12px;
+        margin: 5px 0;
+    }
+</style>
+<div class="seller-box">
+    <div class="head">
+        <h3>上传凭证</h3>
+    </div>    
+    <div class="body">
+        <ul class="accessory clearfix">
+            <div class="row-fluid">
+                <li>
+                    <div class="imgbox">
+                        <img src="$IMAGE_PATH/seller-def.png" id="id0" alt=""/>
+						<input type="hidden" id="mediaPic" name="mediaUuid"/>
+						<input type="hidden" id="pictrueName" name="pictrueName"/>   
+                    </div>
+					<a class="a-upload" href="javascript:;">
+                        <input id="picture0" type="file" name="picture" class="as">上传图片
+                     </a>
+                </li>
+                <li>
+                    <div class="imgbox">
+                        <img src="$IMAGE_PATH/seller-def.png" id="id1" alt=""/>
+						<input type="hidden" id="mediaPic" name="mediaUuid"/>
+						<input type="hidden" id="pictrueName" name="pictrueName"/>   
+                    </div>
+					<a class="a-upload" href="javascript:;">
+                        <input id="picture1" type="file" name="picture">上传图片
+                     </a>
+                </li>
+                <li>
+                    <div class="imgbox">
+                        <img src="$IMAGE_PATH/seller-def.png" id="id2" alt=""/>
+						<input type="hidden" id="mediaPic" name="mediaUuid"/>
+						<input type="hidden" id="pictrueName" name="pictrueName"/>   
+                    </div>
+					<a class="a-upload" href="javascript:;">
+                        <input id="picture2" type="file" name="picture">上传图片
+                     </a>
+                </li>
+                <li>
+                    <div class="imgbox">
+                        <img src="$IMAGE_PATH/seller-def.png" id="id3" alt=""/>
+						<input type="hidden" id="mediaPic" name="mediaUuid"/>
+						<input type="hidden" id="pictrueName" name="pictrueName"/>   
+                    </div>
+					<a class="a-upload" href="javascript:;">
+                        <input id="picture3" type="file" name="picture">上传图片
+                     </a>
+                </li>
+                <li>
+                    <div class="imgbox">
+                        <img src="$IMAGE_PATH/seller-def.png" id="id4" alt=""/>
+						<input type="hidden" id="mediaPic" name="mediaUuid"/>
+						<input type="hidden" id="pictrueName" name="pictrueName"/>   
+                    </div>
+					<a class="a-upload" href="javascript:;">
+                        <input id="picture4" type="file" name="picture">上传图片
+                     </a>
+                </li>
+                </ul>
+            </div>
+            <div class="control-group" style="margin-bottom:20px;">
+	            <span class="alert rk-alert">
+	               	 图片格式必须是：.jpg,.png,.jpeg,.gif,.bmp
+	            </span>
+	        	</div>
+            <div>
+            <div class="control-group" style="margin-top:20px;">
+            <div class="controls">
+                <button type="button" class="btn btn-info" id="btn_submit"><i class="icon-ok-sign icon-white"></i> 提交</button>
+                <button type="button" class="btn" id="btn_close"><i class="icon-reply icon-white"></i> 关闭</button>
+            </div>
+        <form action="" accept-charset="" id="backrefundForm" method="" onsubmit="">
+            <input name="backId" id= "backId" value="$!{vo.backId}" type="hidden"></input>
+            <input name="orderId" id= "orderId" value="$!{vo.orderId}" type="hidden"></input>
+            <input name="applyType" id= "applyType" value="$!{applyType}" type="hidden"></input>
+            <input name="backPicList[0]" id= "imgid0" type="hidden"></input>
+            <input name="backPicList[1]" id= "imgid1" type="hidden"></input>
+            <input name="backPicList[2]" id= "imgid2" type="hidden"></input>
+            <input name="backPicList[3]" id= "imgid3" type="hidden"></input>
+            <input name="backPicList[4]" id= "imgid4" type="hidden"></input>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="navfix">
+    <div class="navfix-block">
+        <div class="block-panel">
+            <div class="gwEwm"><img src="$IMAGE_PATH/gwEwm.png" alt=""/></div>
+        </div>
+        <div class="block-panel shopEntry">
+            <a href="#siteInfoURL('1')">
+                <i class="iconShop"></i>
+                <p>商城入口</p></a>
+        </div>
+    </div>
+    <div class="block-panel topScorll">
+        <a href="#"><img src="$IMAGE_PATH/topScroll.png" alt=""/></a>
+    </div>
+</div>

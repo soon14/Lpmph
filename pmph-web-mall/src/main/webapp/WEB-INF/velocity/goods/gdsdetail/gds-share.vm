@@ -1,0 +1,96 @@
+
+<style>
+  /* #share a{with:45px;height:45px;padding:0;margin:0px;} */
+  #newshare a{      border: 1px solid #ddd;
+			    padding: 6px 25px;
+			    -webkit-border-radius: 5px;
+			    -moz-border-radius: 5px;
+			    border-radius: 5px;
+			    text-align: center;
+			    with:45px;
+			    height:45px
+			    padding:10px;
+			    margin-left:300px;
+			    margin-top:20px;
+			    display: inline-block;}
+   #newshare a.bds_tsina{background:url(../images/over_share.png) no-repeat;}
+   #newshare a.bds_tqq{background:url(../images/over_share.png) no-repeat;}
+   #newshare a.bds_douban{background:url(../images/over_share.png) no-repeat;}
+   #newshare .bdshare-button-style0-16 a{margin-top:7px!important}
+   .share-btn{margin-top:7px}
+   .share-btn a{padding:0 25px}
+   .share-btn a:hover{color:#666;}
+</style>
+<div class="share-box" style=""><!-- style="display: block;" -->
+    <i class="toparrow"></i>
+    <div class="share-box-tit">分享给好友
+        <span class="close" id="off">x</span>
+    </div>
+    <div class="share-box-cont">
+        <div class="share-web">
+            <div class="s-w-tit">
+                <span class="tit">分享到：</span>
+                <div class="bdsharebuttonbox">
+	                #*<label class="checkbox inline">
+	                    <input type="checkbox" id="inlineCheckbox1"   value="option1"> 
+						<a href="javascript:void(0);" class="bds_tqq" data-cmd="tqq" id="abc" title="分享到腾讯微博"></a>
+	                </label>*#
+	                <label class="checkbox inline">
+	                    <input type="checkbox" id="inlineCheckbox2" value="option2"></a>
+	                    <a href="javascript:void(0);" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	                </label>
+	                <label class="checkbox inline">
+	                    <input type="checkbox" id="inlineCheckbox3" value="option3">
+	                    <a href="javascript:void(0);" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+	                </label>
+                </div>
+            </div>
+            <div class="s-w-cont clearfix">
+            #set($price=$!{gdsDetailInfo.SkuInfo.discountPrice}*0.01)
+                <textarea class="txt" id="bdText" style="resize:none">我在@人卫智慧服务商城 发现了一个非常不错的商品： $!{gdsDetailInfo.gdsName}  人卫价：￥$number.format("#0.00", $price)。 感觉不错，分享一下</textarea>
+                <span class="share-a pull-left" onclick = "shareAddress()">
+	                	<i class="icon-external-link"></i>
+	                	分享链接
+                	
+                </span>
+                <span class="pull-right" id="allNum" >最多可以输入100字</span>
+            </div>
+        </div>
+        <div class="share-pro" id="share-pro">
+            <h4>选中配图：</h4>
+
+            <div class="s-p-scroll" id="spscroll">
+                <div id="share-trigger" class="share-trigger">
+                    <a href="javascript:void(0);" class="prev disabled" data-rel="shareSwitch1" disabled="disabled"></a>
+                    <a href="javascript:void(0);" class="next" data-rel="shareSwitch1"></a>
+                </div>
+                <div class="share-scroll">
+                    <ul id="share-container" class="share-container">
+                    #set($arry=$!{imglist})
+                     #set($id=$arry.size())
+                    #foreach($url in $!{imglist})
+                    	#if($velocityCount==1)
+                        <li class="shareSwitch1 active" value="$url"> 
+                        #else
+                        <li class="shareSwitch1 " value="$url" >
+                        #end
+                            <div class="p-img">
+                           		 <a href="javascript:void(0);">
+                                    <img src="$url" alt="">
+                                 </a>
+                                <i class="icon-ok"></i>
+                            </div>
+                        </li>
+                     #end 
+                    </ul>
+                </div>
+            </div>
+            <div class="share-btn" id="oldshare">
+            	<a href="javascript:void(0);" onclick="defaultShare()">分享</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/powerSwitch/jquery-powerSwitch.js"></script>
+<script type="text/javascript" src="$BUSIJS_PATH/goods/gdsdetail/gds-share.js?version=$!{JS_VERSION}"></script>

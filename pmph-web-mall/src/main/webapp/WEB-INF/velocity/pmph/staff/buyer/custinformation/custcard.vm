@@ -1,0 +1,160 @@
+#parse("sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/buyer/custcard.js?version=$!{JS_VERSION}" ></script>
+<link rel="stylesheet" href="$!{CSS_PATH}/member.css" />
+
+    <script>
+
+        $(function(){
+            U.tab('.teamTab','.teamTabc');
+			
+			$('.replyTip tr').popover({
+			placement:'top',
+			trigger:'hover',
+			title:''
+			});
+        });
+
+		
+    </script>
+	
+		<div id="main">
+            <ul class="sptj-tit teamTab">
+           		<li><a href="#" class="active">绑定会员卡</a></li>
+				#custInfo()
+						#if(${cust.custLevelCode}!='01')
+                <li><a href="#" >会员卡申请</a></li>
+				#end
+            </ul>
+
+         <div class="teamTabc">
+         	<div class="sptj-box information-form clearfix">
+                <!--绑定会员卡-->
+                <div class="card-m">
+                    <form class="form-horizontal" id="cardbindform">
+                        <label class="control-label card-label">
+                            绑定会员卡：
+                        </label>
+                        <div class="control-group">
+                            <div class="controls card-text">
+                                <input type="text" class="required" id="cust_card_id" placeholder="会员卡号"/>
+                                <input type="button" class="mbtn mbtn-orange" value="绑定" id="cardbindsubmit"/>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="card-tit">历史绑卡记录</div>
+                    <table class="table table-bordered mt10">
+                        <thead>
+                        <tr>
+                            <th>会员卡号</th>
+                            <th>等级</th>
+                            <th>绑卡时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+						#foreach($param in $!{cardbinglist})
+                        <tr>
+                            <td>$!{param.custCardId}</td>
+                            <td>$!{param.custCardLevelName}</td>
+                            <td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{param.bindTime})</td>
+                        </tr>
+						#end
+                        </tbody>
+                    </table>
+                    <div class="pull-right" style="color:#999">仅显示最近10条记录</div>
+
+                </div>
+            </div>
+				#if(${cust.custLevelCode}!='01')
+            <div class="sptj-box information-form clearfix">
+                <!--会员卡申请-->
+                <form class="form-horizontal" id="cardapplyform">
+                    <div class="control-group">
+                        <label class="control-label card-label">当前会员等级：</label>
+                        <div class="controls card-text card-color">
+                            #custLevelCode($!{custinfo.custLevelCode},'STAFF_CUST_LEVEL')$!{custinfo.custLevelName}
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label card-label">
+                            当前绑定会员卡号：</label>
+                        <div class="controls card-text">
+                            #if(!$!{custinfo.custCardId})
+								无
+							#else
+								$!{custinfo.custCardId}
+							#end
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label card-label">
+                            申请会员卡等级：</label>
+                        <div class="controls card-text">
+							$!{custinfo.custLevelName}
+							<input type="hidden" id="custLevelCode" name="custLevelCode" value="$!{custinfo.custLevelCode}">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label card-label">
+                            联系人姓名：</label>
+                        <div class="controls card-text">
+							<input type="text" id="contactName" name="contactName" value="$!{custinfo.custName}" placeholder="用于会员卡寄送" style="width:226px"  class="input-large required htmlcheck" maxlength="10">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label card-label">
+                            联系人手机：</label>
+                        <div class="controls card-text">
+							<input type="text" id="contactPhone" name="contactPhone" placeholder="用于会员卡寄送" style="width:226px" value="$!{custinfo.serialNumber}"  class="required htmlcheck mobilePhone" maxlength="11">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label card-label">
+                            联系人地址：</label>
+                        <div class="controls card-text">
+							<input type="text" id="contactAddress" name="contactAddress" placeholder="用于会员卡寄送" style="width:226px"  class="input-large required htmlcheck" maxlength="128">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label card-label">
+                            备注：</label>
+                        <div class="controls card-text">
+                            <textarea rows="3" name="remark" maxlength="128"></textarea>
+                        </div>
+                    </div>
+    				<div class="control-group">
+                        <div class="controls card-text">                                
+    						<input type="button" class="mbtn mbtn-orange" value="提交申请" id="applysubmit" />
+                        </div>
+                    </div>
+                </form>
+                <div class="table-right">
+
+                    <table class="table table-bordered replyTip">
+                        <caption  class="fonttit text-left">历史申请记录：</caption>
+                        <thead>
+                        <tr>
+                            <th>会员等级</th>
+                            <th>审核状态</th>
+                            <th>申请时间</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+						#foreach($param in $!{cardapplicationlist})
+                        <tr data-content="$!{param.remark}"  title="">
+                            <td width="60px">$!{param.custLevelName}</td>
+                            <td width="60px">#if($!{param.checkStatus}=='0')待审核#elseif($!{param.checkStatus}=='1')审核通过#else 审核不通过 #end</td>
+                            <td width="90px">$!date.format('yyyy-MM-dd HH:mm:ss',$!{param.createTime})</td>
+                        </tr>
+						#end
+                        </tbody>
+                    </table>
+					<div class="pull-right" style="color:#999">仅显示最近5条记录</div>
+                </div>
+            </div>
+           #end
+         </div>
+
+ 
+        </div>

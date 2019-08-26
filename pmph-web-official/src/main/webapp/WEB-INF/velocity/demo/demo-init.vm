@@ -1,0 +1,4 @@
+页面测试；初始化；
+staff: ${staffCode}
+<br/>
+baseInfo.staff: ${infoStaffCode}

@@ -1,0 +1,70 @@
+#parse("/module/mod-form.vm")
+#parse("/module/mod-grid.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.form.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/shopacct/acct-adjust.js?version=$!{JS_VERSION}" ></script>
+
+		<div class="well well-searchForm" style="width:1200px;height:500px">
+		<form id="detailInfoForm" class="form-horizontal required-validate">
+			<div class="row-fluid formSep"  style="margin:0;padding:0;">
+				<!--<div class="span4">
+					<div class="control-group" style="width:300px">
+						<label class="control-label">调账结算日：</label>
+						<div class="controls">
+                            <p style="margin-top:7px" id="billDay">$!{billDay}</p>
+                            <input type="hidden" id="billDayVal" value="$!{billDay}"/>
+						</div>
+					</div>
+				</div>-->
+				<div class="">
+                    <div class="control-group" style="text-align: center;font-size: 20px;">
+                    		<span>店铺名称：</span>
+                            <p style="margin-top:7px;display: inline-block;" >$!{shopName}</p>
+							<input type="hidden" id="shopId" value="$!{shopId}"/>
+							
+							<div style="font-size:13px;color:#666;">
+								<span>调账结算日：</span><p style="display: inline-block;" id="billDay">$!{billDay}</p>
+                            	<input type="hidden" id="billDayVal" value="$!{billDay}"/>
+							</div>
+                    </div>
+                </div>
+			</div>
+			<div class="row-fluid">
+            </div>
+			<div class="row-fluid">
+            </div>
+			<div class="row-fluid">
+            </div>
+			<div class="row-fluid">
+            </div>
+			<div class="row-fluid" style="width: 600px;margin-right: 0px;">
+    			<div class="control-group">
+    				<label class="control-label">调账金额：</label>
+    				<div class="controls">
+    					<input type="text" class="input-large required" name="money" id="money"  maxlength="16" placeholder="请输入调账金额"/>
+						<input type="hidden" id="allMoney" value="$!{allMoney}"/>
+						<span class="help-inline">调增请输入正数,调减请输入负数</span>
+					</div>
+                </div>
+            </div>	
+			<div class="row-fluid">
+            </div>
+			<div class="row-fluid">
+            </div>
+			<div class="row-fluid" style="margin-bottom: 25px;padding-bottom: 25px;border-bottom: 1px dashed #dcdcdc;">
+    			<div class="control-group">
+    				<label class="control-label">备注说明：</label>
+    				<div class="controls" style="width:700px;">
+    					<textarea rows="4" class="input-large required" name="applyDesc" maxlength="512" style="width:500px;"></textarea>
+    				</div>
+    			</div>
+            </div>
+			</form>
+			<div class="row-fluid">
+            </div>
+			<div class="row-fluid">
+            </div>
+			<div class="pull-left" style="margin-left:45%">
+					<button type="button" class="btn btn-info" id="btnFormSave" ><i class="icon-ok-sign icon-white"></i>提交申请</button>
+					<button type="button" class="btn " id="btnReturn"><i class="icon-reply icon-white"></i> 返	回</button>
+			</div>
+		</div>

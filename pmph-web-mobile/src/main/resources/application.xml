@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+	<import>classpath:application-url.xml</import>
+	<!--<import>classpath:application-exception.xml</import>-->
+	<!-- 
+	<redis comment="redis缓存配置">
+		<pool>
+			<maxActive>1024</maxActive>
+			<maxIdle>200</maxIdle>
+			<maxWait>1000</maxWait>
+			<testOnBorrow>true</testOnBorrow>
+		</pool>
+		<ip>127.0.0.1</ip>
+		<port>6379</port>
+	</redis> -->
+	
+	<!-- <file>
+		<log>
+			<export-url-list>/home/yangqx/work/share/workspace/zj/butterfly/butterfly-author-web/target/url-list.txt</export-url-list>
+		</log>
+	</file>
+	-->
+	
+	<!-- 样式 -->
+	<!--
+	<project>
+		<theme>
+			<path>file:///D:/eclipse/workspace/butterfly/butterfly-ui-library/src/main/webapp/,/,classpath:</path>
+			<domain>demo</domain>
+			<module>wo</module>
+			<useCache>false</useCache>
+		</theme>
+	</project>
+	-->
+	
+	<!--
+	<monitor>
+		<permission comment="全局配置是否需要监控">false</permission>
+		<servicetimingwarn comment="监控执行时间超预计的方法，记录参数，单位ms">5000</servicetimingwarn>
+	</monitor>
+	-->
+	
+</application>

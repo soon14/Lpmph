@@ -1,0 +1,72 @@
+#parse("/module/mod-form.vm")
+#parse("/module/mod-upload.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/javascript/holder/holder.js" ></script>
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/website/extend/bus.selector.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/staff/custservice/custservice-third-edit.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/public/jquery.area.js?version=$!{JS_VERSION}" ></script>
+<style>
+select{disabled:true}
+</style>
+<h3 class="heading">编辑客服</h3> 
+<div class="formBox row-fluid">
+	<form id="detailInfoForm" class="form-horizontal required-validate " style="margin-bottom: 0px;">
+		<div class="span12">
+			<div class="row-fluid formSep">
+        		<div class="span6">
+        			<div class="control-group">
+        				<label class="control-label">会员名：</label>
+                        <div class="controls">
+							<input class="input-medium" disabled name="staffCode" style="width:210px;" value="$!{info.staffCode}" type="text"/>
+                        </div>
+        			</div>
+        		</div>
+        	</div>
+			<div class="row-fluid formSep"> 
+            		<div class="span6">
+            			<div class="control-group">
+            				<label class="control-label">所属平台：</label>
+            				<div class="controls">
+	                            <input class="input-medium" disabled  style="width:210px;" value="$!{platName}" type="text"/>
+	                        </div>
+            			</div>
+            		</div>
+            	</div>
+    		<div class="row-fluid formSep">
+    			<div class="span6">
+    				<div class="control-group">
+    					 <label class="control-label">客服姓名：</label>
+                        <div class="controls">
+                            <input type="text" name="hotlinePerson" style="width:210px;" class="input-medium required" maxlength="16" value="$!{info.hotlinePerson}" /> 
+                        </div>
+    				</div>
+    			</div>
+    		</div>
+			<div class="row-fluid formSep">
+				<div class="span6">
+    				<div class="control-group">
+    					<label class="control-label">客服电话：</label>
+                        <div class="controls">
+    						<input type="text" class="input-medium mobilePhone htmlcheck" style="width:210px;" name="hotlinePhone" value="$!{info.hotlinePhone}" maxlength="11" />
+    					</div>
+    				</div>
+    			</div> 
+    		</div>
+			<div class="row-fluid formSep">
+				<div class="span6">
+    				<div class="control-group">
+    					<label class="control-label">上限接待人数：</label>
+                        <div class="controls">
+    						<input type="text" class="input-medium digits required" style="width:210px;" name="receptionCount" value="$!{info.receptionCount}" />
+    					</div>
+    				</div>
+    			</div> 
+            </div>
+    		<div class="pull-left" style="margin-left:45%">
+				<button type="button" class="btn btn-info" id="btnFormUpdate" ><i class="icon-ok-sign icon-white"></i> 保　存</button>
+				<button type="button" class="btn btn" id="btnReturn"><i class="icon-reply icon-white"></i> 返　回</button>
+			</div>
+		
+		</div>
+		<input type="hidden" name="id" value="$!{info.id}" />
+    </form>
+</div>  

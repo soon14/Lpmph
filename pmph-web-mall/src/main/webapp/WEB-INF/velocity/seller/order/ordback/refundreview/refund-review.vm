@@ -1,0 +1,34 @@
+#parse("/module/mod-form.vm")
+<form action="" accept-charset="" id="netPayForm" method="" onsubmit=""> </form>
+<script type="text/javascript">
+$(function(){
+	var actionUrl = '${payData.actionUrl}';
+	var method = '${payData.method}';
+	var charset = '${payData.charset}';
+    var formData = JSON.parse('${formData}');
+	var setMethod = "post";
+	if(method!= null &&method!= "" && charset!='method'){
+		setMethod = method;
+	}
+	
+	var $form = $("#netPayForm");
+	$form.attr("action",actionUrl);
+	$form.attr("method",setMethod);
+	 
+	if(charset!="" && charset!='undefined'){
+		$form.attr("accept-charset",charset);
+		var onsubmit = "document.charset='"+charset+"';return true;";
+		$form.attr("onsubmit",onsubmit);
+	}
+	var contentHTML="";
+	for(var key in formData) {
+		var value = "";
+		if (formData[key] != null) {
+			value = formData[key];
+		}
+		contentHTML = contentHTML + "<input type=\"hidden\" id=\""+key+"\" name=\""+key+"\" value=\""+ value +"\">";
+	}
+	$form.html(contentHTML);
+	$form.submit(); 
+});
+</script>

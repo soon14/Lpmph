@@ -1,0 +1,134 @@
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/demo/demo-form-more.js?version=$!{JS_VERSION}" ></script>
+
+
+			<h3 class="heading">用户详细信息编辑</h3>
+		
+			<div class="formBox row-fluid">
+				<form id="detailInfoForm" class="form-horizontal required-validate " style="margin-bottom: 0px;">
+				<div class="span8">
+				<div class="row-fluid formSep">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label">系统参数编码</label>
+							<div class="controls">
+								<input type="text" class="input-block-level required" name="user.login_name" placeholder="" value="${sysCfg.paraCode}" />
+								<input type="hidden" id="userId" name="user.id" value="${param.userId}" />
+								<input type="hidden" id="operation" value="1" />
+							</div>
+						</div>
+					</div>
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label">系统参数值</label>
+							<div class="controls">
+								<input type="text" class="input-block-level required" name="sysCfg.paraValue"  value="${sysCfg.paraValue}" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid formSep">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label">性别</label>
+							<div class="controls">
+								<select>
+									<option>男</option>
+									<option>女</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label">出生年月</label>
+							<div class="controls">
+								<!--<input type="text" class="input-block-level required bDate" name="user.birthday" />-->
+								<input type="text" class="input-block-level required Wdate" onClick="WdatePicker()" name="user.birthday" />
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid formSep">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label">联系电话1</label>
+							<div class="controls">
+								<input type="text" class="input-block-level phone" name="user.phone1" />
+							</div>
+						</div>
+					</div>
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label">联系电话2</label>
+							<div class="controls">
+								<input type="text" class="input-block-level phone" name="user.phone2" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid formSep">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label">QQ</label>
+							<div class="controls">
+								<input type="text" class="input-block-level number" name="user.qq" />
+							</div>
+						</div>
+					</div>
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label">电子邮箱</label>
+							<div class="controls">
+								<input type="text" class="input-block-level email" name="user.email" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid formSep">
+					<div class="">
+						<div class="control-group">
+							<label class="control-label">备注</label>
+							<div class="controls">
+								<textarea rows="4" class="input-block-level" name="user.remark"  ></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row-fluid formSep">
+					<div class="span6">
+						<div class="control-group">
+							<label class="control-label">状态</label>
+							<div class="controls">
+								<select>
+									<option>启用</option>
+									<option>禁用</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="pull-right">
+					<button type="button" class="btn btn-success" id="btnFormSave"><i class="icon-ok"></i> 保　存</button>
+					<button type="button" class="btn btn-primary" id="btnReturn"><i class="icon-reply"></i> 返　回</button>
+				</div>
+				</div>
+				
+				
+				<div class="span4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">用户角色关联</h3>
+						</div>
+						<div class="panel-body">
+						
+							<select name="user_role" multiple="multiple" class="input-block-level required" size="15" id="listRoles" >
+							</select>
+						
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+				</form>
+			</div>

@@ -1,0 +1,56 @@
+#parse("/module/mod-grid.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/goods/gift/gift-skulist.js?version=$!{JS_VERSION}" ></script>
+
+<input type="hidden" value="$!{}" id="gdsId"/>
+
+<div class="well well-searchForm">
+	<input type="hidden" value="" name="shopId" id="shopId"/>
+			<form id="searchForm" class="form-horizontal required-validate" style="margin-bottom: 0px;">
+			<div class="row-fluid">
+				<div class="span5">
+					<div class="control-group">
+						<label class="control-label">单品编码：</label>
+						<div class="controls">
+							<input type="text" name="skuId" id="skuId" class="input-medium digits" value="" placeholder="输入商品编码">
+						</div>
+					</div>
+				</div>
+				<div class="span5">
+					<div class="control-group">
+						<label class="control-label">单品名称：</label>
+						<div class="controls">
+							<input type="text" name="skuName" id="skuName" class="input-medium" value="" placeholder="输入商品名称">
+						</div>
+					</div>
+				</div>
+				
+				<div class="clear"></div>
+			</div>
+			
+			
+				<div class="row-fluid">
+				<div class="span5">
+					<div class="control-group">
+						<label class="control-label">ISBN号：</label>
+						<div class="controls">
+							<input type="text" name="isbn" id="isbn" class="input-medium " value="" placeholder="输入ISBN号">
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			
+			</form>
+		</div>
+		<div class="row-fluid" style="margin-bottom: 10px;">
+			<div class="pull-right">
+				<a class="btn btn-info" id="btnFormSearch" href="#"><i class="icon-search icon-white"></i> 查询</a>
+				<a class="btn" id="btnFormReset" href="#"><i class="icon-refresh"></i> 重置</a>
+			</div>
+		</div>
+<div class="row-fluid">
+	<table id="dataGridTable"></table>
+</div>
+<dir class="clear">
+</dir>

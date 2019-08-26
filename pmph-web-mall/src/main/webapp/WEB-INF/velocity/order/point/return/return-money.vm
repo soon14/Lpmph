@@ -1,0 +1,267 @@
+#parse("sys/sys_param.vm")
+<title>退款详情 -积分商城</title>
+<!--content-->
+<div id="content" class="pay">
+    <div class="wrap1200">
+       <ul class="pay-step">
+            <li #if($!{rBackApplyResp.status} == '00' || $!{rBackApplyResp.status} == '05') class="active" #end>
+                <div class="s-txt">
+						退款申请
+                </div>
+                <div class="s-num">
+                    1
+                </div>
+            </li>
+            <li #if($!{rBackApplyResp.status} == '01') class="active" #end>
+                <div class="s-txt">
+						供货商同意
+                </div>
+                <div class="s-num">
+                    2
+                </div>
+            </li>
+            <li #if($!{rBackApplyResp.status} == '04') class="active" #end>
+                <div class="s-txt">
+					供货商确认退款
+                </div>
+                <div class="s-num">
+                    3
+                </div>
+            </li>
+        </ul>
+		<div class="ret-container">
+			<div class="ret-box">
+                <div class="head">
+                    <h3>订单信息</h3>
+                </div>
+                <div class="body return-ord-detail">
+                    <span class="number">订单号：<a href="javascript:void(0)" >$!{rBackApplyResp.orderId}</a></span>
+                    <input id="orderId" name="orderId" type="hidden" value="$!{rBackApplyResp.orderId}">
+					<table class="ret-detail">
+                        <thead>
+                        <tr>
+                            <td style="width:100px">书号</td>
+                            <td style="width:100px">商品图片</td>
+                            <td style="width:350px">商品名称</td>
+                            <td style="width:100px">购买数量</td>
+                            <td style="width:150px">购买价格</td>
+                            <td style="width:150px">退款金额</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        #foreach($!backGds in $!rBackGdsResps)
+        					<tr class="bg-fff"> 
+                                <td><div class="border-right">$!{backOrderSub.zsCode} </div></td>
+                                <td><div class="border-right"><a href="#siteInfo(2)$!backGds.gdsUrl" target="_blank"><img src="#genImageUrl($!backGds.getPicId(),'200x200!')" width="48"></img></a></div></td>
+                                <td><div class="border-right"><a href="#siteInfo(2)$!backGds.gdsUrl" target="_blank">$!backGds.gdsName</a></div></td>
+                                <td><div class="border-right">x $!backGds.num</div></td>
+        						<td>
+									<div class="border-right">
+										$!{backGds.score}积分 +
+										#money($!backGds.discountMoney)
+									</div>
+								</td> 
+								#if($velocityCount == 1)
+									<td rowspan="$!rBackGdsResps.size()">
+										<div class="border-right">
+											#if($!{rBackApplyResp.orderScore} && $!{rBackApplyResp.status} != "00")
+												$!{rBackApplyResp.orderScore}积分
+											#end
+											#if($!{rBackApplyResp.orderScore} && $!{rBackApplyResp.backMoney} && $!{rBackApplyResp.status} != "00")
+												+
+											#end
+											#money($!{rBackApplyResp.backMoney})
+										</div>
+									</td> 
+								#end
+                            </tr>
+        				#end 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+			<div class="ret-box">
+                <div class="head">
+                    <h3>凭证信息</h3>
+                </div>
+                <div class="body">
+                    <script>
+                        $(function(){
+                            U.tab(".ret-pzn",".ret-pzc");
+                        })
+                    </script>
+                    <ul class="ret-pzn">
+                        <li>确认收款凭证</li>
+                    </ul>
+                    <div class="ret-pzc">
+                        <div class="item">
+                            <div class="imgs">
+                               #set($vfsId = "")
+								#foreach($!picitem in $!rBackPicResps)
+    								#if($!picitem.picType == '2')
+										#if($!picitem.getVfsId()) 
+											<span> 
+												<img src="#genImageUrl($!picitem.getVfsId(),'')" width="100" style="cursor: pointer" onClick="imgModal(this);" data-toggle="modal" data-target=".bs-img-modal-lg"></img>
+											</span>
+										#end
+									#end 
+								#end  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			#if($!{rBackApplyResp.status} != '00')
+            <div class="ret-box">
+                <div class="head">
+                    <h3>订单优惠信息</h3>
+                </div>
+                <div class="body">
+                    <div class="b-pad">
+    					<table class="ret-pref">
+                          #if($!{rBackDiscountResps} || $!{rBackCouponResps}) 
+    						 #set($itemCount = 0)
+    						 #if($!{rBackDiscountResps})
+            					 #set($disCount = 0)
+    							 #set($discountType = 0)
+    							 #foreach($!backDiscountItem in $!rBackDiscountResps)
+    								#if($!backDiscountItem.discountType == '02')
+    									 #if($!backDiscountItem.procType == '0')
+    										#set($itemCount = 1)
+    										#set($disCount = 1)
+    									 #end
+    									  #if($!backDiscountItem.procType == '1')
+    										#set($itemCount = 1)
+    										#set($disCount = 1)
+    									 #end
+    								#end 
+    								#if($!backDiscountItem.discountType == '03')
+    									  #if($!backDiscountItem.procType == '0')
+    										 #set($discountType = 1)
+    									  #end
+    								#end 
+    							 #end
+    							 #if($!disCount == 1)
+    								<tr class="first-tr">
+                                         <th>积分</th> 
+                                         <td>
+                							#foreach($!backDiscountItem in $!rBackDiscountResps)
+                								#if($!backDiscountItem.discountType == '02')
+                									 #if($!backDiscountItem.procType == '0')
+                										<p>下单使用返还$!{backDiscountItem.amount}积分</p>
+                									 #end
+                									  #if($!backDiscountItem.procType == '1')
+                										<p>下单赠送扣减$!{backDiscountItem.amount}积分</p>
+                									 #end
+                								#end 
+                							#end
+                							
+                                         </td>
+                                     </tr>
+    							 #end
+    							 
+        					 #end
+        					 #if($!rBackCouponResps)
+        						<tr #if($!itemCount == 0) class="first-tr" #end>
+    							   #set($itemCount = 1)
+                                   <th>优惠券</th>
+                                   <td>
+        							   #foreach($!backCouponItem in $!rBackCouponResps)
+            								<p>优惠券名称：$!{backCouponItem.couponTypeName}&nbsp;&nbsp;&nbsp;赠送扣减数量：$!{backCouponItem.couponCnt}</p> 
+        							   #end
+                                   </td>
+                               </tr>  
+        					 #end
+        					 #if($!{rBackDiscountResps})
+    							#if($!discountType == 1)
+    								 #set($zjCount = 0)
+            						 #foreach($!backDiscountItem in $!rBackDiscountResps)
+        								  #if($!backDiscountItem.discountType == '03')
+        									  #if($!backDiscountItem.procType == '0')
+        										#set($itemCount = 1)
+    											#set($zjCount = 1)
+        									  #end
+        								  #end 
+    								 #end
+    								 #if($!zjCount == 1)
+    									<tr #if($!itemCount == 0) class="first-tr" #end>
+                                           <th>资金账户</th>
+                                           <td style="padding-bottom: 25px">
+                							  #foreach($!backDiscountItem in $!rBackDiscountResps)
+                								  #if($!backDiscountItem.discountType == '03')
+                									  #if($!backDiscountItem.procType == '0')
+                										 <p>#translate("STAFF_ACCT_TYPE",$!{backDiscountItem.acctType}):下单使用返还#money($!backDiscountItem.amount)元</p>
+                									  #end
+                								  #end 
+                							  #end
+                                           </td>
+                                       </tr>
+    								 #end
+    								 
+    						   #end
+    						 #end
+    						 #if($!itemCount == 0)
+        						 <tr class="first-tr">
+            						<th>无优惠信息</th>
+        							<td style="padding-bottom: 25px">
+                                    </td>
+            					</tr>
+    						 #end
+    					 #else
+    					    <tr class="first-tr">
+        						<th>无优惠信息</th>
+    							<td style="padding-bottom: 25px">
+                                </td>
+        					</tr>
+    					 #end
+                          
+                       </table>
+                    </div>
+                </div>
+            </div>
+			#end
+            <div class="ret-box">
+                <div class="head">
+                    <h3>退款日志信息</h3>
+                </div>
+                <div class="body">
+                    <table class="ret-logtb">
+                        <thead>
+                        <tr>
+                            <td>操作时间</td>
+                            <td>操作描述</td>
+                            <td>操作人</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        #foreach($!backGdsLog in $!rBackTrackResps)
+							<tr> 
+								<td>$!date.format('yyyy-MM-dd HH:mm:ss',$!{backGdsLog.createTime})</td>
+								<td>$!{backGdsLog.nodeDesc}</td>
+								<td>$!{backGdsLog.staffName}</td>
+                            </tr>
+						#end
+                        </tbody>
+                    </table>
+                    <div class="ret-logdt">
+                         <p>
+                            <span class="log-lb">退货原因：</span>
+                            <span>$!{rBackApplyResp.backTypeName}</span>
+                        </p>
+                        <p>
+                            <span class="log-lb">问题描述：</span>
+                            <span>$!{rBackApplyResp.backDesc}</span>
+                        </p>
+                        <p>
+                            <span class="log-lb">审核意见：</span>
+                            <span>$!{rBackApplyResp.checkDesc}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</div>

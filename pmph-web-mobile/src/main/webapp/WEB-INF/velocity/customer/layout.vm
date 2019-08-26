@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+#parse("/sys/sys_head.vm")
+	
+	<script type="text/javascript" src="$RESOURCE_PATH/jquery/util.js"></script>
+	<script type="text/javascript" src="$RESOURCE_PATH/jquery/artTemplate/template-debug.js"></script>
+<!-- 	<link href="$RESOURCE_PATH/jquery/mCustomScrollbar/jquery.mCustomScrollbar.css" rel="stylesheet" type="text/css" -->
+<!--           media="screen"/> -->
+<!--     <script type="text/javascript" src="$RESOURCE_PATH/jquery/mCustomScrollbar/jquery.mousewheel.js"></script> -->
+<!--     <script type="text/javascript" src="$RESOURCE_PATH/jquery/mCustomScrollbar/jquery.mCustomScrollbar.js"></script> -->
+	<script type="text/javascript" src="$RESOURCE_PATH/bootstrap/theme/gebo_admin/js/jquery.imagesloaded.min.js"></script>
+	<script type="text/javascript" src="$!{RESOURCE_PATH}/js-old/frameajax/ajaxfileupload.js"></script>
+	
+<!--     <script type="text/javascript" charset="utf-8" src="$RESOURCE_PATH/UEdit/ueditor.config.js"></script> -->
+<!--     <script type="text/javascript" charset="utf-8" src="$RESOURCE_PATH/UEdit/ueditor.all.js"></script> -->
+   
+<!--    	<script type="text/javascript" charset="utf-8" src="$RESOURCE_PATH/UEdit/lang/zh-cn/zh-cn.js"></script> -->
+   	<!--全屏查看图片-->
+    <link href="$RESOURCE_PATH/jquery/blueimp-gallery/blueimp-gallery.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script type="text/javascript" src="$RESOURCE_PATH/jquery/blueimp-gallery/jquery.blueimp-gallery.js"></script>
+    <script type="text/javascript" src="$RESOURCE_PATH/jquery/blueimp-gallery/e.image.js"></script>
+	<script type="text/javascript" src="$RESOURCE_PATH/jquery/fastclick/fastclick.js"></script>
+</head>
+<body>
+	
+	$screen_content
+
+</body>
+	
+</html>

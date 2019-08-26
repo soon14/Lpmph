@@ -1,0 +1,337 @@
+<!--时间-->
+<script type="text/html" id="timeRecord">
+    <li class="chat-time">
+        <span class="c-time">{{time}}</span>
+    </li>
+</script>
+<!--订单模版-->
+<script type="text/html" id="recordOrder1">
+<li class="chat-item {{chatSide}}">
+			<div class="head-img">
+                <img src="{{custPic}}" alt=""/>
+            </div>
+            <div class="chat-wrap">
+                <div class="chat">
+                    <div class="proImg">
+                <img src="{{ordImage}}" alt=""/>
+            </div>
+            <div class="proCont">
+                <p class="pinfo">订单编号：{{ordId}}</p>
+
+                <p class="pinfo">订单金额：<span class="c-orange">¥{{price}}</span></p>
+
+                <p class="pinfo">订单时间：{{createTime}}</p></div>
+                </div>
+            </div>
+    </li>    
+
+</script>
+<script type="text/html" id="recordOrder">
+    <li class="odr-item odritem">
+            <input type="hidden" name="ordImage" value="{{ordImage}}"/>
+			<input type="hidden" name="ordId" value="{{ordId}}"/>
+			<input type="hidden" name="price" value="{{price}}"/>
+			<input type="hidden" name="timeDto" value="{{timeDto}}"/>
+			<input type="hidden" name="time" value="{{createTime}}"/>
+			<div class="proImg">
+                <img src="{{ordImage}}" alt=""/>
+            </div>
+            <div class="proCont">
+                <p class="pinfo">订单编号：{{ordId}}</p>
+
+                <p class="pinfo">订单金额：<span class="c-orange">¥{{price}}</span></p>
+
+                <p class="pinfo">订单时间：{{createTime}}</p>
+			</div>
+        </li>
+</script>
+<!--商品模版-->
+
+<script type="text/html" id="recordGds">
+     <li class="odr-item goodsitem">
+            <input type="hidden" name="gdsImage" value="{{gdsImage}}"/>
+			<input type="hidden" name="gdsMsg" value="{{gdsMsg}}"/>
+			<input type="hidden" name="price" value="{{price}}"/>
+			<input type="hidden" name="gdsId" value="{{gdsId}}"/>
+			<input type="hidden" name="gdsName" value="{{gdsName}}"/>
+			<div class="proImg">
+                <img src="{{gdsImage}}" alt=""/>
+            </div>
+            <div class="proCont">
+                <p class="ptit">{{gdsName}}</p>
+                <p class="pinfo"><span class="c-orange">¥{{price}}</span></p>
+			</div>
+        </li>
+</script>
+<script type="text/html" id="recordGds1">
+<li class="chat-item {{chatSide}}">
+			<div class="head-img">
+                <img src="{{custPic}}" alt=""/>
+            </div>
+            <div class="chat-wrap">
+                <div class="chat">
+                    <div class="proImg">
+                <img src="{{gdsImage}}" alt=""/>
+            </div>
+            <div class="proCont">
+                <p class="ptit">{{gdsName}}</p>
+                <p class="pinfo"><span class="c-orange">¥{{price}}</span></p>
+			</div>
+                </div>
+            </div>
+    </li> 
+
+</script>
+<!--发送的普通消息-->
+<script type="text/html" id="selfRecord">
+    <li class="chat-item chat-right">
+			<div class="head-img">
+                <img src="{{custPic}}" alt=""/>
+            </div>
+            <div class="chat-wrap">
+                <div class="chat">
+                    {{#msg}}
+                </div>
+            </div>
+    </li>
+</script>
+<!--接收的普通消息-->
+<script type="text/html" id="record">
+    <li class="chat-item">
+			<div class="head-img">
+                <img src="{{servPic}}" alt=""/>
+            </div>
+            <div class="chat-wrap">
+                <div class="chat">
+                    	{{#msg}}
+                </div>
+            </div>
+    </li>
+</script>
+<!--聊天显示-->
+<script type="text/html" id="showtemp">
+<div class="notice" style="display:none;text-align: center;">
+	
+    	<p></p>
+   
+</div>   
+<div class="chat-record scroll-down" data-am-widget="list_news" id="chatScorllDiv">
+<div class="am-list-news-bd scroll">			
+			<div class="pull-action  pull-down">
+                <span class="pull-label"> 加载数据</span>
+                <span class="am-icon-spinner am-icon-spin"></span>
+            </div>	
+	<ul class="chat-list">
+        <li class="his-tip ser-more" style="display:none;">
+                    查看更多信息
+        </li>
+		<li class="his-tip" id="his-tip1" style="display:none;">
+            	以上是历史消息
+        </li>
+    </ul>
+</div>
+</div>
+</script>
+<!--聊天主板-->
+<script type="text/html" id="chattemp">
+<header class="am-header am-header-fixed">
+    <div class="am-header-title">
+        在线客服
+    </div>
+    <div class="am-header-left am-header-nav"  id="logoutBtn">
+            <i class="public-arrowleft1"></i>
+    </div>
+    <!--<div class="am-header-right">
+        <div class="head-down">
+          <span class="otxt">
+            <i class="iconfont icon-more"></i>
+          </span>
+
+            <div class="down-list">
+                <ul class="ord-item">
+                    <li><a href="#"><i class="icon icon-cusOdr01"></i>我的订单</a></li>
+                    <li><i class="icon icon-cusOdr02"></i>浏览商品</li>
+                </ul>
+            </div>
+        </div>
+    </div>-->
+</header>	
+	<!--聊天显示-->
+	<div id="chatMain{{chatId}}"></div>
+	<!--聊天发送-->
+	<div class="chat-input" id="chat-input">
+        <div class="chat-order">
+            <span class="btnOdr"  id="myorder">我的订单</span>
+            <span class="btnOdr" id="browseGoods">浏览商品</span>
+        </div>
+        <div class="chat-in-head">
+            <div class="head-mFun" id="head-mFun">
+                <img src="$!{IMAGE_PATH}/customer/head-more.png" alt=""/>
+            </div>
+            <div class="head-input" id="head-input">
+              <!-- <div id="editor{{chatId}}" style="width: 100%"></div>-->
+				<div class="inSend needsclick" contenteditable="true"></div>
+				
+            </div>
+            <div class="head-emoticon" id="head-emoticon">
+                <img src="$!{IMAGE_PATH}/customer/head-emoticon.png" alt=""/>
+            </div>
+            <div class="head-send">
+                <button class="send-btn" id="sendMsg">发送</button>
+            </div>
+        </div>
+        <div class="chat-in-cont">
+            <div class="mFun">
+                <ul class="clearfix">
+                    <li>
+                        <label class="funBg">
+						<div class="funBg"><img src="$!{IMAGE_PATH}/customer/function01.png" alt=""/></div>
+						<input type="file" id="upfile" name="upfile" class="input-file" data-role="uploader" accept="image/*">
+						</label>                        
+						<p class="funFont">发送图片</p>
+                    </li>
+                    <li id="funFont">
+                        <div class="funBg"><img src="$!{IMAGE_PATH}/customer/function02.png" alt=""/></div>
+                        <p class="funFont">满意度评价</p>
+                    </li>
+                    <li id="hismsgbtn">
+                        <div class="funBg"><img src="$!{IMAGE_PATH}/customer/function03.png" alt=""/></div>
+                        <p class="funFont">历史消息</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="emoticon">
+				<div class="emoticons">
+					<div class="am-slider am-slider-default">
+						<ul class="am-slides">
+						</ul>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+	<!--评价-->
+	<div class="customer-evaluate-fixed" style="display: none;">
+    <div class="customer-evaluate">
+        <div class="eva-head">
+            <img src="$!{IMAGE_PATH}/customer/evahead.png" alt=""/>
+
+            <div class="evaClose">
+                <img src="$!{IMAGE_PATH}/customer/closeIMG.png" alt=""/>
+            </div>
+        </div>
+        <div class="eva-cont">
+            <h2 class="tit">请您对本次服务评价</h2>
+            <ul class="eva-state clearfix">
+                <input type="hidden" name="evalscore" value="4"/>
+				<li value="5">非常满意</li>
+                <li class="active" value="4">满意</li>
+                <li value="3">一般</li>
+                <li value="2">对服务不满意</li>
+                <li value="1">对业务流程不满意</li>
+            </ul>
+            <div class="eva-edit" style="display: none;">
+                <input type="text" name="notSatisfyReason" id="notSatisfyReason" placeholder="填写评价内容" class="evaEditInput"/>
+                <span></span>
+			</div>
+        </div>
+        <div class="eva-submit"><span class="eva-btn">提交</span></div>
+   	 </div>
+</div>
+</script>
+<!--订单列表页面-->
+<script type="text/html" id="orderlist">
+<header class="am-header am-header-fixed">
+    <div class="am-header-title">
+        我的订单
+    </div>
+    <div class="am-header-left am-header-nav">
+            <i class="public-arrowleft1" id="orderBackBtn"></i>
+    </div>
+</header>
+<div id="orderDiv" data-am-widget="list_news" class="scroll-down">
+<div class="am-list-news-bd scroll" style="">
+	<div class="pull-action  pull-down">
+     	<span class="pull-label"> 加载数据</span>
+     	<span class="am-icon-spinner am-icon-spin"></span>
+	</div>
+	<ul class="customer-order" id="customer-order">
+		 
+	</ul>
+</div>
+</div>
+</script>
+
+<!--订单弹窗模型-->
+<script type="text/html" id="orderWinTemp">
+<div style="display:none" id="dlgCont" class="dlgCont">
+        <div class="customer-order dialog-order orderdoalog">
+            
+        </div>
+        <div class="odr-btn">
+            <button class="btn btn-qd" id="confimBtn">确定</button>
+            <button class="btn" id="closeBtn">取消</button>
+        </div>
+ </div>
+</script>
+<!--商品列表页面-->
+<script type="text/html" id="gdslist">
+<header class="am-header am-header-fixed">
+    <div class="am-header-title">
+        浏览商品
+    </div>
+    <div class="am-header-left am-header-nav">
+            <i class="public-arrowleft1" id="goodsBackBtn"></i>
+    </div>
+</header>
+<div id="goodsDiv" data-am-widget="list_news" class="scroll-down">
+<div class="am-list-news-bd scroll">
+<div class="pull-action  pull-down">
+     	<span class="pull-label"> 加载数据</span>
+     	<span class="am-icon-spinner am-icon-spin"></span>
+</div>
+<ul class="customer-order" id="customer-gds">
+
+</ul>
+</div>
+</div>
+</script>
+<!--商品弹窗模型-->
+<script type="text/html" id="gdsWinTemp">
+<div style="display:none" id="dlgCont2" class="dlgCont2">
+        <div class="customer-order dialog-order goodsdoalog">
+            
+        </div>
+        <div class="odr-btn">
+            <button class="btn btn-qd" id="confimBtn2">确定</button>
+            <button class="btn" id="closeBtn2">取消</button>
+        </div>
+ </div>
+</script>
+<!--历史消息-->
+<script type="text/html" id="histemp">
+	<header class="am-header am-header-fixed">
+    <div class="am-header-title">
+        历史消息
+    </div>
+    <div class="am-header-left am-header-nav">
+            <i class="public-arrowleft1" id="hisBackBtn"></i>
+    </div>
+	</header>	
+	<!--历史消息显示-->
+	<div id="historyMain{{chatId}}" >
+		<div class="chat-record scroll-down"  id="hisScorllDiv">
+		<div class="am-list-news-bd scroll" style="padding-bottom:0px;">			
+			<div class="pull-action  pull-down">
+     			<span class="pull-label"> 加载数据</span>
+     			<span class="am-icon-spinner am-icon-spin"></span>
+			</div>
+			<ul class="chat-list">
+        		<li class="his-tip ser-more" style="display:none;">
+                   	 查看更多信息
+        		</li>
+    		</ul>
+		</div>
+		</div>
+	</div>
+</script>

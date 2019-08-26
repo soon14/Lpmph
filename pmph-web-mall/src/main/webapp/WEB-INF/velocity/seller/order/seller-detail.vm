@@ -1,0 +1,134 @@
+#parse("sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/seller-detail.js?version=$!{JS_VERSION}"></script>
+
+<div class="seller-mainR">
+	<form id="exportForm" action="$!{CONTEXT_PATH}/seller/order/detail/exportDetail" target="_blank" method="post" style="display:none">
+    	<input type="hidden" name="exportInfo" id="exportInfo" value="0">
+    	<input type="hidden" name="exportType" id="exportType" value="0">
+	</form>
+    <div class="main">
+        <div class="seller-well">
+            <form id="searchForm" action="" class="form-horizontal required-validate">
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">店铺名称：</label>
+                            <div class="controls">
+                                <select name="shopId" id="" class="input-block-level" >
+                                    ##<option value="">请选择</option>
+                                    ###shopStatuslist('','1')
+                                    #sellerList('1')
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">会员名：</label>
+                            <div class="controls">
+                                <input type="text" name="staffCode" class="input-block-level" value="" placeholder="输入名称">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">商品名称：</label>
+                            <div class="controls">
+                                <input type="text" name="gdsName" class="input-block-level" value="" placeholder="输入名称">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label">订单编号：</label>
+                            <div class="controls">
+                                <input type="text" name="orderId" class="input-block-level" value="" placeholder="输入编号">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span8">
+                        <div class="control-group">
+                            <label class="control-label" for="begDate">购买日期：</label>
+                            <div class="controls">
+                                <input type="text" class="input-block-level Wdate"
+                                       onclick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" name="begDate"
+                                       value="$!date.format('yyyy-MM-dd',$!{begDate})" id="begDate" style="cursor: pointer; width: 135px">
+                                至
+                                <input type="text" class="input-block-level Wdate"
+                                       onclick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begDate\')}'})" name="endDate"
+                                       value="$!date.format('yyyy-MM-dd',$!{endDate})" id="endDate" style="cursor: pointer;width: 135px">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+	                <div class="row-fluid">
+	                	<div class="span4">
+	                		<div class="control-group">
+	                    	<label class="control-label">ISBN号：</label>
+	                    		<div class="controls">
+	                        		<input type="text" id="isbn" name="isbn" class="input-medium" value="" placeholder="ISBN号">
+	                    		</div>
+	                		</div>
+	            		</div>
+	            		<div class="span4">
+	                		<div class="control-group">
+	                    	<label class="control-label">支付方式：</label>
+	                    	<div class="controls">
+	                        	<select name="payType" class="input-medium" id="offline_grid_payType"  >
+		                            <option value="">--请选择--</option>
+		                            <option value='0'>线上支付</option>
+		                            <option value='1'>线下支付</option>
+	                        	</select>
+	                    	</div>
+	                	</div>
+	            	</div>
+	            	<div class="clear"></div>
+                </div>
+            </form>
+        </div>
+		<input type="hidden" name="resetBegDate" id="resetBegDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+    	<input type="hidden" name="resetEndDate" id="resetEndDate" value="$!date.format('yyyy-MM-dd',$!{endDate})">
+			
+        <div class="alert alert-info">
+            <label class="control-label">累计下单<span id="orderCount" class="numberFont"></span>笔,
+                        订单总笔数<span id="orderNum" class="numberFont"></span>笔,
+                        商品销售总数<span id="saleNum" class="numberFont"></span>笔,
+                        ##成交率<span id="payedRate" class="numberFont"></span>%,
+                        累计订单应付金额<span id="basicMoney" class="numberFont"></span>元,
+                        累计订单实付金额<span id="realMoney" class="numberFont"></span>元
+            </label>
+        </div>
+        <div class="seller-tab">
+            <div class="tab-content" >
+                <div class="nItem">
+                    <div class="row-fluid">
+                        <div class="span4">
+                                <span class="sbtn sbtn-blue" id="btnFormExport"><i class="icon-download-alt"></i> 导出</span>
+                        </div>
+                        <div class="span4">
+                        </div>
+                        <div class="span4">
+                            <div class="control-group">
+                                <div class="controls">
+                                    <div class="btn-wrap btn-w-right">
+                                        <span class="sbtn sbtn-blue" id="btnFormSearch"><i class="icon-search"></i> 查询</span>
+                                        <span class="sbtn" id="btnFormReset"><i class="icon-asterisk icon-color"></i> 重置</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+    				<div style="overflow-x: auto;" id="order-contentDiv">
+    					#parse("/seller/order/detaillist/seller-detail-list.vm")
+                    </div>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>

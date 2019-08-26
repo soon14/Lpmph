@@ -1,0 +1,29 @@
+<!-- 首页医学教育-->
+#parse("/rwgw/sys/sys_param.vm")
+#if($floorAdRespList && 0 < ${floorAdRespList.size()})
+<div class="box">
+    <div class="box-head">
+        <i class="box-ticon ticon-medical"></i>
+        #if(${floorRespDTO} && ${floorRespDTO.linkUrl} && '' != ${floorRespDTO.linkUrl})
+        <a class="r-opt" href="$!{floorRespDTO.linkUrl}">
+            more
+        	<i class="micon micon-more"></i>
+        </a>
+        #end
+    </div>
+    <div class="box-body">
+        <ul class="gwIdx-imgList clearfix">
+        	#foreach($floorAd in ${floorAdRespList})
+            <li>
+                <div class="wrapImg">
+                	<a href="$!{floorAd.linkUrl}"><img src="$!{floorAd.vfsUrl}" alt="$!{floorAd.advertiseTitle}"></a>
+                </div>
+                <div class="wrapTit">
+                	<a href="$!{floorAd.linkUrl}">$!{floorAd.advertiseTitle}</a>
+                </div>
+            </li>
+            #end
+        </ul>
+    </div>
+</div>
+#end

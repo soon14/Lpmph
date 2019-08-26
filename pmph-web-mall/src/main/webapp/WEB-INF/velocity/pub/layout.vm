@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>我的征订单-#siteName('')</title>
+    <meta charset="UTF-8">
+    #parse("/sys/sys_head.vm")
+	<link href="$!{RESOURCE_PATH}/qTip2/jquery.qtip.css" type="text/css" rel="stylesheet"/>
+	<link href="$!{CSS_PATH}/reset.css" type="text/css" rel="stylesheet"/>
+	<link href="$!{CSS_PATH}/member.css" type="text/css" rel="stylesheet"/>
+	##<link rel="stylesheet" href="$!{CSS_PATH}/default/staff/member.css" />
+	<link href="$!{CSS_PATH}/pub.css" type="text/css" rel="stylesheet"/>
+	<style>
+    	body{word-break: break-all;}
+	</style>
+	<script type="text/javascript" src="$!{BUSIJS_PATH}/pub/all-order-list.js?version=$!{JS_VERSION}" ></script>
+	<script type="text/javascript" src="$!{RESOURCE_PATH}/qTip2/jquery.qtip.js?version=$!{JS_VERSION}"></script>    
+
+</head>
+<body>
+<input type="hidden" id="status" value="$!{status}"></input>
+<!--右侧的楼层导航-->
+
+
+<!--顶部的广告-->
+<div class="text-center">
+</div>
+
+<!--顶部 begin-->
+<div id="header" class="clearfix">
+	#parse("/main/main-site-nav.vm")
+</div>
+<!--顶部 end-->
+
+<!--内容 begin-->
+<div class="wrap1200 ">
+    <div id="content" class="clearfix">
+        #parse("/main/main-buyer-menu.vm")
+        $screen_content
+    </div>
+</div>
+<!--内容 end-->
+
+
+<!--底部 begin-->
+<div id="footer" class="text-center">
+    #parse("/main/main-bottom.vm")
+</div>
+<!--底部 end-->
+
+
+
+</body>
+</html>

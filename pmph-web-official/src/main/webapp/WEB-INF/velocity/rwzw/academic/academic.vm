@@ -1,0 +1,157 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-scroll.vm")
+#siteInfo('1')
+<!--广告-->
+<div class="wrap100">
+    <div class="scrollLoad acade-f xs-bg01" style="opacity: 0.1;filter:alpha(opacity=10)">
+        <div class="container xs-img01">
+            <div class="xs-font01"><img src="$IMAGE_PATH/xs-font01.png"> </div>
+            <div class="xs-btn01"><a href="${siteUrl}homepage?page=referencebook" target="_blank"><img src="$IMAGE_PATH/xs-btn01.png"/></a> </div>
+        </div>
+		 <div class="link link-f1">
+            <div class="link-logo"></div>
+              <span class="link-c">
+                  <a href="${siteUrl}homepage?page=referencebook" target="_blank">人卫学术图书</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+
+    <div class="scrollLoad acade-f xs-bg02">
+        <div class="container xsBox02">
+            <div class="bg02-text" style="position: relative; top: 30px;opacity: 0.1;filter:alpha(opacity=10)">
+                <div class="xs-font02"><img src="$IMAGE_PATH/xs-font02.png"> </div>
+                <div class="xs-btn02"><a href="http://zengzhi.ipmph.com/" target="_blank"><img src="$IMAGE_PATH/xs-btn02.png"/></a> </div>
+            </div>
+			 <div class="link link-f2">
+                <div class="link-logo"></div>
+              <span class="link-c">
+                  <a href="http://zengzhi.ipmph.com/" target="_blank">融合学术专著</a>
+                  <span class="arrow-left"></span>
+              </span>
+            </div>
+        </div>
+		
+    </div>
+    <div class="scrollLoad acade-f xs-bg05">
+        <div class="container xsBox05">
+            <div class="bg02-text" style="position: relative; top: 30px;opacity: 0.1;filter:alpha(opacity=10)">
+                <div class="xs-font05"><img src="$IMAGE_PATH/xs-font05.png"></div>
+                <div class="xs-btn05"><a href="http://ccdas.ipmph.com/" target="_blank"><img src="$IMAGE_PATH/xs-btn05.png" /></a></div>
+            </div>
+            <div class="link link-f6">
+                <div class="link-logo"></div>
+		        <span class="link-c">
+		            <a href="http://ccdas.ipmph.com/" target="_blank">人卫临床助手</a>
+		            <span class="arrow-left"></span>
+		        </span>
+            </div>
+        </div>
+    </div>
+    <div class="scrollLoad acade-f xs-bg06">
+           <div class="container">
+               <div class="bg02-text" style="position: relative; top: 30px;opacity: 0.1;filter:alpha(opacity=10)">
+                   <div class="xs-font06"><img src="$IMAGE_PATH/xs-font06.png"></div>
+                   <div class="xs-btn06"><a href="http://pharmacy.ipmph.com/" target="_blank"><img src="$IMAGE_PATH/xs-btn06.png" /></a></div>
+               </div>
+               <div class="link link-f7">
+                   <div class="link-logo"></div>
+                     <span class="link-c">
+                      <a href=" http://pharmacy.ipmph.com/" target="_blank">人卫用药助手</a>
+                         <span class="arrow-left"></span>
+                     </span>
+               </div>
+           </div>
+    </div>
+    <div class="scrollLoad acade-f xs-bg04">
+        <div class="container xsBox04">
+            <div class="bg04-text" style="top:30px; position: relative;opacity: 0.1;filter:alpha(opacity=10)" >
+                <div class="xs-font04"><img src="$IMAGE_PATH/xs-font04.png"> </div>
+                <div class="xs-btn04"><a href="http://books.ipmph.com/" target="_blank"><img src="$IMAGE_PATH/xs-btn04.png"/></a></div>
+            </div>
+			 <div class="link link-f3">
+                <div class="link-logo"></div>
+              <span class="link-c">
+                  <a href="http://books.ipmph.com/" target="_blank">富媒体电子书</a>
+                  <span class="arrow-left"></span>
+              </span>
+            </div>
+        </div>
+    </div>
+    <div class="scrollLoad acade-f xs-bg03">
+        <div class="container xsBox03 ">
+            <div class="bg03-text"  style="top: 30px; position: relative;opacity: 0.1;filter:alpha(opacity=10)">
+            <div class="xs-font03"><img src="$IMAGE_PATH/xs-font03.png"> </div>
+            <div class="xs-btn03"><a href="http://medbooks.ipmph.com/medical/medbooks/index.zhtml" target="_blank"><img src="$IMAGE_PATH/xs-btn03.png"/></a> </div></div>
+        </div>
+		 <div class="link link-f4">
+            <div class="link-logo"></div>
+              <span class="link-c">
+                 <a href="http://medbooks.ipmph.com/medical/medbooks/index.zhtml" target="_blank">临床知识库</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+    <!--div class="scrollLoad acade-f xs-bg08">
+        <div class="container">
+            <div class="bg02-text" style="top: 30px; position: relative;opacity: 0.1;filter:alpha(opacity=10)">
+                <div class="xs-font"><img src="$IMAGE_PATH/xs-font08.png"></div>
+                <div class="xs-btn"><a href="http://lib.pmph.com/" target="_blank"><img src="$IMAGE_PATH/xs-btn08.png" /></a></div>
+            </div>
+        </div>
+        <div class="link link-f8">
+            <div class="link-logo"></div>
+	          	<span class="link-c" style="width: 120px">
+	              	<a href="http://lib.pmph.com/" target="_blank">医药图书馆</a>
+	              	<span class="arrow-left"></span>
+	          	</span>
+        	</div>
+    </div-->
+    <div class="scrollLoad acade-f xs-bg07" >
+        <div class="container"  >
+            <div class="xs-font07" style="opacity: 0.1; filter:alpha(opacity=10)">
+            <a href="http://booksupdate.ipmph.com/bookonline/index.zhtml" target="_blank"><img src="$IMAGE_PATH/xs-font07.png"/></a> </div>
+        </div>
+		  <div class="link link-f5">
+            <div class="link-logo"></div>
+              <span class="link-c">
+                 <a href="http://booksupdate.ipmph.com/bookonline/index.zhtml" target="_blank">在线参考书</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+    <script>
+        $('.scrollLoad').scrollLoading({
+            callback:function(obj){
+                if($(obj).hasClass('xs-bg01'))
+                {
+                    $(obj).animate({'opacity':1},2000);
+                }
+                else if ($(obj).hasClass('xs-bg02')) {
+                    $(obj).find('.bg02-text').animate({'top': 0, 'opacity': 1}, 1000);
+                }
+                else if ($(obj).hasClass('xs-bg03')) {
+                    $(obj).find('.bg03-text').animate({'top': 0, 'opacity': 1}, 1000);
+                }
+                else if ($(obj).hasClass('xs-bg04')) {
+                    $(obj).find('.bg04-text').animate({'top': 0, 'opacity': 1}, 1000);
+                }
+                else if ($(obj).hasClass('xs-bg07')) {
+                    $(obj).find('.xs-font07').animate({'opacity': 1}, 1000);
+                } 
+                else if ($(obj).hasClass('xs-bg05')) {
+                    $(obj).find('.bg02-text').animate({'top': 0, 'opacity': 1}, 1000);
+                }
+                else if ($(obj).hasClass('xs-bg06')) {
+                    $(obj).find('.bg02-text').animate({'top': 0, 'opacity': 1}, 1000);
+                }
+                else if ($(obj).hasClass('xs-bg08')) {
+                    $(obj).find('.bg02-text').animate({'top': 0, 'opacity': 1}, 1000);
+                }
+            }
+        });
+		
+		$('#zwlogo').attr('src',$webroot+'images/logo-xs.png');
+		
+    </script>
+</div>

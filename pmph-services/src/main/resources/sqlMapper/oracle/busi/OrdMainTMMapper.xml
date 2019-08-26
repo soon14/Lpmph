@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ai.ecp.pmph.dao.mapper.busi.OrdMainTMMapper" >
+  <resultMap id="BaseResultMap" type="com.ai.ecp.pmph.dao.model.OrdMainTM" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="ORDER_CODE" property="orderCode" jdbcType="VARCHAR" />
+    <result column="TM_STAFF_CODE" property="tmStaffCode" jdbcType="VARCHAR" />
+    <result column="ALIPAY_ACCOUNT" property="alipayAccount" jdbcType="VARCHAR" />
+    <result column="ORDER_MONEY" property="orderMoney" jdbcType="VARCHAR" />
+    <result column="REAL_EXPRESS_FEE" property="realExpressFee" jdbcType="VARCHAR" />
+    <result column="ORDER_SCORE" property="orderScore" jdbcType="VARCHAR" />
+    <result column="SUM_MONEY" property="sumMoney" jdbcType="VARCHAR" />
+    <result column="BACK_SCORE" property="backScore" jdbcType="VARCHAR" />
+    <result column="REAL_MONEY" property="realMoney" jdbcType="VARCHAR" />
+    <result column="REAL_SCORE" property="realScore" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="BUYER_MSG" property="buyerMsg" jdbcType="VARCHAR" />
+    <result column="CONTRACT_NAME" property="contractName" jdbcType="VARCHAR" />
+    <result column="CONTRACT_ADDR" property="contractAddr" jdbcType="VARCHAR" />
+    <result column="DISPATCH_TYPE" property="dispatchType" jdbcType="VARCHAR" />
+    <result column="CONTRACT_TEL" property="contractTel" jdbcType="VARCHAR" />
+    <result column="CONTRACT_NUM" property="contractNum" jdbcType="VARCHAR" />
+    <result column="ORDER_TIME" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="PAY_TIME" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="BB_TITLE" property="bbTitle" jdbcType="VARCHAR" />
+    <result column="BB_TYPE" property="bbType" jdbcType="VARCHAR" />
+    <result column="EXPRESS_NO" property="expressNo" jdbcType="VARCHAR" />
+    <result column="EXPRESS_COMPANY" property="expressCompany" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ORDER_AMOUNT" property="orderAmount" jdbcType="VARCHAR" />
+    <result column="SHOP_ID" property="shopId" jdbcType="VARCHAR" />
+    <result column="SHOP_NAME" property="shopName" jdbcType="VARCHAR" />
+    <result column="CLOSE_REASON" property="closeReason" jdbcType="VARCHAR" />
+    <result column="SHOP_SERVICE_FEE" property="shopServiceFee" jdbcType="VARCHAR" />
+    <result column="STAFF_SERVICE_FEE" property="staffServiceFee" jdbcType="VARCHAR" />
+    <result column="INVOICE_TITLE" property="invoiceTitle" jdbcType="VARCHAR" />
+    <result column="APP_FLAG" property="appFlag" jdbcType="VARCHAR" />
+    <result column="STAGE_ORDER_MSG" property="stageOrderMsg" jdbcType="VARCHAR" />
+    <result column="DOWN_RANK" property="downRank" jdbcType="VARCHAR" />
+    <result column="MODITY_SKU" property="moditySku" jdbcType="VARCHAR" />
+    <result column="MODIFY_CONTRACT_ADDR" property="modifyContractAddr" jdbcType="VARCHAR" />
+    <result column="EXCEPTION_MSG" property="exceptionMsg" jdbcType="VARCHAR" />
+    <result column="TM_COUP_DEDUCT" property="tmCoupDeduct" jdbcType="VARCHAR" />
+    <result column="JFB_DEDUCT" property="jfbDeduct" jdbcType="VARCHAR" />
+    <result column="O2O_FLAG" property="o2oFlag" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_STAFF" property="createStaff" jdbcType="INTEGER" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_STAFF" property="updateStaff" jdbcType="INTEGER" />
+    <result column="RW_STAFF_CODE" property="rwStaffCode" jdbcType="VARCHAR" />
+    <result column="RW_STAFF_ID" property="rwStaffId" jdbcType="INTEGER" />
+    <result column="RW_SCORE_FLAG" property="rwScoreFlag" jdbcType="VARCHAR" />
+    <result column="RW_SCORE" property="rwScore" jdbcType="INTEGER" />
+    <result column="IMPORT_TIME" property="importTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, ORDER_CODE, TM_STAFF_CODE, ALIPAY_ACCOUNT, ORDER_MONEY, REAL_EXPRESS_FEE, ORDER_SCORE, 
+    SUM_MONEY, BACK_SCORE, REAL_MONEY, REAL_SCORE, STATUS, BUYER_MSG, CONTRACT_NAME, 
+    CONTRACT_ADDR, DISPATCH_TYPE, CONTRACT_TEL, CONTRACT_NUM, ORDER_TIME, PAY_TIME, BB_TITLE, 
+    BB_TYPE, EXPRESS_NO, EXPRESS_COMPANY, REMARK, ORDER_AMOUNT, SHOP_ID, SHOP_NAME, CLOSE_REASON, 
+    SHOP_SERVICE_FEE, STAFF_SERVICE_FEE, INVOICE_TITLE, APP_FLAG, STAGE_ORDER_MSG, DOWN_RANK, 
+    MODITY_SKU, MODIFY_CONTRACT_ADDR, EXCEPTION_MSG, TM_COUP_DEDUCT, JFB_DEDUCT, O2O_FLAG, 
+    CREATE_TIME, CREATE_STAFF, UPDATE_TIME, UPDATE_STAFF, RW_STAFF_CODE, RW_STAFF_ID, 
+    RW_SCORE_FLAG, RW_SCORE, IMPORT_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.ai.ecp.pmph.dao.model.OrdMainTMCriteria" >
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       select * from (select t_1.*,rownum as row_num from (
+    </if>
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_ord_main_tm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitClauseStart != null and limitClauseStart >= 0" >
+       <![CDATA[ ) t_1 where rownum<=#{limitClauseCount,jdbcType=INTEGER} + #{limitClauseStart,jdbcType=INTEGER}) t_2 where t_2.row_num>#{limitClauseStart,jdbcType=INTEGER}]]>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_ord_main_tm
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_ord_main_tm
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ai.ecp.pmph.dao.model.OrdMainTMCriteria" >
+    delete from t_ord_main_tm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ai.ecp.pmph.dao.model.OrdMainTM" >
+    insert into t_ord_main_tm (ID, ORDER_CODE, TM_STAFF_CODE, 
+      ALIPAY_ACCOUNT, ORDER_MONEY, REAL_EXPRESS_FEE, 
+      ORDER_SCORE, SUM_MONEY, BACK_SCORE, 
+      REAL_MONEY, REAL_SCORE, STATUS, 
+      BUYER_MSG, CONTRACT_NAME, CONTRACT_ADDR, 
+      DISPATCH_TYPE, CONTRACT_TEL, CONTRACT_NUM, 
+      ORDER_TIME, PAY_TIME, BB_TITLE, 
+      BB_TYPE, EXPRESS_NO, EXPRESS_COMPANY, 
+      REMARK, ORDER_AMOUNT, SHOP_ID, 
+      SHOP_NAME, CLOSE_REASON, SHOP_SERVICE_FEE, 
+      STAFF_SERVICE_FEE, INVOICE_TITLE, APP_FLAG, 
+      STAGE_ORDER_MSG, DOWN_RANK, MODITY_SKU, 
+      MODIFY_CONTRACT_ADDR, EXCEPTION_MSG, TM_COUP_DEDUCT, 
+      JFB_DEDUCT, O2O_FLAG, CREATE_TIME, 
+      CREATE_STAFF, UPDATE_TIME, UPDATE_STAFF, 
+      RW_STAFF_CODE, RW_STAFF_ID, RW_SCORE_FLAG, 
+      RW_SCORE, IMPORT_TIME)
+    values (#{id,jdbcType=VARCHAR}, #{orderCode,jdbcType=VARCHAR}, #{tmStaffCode,jdbcType=VARCHAR}, 
+      #{alipayAccount,jdbcType=VARCHAR}, #{orderMoney,jdbcType=VARCHAR}, #{realExpressFee,jdbcType=VARCHAR}, 
+      #{orderScore,jdbcType=VARCHAR}, #{sumMoney,jdbcType=VARCHAR}, #{backScore,jdbcType=VARCHAR}, 
+      #{realMoney,jdbcType=VARCHAR}, #{realScore,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{buyerMsg,jdbcType=VARCHAR}, #{contractName,jdbcType=VARCHAR}, #{contractAddr,jdbcType=VARCHAR}, 
+      #{dispatchType,jdbcType=VARCHAR}, #{contractTel,jdbcType=VARCHAR}, #{contractNum,jdbcType=VARCHAR}, 
+      #{orderTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=TIMESTAMP}, #{bbTitle,jdbcType=VARCHAR}, 
+      #{bbType,jdbcType=VARCHAR}, #{expressNo,jdbcType=VARCHAR}, #{expressCompany,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{orderAmount,jdbcType=VARCHAR}, #{shopId,jdbcType=VARCHAR}, 
+      #{shopName,jdbcType=VARCHAR}, #{closeReason,jdbcType=VARCHAR}, #{shopServiceFee,jdbcType=VARCHAR}, 
+      #{staffServiceFee,jdbcType=VARCHAR}, #{invoiceTitle,jdbcType=VARCHAR}, #{appFlag,jdbcType=VARCHAR}, 
+      #{stageOrderMsg,jdbcType=VARCHAR}, #{downRank,jdbcType=VARCHAR}, #{moditySku,jdbcType=VARCHAR}, 
+      #{modifyContractAddr,jdbcType=VARCHAR}, #{exceptionMsg,jdbcType=VARCHAR}, #{tmCoupDeduct,jdbcType=VARCHAR}, 
+      #{jfbDeduct,jdbcType=VARCHAR}, #{o2oFlag,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createStaff,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{updateStaff,jdbcType=INTEGER}, 
+      #{rwStaffCode,jdbcType=VARCHAR}, #{rwStaffId,jdbcType=INTEGER}, #{rwScoreFlag,jdbcType=VARCHAR}, 
+      #{rwScore,jdbcType=INTEGER}, #{importTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ai.ecp.pmph.dao.model.OrdMainTM" >
+    insert into t_ord_main_tm
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderCode != null" >
+        ORDER_CODE,
+      </if>
+      <if test="tmStaffCode != null" >
+        TM_STAFF_CODE,
+      </if>
+      <if test="alipayAccount != null" >
+        ALIPAY_ACCOUNT,
+      </if>
+      <if test="orderMoney != null" >
+        ORDER_MONEY,
+      </if>
+      <if test="realExpressFee != null" >
+        REAL_EXPRESS_FEE,
+      </if>
+      <if test="orderScore != null" >
+        ORDER_SCORE,
+      </if>
+      <if test="sumMoney != null" >
+        SUM_MONEY,
+      </if>
+      <if test="backScore != null" >
+        BACK_SCORE,
+      </if>
+      <if test="realMoney != null" >
+        REAL_MONEY,
+      </if>
+      <if test="realScore != null" >
+        REAL_SCORE,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="buyerMsg != null" >
+        BUYER_MSG,
+      </if>
+      <if test="contractName != null" >
+        CONTRACT_NAME,
+      </if>
+      <if test="contractAddr != null" >
+        CONTRACT_ADDR,
+      </if>
+      <if test="dispatchType != null" >
+        DISPATCH_TYPE,
+      </if>
+      <if test="contractTel != null" >
+        CONTRACT_TEL,
+      </if>
+      <if test="contractNum != null" >
+        CONTRACT_NUM,
+      </if>
+      <if test="orderTime != null" >
+        ORDER_TIME,
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME,
+      </if>
+      <if test="bbTitle != null" >
+        BB_TITLE,
+      </if>
+      <if test="bbType != null" >
+        BB_TYPE,
+      </if>
+      <if test="expressNo != null" >
+        EXPRESS_NO,
+      </if>
+      <if test="expressCompany != null" >
+        EXPRESS_COMPANY,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="orderAmount != null" >
+        ORDER_AMOUNT,
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID,
+      </if>
+      <if test="shopName != null" >
+        SHOP_NAME,
+      </if>
+      <if test="closeReason != null" >
+        CLOSE_REASON,
+      </if>
+      <if test="shopServiceFee != null" >
+        SHOP_SERVICE_FEE,
+      </if>
+      <if test="staffServiceFee != null" >
+        STAFF_SERVICE_FEE,
+      </if>
+      <if test="invoiceTitle != null" >
+        INVOICE_TITLE,
+      </if>
+      <if test="appFlag != null" >
+        APP_FLAG,
+      </if>
+      <if test="stageOrderMsg != null" >
+        STAGE_ORDER_MSG,
+      </if>
+      <if test="downRank != null" >
+        DOWN_RANK,
+      </if>
+      <if test="moditySku != null" >
+        MODITY_SKU,
+      </if>
+      <if test="modifyContractAddr != null" >
+        MODIFY_CONTRACT_ADDR,
+      </if>
+      <if test="exceptionMsg != null" >
+        EXCEPTION_MSG,
+      </if>
+      <if test="tmCoupDeduct != null" >
+        TM_COUP_DEDUCT,
+      </if>
+      <if test="jfbDeduct != null" >
+        JFB_DEDUCT,
+      </if>
+      <if test="o2oFlag != null" >
+        O2O_FLAG,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createStaff != null" >
+        CREATE_STAFF,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="updateStaff != null" >
+        UPDATE_STAFF,
+      </if>
+      <if test="rwStaffCode != null" >
+        RW_STAFF_CODE,
+      </if>
+      <if test="rwStaffId != null" >
+        RW_STAFF_ID,
+      </if>
+      <if test="rwScoreFlag != null" >
+        RW_SCORE_FLAG,
+      </if>
+      <if test="rwScore != null" >
+        RW_SCORE,
+      </if>
+      <if test="importTime != null" >
+        IMPORT_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null" >
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tmStaffCode != null" >
+        #{tmStaffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccount != null" >
+        #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMoney != null" >
+        #{orderMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="realExpressFee != null" >
+        #{realExpressFee,jdbcType=VARCHAR},
+      </if>
+      <if test="orderScore != null" >
+        #{orderScore,jdbcType=VARCHAR},
+      </if>
+      <if test="sumMoney != null" >
+        #{sumMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="backScore != null" >
+        #{backScore,jdbcType=VARCHAR},
+      </if>
+      <if test="realMoney != null" >
+        #{realMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="realScore != null" >
+        #{realScore,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerMsg != null" >
+        #{buyerMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="contractName != null" >
+        #{contractName,jdbcType=VARCHAR},
+      </if>
+      <if test="contractAddr != null" >
+        #{contractAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchType != null" >
+        #{dispatchType,jdbcType=VARCHAR},
+      </if>
+      <if test="contractTel != null" >
+        #{contractTel,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNum != null" >
+        #{contractNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bbTitle != null" >
+        #{bbTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bbType != null" >
+        #{bbType,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNo != null" >
+        #{expressNo,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCompany != null" >
+        #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmount != null" >
+        #{orderAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="closeReason != null" >
+        #{closeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="shopServiceFee != null" >
+        #{shopServiceFee,jdbcType=VARCHAR},
+      </if>
+      <if test="staffServiceFee != null" >
+        #{staffServiceFee,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTitle != null" >
+        #{invoiceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="appFlag != null" >
+        #{appFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="stageOrderMsg != null" >
+        #{stageOrderMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="downRank != null" >
+        #{downRank,jdbcType=VARCHAR},
+      </if>
+      <if test="moditySku != null" >
+        #{moditySku,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyContractAddr != null" >
+        #{modifyContractAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionMsg != null" >
+        #{exceptionMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="tmCoupDeduct != null" >
+        #{tmCoupDeduct,jdbcType=VARCHAR},
+      </if>
+      <if test="jfbDeduct != null" >
+        #{jfbDeduct,jdbcType=VARCHAR},
+      </if>
+      <if test="o2oFlag != null" >
+        #{o2oFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null" >
+        #{createStaff,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null" >
+        #{updateStaff,jdbcType=INTEGER},
+      </if>
+      <if test="rwStaffCode != null" >
+        #{rwStaffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rwStaffId != null" >
+        #{rwStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="rwScoreFlag != null" >
+        #{rwScoreFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="rwScore != null" >
+        #{rwScore,jdbcType=INTEGER},
+      </if>
+      <if test="importTime != null" >
+        #{importTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ai.ecp.pmph.dao.model.OrdMainTMCriteria" resultType="java.lang.Long" >
+    select count(*) from t_ord_main_tm
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_ord_main_tm
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderCode != null" >
+        ORDER_CODE = #{record.orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tmStaffCode != null" >
+        TM_STAFF_CODE = #{record.tmStaffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.alipayAccount != null" >
+        ALIPAY_ACCOUNT = #{record.alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderMoney != null" >
+        ORDER_MONEY = #{record.orderMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realExpressFee != null" >
+        REAL_EXPRESS_FEE = #{record.realExpressFee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderScore != null" >
+        ORDER_SCORE = #{record.orderScore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sumMoney != null" >
+        SUM_MONEY = #{record.sumMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.backScore != null" >
+        BACK_SCORE = #{record.backScore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realMoney != null" >
+        REAL_MONEY = #{record.realMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realScore != null" >
+        REAL_SCORE = #{record.realScore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.buyerMsg != null" >
+        BUYER_MSG = #{record.buyerMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractName != null" >
+        CONTRACT_NAME = #{record.contractName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractAddr != null" >
+        CONTRACT_ADDR = #{record.contractAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dispatchType != null" >
+        DISPATCH_TYPE = #{record.dispatchType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractTel != null" >
+        CONTRACT_TEL = #{record.contractTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contractNum != null" >
+        CONTRACT_NUM = #{record.contractNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderTime != null" >
+        ORDER_TIME = #{record.orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payTime != null" >
+        PAY_TIME = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.bbTitle != null" >
+        BB_TITLE = #{record.bbTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bbType != null" >
+        BB_TYPE = #{record.bbType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressNo != null" >
+        EXPRESS_NO = #{record.expressNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expressCompany != null" >
+        EXPRESS_COMPANY = #{record.expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderAmount != null" >
+        ORDER_AMOUNT = #{record.orderAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopId != null" >
+        SHOP_ID = #{record.shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopName != null" >
+        SHOP_NAME = #{record.shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.closeReason != null" >
+        CLOSE_REASON = #{record.closeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopServiceFee != null" >
+        SHOP_SERVICE_FEE = #{record.shopServiceFee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.staffServiceFee != null" >
+        STAFF_SERVICE_FEE = #{record.staffServiceFee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoiceTitle != null" >
+        INVOICE_TITLE = #{record.invoiceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appFlag != null" >
+        APP_FLAG = #{record.appFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stageOrderMsg != null" >
+        STAGE_ORDER_MSG = #{record.stageOrderMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downRank != null" >
+        DOWN_RANK = #{record.downRank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.moditySku != null" >
+        MODITY_SKU = #{record.moditySku,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyContractAddr != null" >
+        MODIFY_CONTRACT_ADDR = #{record.modifyContractAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionMsg != null" >
+        EXCEPTION_MSG = #{record.exceptionMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tmCoupDeduct != null" >
+        TM_COUP_DEDUCT = #{record.tmCoupDeduct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jfbDeduct != null" >
+        JFB_DEDUCT = #{record.jfbDeduct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.o2oFlag != null" >
+        O2O_FLAG = #{record.o2oFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createStaff != null" >
+        CREATE_STAFF = #{record.createStaff,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTime != null" >
+        UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateStaff != null" >
+        UPDATE_STAFF = #{record.updateStaff,jdbcType=INTEGER},
+      </if>
+      <if test="record.rwStaffCode != null" >
+        RW_STAFF_CODE = #{record.rwStaffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rwStaffId != null" >
+        RW_STAFF_ID = #{record.rwStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="record.rwScoreFlag != null" >
+        RW_SCORE_FLAG = #{record.rwScoreFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rwScore != null" >
+        RW_SCORE = #{record.rwScore,jdbcType=INTEGER},
+      </if>
+      <if test="record.importTime != null" >
+        IMPORT_TIME = #{record.importTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_ord_main_tm
+    set ID = #{record.id,jdbcType=VARCHAR},
+      ORDER_CODE = #{record.orderCode,jdbcType=VARCHAR},
+      TM_STAFF_CODE = #{record.tmStaffCode,jdbcType=VARCHAR},
+      ALIPAY_ACCOUNT = #{record.alipayAccount,jdbcType=VARCHAR},
+      ORDER_MONEY = #{record.orderMoney,jdbcType=VARCHAR},
+      REAL_EXPRESS_FEE = #{record.realExpressFee,jdbcType=VARCHAR},
+      ORDER_SCORE = #{record.orderScore,jdbcType=VARCHAR},
+      SUM_MONEY = #{record.sumMoney,jdbcType=VARCHAR},
+      BACK_SCORE = #{record.backScore,jdbcType=VARCHAR},
+      REAL_MONEY = #{record.realMoney,jdbcType=VARCHAR},
+      REAL_SCORE = #{record.realScore,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      BUYER_MSG = #{record.buyerMsg,jdbcType=VARCHAR},
+      CONTRACT_NAME = #{record.contractName,jdbcType=VARCHAR},
+      CONTRACT_ADDR = #{record.contractAddr,jdbcType=VARCHAR},
+      DISPATCH_TYPE = #{record.dispatchType,jdbcType=VARCHAR},
+      CONTRACT_TEL = #{record.contractTel,jdbcType=VARCHAR},
+      CONTRACT_NUM = #{record.contractNum,jdbcType=VARCHAR},
+      ORDER_TIME = #{record.orderTime,jdbcType=TIMESTAMP},
+      PAY_TIME = #{record.payTime,jdbcType=TIMESTAMP},
+      BB_TITLE = #{record.bbTitle,jdbcType=VARCHAR},
+      BB_TYPE = #{record.bbType,jdbcType=VARCHAR},
+      EXPRESS_NO = #{record.expressNo,jdbcType=VARCHAR},
+      EXPRESS_COMPANY = #{record.expressCompany,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      ORDER_AMOUNT = #{record.orderAmount,jdbcType=VARCHAR},
+      SHOP_ID = #{record.shopId,jdbcType=VARCHAR},
+      SHOP_NAME = #{record.shopName,jdbcType=VARCHAR},
+      CLOSE_REASON = #{record.closeReason,jdbcType=VARCHAR},
+      SHOP_SERVICE_FEE = #{record.shopServiceFee,jdbcType=VARCHAR},
+      STAFF_SERVICE_FEE = #{record.staffServiceFee,jdbcType=VARCHAR},
+      INVOICE_TITLE = #{record.invoiceTitle,jdbcType=VARCHAR},
+      APP_FLAG = #{record.appFlag,jdbcType=VARCHAR},
+      STAGE_ORDER_MSG = #{record.stageOrderMsg,jdbcType=VARCHAR},
+      DOWN_RANK = #{record.downRank,jdbcType=VARCHAR},
+      MODITY_SKU = #{record.moditySku,jdbcType=VARCHAR},
+      MODIFY_CONTRACT_ADDR = #{record.modifyContractAddr,jdbcType=VARCHAR},
+      EXCEPTION_MSG = #{record.exceptionMsg,jdbcType=VARCHAR},
+      TM_COUP_DEDUCT = #{record.tmCoupDeduct,jdbcType=VARCHAR},
+      JFB_DEDUCT = #{record.jfbDeduct,jdbcType=VARCHAR},
+      O2O_FLAG = #{record.o2oFlag,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=TIMESTAMP},
+      CREATE_STAFF = #{record.createStaff,jdbcType=INTEGER},
+      UPDATE_TIME = #{record.updateTime,jdbcType=TIMESTAMP},
+      UPDATE_STAFF = #{record.updateStaff,jdbcType=INTEGER},
+      RW_STAFF_CODE = #{record.rwStaffCode,jdbcType=VARCHAR},
+      RW_STAFF_ID = #{record.rwStaffId,jdbcType=INTEGER},
+      RW_SCORE_FLAG = #{record.rwScoreFlag,jdbcType=VARCHAR},
+      RW_SCORE = #{record.rwScore,jdbcType=INTEGER},
+      IMPORT_TIME = #{record.importTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ai.ecp.pmph.dao.model.OrdMainTM" >
+    update t_ord_main_tm
+    <set >
+      <if test="orderCode != null" >
+        ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tmStaffCode != null" >
+        TM_STAFF_CODE = #{tmStaffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="alipayAccount != null" >
+        ALIPAY_ACCOUNT = #{alipayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="orderMoney != null" >
+        ORDER_MONEY = #{orderMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="realExpressFee != null" >
+        REAL_EXPRESS_FEE = #{realExpressFee,jdbcType=VARCHAR},
+      </if>
+      <if test="orderScore != null" >
+        ORDER_SCORE = #{orderScore,jdbcType=VARCHAR},
+      </if>
+      <if test="sumMoney != null" >
+        SUM_MONEY = #{sumMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="backScore != null" >
+        BACK_SCORE = #{backScore,jdbcType=VARCHAR},
+      </if>
+      <if test="realMoney != null" >
+        REAL_MONEY = #{realMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="realScore != null" >
+        REAL_SCORE = #{realScore,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerMsg != null" >
+        BUYER_MSG = #{buyerMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="contractName != null" >
+        CONTRACT_NAME = #{contractName,jdbcType=VARCHAR},
+      </if>
+      <if test="contractAddr != null" >
+        CONTRACT_ADDR = #{contractAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatchType != null" >
+        DISPATCH_TYPE = #{dispatchType,jdbcType=VARCHAR},
+      </if>
+      <if test="contractTel != null" >
+        CONTRACT_TEL = #{contractTel,jdbcType=VARCHAR},
+      </if>
+      <if test="contractNum != null" >
+        CONTRACT_NUM = #{contractNum,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTime != null" >
+        ORDER_TIME = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bbTitle != null" >
+        BB_TITLE = #{bbTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="bbType != null" >
+        BB_TYPE = #{bbType,jdbcType=VARCHAR},
+      </if>
+      <if test="expressNo != null" >
+        EXPRESS_NO = #{expressNo,jdbcType=VARCHAR},
+      </if>
+      <if test="expressCompany != null" >
+        EXPRESS_COMPANY = #{expressCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmount != null" >
+        ORDER_AMOUNT = #{orderAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        SHOP_ID = #{shopId,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        SHOP_NAME = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="closeReason != null" >
+        CLOSE_REASON = #{closeReason,jdbcType=VARCHAR},
+      </if>
+      <if test="shopServiceFee != null" >
+        SHOP_SERVICE_FEE = #{shopServiceFee,jdbcType=VARCHAR},
+      </if>
+      <if test="staffServiceFee != null" >
+        STAFF_SERVICE_FEE = #{staffServiceFee,jdbcType=VARCHAR},
+      </if>
+      <if test="invoiceTitle != null" >
+        INVOICE_TITLE = #{invoiceTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="appFlag != null" >
+        APP_FLAG = #{appFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="stageOrderMsg != null" >
+        STAGE_ORDER_MSG = #{stageOrderMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="downRank != null" >
+        DOWN_RANK = #{downRank,jdbcType=VARCHAR},
+      </if>
+      <if test="moditySku != null" >
+        MODITY_SKU = #{moditySku,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyContractAddr != null" >
+        MODIFY_CONTRACT_ADDR = #{modifyContractAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionMsg != null" >
+        EXCEPTION_MSG = #{exceptionMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="tmCoupDeduct != null" >
+        TM_COUP_DEDUCT = #{tmCoupDeduct,jdbcType=VARCHAR},
+      </if>
+      <if test="jfbDeduct != null" >
+        JFB_DEDUCT = #{jfbDeduct,jdbcType=VARCHAR},
+      </if>
+      <if test="o2oFlag != null" >
+        O2O_FLAG = #{o2oFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createStaff != null" >
+        CREATE_STAFF = #{createStaff,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateStaff != null" >
+        UPDATE_STAFF = #{updateStaff,jdbcType=INTEGER},
+      </if>
+      <if test="rwStaffCode != null" >
+        RW_STAFF_CODE = #{rwStaffCode,jdbcType=VARCHAR},
+      </if>
+      <if test="rwStaffId != null" >
+        RW_STAFF_ID = #{rwStaffId,jdbcType=INTEGER},
+      </if>
+      <if test="rwScoreFlag != null" >
+        RW_SCORE_FLAG = #{rwScoreFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="rwScore != null" >
+        RW_SCORE = #{rwScore,jdbcType=INTEGER},
+      </if>
+      <if test="importTime != null" >
+        IMPORT_TIME = #{importTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ai.ecp.pmph.dao.model.OrdMainTM" >
+    update t_ord_main_tm
+    set ORDER_CODE = #{orderCode,jdbcType=VARCHAR},
+      TM_STAFF_CODE = #{tmStaffCode,jdbcType=VARCHAR},
+      ALIPAY_ACCOUNT = #{alipayAccount,jdbcType=VARCHAR},
+      ORDER_MONEY = #{orderMoney,jdbcType=VARCHAR},
+      REAL_EXPRESS_FEE = #{realExpressFee,jdbcType=VARCHAR},
+      ORDER_SCORE = #{orderScore,jdbcType=VARCHAR},
+      SUM_MONEY = #{sumMoney,jdbcType=VARCHAR},
+      BACK_SCORE = #{backScore,jdbcType=VARCHAR},
+      REAL_MONEY = #{realMoney,jdbcType=VARCHAR},
+      REAL_SCORE = #{realScore,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      BUYER_MSG = #{buyerMsg,jdbcType=VARCHAR},
+      CONTRACT_NAME = #{contractName,jdbcType=VARCHAR},
+      CONTRACT_ADDR = #{contractAddr,jdbcType=VARCHAR},
+      DISPATCH_TYPE = #{dispatchType,jdbcType=VARCHAR},
+      CONTRACT_TEL = #{contractTel,jdbcType=VARCHAR},
+      CONTRACT_NUM = #{contractNum,jdbcType=VARCHAR},
+      ORDER_TIME = #{orderTime,jdbcType=TIMESTAMP},
+      PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      BB_TITLE = #{bbTitle,jdbcType=VARCHAR},
+      BB_TYPE = #{bbType,jdbcType=VARCHAR},
+      EXPRESS_NO = #{expressNo,jdbcType=VARCHAR},
+      EXPRESS_COMPANY = #{expressCompany,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ORDER_AMOUNT = #{orderAmount,jdbcType=VARCHAR},
+      SHOP_ID = #{shopId,jdbcType=VARCHAR},
+      SHOP_NAME = #{shopName,jdbcType=VARCHAR},
+      CLOSE_REASON = #{closeReason,jdbcType=VARCHAR},
+      SHOP_SERVICE_FEE = #{shopServiceFee,jdbcType=VARCHAR},
+      STAFF_SERVICE_FEE = #{staffServiceFee,jdbcType=VARCHAR},
+      INVOICE_TITLE = #{invoiceTitle,jdbcType=VARCHAR},
+      APP_FLAG = #{appFlag,jdbcType=VARCHAR},
+      STAGE_ORDER_MSG = #{stageOrderMsg,jdbcType=VARCHAR},
+      DOWN_RANK = #{downRank,jdbcType=VARCHAR},
+      MODITY_SKU = #{moditySku,jdbcType=VARCHAR},
+      MODIFY_CONTRACT_ADDR = #{modifyContractAddr,jdbcType=VARCHAR},
+      EXCEPTION_MSG = #{exceptionMsg,jdbcType=VARCHAR},
+      TM_COUP_DEDUCT = #{tmCoupDeduct,jdbcType=VARCHAR},
+      JFB_DEDUCT = #{jfbDeduct,jdbcType=VARCHAR},
+      O2O_FLAG = #{o2oFlag,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      CREATE_STAFF = #{createStaff,jdbcType=INTEGER},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      UPDATE_STAFF = #{updateStaff,jdbcType=INTEGER},
+      RW_STAFF_CODE = #{rwStaffCode,jdbcType=VARCHAR},
+      RW_STAFF_ID = #{rwStaffId,jdbcType=INTEGER},
+      RW_SCORE_FLAG = #{rwScoreFlag,jdbcType=VARCHAR},
+      RW_SCORE = #{rwScore,jdbcType=INTEGER},
+      IMPORT_TIME = #{importTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

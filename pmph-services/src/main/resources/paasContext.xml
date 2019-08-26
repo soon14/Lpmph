@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:zknode.properties</value>
+                <value>classpath:config.properties</value>
+            </list>
+        </property>
+    </bean>
+	<!--<bean id="cc" class="com.ai.paas.ConfigurationCenter" init-method="init">
+        <constructor-arg value="dlxels01:2181,dlxels02:2181,dlxels03:2181"/>
+        <constructor-arg value="P"/>
+        <property name="auth" value="7e6161fe018bd4054414cbc9999fee89f9110662f8981993"/>
+    </bean>-->
+    <bean id="cc" class="com.ai.paas.ConfigurationCenter" init-method="init">
+        <!--<constructor-arg value="127.0.0.1:2181"/>-->
+        <constructor-arg value="${zk.server.address}"/>
+        <!--第二个参数 D 或者 P；D表示开发模式；P表示生产环境-->
+        <constructor-arg value="P"/>
+        <property name="auth" value="${cc.auth}"/>
+    </bean>
+    <!-- <bean id="transactionManager" class="com.ai.paas.tx.TransactionManager" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="/com/ai/paas/tx/transactionManager"/>
+    </bean>-->
+    <!--日志消息发送-->
+    <bean id="logMessageSender" class="com.ai.paas.message.MessageSender" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="${logMessageSender}"/>
+    </bean>
+    <!--通用消息发送-->
+    <bean id="messageSender" class="com.ai.paas.message.MessageSender" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="${messageSender}"/>
+    </bean>
+   <!-- 通用消息消费 -->
+    <bean id="messageConsumer" class="com.ai.paas.message.MessageConsumer" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="${messageConsumer}"/>
+        <property name="groupId" value="default_message_group"/>
+    </bean>
+   
+    <!--日志信息写入 mongodb-->
+    <bean id="logWriter" class="com.ai.paas.log.MongoLogSVCImpl" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="${logWriter}"/>
+    </bean>
+    <!--跟踪日志信息写入 mongodb-->
+    <bean id="tradeLogWriter" class="com.ai.paas.log.MongoLogSVCImpl" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="${tradeLogWriter}"/>
+    </bean>
+    <!--文件信息写入 mongodb-->
+    <bean id="fileManager" class="com.ai.paas.file.MongoFileManagerSVCImpl" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="${fileManager}"/>
+    </bean>
+    <!--redis cache-->
+    <bean id="cacheSvc" class="com.ai.paas.cache.remote.RemoteCacheSVCImpl" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="${cacheSvc}"/>
+    </bean>
+    
+    <!--此处的messageSource 不能使用通配符的方式来获取文件，也即在加载的时候，可能无法使用 classpath*的方式；需要显示指定；会造成内容文件过多。需要找方法解决；-->
+	<bean id="messageSource" class="com.ai.paas.resource.PaasReloadableResourceBundleMessageSource">  
+		<property name="defaultEncoding" value="utf-8" />  
+		<property name="useCodeAsDefaultMessage" value="true" />  
+		<property name="cacheSeconds" value="10"></property>
+		<property name="mappingDirectoryLocations">
+			<map>
+				<entry key="message" value="classpath*:/message/**/*.properties"></entry>
+			</map>
+		</property> 
+	</bean>
+	<bean id="imageSv" class="com.ai.paas.image.impl.GMImage" init-method="init">
+    	<property name="confCenter" ref="cc"/>
+        <property name="confPath" value="${imageSv}"/>
+   </bean> 
+   <bean id="systemPropertiesManager" class="com.ai.paas.config.SystemPropertiesManager" init-method="init">
+	    <property name="cc" ref="cc"/>
+	    <property name="confPath" value="/com/ai/paas/properties/system"/>
+	</bean>
+    <bean id="mongoSVC" class="com.ai.paas.mongo.MongoSVCImpl" init-method="init">
+        <property name="cc" ref="cc"/>
+        <property name="confPath" value="/com/ai/paas/mongodb/conf"/>
+    </bean>
+</beans>

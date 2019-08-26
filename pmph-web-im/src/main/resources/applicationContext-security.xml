@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Application context containing authentication, channel
+  - security and web URI beans.
+  -
+  - Only used by "filter" artifact.
+  -
+  -->
+
+<b:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:b="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+<!--
+    <global-method-security pre-post-annotations="enabled">
+        <expression-handler ref="expressionHandler"/>
+    </global-method-security>
+-->
+	<http pattern="/css/**" security="none"/>
+	<http pattern="/html/**" security="none"/>
+	<http pattern="/js/**" security="none"/>
+	<http pattern="/images/**" security="none"/>
+	<http pattern="/js-busi/**" security="none"/>
+	<http pattern="/ecpindex" security="none"/>
+	<http pattern="/explorer/**" security="none"/>
+	<http pattern="/login" security="none"/>
+	<http pattern="/captcha/CapthcaImage" security="none"/>
+	<http pattern="/third/sys/shopfishing/**" security="none"/>
+    <http pattern="/uedit/**" security="none"/>
+    
+    <http use-expressions="true" entry-point-ref="ecpLoginUrlAuthenticationEntryPoint">
+    	<!--
+    	<intercept-url pattern="/login*" access="ROLE_SUPERVISOR"/>
+    	
+        <form-login login-page="/login" default-target-url="/jsp/app/main/loginSuccess.jsp" login-processing-url="/sys/login/doLogin.action" authentication-failure-url="/jsp/app/main/login.jsp?login_error=1"/>
+        -->
+        <http-basic/>
+        <logout logout-success-url="/login" logout-url="/j_spring_security_logout"/>
+        <!--
+        <remember-me />
+        
+        <session-management invalid-session-url="/login" session-authentication-error-url="/login">
+            <concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+        </session-management>
+        -->
+        <anonymous enabled="true"/>
+        <access-denied-handler ref="ecpAccessDeniedHandler"/>
+        <!-- 避免ajax 被cache -->
+        <request-cache ref="httpSessionRequestCache"/>
+        
+        <!--session管理-->
+        <custom-filter ref="concurrencyFilter"  before="SECURITY_CONTEXT_FILTER" />
+        <!-- 登录过滤器 -->
+        <custom-filter ref="loginFilter" position="FORM_LOGIN_FILTER"  />
+        <!-- 认证过滤器 -->
+        <custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"/>
+        
+        <session-management session-authentication-strategy-ref="sas"/>
+    </http>
+    <!--无访问权限处理-->
+    <b:bean id="ecpAccessDeniedHandler" class="com.ai.ecp.base.security.EcpAccessDeniedHandlerImpl">
+    	<!-- 
+    	<b:property name="errorPage" value="/WEB-INF/velocity/staff/login/403.vm"></b:property>
+    	 -->
+    	<b:property name="errorPage" value="/login"></b:property>
+    </b:bean>
+    <!--save request处理-->
+    <b:bean id="httpSessionRequestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache">
+    	<b:property name="requestMatcher" ref="ecpRequestMatcher"/>
+    </b:bean>
+    <b:bean id="ecpRequestMatcher" class="com.ai.ecp.base.security.EcpRequestMatcher"></b:bean>
+    <!-- 登录验证器 -->
+    <b:bean id="loginFilter" class="com.ai.ecp.base.security.EcpUsernamePasswordAuthenticationFilter">
+		<!-- 处理登录 -->
+		<b:property name="filterProcessesUrl" value="/j_spring_security_check"></b:property>
+		<b:property name="authenticationSuccessHandler" ref="loginLogAuthenticationSuccessHandler"></b:property>
+		<b:property name="authenticationFailureHandler" ref="simpleUrlAuthenticationFailureHandler"></b:property>
+		<b:property name="authenticationManager" ref="ecpAuthenticationManager"></b:property>
+		<!--限制用户并发数-->
+		<b:property name="sessionAuthenticationStrategy" ref="sas"></b:property>
+		<b:property name="postOnly" value="false"/>
+		<!--密码错误处理-->
+		<!--<b:property name="authRSV" value="#{ getBeanFactory().containsBean('authRSV')?@authRSV:null}"/>-->
+	</b:bean>
+	<b:bean id="loginLogAuthenticationSuccessHandler" class="com.ai.ecp.base.security.EcpAuthenticationSuccessHandler">
+		<b:property name="defaultTargetUrl" value="/login/workbench"></b:property>
+		<b:property name="refererParameter" value="Referer"></b:property>
+		<b:property name="successHandler">
+			<b:bean class="com.ai.ecp.base.security.handler.support.DefaultLoginSuccessHandler">
+				<b:property name="handlers">
+					<b:list>
+						<b:bean class="com.ai.ecp.base.security.handler.support.ManageLoginSuccessHandler">
+							<b:property name="loginRSV" value="#{ getBeanFactory().containsBean('loginRSV')?@loginRSV:null}"/>
+							<b:property name="managerRSV" value="#{ getBeanFactory().containsBean('managerRSV')?@managerRSV:null}"/>
+						</b:bean>
+					</b:list>
+				</b:property>
+			</b:bean>
+		</b:property>
+		
+	</b:bean>
+	<b:bean id="simpleUrlAuthenticationFailureHandler" class="com.ai.ecp.base.security.EcpAuthenticationFailureHandler">
+		<b:property name="defaultFailureUrl" value="/login"></b:property>
+		<b:property name="failureHandler">
+			<b:bean class="com.ai.ecp.base.security.handler.support.ECPLoginFailureHander">
+				<b:property name="loginRSV" value="#{ getBeanFactory().containsBean('loginRSV')?@loginRSV:null}"/>
+			</b:bean>
+		</b:property>
+	</b:bean>
+    <b:bean id="ecpLoginUrlAuthenticationEntryPoint" class="com.ai.ecp.base.security.EcpLoginUrlAuthenticationEntryPoint">
+    	<b:property name="loginFormUrl" value="/login"></b:property>
+    </b:bean>
+    
+    <!-- 认证过滤器 -->
+    <b:bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor">
+    	<!-- 用户拥有的权限 -->
+    	<b:property name="authenticationManager" ref="ecpAuthenticationManager" />
+    	<!-- 用户是否拥有所请求资源的权限 -->
+    	<b:property name="accessDecisionManager" ref="accessDecisionManager" />
+    	<!-- 资源与权限对应关系 -->
+    	<b:property name="securityMetadataSource" ref="ecpInvocationSecurityMetadataSourceService" />
+    	<b:property name="observeOncePerRequest" value="false"/>
+    </b:bean>
+    <authentication-manager alias="ecpAuthenticationManager">
+        <authentication-provider ref="daoAuthenticationProvider">
+        <!-- 
+           <password-encoder ref="passwordEncoder">
+           		<salt-source user-property="username"/>
+           </password-encoder>
+         -->
+        </authentication-provider>
+    </authentication-manager>
+    <b:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+    	<b:property name="hideUserNotFoundExceptions" value="false"></b:property>
+    	<b:property name="userDetailsService" ref="ecpUserDetailsService"></b:property>
+    	<b:property name="passwordEncoder" ref="passwordEncoder"></b:property>
+    	<!--
+    	<b:property name="saltSource">
+    		<b:bean class="org.springframework.security.authentication.dao.ReflectionSaltSource">
+    			<b:property name="userPropertyToUse" value="username"></b:property>
+    		</b:bean>
+    	</b:property>
+    	 -->
+    </b:bean>
+    <!-- 用户的密码加密或解密
+ 	<b:bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder">
+ 		<b:property name="encodeHashAsBase64" value="true"></b:property>
+    </b:bean>
+     -->
+    <!-- -->
+    <b:bean id="passwordEncoder" class="com.ai.ecp.base.security.ECPPasswordEncoder">
+    	<b:constructor-arg value="MD5-SALT"></b:constructor-arg>
+    </b:bean>
+    
+    <!--用户拥有的权限-->
+    <b:bean id="ecpUserDetailsService" class="com.ai.ecp.base.security.EcpUserDetailsService">
+		<b:property name="authRSV" value="#{ getBeanFactory().containsBean('imAuthRSV')?@imAuthRSV:null}"/>
+    	<b:property name="staffClass" value="10"/>
+    </b:bean>
+    <b:bean class="com.ai.ecp.base.security.storage.SessionStorageFactory"></b:bean>
+    <!--用户是否拥有所请求资源的权限-->
+    <!--
+    <b:bean id="ecpAccessDecisionManager" class="com.ai.ecp.base.security.EcpAccessDecisionManager"></b:bean>
+    -->
+    <b:bean id="accessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+	 	<!-- 没有显式定义的资源都保护起来。该属性默认值为false -->
+	 	<b:property name="allowIfAllAbstainDecisions" value="false"/>
+        <b:property name="decisionVoters">
+            <b:list>
+                <b:bean class="org.springframework.security.access.vote.RoleVoter">
+                    <b:property name="rolePrefix" value="ROLE_" />
+                </b:bean>
+                <b:bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+            </b:list>
+        </b:property>
+    </b:bean>
+    <!-- 资源与权限对应关系 -->
+    <b:bean id="ecpInvocationSecurityMetadataSourceService" class="com.ai.ecp.base.security.EcpInvocationSecurityMetadataSourceService">
+    	<b:property name="resourcesOfAuthentication">
+    		<b:ref local="resourcesOfAuthentication"/>
+    	</b:property>
+    </b:bean>
+    <b:bean id="resourcesOfAuthentication" class="com.ai.ecp.base.security.ResourcesOfAuthentication">
+		<b:property name="menuRSV" value="#{ getBeanFactory().containsBean('menuRSV')?@menuRSV:null}"></b:property>
+    	<b:property name="sysCodes">
+    		<b:list>
+    			<b:value>SYS_SUB_SYSTEM_2000</b:value>
+    		</b:list>
+    	</b:property>
+    </b:bean>
+    
+    <b:bean id="concurrencyFilter" class="com.ai.ecp.base.security.EcpConcurrentSessionFilter">
+    	<b:constructor-arg ref="sessionRegistry" />
+    	<b:constructor-arg value="/login" />
+    	<b:property name="refererParameter" value="Referer"></b:property>
+    	<!-- 是否要求登录 -->
+    	<b:property name="requiredSession" value="true"/>
+    	<b:property name="excludeUrls">
+	    	<b:list>
+	    		<b:value>/j_spring_security_check</b:value>
+	    		<b:value>/ecpupload/publicFileUpload</b:value>
+	    		<b:value>/ecpupload/editorFileUpload</b:value>
+	    		<b:value>/login/check</b:value>
+	    		<b:value>/acct/uploadfile</b:value>
+	    		<b:value>/card/excelfile</b:value>
+	    		<b:value>/gdsprom/uploadfile</b:value>
+	    		<b:value>/goods/excelImport/uploadfile</b:value>
+	    		<b:value>/goods/excelEditImport/uploadfile</b:value>  	 		
+	    		<b:value>/im/third/sys/login</b:value> 	
+	    		<b:value>/im/third/sys/back</b:value> 	
+	    		<b:value>/company/shoplogoUpload</b:value>
+	    		<b:value>/skinpageconfig/init</b:value>
+	    		<b:value>/cust/chat</b:value>
+	    		<b:value>/history</b:value>
+	    		<b:value>/cust/logout/disconn</b:value>
+	    		<b:value>/cust/getHotlineQueue</b:value>
+	    		<b:value>/mallInfo</b:value>
+	    		
+	    	</b:list>
+	    </b:property>
+		<b:property name="includeUrls">
+	    	<b:list>
+	    		<b:value>/third/sys/shopfishing/</b:value>
+	    	</b:list>
+	    </b:property>
+	</b:bean>
+	<b:bean id="sas" class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
+	    <b:constructor-arg ref="sessionRegistry" />
+	    <b:property name="maximumSessions" value="-1" />
+	    <b:property name="exceptionIfMaximumExceeded" value="false"/>
+	</b:bean>
+	<b:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" />
+
+    <!-- Automatically receives AuthenticationEvent messages -->
+    <b:bean id="loggerListener" class="org.springframework.security.authentication.event.LoggerListener"/>
+</b:beans>

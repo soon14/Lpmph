@@ -1,0 +1,23 @@
+	#parse("/module/mod-form.vm")
+	#parse("/module/mod-grid.vm")
+	#parse("sys/sys_param.vm")
+	#parse("/module/mod-editor.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/goods/gdsGuess/guess-edit.js?version=$!{JS_VERSION}" ></script>
+
+
+			<h3 class="heading">编辑猜你喜欢</h3>
+				<!--基本信息-->    
+				<div class="formBox row-fluid">
+					#parse("goods/gdsGuess/guess-baseInfo.vm")
+				</div>
+				<!--关联商品-->
+				<div class="formBox row-fluid">
+					#parse("goods/gdsGuess/guess-relation.vm")
+				</div>
+				<div align="center">
+					<button type="button " class="btn btn-info" id="btnFormSave"><i class="icon-ok-sign icon-white"></i> 保　存</button>
+					<button type="button" class="btn" id="btnReturn"><i class="icon-reply icon-white"></i> 返　回</button>
+				</div>
+                
+				
+      

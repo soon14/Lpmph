@@ -1,0 +1,14 @@
+#parse("/rwgw-en/sys/sys_param.vm")
+<!--底部 begin-->
+<div id="footer">
+    <div class="w">
+       <p class="tt">Links</p>
+	   <div class="ecp-component friendship-link" data-status="1" data-site-id="5" data-module="ecp-component/friendship-link">
+       </div>
+        <p class="spit"></p>
+        <div class="copyright">
+            <p>Copyright ©2016 PMPH All rights reserved | Address : No19, Panjiayuan Nanli, Chaoyang District, Beijing 100021, China</p>
+        </div>
+     </div>
+</div>
+<!--底部 end-->

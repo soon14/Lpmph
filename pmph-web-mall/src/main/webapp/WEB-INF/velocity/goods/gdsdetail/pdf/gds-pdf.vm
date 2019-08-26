@@ -1,0 +1,25 @@
+#parse("sys/sys_param.vm")
+<script type="text/javascript" src="http://github.com/malsup/media/raw/master/jquery.media.js?v0.92"></script>
+<script type="text/javascript" src="$RESOURCE_PATH/jqeury/jquery.metadata.js"></script>
+<script type="text/javascript" src="$BUSIJS_PATH/goods/gdsdetail/gds-pdf.js"></script>
+<style type="text/css">
+#pdf {
+	width: 900px;
+	height: 500px;
+	margin: 2em auto;
+	border: 10px solid #6699FF;
+}
+
+#pdf p {
+   padding: 1em;
+}
+
+#pdf object {
+   display: block;
+   border: solid 1px #666;
+}
+</style>
+ <script type="text/javascript">
+ $('.media').media({width:500, height:400});
+ </script> 
+<a class="media" href="" id="pdf"></a>

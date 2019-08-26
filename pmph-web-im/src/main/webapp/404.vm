@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>404页面</title>
+	#parse("/sys/sys_param.vm")
+	#parse("/sys/sys_head.vm")
+</head>
+<body>
+
+<!--<div class="error-404">
+   <div class="err-con">
+    <div class="error-font" >页面被外星人抓走了，<span id="timeout">6</span>秒之后返回首页</div>
+    <button class="error-btn">
+		<a href="$!{CONTEXT_PATH}/homepage">返回首页</a>
+    </div>
+</div>--> 
+<div class="error-404">
+    <div class="err-con">
+        <div class="error-font">对不起客官，您要的页面找不到了</div>
+        <button class="error-btn"><a href="$!{CONTEXT_PATH}/homepage">返回首页</a></button>
+    </div>
+</div>
+
+#parse("/main/main-bottom.vm")
+
+</body>
+</html>

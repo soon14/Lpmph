@@ -1,0 +1,10 @@
+
+<div class="menu-ad">
+    <ul>
+        <li class="book book-at"><a href="$CONTEXT_PATH/search?keyword=#stringEncode('案头书')" target="_blank">案头书</a></li>
+        <li class="book book-kd"><a href="$CONTEXT_PATH/search?keyword=#stringEncode('口袋书')" target="_blank">口袋书</a></li>
+        <li class="book book-new"><a href="$CONTEXT_PATH/search?field=newProductTime&sort=desc" target="_blank">最新产品</a></li>
+    </ul>
+</div>
+
+		

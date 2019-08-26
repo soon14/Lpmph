@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>供应链电商卖家中心</title>
+    #parse("/sys/sys_head.vm")
+	<link href="$!{CSS_PATH}/seller-reset.css" type="text/css" rel="stylesheet">
+    <link href="$!{CSS_PATH}/seller.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="$!{CONTEXT_PATH}/js-busi/seller/util.js"></script>
+</head>
+<body>
+<!--header-->
+#parse("/seller/main/main-top.vm")
+<!--content-->
+<div class="">
+    <div class="seller-mainR">
+        <div class="main">
+            $screen_content
+        </div>
+    </div>
+</div>
+<!--快速导航 begin-->
+#parse("/main/main-content-bottom.vm")
+<!--快速导航 end-->
+
+<!--底部 begin-->
+#parse("/main/main-bottom.vm")
+<!--底部 end-->
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    #parse("/sys/sys_head.vm")
+	<script type="text/javascript" src="$!{BUSIJS_PATH}/buyer/member.js"></script>
+</head>
+<body>
+  <header class="am-header am-header-fixed">
+      <div class="am-header-title">
+        个人中心
+      </div>
+      <div class="am-header-right" id="message">
+          <span class="opt">
+             <i class="iconfont icon-msg"></i>
+             信息
+          </span>
+      </div>
+  </header>
+  <div class="ui-content-fixBottom">
+      <div class="mb-head">
+          <div class="img-wrap" id="imgHeader">
+			#if($!{member.custPic})
+              <img src="#genImageUrl(${member.custPic})" alt=""/>
+			  	#else
+			  <img src="$IMAGE_PATH/cur-defHd.png" alt=""/>
+			   #end
+          </div>
+          <div class="cont">
+              <p><label>会员等级：</label><span>#translate('STAFF_CUST_LEVEL',$!{member.custLevelCode})</span></p>
+              <p>$!{member.staffCode}</p>
+               <input type='hidden' name="staffCode" id="staffCode" value="$!{member.staffCode}"  />
+          </div>
+      </div>
+      <ul class="mb-menu">
+          <li><a href="$CONTEXT_PATH/order/member/pay"><span class="iconfont icon-mem01"></span>待付款#if($!{ordCountRes.requestStatusPay}>0)<span class="dot"></span>#end</a></li>
+          <li><a href="$CONTEXT_PATH/order/member/send"><span class="iconfont icon-mem02"></span>待发货#if($!{ordCountRes.requestStatusSend}>0)<span class="dot"></span>#end</a></li>
+          <li><a href="$CONTEXT_PATH/order/member/recept"><span class="iconfont icon-mem04"></span>待收货#if($!{ordCountRes.requestStatusRecept}>0)<span class="dot"></span>#end</a></li>
+          <li><a href="$CONTEXT_PATH/buyereval/index"><span class="iconfont icon-mem03"></span>待评价#if($!{comment}>0)<span class="dot"></span>#end</a></li>
+      </ul>
+      <div class="mb-cont">
+         <ul class="mb-list">
+             <li id="orderMy">
+                 <div class="img-wrap">
+                     <img src="$IMAGE_PATH/mb-order.png" alt=""/>
+                 </div>
+                 <div class="cont">
+                              <span class="txt">
+                                  全部订单
+                              </span>
+                     <span class="ui-arrow ui-arrow-right"></span>
+                 </div>
+             </li>
+             <li id="pointOrder">
+                 <div class="img-wrap">
+                     <img src="$IMAGE_PATH/mb-poin.png" alt=""/>
+                 </div>
+                 <div class="cont">
+                              <span class="txt">
+                                  积分订单
+                              </span>
+                     <span class="ui-arrow ui-arrow-right"></span>
+                 </div>
+             </li>
+             <li id="favgoods">
+                 <div class="img-wrap">
+                     <img src="$IMAGE_PATH/mb-fav.png" alt=""/>
+                 </div>
+                 <div class="cont">
+                              <span class="txt">
+                                  我的收藏
+                              </span>
+                     <span class="ui-arrow ui-arrow-right"></span>
+                 </div>
+             </li>
+             <li id="infomation">
+                 <div class="img-wrap">
+                     <img src="$IMAGE_PATH/mb-info.png" alt=""/>
+                 </div>
+                 <div class="cont">
+                              <span class="txt">
+                                  我的信息
+                              </span>
+                     <span class="ui-arrow ui-arrow-right"></span>
+                 </div>
+             </li>
+         </ul>
+         <ul class="mb-list">
+             <li id="score">
+                 <div class="img-wrap">
+                     <img src="$IMAGE_PATH/mb-jf.png" alt=""/>
+                 </div>
+                 <div class="cont">
+                              <span class="txt">
+                                  会员积分
+                              </span>
+                     <span class="ui-arrow ui-arrow-right"></span>
+                 </div>
+             </li>
+             <li id="mall-point">
+                 <div class="img-wrap">
+                     <img src="$IMAGE_PATH/mb-poin-mall.png" alt=""/>
+                 </div>
+                 <div class="cont">
+                              <span class="txt">
+	                              #if($!{currSiteId} == '1')
+	                              		 积分商城
+	                              #else
+	                              		商城
+	                              #end
+                              </span>
+                              <input type="hidden" id="currSiteId" value="$!{currSiteId}" />
+                              <input type="hidden" id="mallSiteUrl" value="$!{mallSiteUrl}" />
+                              <input type="hidden" id="mallPointSiteUrl" value="$!{mallPointSiteUrl}" />
+                     <span class="ui-arrow ui-arrow-right"></span>
+                 </div>
+             </li>
+             <li id="membercoup">
+                 <div class="img-wrap">
+                     <img src="$IMAGE_PATH/mb-yhq.png" alt=""/>
+                 </div>
+                 <div class="cont">
+                              <span class="txt">
+                                  优惠券
+                              </span>
+                     <span class="ui-arrow ui-arrow-right"></span>
+                 </div>
+             </li>
+         </ul>
+      </div>
+  </div>
+  #parse("/main/main-bottom-navbar.vm")
+</body>
+</html>

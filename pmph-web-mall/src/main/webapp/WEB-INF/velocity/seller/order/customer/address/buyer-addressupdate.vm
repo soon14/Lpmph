@@ -1,0 +1,64 @@
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/public/jquery.area.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$BUSIJS_PATH/seller/order/customer/updateAddress.js"></script>
+<script type="text/javascript" src="$RESOURCE_PATH/bootstrap/core/2.3.2/js/bootstrap.min.js"></script>
+<style type="text/css">
+	.error {
+    	color: #C62626;
+	}
+</style>
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/core/2.3.2/css/bootstrap.min.css" />
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/core/2.3.2/css/bootstrap-responsive.css" />
+<link rel="stylesheet" href="$RESOURCE_PATH/bootstrap/extend/css/bootstrap_panel.css" />
+<!-- Font-Awesome -->
+<form id="addrdetailfrom" class="form-horizontal required-validate">
+	<input type='hidden' id='orderId' name='orderId' value='$!{orderId}'/>
+    <div class="control-group">
+        <label class="control-label">收货人：</label>
+        <div class="controls">
+            <input type="text" name="contactName" class="required htmlcheck" maxlength="30" value="$!{buyerAddr.contactName}">
+            <input type="hidden" name="id" value="$!{buyerAddr.id}">
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="p-code">所在地区：</label>
+        <div class="controls">
+            <select area-defaultvalue="$!{buyerAddr.province}" value="" area-children="city-code" area-level="province" area-type="admin" id="p-code" name="province" class="jquery-area span2 "><option value="110000">北京</option><option value="120000">天津</option><option value="130000">河北</option><option value="140000">山西</option><option value="150000">内蒙古</option><option value="210000">辽宁</option><option value="220000">吉林</option><option value="230000">黑龙江</option><option value="310000">上海</option><option value="320000">江苏</option><option value="330000">浙江</option><option value="340000">安徽</option><option value="350000">福建</option><option value="360000">江西</option><option value="370000">山东</option><option value="410000">河南</option><option value="420000">湖北</option><option value="430000">湖南</option><option value="440000">广东</option><option value="450000">广西</option><option value="460000">海南</option><option value="500000">重庆</option><option value="510000">四川</option><option value="520000">贵州</option><option value="530000">云南</option><option value="540000">西藏</option><option value="610000">陕西</option><option value="620000">甘肃</option><option value="630000">青海</option><option value="640000">宁夏</option><option value="650000">新疆</option><option value="710000">台湾</option><option value="810000">香港</option><option value="820000">澳门</option></select>
+            <select area-defaultvalue="$!{buyerAddr.cityCode}" value="" area-children="county-code" area-level="city" area-type="admin" id="city-code" name="cityCode" class="jquery-area span2 " area-province="110000"><option value="110100">市辖区</option><option value="110200">县</option></select>
+            <select area-defaultvalue="$!{buyerAddr.countyCode}" value="" area-children="" area-level="county" area-type="admin" id="county-code" name="countyCode" class="jquery-area span2 " area-city="110100" area-province="110000"><option value="110101">东城区</option><option value="110102">西城区</option><option value="110105">朝阳区</option><option value="110106">丰台区</option><option value="110107">石景山区</option><option value="110108">海淀区</option><option value="110109">门头沟区</option><option value="110111">房山区</option><option value="110112">通州区</option><option value="110113">顺义区</option><option value="110114">昌平区</option><option value="110115">大兴区</option><option value="110116">怀柔区</option><option value="110117">平谷区</option></select>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">详细地址：</label>
+        <div class="controls">
+            <input type="text" name="chnlAddress" maxlength="30" class="required htmlcheck input-large maxlength:30" value="$!{buyerAddr.chnlAddress}">
+            <span class="itxt-tip">
+                请您填写收货人详细地址(最多30个字符)
+            </span>
+        </div>
+    </div>
+    <div class="clearfix">
+        <div class="control-group pull-left">
+            <label class="control-label">手机号码：</label>
+            <div class="controls">
+                <input name="contactPhone" type="text" class="required htmlcheck mobilePhone" maxlength="11" minlength="11" value="$!{buyerAddr.contactPhone}"/>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix">
+        <div class="control-group pull-left">
+            <label class="control-label">固定号码：</label>
+            <div class="controls">
+                <input name="contactNumber" type="text" class="phone htmlcheck" value="$!{buyerAddr.contactNumber}">
+            </div>
+        </div>       
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            <input type="button" class="btn" id="saveaddr" value="保存收货人信息"/>
+             <input type="button" class="btn" id="btnCancel1" value="取消"/>
+         </div>
+    </div>
+
+</form>

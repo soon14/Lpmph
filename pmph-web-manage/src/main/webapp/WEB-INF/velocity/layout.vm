@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+
+<html>
+<head>
+    <title>#siteName('1')管理平台</title>
+
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	#parse("/sys/sys_param.vm")
+	#parse("/sys/sys_head.vm")
+	<link rel="stylesheet" href="$!{CSS_PATH}/siderbar-icon.css"/>
+
+</head>
+
+<body>
+
+
+<div id="maincontainer" class="clearfix body">
+
+    <!-- header -->
+#parse("/main/main-top.vm")
+    <!-- header -->
+
+
+    <!-- main content -->
+	<div id="contentwrapper" class="clearfix">
+		    <div class="main_content main_cbg">
+				<!-- 面包屑导航 -->
+        	    #parse("/main/main-breadcrumb.vm")
+			
+					<div class="b-white p20 clearfix">
+        			$screen_content
+					</div>
+				
+			</div>
+	</div> 
+    <!-- main content -->
+
+
+    <!-- sidebar -->
+      #parse("/main/main-sidebar-new.vm")
+    <!-- sidebar -->
+
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+#parse("/sys/sys_param.vm")
+<!-- 表单需要引用的脚本、样式库 -->
+<script type="text/javascript" src="$!{RESOURCE_PATH}/jquery/my97datepicker/WdatePicker.js"></script>

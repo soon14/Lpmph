@@ -1,0 +1,316 @@
+
+#parse("/module/mod-scroll.vm")
+<style>
+.row-fluid [class*="span"]:first-child {
+            margin-left: 2.127659574468085%;
+        }
+        .row-fluid{
+            margin-left: -2.127659574468085%;
+        }
+        .row-fluid .span4{
+            width: 31%;
+        }
+        .impor-con .span4 {
+            margin-bottom: 10px;
+        }
+		.row-fluid{
+            width: auto;
+        }
+</style>
+<!--广告-->
+    <div class="wrap100">
+        <div class="scrollLoad wx-bg01">
+            <div class="container wx-banner">
+                <div class="wx-ewm" style="top: 60px; opacity: 0.1;filter:alpha(opacity=10)"><img src="$IMAGE_PATH/wx-ewm.png"></div>
+                <div class="wx-phone" style="top: 50px"><img src="$IMAGE_PATH/wx-phone.png"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.scrollLoad').scrollLoading({
+            callback:function(obj){
+                if($(obj).hasClass('wx-bg01')){
+                    $(obj).find('.wx-ewm').animate({'top':0,'opacity':1},1000);
+                    $(obj).find('.wx-phone').animate({'top':30,'opacity':1},1000);
+                }
+            }
+        });
+    </script>
+    <!--重点推荐-->
+    <div class="wrap100">
+        <div class="container">
+            <div class="impor-tit"><i class="wx-icon impor-icon"></i>
+
+                <h2>重点推荐</h2></div>
+            <div class="impor-con">
+                <ul class="row-fluid ecp-component zw-weix-slider" data-status="1" data-homepage-is-show="1" data-place-size="1" data-place-id="32" data-place-width="170" data-place-height="170" data-module="ecp-component/rwzw/zw-weix-slider">
+                   <!-- <li class="span4">
+                        <div class="por-left">
+                            <img src="$IMAGE_PATH/pro/wx-pro01.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <img src="$IMAGE_PATH/pro/wx01.jpg" alt=""/>
+                            </div>
+                        </div>
+                        <div class="con-w"><h3>健康四合院</h3>
+
+                            <p class="wxh">微信号：pmph_jkshy</p>
+
+                            <p class="w-name">推开院门看健康</p>
+                        </div>
+                    </li>
+                    <li class="span4 clearfix">
+                        <div class="por-left">
+                            <img src="$IMAGE_PATH/pro/wx-pro02.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <img src="$IMAGE_PATH/pro/wx02.jpg" alt=""/>
+                            </div>
+                        </div>
+                        <div class="con-w"><h3>医学考试数字人卫</h3>
+
+                            <p class="wxh">微信号：yxksszrw</p>
+
+                            <p class="w-name">定期放送执业医师、护士执业、卫生
+                                资格、执业药师的习题、资源及最新
+                                动态！关注我们，轻松通过考试！</p>
+                        </div>
+                    </li>
+                    <li class="span4 clearfix">
+                        <div class="por-left">
+                            <img src="$IMAGE_PATH/pro/wx-pro03.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <img src="$IMAGE_PATH/pro/wx03.jpg" alt=""/>
+                            </div>
+                        </div>
+                        <div class="con-w"><h3>中国学生健康报</h3>
+
+                            <p class="wxh">微信号：暂无</p>
+
+                            <p class="w-name">我们是《中国学生健康报》。期待与
+                                您携手，让孩子“学会健康生活”。</p>
+                        </div>
+                    </li>-->
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!--微信列表-->
+    <div class="wrap100">
+        <div class="container">
+            <div class="impor-tit"><i class="wx-icon list-icon"></i>
+
+                <h2>微信列表</h2></div>
+            <div class="wx-list clearfix">
+                <ul class="ecp-component zw-weix-list" data-status="1" data-homepage-is-show="1" data-place-size="1" data-place-id="33" data-place-width="237" data-place-height="237" data-module="ecp-component/rwzw/zw-weix-list">
+                  <!--  <li>
+                        <div class="wx-list-img">
+                            <img src="$IMAGE_PATH/pro/list01.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>renweizhongyi</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d01.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">人卫中医</p>
+                    </li>
+                    <li>
+                        <div class="wx-list-img">
+                            <img src="$IMAGE_PATH/pro/list02.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>pmphpeixunbu</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d02.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">人卫培训</p>
+                    </li>
+                    <li>
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list23.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>renwei-danei</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d03.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">大内总管</p>
+                    </li>
+                    <li class="ml0">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list03.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>PMPH_Surgery</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d04.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">人卫外科</p>
+                    </li>
+                    <li>
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list04.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>RenWeiFuChan</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d05.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">人卫妇产</p>
+                    </li>
+                    <li>
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list05.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>RenWei-ErKe</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d06.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">人卫儿科</p>
+                    </li>
+                    <li>
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list06.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>RenWeiKouQiang</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d07.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">人卫口腔</p>
+                    </li>
+                    <li class="ml0">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list07.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>pmph_rwyx</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d08.jpg" alt=""/>
+                            </div>
+
+                        </div>
+
+                        <p class="text-center list-tit">人卫药学</p>
+                    </li>
+
+                    <li class="">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list17.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>pmphmooc</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d19.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">人卫慕课</p>
+                    </li>
+                    <li class="">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list18.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>yxjyszrw</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d18.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">医学教育</p>
+                    </li>
+                    <li>
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list11.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>zgykzz</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d12.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">中国医刊</p>
+                    </li>
+                    <li class="ml0">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list12.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>zglcyszz</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d13.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">中国临床医生</p>
+                    </li>
+                    <li class="">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list16.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>CHINJPD</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">《中国产前诊断杂志》</p>
+                    </li>
+                    <li class="">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list22.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>Yixueqianyan13</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d.jpg" alt=""/>
+                            </div>
+                        </div>
+                        <p class="text-center list-tit">《中国医学前沿杂志》</p>
+                    </li>
+                    <li class="">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list21.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>miniaowaikezazhi</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">《泌尿外科杂志》</p>
+                    </li>
+                    <li class="ml0">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list09.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>无</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d10.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">北京人卫文化传播公司</p>
+                    </li>
+                    <li class="">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list08.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>无</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d09.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">人卫环球医学漫游</p>
+                    </li>
+                    <li class="">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list13.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>yijiarenwei</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d14.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">医家人卫</p>
+                    </li>
+                    <li class="">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list14.jpg" alt=""/>
+                            <div class="pro-trans">
+                                <h4>bjlakeviewhotel</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d15.jpg" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">人卫酒店</p>
+                    </li>
+<li class="ml0">
+                        <div class="wx-list-img"><img src="$IMAGE_PATH/pro/list24.png" alt=""/>
+                            <div class="pro-trans">
+                                <h4>无</h4>
+                                <img src="$IMAGE_PATH/pro/wx-d16.png" alt=""/>
+                            </div>
+                        </div>
+
+                        <p class="text-center list-tit">数字化中药材标准</p>
+</li>-->
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+<script >
+$('#zwlogo').attr('src',$webroot+'images/logo-wx.png');
+</script>

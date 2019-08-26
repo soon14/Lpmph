@@ -1,0 +1,18 @@
+#menu
+<div class="seller-navL">
+            <div class="list">
+	#foreach($menu in $list)
+		
+		<dl>
+                    <dt><i class="sl-icon icon-order"></i> $!{menu.menuTitle} <i class="sl-icon icon-down"></i></dt>
+                    <dd class="list-c">
+                        <ul class="clearfix sellermenu">
+								#foreach($att in $!{menu.sonList})
+									   <li class="active"><a href="javascript:void(0)" sellermenuurl="$!{att.menuUrl}">$!{att.menuTitle}</a></li>
+									#end
+                        </ul>
+                    </dd>
+                </dl>
+	#end
+            </div>
+</div>

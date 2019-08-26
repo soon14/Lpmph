@@ -1,0 +1,156 @@
+#parse("/module/mod-scroll.vm")
+#siteInfo('1')
+
+<!--广告-->
+<div class="wrap100">
+    <div class="scrollLoad edu-f ad-bg01" style="opacity: 0.1;filter:alpha(opacity=10)">
+        <div class="container adBox010">
+            <div class="ad-font01"><img src="$IMAGE_PATH/ad-font01.png"> </div>
+            <div class="ad-btn01"><a href="${siteUrl}homepage?page=paperbook" target="_blank"><img src="$IMAGE_PATH/ad-btn01.png"/> </a></div>
+        </div>
+		  <div class="link link-f1">
+            <div class="link-logo"></div>
+                  <span class="link-c">
+                   <a href="${siteUrl}homepage?page=paperbook" target="_blank">教材教辅</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+
+    <div class="scrollLoad edu-f ad-bg02">
+        <div class="adBox02">
+            <div class="container">
+            <div class="bg02-text" style="position: relative; top: 20px;opacity: 0.1;filter:alpha(opacity=10)">
+                <div class="ad-font02"><img src="$IMAGE_PATH/ad-font02-1.png"> </div>
+                <div class="ad-font02-1"><img src="$IMAGE_PATH/ad-font02-2.png"> </div>
+                <div class="ad-btn02"><a href="http://zengzhi.ipmph.com/" target="_blank"><img src="$IMAGE_PATH/ad-btn02.png"/></a> </div>
+            </div>
+        </div>
+        </div>
+		 <div class="link link-f2">
+            <div class="link-logo"></div>
+                  <span class="link-c">
+                    <a href="http://zengzhi.ipmph.com/" target="_blank">融合教材</a>
+                    <span class="arrow-left"></span>
+                  </span>
+        </div>
+    </div>
+
+
+    <div class="scrollLoad edu-f ad-bg04">
+        <div class="container adBox04">
+            <div class="bg04-text" style="top:20px; position: relative;opacity: 0.1;filter:alpha(opacity=10)" >
+                <div class="ad-font04"><img src="$IMAGE_PATH/ad-font04.png"> </div>
+                <div class="ad-btn04"><a href="http://www.pmphou.com/" target="_blank"><img src="$IMAGE_PATH/ad-btn04.png"/></a></div>
+            </div>
+        </div>
+		  <div class="link link-f3">
+            <div class="link-logo"></div>
+              <span class="link-c">
+                  <a href="http://www.pmphou.com/" target="_blank">开放大学</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+    <div class="scrollLoad edu-f ad-bg03">
+        <div class="container adBox03 " style="top: 20px; position: relative;opacity: 0.1;filter:alpha(opacity=10)">
+            <div class="ad-font03"><img src="$IMAGE_PATH/ad-font03.png"> </div>
+            <div class="ad-btn03"><a href="http://textbooks.ipmph.com/" target="_blank"><img src="$IMAGE_PATH/ad-btn03.png"/></a> </div>
+        </div>
+		 <div class="link link-f4">
+            <div class="link-logo"></div>
+              <span class="link-c">
+                  <a href="http://textbooks.ipmph.com/" target="_blank">数字教材</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+    <div class="scrollLoad edu-f ad-bg07">
+        <div class="container " style="top: 20px; position: relative;opacity: 0.1;filter:alpha(opacity=10)">
+            <div class="ad-font07"><img src="$IMAGE_PATH/ad-font07.png"> </div>
+            <div class="ad-btn07"><a href="http://www.pmphmooc.com/" target="_blank"><img src="$IMAGE_PATH/ad-btn07.png"/></a> </div>
+        </div>
+		 <div class="link link-f5">
+            <div class="link-logo"></div>
+              <span class="link-c">
+                 <a href="http://www.pmphmooc.com/" target="_blank">人卫慕课</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+    <div class="scrollLoad edu-f ad-bg05">
+        <div class="container adBox01 text-center" style="opacity: 0.1;filter:alpha(opacity=10)">
+            <div class="mt30"><img src="$IMAGE_PATH/ad-font05.png"> </div>
+            <div class="mt20"><img src="$IMAGE_PATH/ad-img05.png"> </div>
+
+            <div class="mt20"><a href="http://edu.ipmph.com/sck/" target="_blank"><img src="$IMAGE_PATH/ad-btn05.png"/></a> </div>
+        </div>
+		 <div class="link link-f6">
+            <div class="link-logo"></div>
+              <span class="link-c" style="width: 120px">
+                  <a href="http://edu.ipmph.com/sck/" target="_blank">医学教学素材库</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+	 <div class="scrollLoad edu-f ad-height ad-bg06">
+        <div class="container adBox01" style="top: 20px;">
+   <div class="ad-font06"><img src="$IMAGE_PATH/ad-font06.png"> </div>
+            <div class="ad-btn06"><a href=" http://3d.ipmph.com/" target="_blank"><img src="$IMAGE_PATH/ad-btn06.png"/></a> </div>
+        </div>
+        <div class="link link-f7">
+            <div class="link-logo"></div>
+              <span class="link-c">
+                  <a href=" http://3d.ipmph.com/" target="_blank">3D系统解剖学</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+    <div class="scrollLoad edu-f ad-height ad-bg08">
+        <div class="container adBox01" style="top: 20px;">
+            <div class="ad-font08"><img src="$IMAGE_PATH/ad-font08.png"> </div>
+            <div class="ad-btn08"><a href="http://medu.ipmph.com" target="_blank"><img src="$IMAGE_PATH/ad-btn08.png"></a> </div>
+        </div>
+        <div class="link link-f8">
+            <div class="link-logo"></div>
+              <span class="link-c">
+                  <a href="http://medu.ipmph.com" target="_blank">人卫e教</a>
+                  <span class="arrow-left"></span>
+              </span>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $('.scrollLoad').scrollLoading({
+                callback:function(obj){
+                    if($(obj).hasClass('ad-bg01')){
+                        $(obj).animate({'opacity':1},2000);
+                    }
+                    else if($(obj).hasClass('ad-bg02')){
+                        $(obj).find('.bg02-text').animate({'top':0,'opacity':1},1000);
+
+                    }
+                    else if($(obj).hasClass('ad-bg03')){
+                        $(obj).find('.container').animate({'top':0,'opacity':1},1000);
+                    }
+                    else if($(obj).hasClass('ad-bg04')){
+                        $(obj).find('.bg04-text').animate({'top':0,'opacity':1},1000);
+                    }
+                    else if($(obj).hasClass('ad-bg05')){
+                        $(obj).find('.adBox01').animate({'opacity':1},2000);
+                    }
+                    else if($(obj).hasClass('ad-bg06')){
+                        $(obj).find('.adBox01').animate({'top':0,'opacity':1},1000);
+                    }
+                    else if($(obj).hasClass('ad-bg07')){
+                        $(obj).find('.container ').animate({'top':0,'opacity':1},1000);
+                    }
+                    else if($(obj).hasClass('ad-bg08')){
+                        $(obj).find('.container ').animate({'top':0,'opacity':1},1000);
+                    }
+                }
+            });
+        });
+$('#zwlogo').attr('src',$webroot+'images/logo-edu.png');
+    </script>
+</div>

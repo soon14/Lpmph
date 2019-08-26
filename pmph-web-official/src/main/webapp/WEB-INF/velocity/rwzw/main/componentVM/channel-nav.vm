@@ -1,0 +1,55 @@
+#parse("/sys/sys_param.vm")
+    <ul class="nav-bar">
+         	#foreach($channel in ${channelsList})
+                    <li class="nav-item" channelId = "$!{channel.id}">
+						#if($velocityCount == 8)
+							<span class="new">
+                            </span>
+						#end
+                        <a href="
+                        	#if($!{channel.channelUrl} && $!{channel.channelUrl} != '')##有地址
+                        		##判断是否是外部链接
+                            	#if($!{channel.isOutLink} == 1)
+                            		$!{channel.channelUrl}  
+                            	#else
+                            		#siteInfoURL('4')/$!{channel.channelUrl}
+                            	#end
+                        	#else ## 没地址默认为首页
+                        		#siteInfoURL('4')
+                        	#end
+                        	" target='_blank'>$!{channel.channelName}</a>
+                    </li>
+        	#end
+    </ul>
+	
+	<div class="menuBg-child" >
+         <div class="container">
+              <ul class="nav-bar-child clearfix" >
+				#foreach($channel in ${channelsList})
+                <li>
+					#if($!{channel.childList})
+					<dl>
+						#foreach($child in $!{channel.childList})
+                        <dd><a href="
+							#if($!{child.channelUrl} && $!{child.channelUrl} != '')##有地址
+    							##判断是否是外部链接
+                            	#if($!{child.isOutLink} == 1)
+                            		$!{child.channelUrl}  
+                            	#else
+                            		#siteInfoURL('4')/$!{child.channelUrl}
+    							#end
+							#else ## 没地址默认为首页
+								#siteInfoURL('4')
+							#end
+							"  target='_blank'>$!{child.channelName}
+						</a></dd>
+						#end
+                    </dl>
+					#end
+                </li>
+				#end
+            </ul>
+		</div>
+	</div>
+		
+	

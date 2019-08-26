@@ -1,0 +1,19 @@
+#parse("/rwgw/sys/sys_param.vm")
+<script type="text/javascript" src="$BUSIJS_PATH/main/rwgw-get-html.js"></script>
+
+<!--
+<h2>$!{respVO.articleTitle}</h2>
+<div class="date">
+    发布时间：$!date.format('yyyy-MM-dd HH:mm',$!{respVO.pubTime})  
+</div>
+-->
+<div class="w-right-p" style ="padding-bottom:0px;">
+	<div class = "webDef">
+		<input type="hidden" id="articleStaticUrl" name="articleStaticUrl"
+			value="$!{respVO.staticId}" />
+		<div id="articleContent"></div>
+		<!--
+	<p><img src="$!{respVO.thumbnailUrl}" alt=""/><p>
+	-->
+	</div>
+</div>

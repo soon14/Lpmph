@@ -1,0 +1,45 @@
+ #parse("/sys/sys_param.vm")
+
+	<link href="$!{CSS_PATH}/seller-reset.css" type="text/css" rel="stylesheet">
+    <link href="$!{CSS_PATH}/seller.css" type="text/css" rel="stylesheet">
+ <link href="$!{RESOURCE_PATH}/bootstrap/extend/css/bootstrap_page.css" rel="stylesheet" type="text/css" media="screen"/>
+ 
+ <script type="text/javascript" src="$!{BUSIJS_PATH}/seller/goods/gift/list/sku-list.js?version=$!{JS_VERSION}" ></script>
+
+ <table class="seller-table" style="margin-top: 15px;font-size:12px">
+                       
+                        <thead>
+                        <tr>
+                            <td>商品编码</td>
+                            <td>单品编码</td>
+                            <td style="width: 200px;">单品名称</td>
+                            <td>ISBN</td>               
+							<td>操作</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+            				#if($!{giftSkuPage.getResult().size()} <= 0)
+                    		<tr><td colspan='12'>没有符合条件的记录。</td></tr>
+							#end
+							 	#foreach($giftSkuInfo in $giftSkuPage.getResult())
+							
+                        <tr>
+                            <td>$giftSkuInfo.gdsId</td>
+                            <td>$giftSkuInfo.id</td>
+                            <td style="white-space: normal;width: 200px;">
+                             $giftSkuInfo.gdsName
+                            </td>
+                            <td> $!giftSkuInfo.isbn</td>                 
+                            <td>    <a href="#" name="check" skuId="$!giftSkuInfo.id" gdsId="$!giftSkuInfo.gdsId" skuName="$!giftSkuInfo.gdsName">选择</a></td>
+                      
+                        </tr>
+                        #end
+                        </tbody>
+                    </table>
+			
+	<div class="fav-opt clearfix" >
+                        <div class="row-fluid">
+                			<div id="pageControlbar" class="ecppage" data-total-page="${giftSkuPage.pageCount}" data-total-row="${giftSkuPage.count}" data-page-size="${giftSkuPage.pageSize}" data-page-number="${giftSkuPage.pageNo}" data-status="begin"></div>
+                		</div>
+                    </div>
+					

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+	http://www.springframework.org/schema/beans/spring-beans.xsd  
+	http://code.alibabatech.com/schema/dubbo  
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+	">
+    <dubbo:reference id="ordTmMainRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdTmMainRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+   	<dubbo:reference id="ordTmSubRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdTmSubRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+   	<dubbo:reference id="ordImportTMMainRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdImportTMMainRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+  	<dubbo:reference id="ordImportTMSubRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdImportTMSubRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+	<dubbo:reference id="ordImportZYMainRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdImportZYMainRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+   	<dubbo:reference id="ordImportZYSubRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdImportZYSubRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+	<dubbo:reference id="payQuartzInfoForZYOrdRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.IPayQuartzInfoForZYOrdRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+
+    <dubbo:reference id="scoreCalRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.IScoreCalRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+ 
+    <dubbo:reference id="cardDistributeRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.ICustCardDistributeRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+
+    <dubbo:reference id="carderInfoRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.ICarderInfoRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+
+    <dubbo:reference id="cardApplicationRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.ICardApplicationRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+
+    <dubbo:reference id="cardMgrRSV" interface="com.ai.ecp.pmph.dubbo.interfaces.ICardMgrRSV" registry="${default.dubbo.registry.id}" version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+    
+	<dubbo:reference id="erpGdsInfoImportRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IERPGdsInfoImportRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+
+	
+	<dubbo:reference id="zyGdsInfoImportRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IZYGdsInfoImportRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+
+	
+	<dubbo:reference id="examPaperGdsInfoImportRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IExamPaperGdsInfoImportRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+
+	
+	<dubbo:reference id="examPaperBagGdsInfoImportRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IExamPaperBagGdsInfoImportRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+
+	
+	<dubbo:reference id="examTutorialClassGdsInfoImportRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IExamTutorialClassGdsInfoImportRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+
+
+	
+	<dubbo:reference id="erpGdsCategoryImportRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IERPGdsCategoryImportRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+
+	
+	<dubbo:reference id="zyGdsCategoryImportRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IZYGdsCategoryImportRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+	
+	<dubbo:reference id="zyGdsCategoryBatchImportRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IZYGdsCategoryBatchImportRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+	
+	<dubbo:reference id="zyExamNetCategoryImportRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IZYExamNetCategoryImportRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+	
+	<dubbo:reference id="erpGdsStockInfoImportRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IERPGdsStockInfoImportRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+	
+	<dubbo:reference id="eBookImageSampleChapterSyncRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IEBookImageSampleChapterSyncRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+
+	<dubbo:reference id="pBookImageSampleChapterSyncRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IPBookImageSampleChapterSyncRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+	
+	<dubbo:reference id="eBookImageSampleChapterIncreamentalSyncRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IEBookImageSampleChapterIncreamentalSyncRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+	
+	<dubbo:reference id="pBookImageSampleChapterIncreamentalSyncRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataimport.IPBookImageSampleChapterIncreamentalSyncRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+
+
+	<dubbo:reference id="gdsPmphYsymZhekouRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.IGdsPmphYsymZhekouRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+					 
+	<dubbo:reference id="gdsPmphExRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.IGdsPmphExRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+
+	<dubbo:reference id="erpGdsInfoExportRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.dataexport.IERPGdsInfoExportRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+					 
+	<dubbo:reference id="eBookIDSyncRSV"
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.IEBookIDSyncRSV"
+					 registry="${default.dubbo.registry.id}" version="${default.dubbo.version}"
+					 group="${default.dubbo.group}" />
+					 
+	<dubbo:reference id="returnBackRSV" 
+					 interface="com.ai.ecp.pmph.dubbo.interfaces.IReturnBackRSV" 
+					 registry="${default.dubbo.registry.id}" 
+					 version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+					 
+	<dubbo:reference id="ordPmphMainRSV" 
+				 interface="com.ai.ecp.pmph.dubbo.interfaces.IOrdPmphMainRSV" 
+				 registry="${default.dubbo.registry.id}" 
+				 version="${default.dubbo.version}" group="${default.dubbo.group}"/>
+      
+</beans>

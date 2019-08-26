@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PMPH</title>
+	<link rel="shortcut icon" href="$IMAGE_PATH/favicon.ico" type="image/x-icon" />
+	#parse("/rwgw-en/sys/sys_param.vm")
+	#parse("/rwgw-en/sys/sys_head.vm")
+</head>
+<body>
+	<!--头部-->
+	#parse("/rwgw-en/main/index-head.vm")
+	<!--头部-->
+	
+	<!--搜索 begin-->
+	#parse("/rwgw-en/main/index-search.vm")
+	<!--搜索 end-->
+
+	<!--顶部 begin-->
+	#parse("/rwgw-en/main/index-nav.vm")
+	<!--顶部 end-->
+	
+    <!--内容 start-->
+    <div id="content">
+    	$screen_content
+    </div>
+    <!--内容 end-->
+	
+	<!--右侧工具栏 begin-->
+    #parse("/rwgw-en/main/index-toolbar.vm")
+    <!--右侧工具栏 end-->
+
+    <!--底部 begin-->
+    #parse("/rwgw-en/main/index-foot.vm")
+    <!--底部 end-->
+</body>
+</html>

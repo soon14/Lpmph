@@ -1,0 +1,22 @@
+
+<!--搜索 begin-->
+<input type="hidden" id="mallsiteurl" name="mallsiteurl" value="#siteInfoURL('1')" />
+<div id="search">
+    <div class="w">
+        <a href="#siteInfoURL('3')" class="logo">
+            <img src="$IMAGE_PATH/logo.png" alt=""/>
+        </a>
+        <div class="search-right" id="rwgwsearch">
+            <div class="ser-wrap" #if(!${ishome} || ${ishome} == '') style = "margin-top:20px;" #end>
+                <input type="text" class="itxt" id="searchkeyword" placeholder="图书搜索"/>
+                <input type="button" id = "rwgwdosearch" class="ibtn" value="图书搜索"/>
+            </div>
+            <a href="#siteInfoURL('1')"><span class="zhsc-icon"></span></a>
+            #if(${ishome} && ${ishome} != '')
+            <span class="hz-icon"></span>
+            #end
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="$BUSIJS_PATH/main/rwgw-search.js"></script>
+<!--搜索 end-->

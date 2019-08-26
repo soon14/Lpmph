@@ -1,0 +1,112 @@
+#parse("/module/mod-grid.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{RESOURCE_PATH}/framework/manage/extend/ebc.date.js" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/other/order.util.js?version=$!{JS_VERSION}" ></script>
+<script type="text/javascript" src="$!{BUSIJS_PATH}/order/tmall/tmall-grid.js?version=$!{JS_VERSION}" ></script>
+<style type="text/css">
+.numberFont{
+	color:#F00;
+	//font-weight:bold;
+	font-size:150%;
+}
+</style>
+
+
+<form id="exportForm" action="$!{CONTEXT_PATH}/order/" target="_blank" method="post" style="display:none">
+	<input type="hidden" name="exportInfo" id="exportInfo" value="0">
+	<input type="hidden" name="exportType" id="exportType" value="0">
+</form>
+		<div class="well well-searchForm" id="order">
+			<form id="searchForm" class="form-horizontal required-validate" style="margin-bottom: 0px;">
+			<div class="row-fluid">
+				<div class="span4">
+				<label class="control-label">商城会员名：</label>
+					<div class="controls">
+						<input type="text" name="rwStaffCode" class="input-medium" value="" placeholder="">
+					</div>
+				</div>
+				<div class="span4">
+					<div class="control-group">
+						<label class="control-label">收货人姓名：</label>
+						<div class="controls">
+							<input type="text" name="contractName" class="input-medium" value="" placeholder="">
+						</div>
+					</div>
+				</div>
+				<div class="span4">
+					<div class="control-group">
+						<label class="control-label">订单编号：</label>
+						<div class="controls">
+							<input type="text" name="orderCode" class="input-medium" value="" placeholder="">
+						</div>
+					</div>
+				</div>
+				<div class="clear"></div>
+            </div>
+			<div class="row-fluid">
+				<div class="span4">
+				<label class="control-label">订单状态：</label>
+					<div class="controls">
+					<select style="width:160px"  id="" name="status">
+						<option value="">全部</option>
+						<option value="等待买家付款">#escapeHtml("等待买家付款")</option>
+						<option value="交易成功">#escapeHtml("交易成功")</option>
+						<option value="交易关闭">#escapeHtml("交易关闭")</option>
+						<option value="买家已付款，等待卖家发货">#escapeHtml("买家已付款，等待卖家发货")</option>
+						<option value="等待卖家发货">#escapeHtml("等待卖家发货")</option>
+						<option value="卖家部分发货">#escapeHtml("卖家部分发货")</option>
+						<option value="卖家已发货，等待买家确认">#escapeHtml("卖家已发货，等待买家确认")</option>
+					</select>
+					</div>
+				</div>
+                <div class="span4">
+                    <div class="control-group">
+                        <label class="control-label">开始时间：</label>
+						<div class="controls">
+                            <input type="text" style="width:150px;" class="input-small required Wdate" id="begDate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',maxDate:'#F{$dp.$D(\'endDate\')}'})" name="begDate" value="$!date.format('yyyy-MM-dd',$!{begDate})">
+						</div>
+                        
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="control-group">
+                        <label class="control-label">结束时间：</label>
+
+                        <div class="controls">
+                            <input type="text" style="width:150px;" class="input-small required Wdate" id="endDate" placeholder="" onClick="WdatePicker({dateFmt:'yyyy-MM-dd',minDate:'#F{$dp.$D(\'begDate\')}'})" name="endDate"  value="$!date.format('yyyy-MM-dd',$!{endDate})">
+						</div>
+                    </div>
+                </div>
+				<div class="clear"></div>
+			</div>
+			<div class="row-fluid">
+				<div class="span4">
+				<label class="control-label">赠送积分：</label>
+					<div class="controls">
+					<select style="width:160px"  id="" name="rwScoreFlag">
+						<option value="">全部</option>
+						<option value="1">#escapeHtml("是")</option>
+						<option value="0">#escapeHtml("否")</option>
+					</select>
+					</div>
+				</div> 
+				<div class="clear"></div>
+			</div> 
+			</form>
+		</div>
+		
+		<div class="row-fluid" style="margin-bottom: 10px;">
+			<div class="span6">
+				<a class="btn" id="btnImport" href="#"><i class=" icon-plus icon-white"></i> 天猫订单导入</a>
+			</div>
+			<div class="pull-right">
+
+				<a class="btn btn-info" id="btnFormSearch" href="#"><i class="icon-search icon-white"></i> 查询</a>
+
+				<a class="btn" id="btnFormReset" href="#"><i class="icon-refresh"></i> 重置</a>
+			</div>
+		</div> 
+
+		<div class="row-fluid">
+			<table id="dataGridTable"></table>
+		</div>

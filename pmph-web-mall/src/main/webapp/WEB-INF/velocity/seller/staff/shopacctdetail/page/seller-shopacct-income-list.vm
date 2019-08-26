@@ -1,0 +1,53 @@
+#parse("/sys/sys_param.vm")
+#parse("/module/mod-form.vm")
+<script type="text/javascript" src="$!{BUSIJS_PATH}/seller/staff/shopacctdetail/seller-shopacct-income-list.js?version=$!{JS_VERSION}"></script>
+	<table class="seller-table table-striped">
+       <thead>
+	       <tr>
+	           <td>收入流水</td>
+	       	   <td>收入类型</td>
+	           <td>订单编号</td>
+	           <td>商户订单号</td>
+	           <td>支付时间</td>
+	           <td>支付方式</td>
+	           <td>支付通道</td>
+	           <td>实付金额</td>
+	           <td>手续费</td>
+	           <td>入账金额</td>
+	           <td>下单人</td>
+	       </tr>
+       </thead>
+       <tbody>
+       #if(!$incomeResp.getResult())
+			<tr><td class="kong" colspan='11'>很遗憾，暂无数据</td></tr>
+		#end
+		#foreach( $lst in $incomeResp.getResult())
+       	<tr>
+           <td>$!{lst.id}</td>
+           <td>
+	           #if($!{lst.optType}=='11')在线支付
+	           #else 线下支付审核
+	           #end
+           </td>
+           <td>$!{lst.orderId}</td>
+           <td>$!{lst.payTranNo}</td>
+           <td>
+            	$!date.format('yyyy-MM-dd HH:mm:ss',$!{lst.payTime})
+           </td>
+           <td>#translate('ORD_PAY_TYPE',$!{lst.payType})</td>
+           <td>#translate('ORD_PAY_WAY',$!{lst.payWay})</td>
+           <td>#money($!{lst.realMoney})</td>
+           <td>#money($!{lst.fee})</td>
+           <td>#money($!{lst.inMoney})</td>
+           <td>$!{lst.orderStaffCode}</td>
+       	</tr>
+        #end
+       </tbody>
+   </table>
+	<div class="fav-opt clearfix" style="margin-top: 20px;">
+        <div class="row-fluid">
+			<div id="pageControlbarIncome" class="ecppage" data-total-page="$!{incomeResp.pageCount}" data-total-row="$!{incomeResp.count}" data-page-size="$!{incomeResp.pageSize}" data-page-number="$!{incomeResp.pageNo}" data-status="begin"></div>
+		</div>
+    </div>
+    
+    

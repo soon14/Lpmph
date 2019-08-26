@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自主征订-#siteName('')</title>
+	#parse("/sys/sys_param.vm")
+	#parse("/sys/sys_head.vm")
+<link rel="stylesheet" href="$!{CSS_PATH}/default/staff/member.css" />
+</head>
+<body>
+
+<!--右侧的楼层导航-->
+
+
+<!--顶部的广告-->
+<div class="text-center">
+</div>
+
+<!--顶部 begin-->
+<div id="header" class="clearfix">
+	#parse("/main/main-site-nav.vm")
+</div>
+<!--顶部 end-->
+
+<!--内容 begin-->
+<div class="wrap1200 ">
+    <div id="content" class="clearfix">
+        #parse("/main/main-buyer-menu.vm")
+        $screen_content
+    </div>
+</div>
+<!--内容 end-->
+
+
+<!--底部 begin-->
+<div id="footer" class="text-center">
+    #parse("/main/main-bottom.vm")
+</div>
+<!--底部 end-->
+
+
+
+</body>
+</html>

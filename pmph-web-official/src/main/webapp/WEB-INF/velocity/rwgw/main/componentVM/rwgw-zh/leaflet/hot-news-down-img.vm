@@ -1,0 +1,9 @@
+<!-- 首页热点新闻 下 的广告列表-->
+#parse("/rwgw/sys/sys_param.vm")
+#if(${respList} && 0 < ${respList.size()})
+<ul class="gwIdx-imgList clearfix">
+	#foreach($leaflet in ${respList})
+    <li><a href="$!{leaflet.linkUrl}"><img src="$!{leaflet.vfsUrl}" alt="$!{leaflet.advertiseTitle}"/></a></li>
+    #end
+</ul>
+#end

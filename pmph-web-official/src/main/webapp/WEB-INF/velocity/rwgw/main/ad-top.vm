@@ -1,0 +1,6 @@
+##顶部广告
+#parse("/rwgw/sys/sys_param.vm")
+<div class="ecp-component homepage-ad-top hide" data-status="1" data-place-size="1" data-place-id="1201" data-place-width="1200" data-place-height="130" data-module="ecp-component/leaflet/leaflet-top">
+	<div class="gwIndex-img w ad-top-list">
+	</div>
+</div>

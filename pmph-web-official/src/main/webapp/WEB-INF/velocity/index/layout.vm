@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+#parse("sys/sys_head.vm")
+<link rel="stylesheet" href="$!{CSS_PATH}/index.css" />
+</head>
+
+<body>
+#parse("main/main-head.vm")
+
+$screen_content
+
+#parse("main/main-toolbar.vm")
+
+#parse("main/main-bottom.vm")
+</body>
+</html>
